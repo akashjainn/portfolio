@@ -28,12 +28,12 @@ export default function Playground() {
               </p>
               <div className="flex flex-wrap gap-4">
                 <a
-                  href="https://binji.github.io/gbemu/"
+                  href="https://akashjainn.github.io/adventureTimeGame/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 bg-primary-red text-white px-6 py-3 rounded-lg hover:bg-dark-red transition-colors font-medium"
                 >
-                  Open Web Emulator
+                  Play in Browser
                 </a>
                 <a
                   href="https://github.com/akashjainn/adventureTimeGame"

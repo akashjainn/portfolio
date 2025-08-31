@@ -36,17 +36,7 @@ export default function Experience() {
       ],
       tech: ["Data Analysis", "Predictive Modeling"]
     },
-    {
-      company: "Patel Plastic Surgery",
-      position: "Medical Intern",
-      location: "East Cobb, GA",
-      period: "Jun 2021 – Aug 2021",
-      description: "",
-      achievements: [
-        "Developed an itemized inventory management system using a SQL database, improving data accuracy and operational efficiency for tracking thousands of medical supplies"
-      ],
-      tech: ["SQL", "Database Management"]
-    }
+    
   ]
 
   return (
