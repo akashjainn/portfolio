@@ -25,17 +25,7 @@ export default function Experience() {
       ],
       tech: ["React", "AWS", "JavaScript", "CSS"]
     },
-    {
-      company: "Holt Consulting",
-      position: "Plans Assistant",
-      location: "Duluth, GA",
-      period: "Aug 2022 – Apr 2023",
-      description: "",
-      achievements: [
-        "Built predictive traffic flow models for intersection expansion, analyzing traffic and environmental data to recommend lane additions"
-      ],
-      tech: ["Data Analysis", "Predictive Modeling"]
-    },
+    
     
   ]
 
