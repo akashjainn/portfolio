@@ -2,6 +2,7 @@ import Hero from '@/components/Hero'
 import About from '@/components/About'
 import Projects from '@/components/Projects'
 import Experience from '@/components/Experience'
+import Playground from '@/components/Playground'
 import Contact from '@/components/Contact'
 import Navigation from '@/components/Navigation'
 import LoadingScreen from '@/components/LoadingScreen'
@@ -25,6 +26,9 @@ export default function Home() {
         </section>
         <section id="projects">
           <Projects />
+        </section>
+        <section id="playground">
+          <Playground />
         </section>
         <section id="contact">
           <Contact />
