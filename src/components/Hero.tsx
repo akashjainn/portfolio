@@ -163,26 +163,7 @@ console.log("Ready to create something amazing!");`
               </motion.a>
             </motion.div>
 
-            {/* Quick Stats */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.6 }}
-              className="grid grid-cols-3 gap-6 pt-8 border-t border-gray-800"
-            >
-              <div className="text-center">
-                <div className="text-2xl font-bold text-primary-red">3.5</div>
-                <div className="text-sm text-gray-400 font-mono">GPA</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-primary-red">2M+</div>
-                <div className="text-sm text-gray-400 font-mono">Messages/Month</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-primary-red">99.98%</div>
-                <div className="text-sm text-gray-400 font-mono">Uptime</div>
-              </div>
-            </motion.div>
+            
           </motion.div>
 
           {/* Right Side - Code Terminal */}

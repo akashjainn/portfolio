@@ -11,6 +11,7 @@ export default function Contact() {
         </p>
 
         <div className="grid md:grid-cols-3 gap-8 mb-12">
+          {/* Email */}
           <a 
             href="mailto:akashjain1311@gmail.com"
             className="group p-6 bg-white/10 rounded-lg hover:bg-white/20 transition-all duration-300"
@@ -27,6 +28,7 @@ export default function Contact() {
             </p>
           </a>
 
+          {/* Phone */}
           <a 
             href="tel:678-665-0467"
             className="group p-6 bg-white/10 rounded-lg hover:bg-white/20 transition-all duration-300"
@@ -42,8 +44,9 @@ export default function Contact() {
             </p>
           </a>
 
+          {/* LinkedIn */}
           <a 
-            href="https://linkedin.com/in/akashjain1311"
+            href="https://www.linkedin.com/in/akash-jain-687673209/"
             target="_blank"
             rel="noopener noreferrer"
             className="group p-6 bg-white/10 rounded-lg hover:bg-white/20 transition-all duration-300"

@@ -207,7 +207,7 @@ export default function Navigation() {
                       <a href="https://github.com/akashjainn" target="_blank" className="text-gray-400 hover:text-primary-red transition-colors">
                         GitHub
                       </a>
-                      <a href="https://linkedin.com/in/akashjain1311" target="_blank" className="text-gray-400 hover:text-primary-red transition-colors">
+                      <a href="https://www.linkedin.com/in/akash-jain-687673209/" target="_blank" className="text-gray-400 hover:text-primary-red transition-colors">
                         LinkedIn
                       </a>
                     </div>
