@@ -14,7 +14,7 @@ export default function Projects() {
       status: "In Development",
       period: "Aug 2025 – Present",
   github: "https://github.com/akashjainn/stocksense",
-  demo: "#"
+  demo: "https://stocksense-taupe.vercel.app/dashboard"
     },
     {
       title: "Electronic ARTrium",
