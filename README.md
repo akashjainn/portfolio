@@ -12,7 +12,7 @@ An award-winning, cutting-edge portfolio website built with Next.js, TypeScript,
 - **Glitch Effects** and gradient text animations
 
 ### **🎨 Award-Winning Design**
-- **Dark Theme** with Georgia Tech brand colors (Navy #003057, Gold #B3A369)
+- **Dark Theme** with a bold Black & Red palette (Primary #FF0000, Dark #CC0000)
 - **Space Grotesk & JetBrains Mono** typography for modern aesthetics
 - **Noise Textures** and geometric backgrounds
 - **Magnetic Hover Effects** on interactive elements
@@ -157,12 +157,16 @@ src/
 ## 🎨 **CUSTOMIZATION GUIDE**
 
 ### **Colors**
-Update `tailwind.config.js` for brand colors:
+Update `tailwind.config.js` brand palette:
 ```javascript
-colors: {
-  'gt-gold': '#B3A369',    // Georgia Tech Gold
-  'gt-navy': '#003057',    // Georgia Tech Navy
-  'black': '#0a0a0a',      // Deep Black
+extend: {
+  colors: {
+    'primary-red': '#FF0000',
+    'dark-red': '#CC0000',
+    'light-red': '#FF6666',
+    'accent-red': '#FF3333',
+    'blood-red': '#8B0000',
+  }
 }
 ```
 
@@ -188,7 +192,7 @@ This portfolio is designed to compete with award-winning sites and showcase:
 - **Professional Impact** through real-world achievements
 - **Innovation** in user experience design
 
-## � **SEO & PERFORMANCE**
+## 🔍 **SEO & PERFORMANCE**
 
 - **Perfect Lighthouse Scores** across all metrics
 - **Open Graph** social media optimization
