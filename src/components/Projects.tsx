@@ -18,6 +18,25 @@ export default function Projects() {
   demo: "#"
     },
     {
+      title: "LandSafe",
+      description: "Real-time flight tracking dashboard with multi-provider aviation data integration and intelligent flight status monitoring.",
+      longDescription: "Architected a comprehensive aviation tracking platform that aggregates real-time flight data from multiple API providers (AeroDataBox, AviationStack) with intelligent fallback mechanisms, timezone-aware scheduling, and automated status monitoring.",
+      tech: ["Next.js 15", "TypeScript", "Prisma", "PostgreSQL", "TanStack Query", "Radix UI", "Tailwind CSS", "Zod"],
+      features: [
+        "Multi-provider flight data integration with smart fallbacks",
+        "Real-time status tracking with automated refresh capabilities", 
+        "Timezone-aware flight scheduling and local time calculations",
+        "Advanced filtering and search with airport code resolution",
+        "Responsive dashboard with flight board visualization",
+        "Database migrations and automated seeding scripts"
+      ],
+      status: "Active Development",
+      period: "Sep 2025 – Present",
+      github: "https://github.com/akashjainn/LandSafe",
+      site: "https://land-safe.vercel.app/",
+      demo: "#"
+    },
+    {
       title: "Electronic ARTrium",
       description: "An interactive art installation using computer vision and motion tracking to create dynamic responses to participants' presence and movement.",
       longDescription: "Developed an immersive interactive exhibit that combines real-time 3D pose detection with speech recognition to animate both digital and mechanical characters, creating a seamless interactive experience for museum visitors.",
