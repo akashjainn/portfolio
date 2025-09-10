@@ -5,14 +5,14 @@ import './globals.css'
 const spaceGrotesk = Space_Grotesk({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Akash Jain - Software Engineer',
-  description: 'Full-stack software engineer specializing in scalable web applications and modern technologies. Portfolio showcasing innovative projects and professional experience.',
-  keywords: 'software engineer, full-stack developer, React, Next.js, Python, JavaScript, Georgia Tech',
+  title: 'Akash Jain - CS Student & Software Engineer',
+  description: '3rd-year Computer Science student at Georgia Tech with software engineering experience. Built production systems serving 2M+ users during State Farm internship.',
+  keywords: 'computer science student, software engineer intern, React, Next.js, TypeScript, JavaScript, Georgia Tech',
   authors: [{ name: 'Akash Jain' }],
   creator: 'Akash Jain',
   openGraph: {
-    title: 'Akash Jain - Software Engineer',
-    description: 'Full-stack software engineer specializing in scalable web applications and modern technologies.',
+    title: 'Akash Jain - CS Student & Software Engineer',
+    description: '3rd-year Computer Science student at Georgia Tech with software engineering experience.',
     url: 'https://akashjain.dev',
     siteName: 'Akash Jain Portfolio',
     locale: 'en_US',
@@ -20,8 +20,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Akash Jain - Software Engineer',
-    description: 'Full-stack software engineer specializing in scalable web applications and modern technologies.',
+    title: 'Akash Jain - CS Student & Software Engineer',
+    description: '3rd-year Computer Science student at Georgia Tech with software engineering experience.',
   },
   robots: {
     index: true,

@@ -22,12 +22,13 @@ export default function Hero() {
   }, [])
 
   const codeSnippet = `const akash = {
-  role: "Software Engineer",
+  role: "CS Student & Software Engineer",
+  year: "3rd Year at Georgia Tech",
   location: "Atlanta, GA",
-  education: "Georgia Tech CS",
+  experience: ["State Farm Intern", "Full-Stack Projects"],
   passion: ["Innovation", "Technology", "Problem Solving"],
-  currentFocus: "Building the Future",
-  availability: "Open to Opportunities"
+  currentFocus: "Building Production Systems",
+  availability: "Open to Internships & New Grad Roles"
 };
 
 console.log("Ready to create something amazing!");`
@@ -77,7 +78,7 @@ console.log("Ready to create something amazing!");`
               className="font-mono text-sm text-primary-red border border-primary-red/30 rounded-lg px-4 py-2 inline-block"
             >
               <span className="inline-block w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
-              Currently available for new opportunities
+              Seeking Summer 2026 internships & new grad opportunities
             </motion.div>
 
             {/* Main Title */}
@@ -121,10 +122,10 @@ console.log("Ready to create something amazing!");`
               className="space-y-2"
             >
               <h2 className="text-2xl lg:text-3xl font-medium text-gray-300">
-                Full-Stack Software Engineer
+                Computer Science Student & Software Engineer
               </h2>
               <p className="text-lg text-gray-400 font-mono">
-                Crafting scalable solutions with modern technologies
+                Building scalable systems that serve millions of users
               </p>
             </motion.div>
 

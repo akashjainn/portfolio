@@ -137,10 +137,10 @@ export default function About() {
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.8, delay: 0.2 }}
                 >
-                  I&apos;m a Computer Science student at <span className="text-primary-red font-semibold">Georgia Institute of Technology</span> 
+                  I&apos;m a 3rd-year Computer Science student at <span className="text-primary-red font-semibold">Georgia Institute of Technology</span> 
                   with an unwavering passion for building software that makes a difference. My journey began with 
-                  curiosity about how technology shapes our world, and has evolved into a mission to create 
-                  scalable, innovative solutions.
+                  curiosity about how technology shapes our world, and has evolved into hands-on experience creating 
+                  scalable, production-ready systems.
                 </motion.p>
                 
                 <motion.p
@@ -148,10 +148,10 @@ export default function About() {
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.8, delay: 0.4 }}
                 >
-                  During my internship at <span className="text-primary-red font-semibold">State Farm</span>, I developed 
+                  During my Software Engineering internship at <span className="text-primary-red font-semibold">State Farm</span>, I developed 
                   scalable chat systems that serve over 2 million monthly users, achieving 99.98% uptime and 
-                  reducing response latency by 35%. This experience taught me the importance of building 
-                  systems that not only work, but work exceptionally well at scale.
+                  reducing response latency by 35%. This experience taught me how to build enterprise-grade 
+                  systems that perform exceptionally well at scale.
                 </motion.p>
                 
                 <motion.p
@@ -159,10 +159,10 @@ export default function About() {
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.8, delay: 0.6 }}
                 >
-                  Beyond traditional software development, I&apos;m fascinated by the intersection of technology 
-                  and creativity. My projects range from interactive art installations using computer vision 
-                  to predictive analytics for urban planning. I believe the best solutions come from 
-                  understanding both the technical possibilities and human needs.
+                  Beyond coursework, I&apos;m passionate about the intersection of technology and creativity. 
+                  My personal projects range from real-time financial platforms to interactive art installations 
+                  using computer vision. I believe the best solutions come from understanding both the technical 
+                  possibilities and real-world user needs.
                 </motion.p>
               </div>
 
