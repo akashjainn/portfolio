@@ -33,7 +33,7 @@ export default function Experience() {
     <section id="experience" className="py-20 bg-gray-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-white mb-4">Experience</h2>
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">Experience</h2>
           <div className="w-24 h-1 bg-primary-red mx-auto"></div>
         </div>
 
@@ -42,7 +42,7 @@ export default function Experience() {
             <div key={index} className="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                 <div>
-                  <h3 className="text-2xl font-bold text-white">{exp.position}</h3>
+                  <h3 className="text-2xl font-bold text-gray-900">{exp.position}</h3>
                   <h4 className="text-xl text-primary-red font-semibold">{exp.company}</h4>
                   {exp.description && (
                     <p className="text-gray-600 mt-1">{exp.description}</p>
