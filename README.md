@@ -52,6 +52,6 @@ npm run dev
 ## Contact
 
 - **Email**: akashjain1311@gmail.com
-- **LinkedIn**: [linkedin]([https://linkedin.com/in/akashjain1311](https://www.linkedin.com/in/akash-jain-687673209/))
+- **LinkedIn**: [www.linkedin.com/in/akash-jain](https://www.linkedin.com/in/akash-jain-687673209/)
 - **GitHub**: [github.com/akashjainn](https://github.com/akashjainn)
 - **Phone**: (678) 665-0467
