@@ -86,19 +86,19 @@ export default function AboutPage() {
             <div className="flex flex-col sm:flex-row gap-4">
               <a 
                 href="mailto:akashjain1311@gmail.com" 
-                className="btn btn-primary"
+                className="inline-flex items-center justify-center text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-11 rounded-md px-8"
               >
                 Email me
               </a>
               <a 
                 href="/resume" 
-                className="btn btn-outline"
+                className="inline-flex items-center justify-center text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-11 rounded-md px-8"
               >
                 View resume
               </a>
               <a 
                 href="https://github.com/akashjainn" 
-                className="btn btn-ghost"
+                className="inline-flex items-center justify-center text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-11 rounded-md px-8"
                 target="_blank"
                 rel="noopener noreferrer"
               >
