@@ -18,7 +18,7 @@ metrics:
 tags: ["Monorepo", "Real-time", "Sports", "Pricing", "WebSocket", "Monte Carlo"]
 featured: true
 status: "published"
-publishedAt: "2024-02-20"
+publishedAt: "2024-03-30"
 updatedAt: "2024-09-29"
 ---
 
@@ -106,7 +106,7 @@ PropSage/
 
 ### Monte Carlo Pricing Engine
 
-```typescript path=/packages/pricing/monte-carlo.ts start=1
+```typescript path=/packages/pricing/monte-carlo.ts
 export class MonteCarloEngine {
   constructor(private config: SimulationConfig) {}
   
@@ -146,7 +146,7 @@ export class MonteCarloEngine {
 
 ### Real-time WebSocket Broadcasting
 
-```typescript path=/apps/api/websocket.ts start=25
+```typescript path=/apps/api/websocket.ts
 export class PriceUpdateBroadcaster {
   private io: Server
   private priceCache = new Map<string, PropPrice>()
@@ -206,7 +206,7 @@ export class PriceUpdateBroadcaster {
 
 ### Evidence-Aware Price Adjustments
 
-```typescript path=/packages/pricing/evidence-processor.ts start=1
+```typescript path=/packages/pricing/evidence-processor.ts
 export class EvidenceProcessor {
   processGameEvent(event: GameEvent, activeProp: SportsProp): PriceAdjustment {
     const relevanceScore = this.calculateEventRelevance(event, activeProp)
@@ -285,7 +285,7 @@ export class EvidenceProcessor {
 ## Observability/Telemetry
 
 ### Real-time Monitoring
-```typescript path=/apps/api/monitoring.ts start=1
+```typescript path=/apps/api/monitoring.ts
 export class SystemMonitor {
   trackPricingLatency(propId: string, startTime: number) {
     const latency = Date.now() - startTime

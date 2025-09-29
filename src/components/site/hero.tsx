@@ -37,22 +37,6 @@ export function Hero() {
               </Link>
             </Button>
           </div>
-          
-          {/* Key metrics */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12 pt-12 border-t border-border">
-            <div>
-              <div className="text-2xl font-semibold text-foreground">99.98%</div>
-              <div className="text-sm text-muted-foreground">Uptime achieved</div>
-            </div>
-            <div>
-              <div className="text-2xl font-semibold text-foreground">2M+</div>
-              <div className="text-sm text-muted-foreground">Monthly users served</div>
-            </div>
-            <div>
-              <div className="text-2xl font-semibold text-foreground">35%</div>
-              <div className="text-sm text-muted-foreground">Latency reduction</div>
-            </div>
-          </div>
         </div>
       </div>
     </section>

@@ -8,8 +8,9 @@ export const metadata = {
 }
 
 export default async function ProjectsPage() {
-  // Get all published projects, sorted by date
-  const projects = await getAllProjects({ status: 'published' })
+  // Get all published projects, sorted by date (excluding playground projects)
+  const allProjects = await getAllProjects({ status: 'published' })
+  const projects = allProjects.filter(project => project.frontmatter.category !== 'playground')
   
   return (
     <>

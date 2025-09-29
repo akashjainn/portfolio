@@ -4,17 +4,20 @@ import { ProjectCard } from "@/components/site/project-card"
 import { getAllProjects } from "@/lib/mdx"
 
 export default async function Home() {
-  // Get featured projects (limit to 3 for the homepage)
-  const featuredProjects = await getAllProjects({ 
+  // Get featured projects (limit to 3 for the homepage, excluding playground)
+  const allFeaturedProjects = await getAllProjects({ 
     featured: true, 
     limit: 3,
     status: 'published'
   })
+  const featuredProjects = allFeaturedProjects.filter(project => project.frontmatter.category !== 'playground')
   
-  // Fallback to latest 3 projects if no featured ones
-  const displayProjects = featuredProjects.length > 0 
-    ? featuredProjects 
-    : await getAllProjects({ limit: 3, status: 'published' })
+  // Fallback to latest 3 projects if no featured ones (excluding playground)
+  let displayProjects = featuredProjects
+  if (featuredProjects.length === 0) {
+    const allProjects = await getAllProjects({ limit: 6, status: 'published' })
+    displayProjects = allProjects.filter(project => project.frontmatter.category !== 'playground').slice(0, 3)
+  }
 
   return (
     <>

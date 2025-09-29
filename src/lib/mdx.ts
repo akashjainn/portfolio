@@ -28,6 +28,7 @@ export interface ProjectFrontmatter {
   }
   tags: string[]
   featured?: boolean
+  category?: string
   status: 'published' | 'draft'
   publishedAt: string
   updatedAt?: string
@@ -161,11 +162,13 @@ export async function getNoteBySlug(slug: string): Promise<NoteData | null> {
 export async function getAllProjects({
   featured,
   limit,
-  status = 'published'
+  status = 'published',
+  category
 }: {
   featured?: boolean
   limit?: number
   status?: 'published' | 'draft' | 'all'
+  category?: string
 } = {}): Promise<ProjectData[]> {
   const slugs = getProjectSlugs()
   const projects: ProjectData[] = []
@@ -181,6 +184,11 @@ export async function getAllProjects({
 
     // Filter by featured
     if (featured !== undefined && project.frontmatter.featured !== featured) {
+      continue
+    }
+
+    // Filter by category
+    if (category !== undefined && project.frontmatter.category !== category) {
       continue
     }
 

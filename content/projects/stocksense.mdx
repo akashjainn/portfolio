@@ -18,7 +18,7 @@ metrics:
 tags: ["Next.js", "MongoDB", "Real-time", "Finance", "API Integration"]
 featured: true
 status: "published"
-publishedAt: "2024-01-15"
+publishedAt: "2024-03-25"
 updatedAt: "2024-09-29"
 ---
 
@@ -87,7 +87,7 @@ Live: Alpaca SSE -----------> Stream endpoint (SSE)
 
 ### CSV Import with Validation
 
-```typescript path=/api/import/route.ts start=1
+```typescript path=/api/import/route.ts
 export async function POST(request: Request) {
   const formData = await request.formData()
   const file = formData.get('file') as File
@@ -106,7 +106,7 @@ export async function POST(request: Request) {
 
 ### Real-time Quotes with Caching
 
-```typescript path=/api/quotes/route.ts start=12
+```typescript path=/api/quotes/route.ts
 const cache = new Map<string, { data: QuoteData, expires: number }>()
 
 export async function GET(request: Request) {
@@ -135,7 +135,7 @@ export async function GET(request: Request) {
 
 ### Portfolio P/L Calculation
 
-```typescript path=/lib/portfolio.ts start=1
+```typescript path=/lib/portfolio.ts
 export function calculatePortfolioMetrics(
   transactions: Transaction[],
   currentPrices: Record<string, number>
@@ -202,7 +202,7 @@ export function calculatePortfolioMetrics(
 ## Observability/Telemetry
 
 ### Monitoring Stack
-```typescript path=/lib/analytics.ts start=1
+```typescript path=/lib/analytics.ts
 export function trackPortfolioEvent(event: string, properties: any) {
   if (typeof window !== 'undefined') {
     // Custom analytics for portfolio actions
