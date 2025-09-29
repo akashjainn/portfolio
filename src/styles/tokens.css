@@ -1,0 +1,144 @@
+@layer base {
+  :root {
+    /* Light theme tokens */
+    --background: 0 0% 100%;
+    --foreground: 218 22% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 218 22% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 218 22% 15%;
+    --primary: 216 100% 50%;
+    --primary-foreground: 210 20% 96%;
+    --secondary: 210 20% 98%;
+    --secondary-foreground: 218 22% 15%;
+    --muted: 210 20% 98%;
+    --muted-foreground: 215 16% 46%;
+    --accent: 210 20% 98%;
+    --accent-foreground: 218 22% 15%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 216 100% 50%;
+    --radius: 0.5rem;
+    
+    /* Custom semantic colors */
+    --success: 145 58% 44%;
+    --warning: 35 100% 45%;
+    --info: 216 100% 50%;
+  }
+
+  .dark {
+    /* Dark theme tokens */
+    --background: 222 10% 8%;
+    --foreground: 210 20% 96%;
+    --card: 220 14% 14%;
+    --card-foreground: 210 20% 96%;
+    --popover: 220 14% 14%;
+    --popover-foreground: 210 20% 96%;
+    --primary: 216 100% 50%;
+    --primary-foreground: 222 10% 8%;
+    --secondary: 220 14% 14%;
+    --secondary-foreground: 210 20% 96%;
+    --muted: 220 14% 14%;
+    --muted-foreground: 220 9% 65%;
+    --accent: 220 14% 14%;
+    --accent-foreground: 210 20% 96%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 13% 18%;
+    --input: 220 13% 18%;
+    --ring: 216 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Typography scale */
+  .text-display {
+    @apply text-4xl font-semibold tracking-[-0.02em] leading-[1.1];
+  }
+  
+  .text-headline {
+    @apply text-2xl font-semibold tracking-[-0.01em] leading-tight;
+  }
+  
+  .text-title {
+    @apply text-xl font-medium leading-tight;
+  }
+  
+  .text-body {
+    @apply text-base leading-relaxed;
+  }
+  
+  .text-caption {
+    @apply text-sm text-muted-foreground;
+  }
+
+  /* Focus styles for accessibility */
+  .focus-visible:focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+  
+  /* Skip link for screen readers */
+  .skip-link {
+    @apply absolute left-[-10000px] top-auto w-1 h-1 overflow-hidden;
+    @apply focus:left-2 focus:top-2 focus:w-auto focus:h-auto focus:overflow-visible;
+    @apply focus:bg-primary focus:text-primary-foreground focus:px-3 focus:py-2 focus:rounded-md focus:z-50;
+  }
+
+  /* Motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    :root {
+      --border: 0 0% 0%;
+      --ring: 0 0% 0%;
+    }
+    
+    .dark {
+      --border: 0 0% 100%;
+      --ring: 0 0% 100%;
+    }
+  }
+}
+
+/* Font face declarations for SF Pro */
+@font-face {
+  font-family: 'SF Pro Display';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/sf-pro-display.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'SF Pro Text';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/sf-pro-text.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'SF Mono';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/sf-mono.woff2') format('woff2');
+}
