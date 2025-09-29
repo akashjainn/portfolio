@@ -89,9 +89,14 @@ module.exports = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "fade-in": "fadeIn 0.5s ease-in-out",
-        "slide-up": "slideUp 0.3s ease-out",
-        "scale-in": "scaleIn 0.2s ease-out",
+        "fade-in": "fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
+        "fade-up": "fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
+        "slide-up": "slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
+        "slide-down": "slideDown 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
+        "scale-in": "scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+        "bounce-gentle": "bounceGentle 2s ease-in-out infinite",
+        "pulse-subtle": "pulseSubtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        "shimmer": "shimmer 2s linear infinite",
       },
       keyframes: {
         "accordion-down": {
@@ -106,14 +111,43 @@ module.exports = {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" },
         },
+        fadeUp: {
+          "0%": { opacity: "0", transform: "translateY(24px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
         slideUp: {
-          "0%": { transform: "translateY(20px)", opacity: "0" },
-          "100%": { transform: "translateY(0)", opacity: "1" },
+          "0%": { transform: "translateY(100%)" },
+          "100%": { transform: "translateY(0)" },
+        },
+        slideDown: {
+          "0%": { transform: "translateY(-100%)" },
+          "100%": { transform: "translateY(0)" },
         },
         scaleIn: {
-          "0%": { transform: "scale(0.95)", opacity: "0" },
-          "100%": { transform: "scale(1)", opacity: "1" },
+          "0%": { opacity: "0", transform: "scale(0.95)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
         },
+        bounceGentle: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-8px)" },
+        },
+        pulseSubtle: {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.7" },
+        },
+        shimmer: {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(100%)" },
+        },
+      },
+      backdropBlur: {
+        xs: "2px",
+      },
+      boxShadow: {
+        'soft': '0 2px 8px 0 rgb(0 0 0 / 0.08)',
+        'medium': '0 4px 16px 0 rgb(0 0 0 / 0.12)',
+        'hard': '0 8px 32px 0 rgb(0 0 0 / 0.16)',
+        'glow': '0 0 0 1px rgb(255 255 255 / 0.05), 0 1px 3px 0 rgb(0 0 0 / 0.1)',
       },
     },
   },

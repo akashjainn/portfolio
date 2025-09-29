@@ -81,8 +81,29 @@
   }
 }
 
-/* Import Inter fallback font */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+/* Import Inter font with optimal loading */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+/* Smooth scrolling and enhanced base styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Enhanced selection styles */
+::selection {
+  @apply bg-primary/10 text-foreground;
+}
+
+::-moz-selection {
+  @apply bg-primary/10 text-foreground;
+}
 
 /* Prose styles for MDX content */
 @layer components {
@@ -169,5 +190,169 @@
 @layer components {
   .container {
     @apply mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8;
+  }
+}
+
+/* Enhanced card component */
+@layer components {
+  .card-hover {
+    @apply transition-all duration-300 ease-out hover:shadow-medium hover:-translate-y-1;
+  }
+  
+  .card-glass {
+    @apply bg-background/80 backdrop-blur-sm border border-border/50;
+  }
+}
+
+/* Text utilities */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
+
+/* Interactive states */
+@layer components {
+  .interactive {
+    @apply transition-all duration-200 ease-out;
+  }
+  
+  .interactive:hover {
+    @apply scale-[1.02] brightness-105;
+  }
+  
+  .interactive:active {
+    @apply scale-[0.98] brightness-95;
+  }
+}
+
+/* Gradient text effect */
+@layer utilities {
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent;
+  }
+}
+
+/* Enhanced focus rings */
+@layer base {
+  .focus-ring {
+    @apply ring-2 ring-primary/20 ring-offset-2 ring-offset-background;
+  }
+}
+
+/* Smooth reveal animations */
+@layer utilities {
+  .reveal {
+    @apply opacity-0 translate-y-8 transition-all duration-700 ease-out;
+  }
+  
+  .reveal.in-view {
+    @apply opacity-100 translate-y-0;
+  }
+}
+
+/* Loading states */
+@layer components {
+  .skeleton {
+    @apply animate-pulse bg-muted rounded;
+  }
+  
+  .shimmer {
+    @apply relative overflow-hidden;
+  }
+  
+  .shimmer::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-background/40 to-transparent animate-shimmer;
+  }
+}
+
+/* Enhanced prose styling */
+@layer components {
+  .prose-enhanced {
+    @apply prose prose-neutral dark:prose-invert max-w-none;
+  }
+  
+  .prose-enhanced h1,
+  .prose-enhanced h2,
+  .prose-enhanced h3,
+  .prose-enhanced h4,
+  .prose-enhanced h5,
+  .prose-enhanced h6 {
+    @apply font-display text-balance;
+  }
+  
+  .prose-enhanced p {
+    @apply text-pretty leading-relaxed;
+  }
+  
+  .prose-enhanced blockquote {
+    @apply border-l-4 border-primary/20 bg-muted/50 px-6 py-4 not-italic;
+  }
+  
+  .prose-enhanced code {
+    @apply font-mono text-sm bg-muted px-1.5 py-0.5 rounded;
+  }
+  
+  .prose-enhanced pre {
+    @apply bg-muted border border-border rounded-lg;
+  }
+}
+
+/* Advanced grid layouts */
+@layer utilities {
+  .grid-auto-fit-sm {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+  
+  .grid-auto-fit-md {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+  
+  .grid-auto-fit-lg {
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  }
+}
+
+/* Smooth page transitions */
+@layer base {
+  .page-transition {
+    @apply transition-all duration-300 ease-in-out;
+  }
+}
+
+/* Professional dividers */
+@layer components {
+  .divider-elegant {
+    @apply relative flex items-center justify-center my-8;
+  }
+  
+  .divider-elegant::before {
+    content: '';
+    @apply flex-1 h-px bg-gradient-to-r from-transparent via-border to-transparent;
+  }
+  
+  .divider-elegant::after {
+    content: '';
+    @apply flex-1 h-px bg-gradient-to-r from-transparent via-border to-transparent;
+  }
+}
+
+/* Enhanced shadows for depth */
+@layer utilities {
+  .shadow-elegant {
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  }
+  
+  .shadow-elegant-lg {
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  }
+  
+  .shadow-elegant-xl {
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   }
 }
