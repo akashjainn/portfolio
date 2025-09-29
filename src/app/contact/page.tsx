@@ -109,10 +109,12 @@ export default function ContactPage() {
                 </a>
                 
                 <a 
-                  href="/resume"
+                  href="/Akash_Jain_Resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="btn btn-outline w-full text-left justify-start"
                 >
-                  📄 View resume
+                  📄 Download resume
                 </a>
                 
                 <a 

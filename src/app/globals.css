@@ -233,7 +233,7 @@ body {
 /* Gradient text effect */
 @layer utilities {
   .gradient-text {
-    @apply bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-primary/90 via-primary to-primary/90 bg-clip-text text-transparent;
   }
 }
 
