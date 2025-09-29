@@ -7,7 +7,7 @@ interface ProjectCardProps {
   summary: string
   tags: string[]
   href: string
-  demo?: string
+  demo?: string | undefined
   repo?: string
 }
 

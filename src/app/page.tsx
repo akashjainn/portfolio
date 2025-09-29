@@ -1,35 +1,21 @@
 import { Navigation } from "@/components/site/navigation"
 import { Hero } from "@/components/site/hero"
 import { ProjectCard } from "@/components/site/project-card"
+import { getAllProjects } from "@/lib/mdx"
 
-// Temporary project data - will be loaded from MDX later
-const featuredProjects = [
-  {
-    title: "PropSage",
-    summary: "Real-time sports prop pricing with evidence-aware adjustments and edge broadcasts. Monte-Carlo engine with WS streaming.",
-    tags: ["Next.js", "Express", "WebSocket", "Turborepo"],
-    href: "/projects/propsage",
-    demo: "#",
-    repo: "https://github.com/akashjainn/PropSage"
-  },
-  {
-    title: "StockSense",
-    summary: "Portfolio analytics from CSV to live valuation. Live quotes via SSE, MongoDB transactions, and health checks.",
-    tags: ["Next.js", "MongoDB", "Alpha Vantage", "SSE"],
-    href: "/projects/stocksense",
-    demo: "https://stocksense-taupe.vercel.app",
-    repo: "https://github.com/akashjainn/stocksense"
-  },
-  {
-    title: "LandSafe",
-    summary: "Location safety toolkit with reliability focus and mapping UX. A11y and performance optimization planned.",
-    tags: ["TypeScript", "Mapping", "Safety"],
-    href: "/projects/landsafe",
-    repo: "https://github.com/akashjainn/LandSafe"
-  }
-]
+export default async function Home() {
+  // Get featured projects (limit to 3 for the homepage)
+  const featuredProjects = await getAllProjects({ 
+    featured: true, 
+    limit: 3,
+    status: 'published'
+  })
+  
+  // Fallback to latest 3 projects if no featured ones
+  const displayProjects = featuredProjects.length > 0 
+    ? featuredProjects 
+    : await getAllProjects({ limit: 3, status: 'published' })
 
-export default function Home() {
   return (
     <>
       <Navigation />
@@ -42,20 +28,44 @@ export default function Home() {
               Featured Projects
             </h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {featuredProjects.map((project) => (
-                <ProjectCard key={project.title} {...project} />
-              ))}
-            </div>
-            
-            <div className="text-center mt-12">
-              <a 
-                href="/projects" 
-                className="link text-lg font-medium"
-              >
-                View all projects →
-              </a>
-            </div>
+            {displayProjects.length > 0 ? (
+              <>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {displayProjects.map((project) => (
+                    <ProjectCard 
+                      key={project.frontmatter.slug}
+                      title={project.frontmatter.title}
+                      summary={project.frontmatter.summary}
+                      tags={project.frontmatter.tags}
+                      href={`/projects/${project.frontmatter.slug}`}
+                      demo={project.frontmatter.links.demo || undefined}
+                      repo={project.frontmatter.links.repo}
+                    />
+                  ))}
+                </div>
+                
+                <div className="text-center mt-12">
+                  <a 
+                    href="/projects" 
+                    className="link text-lg font-medium"
+                  >
+                    View all projects →
+                  </a>
+                </div>
+              </>
+            ) : (
+              <div className="text-center py-12">
+                <p className="text-muted-foreground mb-4">
+                  Projects coming soon!
+                </p>
+                <a 
+                  href="/about" 
+                  className="link text-lg font-medium"
+                >
+                  Learn more about me →
+                </a>
+              </div>
+            )}
           </div>
         </section>
         
