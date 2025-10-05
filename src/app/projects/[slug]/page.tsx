@@ -2,6 +2,7 @@ import { notFound } from "next/navigation"
 import { Navigation } from "@/components/site/navigation"
 import { CaseStudyLayout } from "@/components/site/case-study-layout"
 import { getProjectBySlug, getProjectSlugs } from "@/lib/mdx"
+import { ProjectStructuredData } from "@/components/seo/structured-data"
 
 export async function generateStaticParams() {
   const slugs = getProjectSlugs()
@@ -57,6 +58,7 @@ export default async function ProjectPage({
 
   return (
     <>
+      <ProjectStructuredData project={frontmatter} />
       <Navigation />
       <main id="main-content">
         <CaseStudyLayout 

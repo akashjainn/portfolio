@@ -12,11 +12,9 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { href: "/", label: "Home" },
   { href: "/projects", label: "Projects" },
-  { href: "/playground", label: "Playground" },
   { href: "/about", label: "About" },
-  { href: "/notes", label: "Writing" },
+  { href: "/playground", label: "Playground" },
   { href: "/Akash_Jain_Resume.pdf", label: "Resume", download: true },
 ]
 

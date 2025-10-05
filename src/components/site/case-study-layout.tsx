@@ -39,9 +39,54 @@ export function CaseStudyLayout({ children, frontmatter, readingTime }: CaseStud
             {frontmatter.title}
           </h1>
           
-          <p className="text-xl text-muted-foreground mb-6 leading-relaxed">
+          <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
             {frontmatter.summary}
           </p>
+
+          {/* Executive Summary Box */}
+          <div className="bg-card border border-border/50 rounded-lg p-6 mb-8">
+            <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
+              <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+              </svg>
+              Executive Summary
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h3 className="font-medium text-sm text-muted-foreground mb-2">KEY ACHIEVEMENTS</h3>
+                <ul className="space-y-1 text-sm">
+                  {frontmatter.metrics?.lighthouse_mobile && (
+                    <li>• {frontmatter.metrics.lighthouse_mobile}/100 Lighthouse Score</li>
+                  )}
+                  {frontmatter.metrics?.lcp_ms && (
+                    <li>• {frontmatter.metrics.lcp_ms}ms LCP (Excellent)</li>
+                  )}
+                  {frontmatter.metrics?.a11y && (
+                    <li>• {frontmatter.metrics.a11y}</li>
+                  )}
+                  {frontmatter.metrics?.uptime && (
+                    <li>• {frontmatter.metrics.uptime} System Uptime</li>
+                  )}
+                </ul>
+              </div>
+              <div>
+                <h3 className="font-medium text-sm text-muted-foreground mb-2">TECH HIGHLIGHTS</h3>
+                <div className="flex flex-wrap gap-1">
+                  {frontmatter.tech.slice(0, 6).map((tech) => (
+                    <span
+                      key={tech}
+                      className="inline-flex items-center rounded border px-2 py-0.5 text-xs font-medium bg-muted/50 text-foreground"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                  {frontmatter.tech.length > 6 && (
+                    <span className="text-xs text-muted-foreground">+{frontmatter.tech.length - 6} more</span>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
 
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-6 bg-muted/30 rounded-lg">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm">

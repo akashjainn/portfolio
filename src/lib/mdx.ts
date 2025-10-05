@@ -4,6 +4,7 @@ import matter from 'gray-matter'
 import { compileMDX } from 'next-mdx-remote/rsc'
 import { remark } from 'remark'
 import remarkGfm from 'remark-gfm'
+import { VideoWithCaptions } from '@/components/ui/video-with-captions'
 
 // Project frontmatter schema
 export interface ProjectFrontmatter {
@@ -105,6 +106,9 @@ export async function getProjectBySlug(slug: string): Promise<ProjectData | null
     // Compile MDX
     const { content: compiledSource } = await compileMDX({
       source: content,
+      components: {
+        VideoWithCaptions,
+      },
       options: {
         mdxOptions: {
           remarkPlugins: [remarkGfm],
@@ -139,6 +143,9 @@ export async function getNoteBySlug(slug: string): Promise<NoteData | null> {
     // Compile MDX
     const { content: compiledSource } = await compileMDX({
       source: content,
+      components: {
+        VideoWithCaptions,
+      },
       options: {
         mdxOptions: {
           remarkPlugins: [remarkGfm],
