@@ -25,7 +25,23 @@ export default async function Home() {
   return (
     <>
       <WebsiteStructuredData />
-      <PersonStructuredData />
+      <PersonStructuredData 
+        name="Akash Jain"
+        jobTitle="Full-stack Developer"
+        worksFor="Georgia Institute of Technology"
+        alumniOf="Georgia Institute of Technology"
+        url="https://akashjain.dev"
+        sameAs={[
+          "https://github.com/akashjainn",
+          "https://linkedin.com/in/akashjainn",
+          "https://twitter.com/akashjainn"
+        ]}
+        address={{
+          addressLocality: "Atlanta",
+          addressRegion: "Georgia",
+          addressCountry: "United States"
+        }}
+      />
       <PortfolioStructuredData projects={featuredProjects} />
       <Navigation />
       <main id="main-content">
@@ -154,15 +170,15 @@ export default async function Home() {
               <div className="text-center">
                 <div className="bg-card border border-border/50 rounded-lg p-6 max-w-2xl mx-auto">
                   <p className="text-muted-foreground mb-4">
-                    "I validate with telemetry and tests, ship with performance budgets, and maintain 
-                    99.2% system uptime through reliability engineering."
+                    &ldquo;I validate with telemetry and tests, ship with performance budgets, and maintain 
+                    99.2% system uptime through reliability engineering.&rdquo;
                   </p>
                   <div className="flex justify-center gap-4">
                     <Button asChild variant="outline" size="sm">
                       <Link href="/about">Full Story</Link>
                     </Button>
                     <Button asChild size="sm">
-                      <Link href="/contact">Let's Talk</Link>
+                      <Link href="/contact">Let&rsquo;s Talk</Link>
                     </Button>
                   </div>
                 </div>

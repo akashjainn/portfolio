@@ -26,6 +26,7 @@ export interface ProjectFrontmatter {
     uptime?: string
     users?: string
     performance_improvement?: string
+    lighthouse_mobile?: number
   }
   tags: string[]
   featured?: boolean

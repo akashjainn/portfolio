@@ -110,7 +110,7 @@ export function WebsiteStructuredData() {
   )
 }
 
-export function PortfolioStructuredData() {
+export function PortfolioStructuredData({ projects }: { projects?: any[] }) {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "CreativeWork",

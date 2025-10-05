@@ -58,7 +58,10 @@ export default async function ProjectPage({
 
   return (
     <>
-      <ProjectStructuredData project={frontmatter} />
+      <ProjectStructuredData 
+        frontmatter={frontmatter} 
+        url={`https://akashjain.dev/projects/${params.slug}`} 
+      />
       <Navigation />
       <main id="main-content">
         <CaseStudyLayout 
