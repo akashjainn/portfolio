@@ -1,6 +1,18 @@
 import Link from "next/link"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { MetricsBadge } from "@/components/ui/metrics-badge"
+
+type ProjectMetrics = {
+  lcp_ms?: number
+  tbt_ms?: number
+  cls?: number
+  a11y?: string
+  uptime?: string
+  users?: string
+  performance_improvement?: string
+  lighthouse_mobile?: number
+}
 
 interface ProjectCardProps {
   title: string
@@ -9,6 +21,7 @@ interface ProjectCardProps {
   href: string
   demo?: string | undefined
   repo?: string
+  metrics?: ProjectMetrics | undefined
 }
 
 export function ProjectCard({ 
@@ -17,8 +30,34 @@ export function ProjectCard({
   tags, 
   href, 
   demo, 
-  repo 
+  repo,
+  metrics
 }: ProjectCardProps) {
+  // Helpers to determine badge variants
+  const getScoreVariant = (score: number) => {
+    if (score >= 90) return 'success'
+    if (score >= 50) return 'warning'
+    return 'error'
+  }
+
+  const getLCPVariant = (value: number) => {
+    if (value <= 2500) return 'success'
+    if (value <= 4000) return 'warning'
+    return 'error'
+  }
+
+  const getTBTVariant = (value: number) => {
+    if (value <= 200) return 'success'
+    if (value <= 600) return 'warning'
+    return 'error'
+  }
+
+  const getCLSVariant = (value: number) => {
+    if (value <= 0.1) return 'success'
+    if (value <= 0.25) return 'warning'
+    return 'error'
+  }
+
   return (
     <Card className="group h-full flex flex-col card-hover card-glass backdrop-blur-sm border-0 shadow-elegant hover:shadow-elegant-lg">
       <CardHeader className="space-y-3">
@@ -33,6 +72,55 @@ export function ProjectCard({
         <CardDescription className="text-muted-foreground line-clamp-2 text-pretty leading-relaxed">
           {summary}
         </CardDescription>
+        {metrics && (
+          <div className="flex flex-wrap gap-2 pt-1">
+            {typeof metrics.lighthouse_mobile === 'number' && (
+              <MetricsBadge 
+                label="Lighthouse"
+                value={metrics.lighthouse_mobile}
+                unit="/100"
+                variant={getScoreVariant(metrics.lighthouse_mobile) as any}
+              />
+            )}
+            {typeof metrics.lcp_ms === 'number' && (
+              <MetricsBadge 
+                label="LCP" 
+                value={metrics.lcp_ms} 
+                unit="ms"
+                variant={getLCPVariant(metrics.lcp_ms) as any}
+              />
+            )}
+            {typeof metrics.tbt_ms === 'number' && (
+              <MetricsBadge 
+                label="TBT" 
+                value={metrics.tbt_ms} 
+                unit="ms"
+                variant={getTBTVariant(metrics.tbt_ms) as any}
+              />
+            )}
+            {typeof metrics.cls === 'number' && (
+              <MetricsBadge 
+                label="CLS" 
+                value={metrics.cls} 
+                variant={getCLSVariant(metrics.cls) as any}
+              />
+            )}
+            {metrics.a11y && (
+              <MetricsBadge 
+                label="A11y" 
+                value={metrics.a11y}
+                variant="quality"
+              />
+            )}
+            {!metrics.a11y && metrics.performance_improvement && (
+              <MetricsBadge 
+                label="Perf" 
+                value={metrics.performance_improvement}
+                variant="performance"
+              />
+            )}
+          </div>
+        )}
       </CardHeader>
       
       <CardContent className="flex-1 flex flex-col justify-between space-y-6">

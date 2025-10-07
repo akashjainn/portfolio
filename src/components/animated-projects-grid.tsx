@@ -12,6 +12,16 @@ interface ProjectFrontmatter {
     demo?: string
     repo: string
   }
+  metrics?: {
+    lcp_ms?: number
+    tbt_ms?: number
+    cls?: number
+    a11y?: string
+    uptime?: string
+    users?: string
+    performance_improvement?: string
+    lighthouse_mobile?: number
+  }
 }
 
 interface Project {
@@ -68,6 +78,7 @@ export function AnimatedProjectsGrid({ projects }: AnimatedProjectsGridProps) {
                   href={`/projects/${project.frontmatter.slug}`}
                   demo={project.frontmatter.links.demo || undefined}
                   repo={project.frontmatter.links.repo}
+                  metrics={project.frontmatter.metrics}
                 />
               </div>
             ))}

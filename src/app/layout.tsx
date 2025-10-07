@@ -10,6 +10,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://akashjain.dev'),
   title: {
     default: 'Akash Jain — Building reliable, real-time web systems',
     template: '%s | Akash Jain'
