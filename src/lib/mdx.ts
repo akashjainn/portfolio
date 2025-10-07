@@ -5,6 +5,11 @@ import { compileMDX } from 'next-mdx-remote/rsc'
 import { remark } from 'remark'
 import remarkGfm from 'remark-gfm'
 import { VideoWithCaptions } from '@/components/ui/video-with-captions'
+import { Callout } from '@/components/ui/callout'
+import { Tldr } from '@/components/mdx/tldr'
+import { Diagram } from '@/components/mdx/diagram'
+import { MetricGrid } from '@/components/mdx/metric-grid'
+import rehypeSlug from 'rehype-slug'
 
 // Project frontmatter schema
 export interface ProjectFrontmatter {
@@ -109,10 +114,15 @@ export async function getProjectBySlug(slug: string): Promise<ProjectData | null
       source: content,
       components: {
         VideoWithCaptions,
+        Callout,
+        Tldr,
+        Diagram,
+        MetricGrid,
       },
       options: {
         mdxOptions: {
           remarkPlugins: [remarkGfm],
+          rehypePlugins: [rehypeSlug],
         },
       },
     })

@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { useRevealOnScroll, useMouseParallax } from "@/lib/animations"
+import { KpiChip } from "@/components/ui/kpi-chip"
 
 export function Hero() {
   const { elementRef, isVisible } = useRevealOnScroll()
@@ -65,6 +66,31 @@ export function Hero() {
                 </svg>
               </Link>
             </Button>
+          </div>
+
+          {/* Proof chips */}
+          <div 
+            className={`mt-6 flex flex-wrap gap-2 transition-all duration-1000 ease-out ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`}
+            style={{ transitionDelay: '800ms' }}
+            aria-label="Key proof metrics"
+          >
+            <KpiChip label="Uptime" value="99.2" suffix="%" href="/projects" />
+            <KpiChip label="Mobile LCP" value="1.6" suffix="s" href="/projects/stocksense" />
+            <KpiChip label="Case studies" value={4} href="/projects" />
+            <KpiChip label="A11y" value="WCAG 2.2 AA" href="/about" />
+          </div>
+
+          {/* Recruiter speed-run strip */}
+          <div 
+            className={`mt-4 text-sm text-muted-foreground transition-all duration-1000 ease-out ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
+            }`}
+            style={{ transitionDelay: '900ms' }}
+          >
+            30s overview → 2‑min tour → 10‑min deep dive. Start with
+            <Link href="/projects" className="ml-1 underline underline-offset-2">Featured Case Studies</Link>.
           </div>
         </div>
       </div>

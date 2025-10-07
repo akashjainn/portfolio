@@ -96,6 +96,7 @@ export default async function Home() {
                       href={`/projects/${project.frontmatter.slug}`}
                       demo={project.frontmatter.links.demo || undefined}
                       repo={project.frontmatter.links.repo}
+                      metrics={project.frontmatter.metrics}
                     />
                   ))}
                 </div>

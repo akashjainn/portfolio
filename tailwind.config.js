@@ -21,6 +21,13 @@ module.exports = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        brand: {
+          50: '#e8f0ff',
+          100: '#d7e6ff',
+          400: '#3b7cff',
+          500: '#2563eb',
+          600: '#1e4fd6'
+        },
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -147,6 +154,7 @@ module.exports = {
         'medium': '0 4px 16px 0 rgb(0 0 0 / 0.12)',
         'hard': '0 8px 32px 0 rgb(0 0 0 / 0.16)',
         'glow': '0 0 0 1px rgb(255 255 255 / 0.05), 0 1px 3px 0 rgb(0 0 0 / 0.1)',
+        'card': '0 1px 0 rgba(255,255,255,.06) inset, 0 8px 24px rgba(0,0,0,.18)'
       },
     },
   },
