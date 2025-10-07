@@ -3,65 +3,19 @@ export default function Projects() {
     {
       title: "StockSense",
       description: "A full-stack stock portfolio platform integrating the Alpaca API for live market data with enterprise-grade user experience.",
-      longDescription: "Full-stack stock platform with live streaming quotes, portfolio analytics, secure auth, and background jobs. Built on Next.js App Router with a production-ready data layer and real-time updates.",
-      tech: [
-        "Next.js 15",
-        "TypeScript",
-        "MongoDB (Atlas)",
-        "Prisma",
-        "Redis + BullMQ",
-        "NextAuth",
-        "TanStack Query",
-        "Tailwind CSS",
-        "Recharts",
-        "Alpaca API",
-        "Alpha Vantage",
-        "SSE"
-      ],
+      longDescription: "Built a comprehensive stock trading platform with real-time market data, portfolio management, and interactive charts. Features secure user authentication, trade history tracking, and responsive design for optimal user experience across devices.",
+      tech: ["Python", "Flask", "React", "PostgreSQL", "Docker", "Alpaca API", "Vercel"],
       features: [
-        "Live streaming quotes via SSE using Alpaca",
-        "On-demand quotes and candles via Alpha Vantage",
-        "Secure auth and sessions with NextAuth",
-        "Portfolio, transactions, and insights with MongoDB",
-        "Background jobs (EOD refresh, backfills) with BullMQ + Redis",
-        "CSV import/export and rich data tables"
+        "Live market data integration with Alpaca API",
+        "Real-time dashboards and interactive charts",
+        "Secure portfolio and trade history management",
+        "Containerized deployment with CI/CD pipelines"
       ],
       status: "In Development",
       period: "Aug 2025 – Present",
-      github: "https://github.com/akashjainn/stocksense",
-      site: "https://stocksense-taupe.vercel.app/",
-      demo: "#"
-    },
-    {
-      title: "LandSafe",
-      description: "Real-time flight tracking dashboard with multi-provider aviation data integration and intelligent flight status monitoring.",
-      longDescription: "A comprehensive aviation tracking platform aggregating flight data from multiple providers with smart fallbacks, timezone-aware scheduling, and a responsive flight board.",
-      tech: [
-        "Next.js 15",
-        "TypeScript",
-        "Prisma",
-        "PostgreSQL (Neon on Vercel)",
-        "TanStack Query",
-        "Radix UI",
-        "Tailwind CSS",
-        "Zod",
-        "date-fns / date-fns-tz",
-        "AeroDataBox API",
-        "Aviationstack API"
-      ],
-      features: [
-        "Multi-provider integration with graceful fallbacks",
-        "Timezone-aware schedule normalization and display",
-        "Flight status snapshots with history and KPIs",
-        "CSV import (Papaparse) and bulk upserts",
-        "Interactive Board with filters, search, and refresh",
-        "Prisma schema, migrations, and seed scripts"
-      ],
-      status: "Active Development",
-      period: "Sep 2025 – Present",
-      github: "https://github.com/akashjainn/LandSafe",
-      site: "https://land-safe.vercel.app/",
-      demo: "#"
+  github: "https://github.com/akashjainn/stocksense",
+  site: "https://stocksense-taupe.vercel.app/",
+  demo: "#"
     },
     {
       title: "Electronic ARTrium",

@@ -230,10 +230,63 @@ body {
   }
 }
 
-/* Gradient text effect */
+/* Gradient text effect — accessible & polished */
 @layer utilities {
   .gradient-text {
-    @apply bg-gradient-to-r from-primary/90 via-primary to-primary/90 bg-clip-text text-transparent;
+    /* Keep glyphs crisp against light backgrounds */
+    @apply bg-clip-text text-transparent;
+    /* Avoid white edges; use saturated stops with strong contrast */
+    background-image: linear-gradient(
+      90deg,
+      hsl(var(--primary) / 0.95),
+      hsl(var(--primary) / 0.85),
+      hsl(var(--primary) / 0.95)
+    );
+    /* Smooth animated sheen without layout shift */
+    background-size: 200% 100%;
+    background-position: 0% 50%;
+    /* Subtle outline to preserve letter edges */
+    text-shadow: 0 0 1px rgba(2, 6, 23, 0.18); /* slate-900 */
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .gradient-text {
+      /* Slightly lighter stops in dark for separation from background */
+      background-image: linear-gradient(
+        90deg,
+        hsl(var(--primary) / 0.80),
+        hsl(var(--primary) / 0.70),
+        hsl(var(--primary) / 0.80)
+      );
+      text-shadow: 0 0 1px rgba(255, 255, 255, 0.25);
+    }
+  }
+
+  /* Respect reduced motion: fall back to solid, high-contrast text */
+  @media (prefers-reduced-motion: reduce) {
+    .gradient-text {
+      color: hsl(var(--foreground));
+      background-image: none !important;
+      -webkit-text-fill-color: currentColor;
+    }
+  }
+}
+
+/* Hover sheen only on medium screens and up */
+@media (min-width: 768px) {
+  .gradient-text {
+    transition: background-position 500ms ease;
+  }
+  .gradient-text:hover {
+    background-position: 100% 50%;
+  }
+}
+
+/* Font smoothing for crisper edges */
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
