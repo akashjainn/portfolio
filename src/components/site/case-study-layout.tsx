@@ -1,6 +1,9 @@
+"use client"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ProjectFrontmatter } from "@/lib/mdx"
+import { TableOfContents } from './toc'
+import { ReadingProgress } from './reading-progress'
 
 interface CaseStudyLayoutProps {
   children: React.ReactNode
@@ -11,7 +14,8 @@ interface CaseStudyLayoutProps {
 export function CaseStudyLayout({ children, frontmatter, readingTime }: CaseStudyLayoutProps) {
   return (
     <article className="py-8">
-      <div className="container max-w-4xl">
+      <ReadingProgress targetId="cs-main" />
+      <div className="container max-w-6xl">
         {/* Breadcrumb */}
         <nav className="mb-8" aria-label="Breadcrumb">
           <Link 
@@ -22,8 +26,8 @@ export function CaseStudyLayout({ children, frontmatter, readingTime }: CaseStud
           </Link>
         </nav>
 
-        {/* Header */}
-        <header className="mb-12">
+  {/* Header */}
+  <header className="mb-12">
           <div className="flex flex-wrap gap-2 mb-4">
             {frontmatter.tags.map((tag) => (
               <span
@@ -195,9 +199,14 @@ export function CaseStudyLayout({ children, frontmatter, readingTime }: CaseStud
           )}
         </header>
 
-        {/* Content */}
-        <div className="prose prose-lg max-w-none">
-          {children}
+        {/* Content with sticky TOC */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_260px] gap-8" id="cs-main">
+          <div id="cs-content" className="prose prose-lg max-w-none">
+            {children}
+          </div>
+          <aside className="hidden lg:block">
+            <TableOfContents containerId="cs-content" />
+          </aside>
         </div>
 
         {/* Footer navigation */}

@@ -48,6 +48,7 @@ export function Navigation() {
                   ? "text-foreground bg-muted/50"
                   : "text-muted-foreground hover:bg-muted/30"
               )}
+              {...(label === 'Resume' ? { 'data-tour': 'resume-link' } : {})}
               aria-current={pathname === href ? "page" : undefined}
             >
               <span className="flex items-center gap-1">

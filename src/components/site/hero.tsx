@@ -25,12 +25,16 @@ export function Hero() {
         >
           <h1 
             id="hero-title"
-            className={`text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display font-semibold tracking-[-0.02em] leading-[0.95] mb-6 text-balance transition-all duration-1000 ease-out ${
+            className={`font-display font-semibold tracking-[-0.02em] leading-[0.95] mb-6 text-balance transition-all duration-1000 ease-out ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
             style={{ transitionDelay: '200ms' }}
           >
-            Building reliable, <span className="gradient-text">real-time</span> web systems
+            <span style={{
+              fontSize: 'clamp(36px, 5vw, 56px)'
+            }}>
+              Building reliable, <span className="gradient-text">real-time</span> web systems
+            </span>
           </h1>
           
           <p 
@@ -65,6 +69,10 @@ export function Hero() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                 </svg>
               </Link>
+            </Button>
+
+            <Button asChild size="lg" variant="ghost" className="interactive hover:bg-muted/50 shadow-elegant">
+              <Link href="/?tour=start">Start Guided Tour</Link>
             </Button>
           </div>
 

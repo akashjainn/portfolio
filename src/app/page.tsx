@@ -5,6 +5,7 @@ import { getAllProjects } from "@/lib/mdx"
 import { WebsiteStructuredData, PersonStructuredData, PortfolioStructuredData } from "@/components/seo/structured-data"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { GuidedTour } from "@/components/site/guided-tour"
 
 export default async function Home() {
   // Get featured projects (limit to 3 for the homepage, excluding playground)
@@ -73,7 +74,7 @@ export default async function Home() {
           </div>
         </section>
         
-        <section className="py-20" aria-labelledby="featured-projects">
+  <section id="featured-projects-section" className="py-20" aria-labelledby="featured-projects">
           <div className="container">
             <div className="text-center mb-16">
               <h2 id="featured-projects" className="text-3xl sm:text-4xl font-display font-semibold tracking-[-0.02em] leading-tight mb-4">
@@ -188,6 +189,14 @@ export default async function Home() {
           </div>
         </section>
       </main>
+      {/* Replay tour affordance (RSC-safe via URL deep-link) */}
+      <div className="container pb-8 text-center text-xs text-muted-foreground">
+        <Link href="/?tour=again" className="underline underline-offset-2 hover:text-foreground">
+          Replay tour
+        </Link>
+      </div>
+      {/* Guided Tour overlay mounted at root so it can highlight global targets */}
+      <GuidedTour />
     </>
   )
 }

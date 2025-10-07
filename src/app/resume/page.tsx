@@ -16,7 +16,7 @@ export default function ResumePage() {
             <p className="text-muted-foreground">Inline preview with a downloadable PDF.</p>
           </header>
 
-          <div className="rounded-lg border bg-card">
+          <div className="rounded-lg border bg-card" id="resume-viewer">
             <object
               data="/Akash_Jain_Resume.pdf#toolbar=0&view=FitH"
               type="application/pdf"
