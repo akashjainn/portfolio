@@ -75,11 +75,7 @@ export function Navigation() {
             </Link>
           </Button>
           
-          {/* Theme toggle placeholder - will implement later */}
-          <Button variant="ghost" size="sm" className="w-9 px-0 interactive hover:bg-muted/50 transition-all duration-200">
-            <span className="sr-only">Toggle theme</span>
-            <span className="text-base transition-transform hover:scale-110">🌙</span>
-          </Button>
+          {/* Theme toggle removed */}
         </div>
       </nav>
     </header>
