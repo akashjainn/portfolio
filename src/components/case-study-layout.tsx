@@ -209,7 +209,7 @@ export function CaseStudyLayout({ children, title, demoUrl, repoUrl, metadata }:
 
         {/* Main content */}
         <main className="flex-1 min-w-0">
-          <article className="prose prose-gray dark:prose-invert max-w-none prose-headings:scroll-mt-24">
+          <article className="prose prose-gray max-w-none prose-headings:scroll-mt-24">
             {children}
           </article>
         </main>

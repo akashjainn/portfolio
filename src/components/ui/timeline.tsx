@@ -19,7 +19,7 @@ interface TimelineProps {
 const statusStyles = {
   completed: 'bg-green-500 border-green-500',
   'in-progress': 'bg-blue-500 border-blue-500 animate-pulse',
-  planned: 'bg-gray-300 dark:bg-gray-600 border-gray-300 dark:border-gray-600'
+  planned: 'bg-gray-300 border-gray-300'
 }
 
 export function Timeline({ items, variant = 'default', className }: TimelineProps) {

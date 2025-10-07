@@ -56,7 +56,7 @@ export default async function PlaygroundPage() {
               <h2 className="text-2xl font-semibold tracking-[-0.01em] leading-tight mb-6">
                 About the Playground
               </h2>
-              <div className="prose prose-neutral dark:prose-invert max-w-none">
+              <div className="prose prose-neutral max-w-none">
                 <p>
                   This section showcases projects that demonstrate technical depth, 
                   systems thinking, and creative problem-solving in domains outside 
