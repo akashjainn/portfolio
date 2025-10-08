@@ -37,7 +37,7 @@ const EXECUTIVE_SUMMARIES = [
     category: "Sports Tech",
     timeline: "2 weeks (Hackathon)",
     impact: [
-      "Won HackGT12 competition",
+      "Top 3 for projects using TwelveLabs API (HackGT12)",
       "94% prediction accuracy achieved",
       "Real-time data processing under 100ms"
     ],

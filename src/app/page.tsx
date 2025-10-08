@@ -6,7 +6,7 @@ import { WebsiteStructuredData, PersonStructuredData, PortfolioStructuredData } 
 import { Button } from "@/components/ui/button"
 import { CommandPalette } from "@/components/ui/command-palette"
 import { SkillsConstellation } from "@/components/ui/skills-constellation"
-import { InteractiveTimeline } from "@/components/ui/interactive-timeline"
+// Interactive timeline removed
 import { ExecutiveSummarySection } from "@/components/ui/executive-summary"
 import { Project3DShowcase } from "@/components/ui/project-3d-preview"
 import { RoleBadge } from "@/components/ui/role-personalization"
@@ -203,10 +203,7 @@ export default async function Home() {
         {/* Executive Summary for Recruiters */}
         <ExecutiveSummarySection />
 
-        {/* Interactive Career Timeline */}
-        <section className="py-20 bg-muted/20">
-          <InteractiveTimeline />
-        </section>
+        {/* Interactive Career Timeline removed */}
 
         {/* 3D Project Previews */}
         <Project3DShowcase />
