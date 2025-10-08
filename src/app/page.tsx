@@ -1,9 +1,11 @@
 import { Navigation } from "@/components/site/navigation"
-import { Hero } from "@/components/site/hero"
+import { EnhancedHero } from "@/components/site/enhanced-hero"
 import { ProjectCard } from "@/components/site/project-card"
 import { getAllProjects } from "@/lib/mdx"
 import { WebsiteStructuredData, PersonStructuredData, PortfolioStructuredData } from "@/components/seo/structured-data"
 import { Button } from "@/components/ui/button"
+import { CommandPalette } from "@/components/ui/command-palette"
+import { SkillsConstellation } from "@/components/ui/skills-constellation"
 import Link from "next/link"
 import { GuidedTour } from "@/components/site/guided-tour"
 
@@ -46,7 +48,7 @@ export default async function Home() {
       <PortfolioStructuredData projects={featuredProjects} />
       <Navigation />
       <main id="main-content">
-        <Hero />
+        <EnhancedHero />
         
         {/* Executive Summary Section */}
         <section className="py-16 border-b border-border/10" aria-labelledby="executive-summary">
@@ -188,14 +190,20 @@ export default async function Home() {
             </div>
           </div>
         </section>
+
+        {/* Interactive Skills Section */}
+        <SkillsConstellation />
       </main>
+
       {/* Replay tour affordance (RSC-safe via URL deep-link) */}
       <div className="container pb-8 text-center text-xs text-muted-foreground">
         <Link href="/?tour=again" className="underline underline-offset-2 hover:text-foreground">
           Replay tour
         </Link>
       </div>
-      {/* Guided Tour overlay mounted at root so it can highlight global targets */}
+
+      {/* Enhanced UI Components */}
+      <CommandPalette />
       <GuidedTour />
     </>
   )

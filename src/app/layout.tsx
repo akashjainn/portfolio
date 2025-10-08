@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import '../styles/design-system.css'
 
 // Configure Inter as fallback (SF Pro will be loaded via CSS when available)
 const inter = Inter({ 
