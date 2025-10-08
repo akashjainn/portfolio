@@ -21,7 +21,13 @@ const RoleContext = createContext<RoleContextType | undefined>(undefined)
 export function useRole() {
   const context = useContext(RoleContext)
   if (!context) {
-    throw new Error('useRole must be used within RoleProvider')
+    // Return default values for SSR
+    return {
+      role: 'general' as UserRole,
+      setRole: () => {},
+      isPersonalized: false,
+      setPersonalized: () => {}
+    }
   }
   return context
 }
@@ -149,7 +155,7 @@ function RoleSelector({ onRoleSelect }: RoleSelectorProps) {
                 </div>
                 <h2 className="text-2xl font-bold mb-2">Welcome to My Portfolio</h2>
                 <p className="text-muted-foreground">
-                  I can personalize your experience based on what you're looking for. 
+                  I can personalize your experience based on what you&apos;re looking for. 
                   This takes just 30 seconds and makes the content more relevant to you.
                 </p>
               </div>
@@ -167,7 +173,7 @@ function RoleSelector({ onRoleSelect }: RoleSelectorProps) {
 
               <div className="flex gap-3 justify-center">
                 <Button onClick={handleContinue} size="lg">
-                  Let's Personalize
+                  Let&apos;s Personalize
                 </Button>
                 <Button onClick={handleSkip} variant="ghost" size="lg">
                   Skip for Now
@@ -181,7 +187,7 @@ function RoleSelector({ onRoleSelect }: RoleSelectorProps) {
               <div className="text-center mb-8">
                 <h2 className="text-2xl font-bold mb-2">What brings you here?</h2>
                 <p className="text-muted-foreground">
-                  Choose the option that best describes your interest. I'll customize the content accordingly.
+                  Choose the option that best describes your interest. I&apos;ll customize the content accordingly.
                 </p>
               </div>
 
@@ -242,14 +248,14 @@ function RoleSelector({ onRoleSelect }: RoleSelectorProps) {
                 </div>
                 <h2 className="text-2xl font-bold mb-2">Perfect!</h2>
                 <p className="text-muted-foreground">
-                  I've customized the experience for <strong>{roles.find(r => r.id === selectedRole)?.title.toLowerCase()}s</strong>. 
-                  You'll see relevant content, metrics, and features prioritized for your needs.
+                  I&apos;ve customized the experience for <strong>{roles.find(r => r.id === selectedRole)?.title.toLowerCase()}s</strong>. 
+                  You&apos;ll see relevant content, metrics, and features prioritized for your needs.
                 </p>
               </div>
 
               <Card className="mb-8 text-left">
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-lg">What You'll See</CardTitle>
+                  <CardTitle className="text-lg">What You&apos;ll See</CardTitle>
                   <CardDescription>Personalized content includes:</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -274,7 +280,7 @@ function RoleSelector({ onRoleSelect }: RoleSelectorProps) {
               </div>
 
               <p className="text-xs text-muted-foreground mt-4">
-                You can change this anytime using Cmd+K → "Switch Role"
+                You can change this anytime using Cmd+K → &quot;Switch Role&quot;
               </p>
             </div>
           )}

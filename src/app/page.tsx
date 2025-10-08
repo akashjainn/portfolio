@@ -9,7 +9,7 @@ import { SkillsConstellation } from "@/components/ui/skills-constellation"
 import { InteractiveTimeline } from "@/components/ui/interactive-timeline"
 import { ExecutiveSummarySection } from "@/components/ui/executive-summary"
 import { Project3DShowcase } from "@/components/ui/project-3d-preview"
-import { RoleProvider, RoleBadge } from "@/components/ui/role-personalization"
+import { RoleBadge } from "@/components/ui/role-personalization"
 import { SmartRecommendations } from "@/components/ui/smart-recommendations"
 import { CodePlaygroundSection } from "@/components/ui/live-code-playground"
 import Link from "next/link"
@@ -32,7 +32,7 @@ export default async function Home() {
   }
 
   return (
-    <RoleProvider>
+    <>
       <WebsiteStructuredData />
       <PersonStructuredData 
         name="Akash Jain"
@@ -228,6 +228,6 @@ export default async function Home() {
       {/* Enhanced UI Components */}
       <CommandPalette />
       <GuidedTour />
-    </RoleProvider>
+    </>
   )
 }

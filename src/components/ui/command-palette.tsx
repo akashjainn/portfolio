@@ -34,7 +34,7 @@ export function CommandPalette() {
     { 
       id: 'projects', 
       title: 'Projects', 
-      subtitle: 'Case studies & work',
+      subtitle: 'Case studies &amp; work',
       icon: FolderOpen, 
       category: 'Navigation',
       action: () => router.push('/projects') 
@@ -42,7 +42,7 @@ export function CommandPalette() {
     { 
       id: 'about', 
       title: 'About', 
-      subtitle: 'Background & experience',
+      subtitle: 'Background &amp; experience',
       icon: User, 
       category: 'Navigation',
       action: () => router.push('/about') 
@@ -130,7 +130,7 @@ export function CommandPalette() {
     { 
       id: 'switch-recruiter', 
       title: 'Switch to Recruiter View', 
-      subtitle: 'Focus on business impact & results',
+      subtitle: 'Focus on business impact &amp; results',
       icon: Users, 
       category: 'Personalization',
       action: () => {
@@ -142,7 +142,7 @@ export function CommandPalette() {
     { 
       id: 'switch-developer', 
       title: 'Switch to Developer View', 
-      subtitle: 'Technical deep dives & code',
+      subtitle: 'Technical deep dives &amp; code',
       icon: Code, 
       category: 'Personalization',
       action: () => {
@@ -154,7 +154,7 @@ export function CommandPalette() {
     { 
       id: 'switch-manager', 
       title: 'Switch to Manager View', 
-      subtitle: 'Leadership & business metrics',
+      subtitle: 'Leadership &amp; business metrics',
       icon: TrendingUp, 
       category: 'Personalization',
       action: () => {
@@ -294,7 +294,7 @@ export function CommandPalette() {
           <div className="max-h-96 overflow-y-auto">
             {Object.entries(groupedCommands).length === 0 ? (
               <div className="px-4 py-8 text-center text-muted-foreground">
-                No results found for "{query}"
+                No results found for &quot;{query}&quot;
               </div>
             ) : (
               Object.entries(groupedCommands).map(([category, categoryCommands]) => (

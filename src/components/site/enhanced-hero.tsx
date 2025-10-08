@@ -142,7 +142,7 @@ export function EnhancedHero() {
             }}
           >
             <span className="block">
-              Hi, I'm{' '}
+              Hi, I&apos;m{' '}
               <span className="relative">
                 <span className="bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent font-bold">
                   Akash Jain
@@ -207,7 +207,7 @@ export function EnhancedHero() {
             >
               <Link href="/contact" className="flex items-center">
                 <Zap className="mr-2 h-5 w-5 transition-transform group-hover:rotate-12" />
-                Let's Connect
+                Let&apos;s Connect
               </Link>
             </Button>
 

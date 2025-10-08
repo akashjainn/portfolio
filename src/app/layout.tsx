@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import '../styles/design-system.css'
+import { RoleProvider } from '@/components/ui/role-personalization'
 
 // Configure Inter as fallback (SF Pro will be loaded via CSS when available)
 const inter = Inter({ 
@@ -75,10 +76,12 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body className={inter.className} suppressHydrationWarning>
-        <a href="#main-content" className="skip-link">
-          Skip to main content
-        </a>
-        {children}
+        <RoleProvider>
+          <a href="#main-content" className="skip-link">
+            Skip to main content
+          </a>
+          {children}
+        </RoleProvider>
       </body>
     </html>
   )

@@ -381,7 +381,7 @@ export function InteractiveTimeline() {
             Want to be part of the next chapter?
           </p>
           <Button asChild size="lg">
-            <a href="/contact">Let's Build Something Together</a>
+            <a href="/contact">Let&apos;s Build Something Together</a>
           </Button>
         </div>
       </div>
