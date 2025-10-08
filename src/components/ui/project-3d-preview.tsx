@@ -35,13 +35,13 @@ const MOCK_PROJECTS = [
     title: "PropSage",
     slug: "propsage",
     category: "Sports Tech",
-    description: "Real-time sports betting odds aggregation platform with 94% prediction accuracy. Built during HackGT12 hackathon with live WebSocket connections and Redis caching for sub-100ms latency.",
-    techStack: ["Next.js", "TypeScript", "Redis", "Server-Sent Events", "TailwindCSS"],
+    description: "Real-time sports betting odds aggregation platform with 94% prediction accuracy. Built as a top 3 project using TwelveLabs API with live WebSocket connections and Redis caching for sub-100ms latency.",
+    techStack: ["Next.js", "TypeScript", "TwelveLabs API", "Server-Sent Events", "TailwindCSS"],
     screenshots: {
-      desktop: ["/images/projects/propsage/desktop-main.png", "/images/projects/propsage/desktop-odds.png"],
-      mobile: ["/images/projects/propsage/mobile-main.png", "/images/projects/propsage/mobile-odds.png"]
+      desktop: ["https://propsage-web.vercel.app/"],
+      mobile: ["https://propsage-web.vercel.app/"]
     },
-    liveUrl: "https://propsage.vercel.app",
+    liveUrl: "https://propsage-web.vercel.app/",
     repoUrl: "https://github.com/akashjainn/propsage",
     features: [
       "Real-time odds aggregation from 5+ sportsbooks",
@@ -63,10 +63,10 @@ const MOCK_PROJECTS = [
     description: "Comprehensive portfolio analytics platform with real-time market data integration. Features advanced risk metrics, P/L calculations, and interactive visualizations for retail investors.",
     techStack: ["Next.js", "MongoDB", "Alpha Vantage API", "Chart.js", "Prisma"],
     screenshots: {
-      desktop: ["/images/projects/stocksense/dashboard.png", "/images/projects/stocksense/analytics.png"],
-      mobile: ["/images/projects/stocksense/mobile-portfolio.png"]
+      desktop: ["https://stocksense-taupe.vercel.app/market"],
+      mobile: ["https://stocksense-taupe.vercel.app/market"]
     },
-    liveUrl: "https://stocksense.vercel.app",
+    liveUrl: "https://stocksense-taupe.vercel.app/market",
     repoUrl: "https://github.com/akashjainn/stocksense",
     features: [
       "CSV portfolio import with format auto-detection",
@@ -79,6 +79,31 @@ const MOCK_PROJECTS = [
       performanceScore: 91,
       accessibilityScore: 95,
       seoScore: 93
+    }
+  },
+  {
+    title: "LandSafe",
+    slug: "landsafe",
+    category: "Safety Tech",
+    description: "Progressive Web App for location-based safety with offline capabilities and emergency features. Real-time location tracking and emergency response system.",
+    techStack: ["PWA", "Service Workers", "Geolocation API", "WebRTC", "IndexedDB"],
+    screenshots: {
+      desktop: ["https://land-safe.vercel.app/"],
+      mobile: ["https://land-safe.vercel.app/"]
+    },
+    liveUrl: "https://land-safe.vercel.app/",
+    repoUrl: "https://github.com/akashjainn/landsafe",
+    features: [
+      "Offline-first PWA architecture",
+      "Real-time location sharing",
+      "Emergency contact system",
+      "Geofencing and safety alerts",
+      "Cross-platform compatibility"
+    ],
+    metrics: {
+      performanceScore: 98,
+      accessibilityScore: 92,
+      seoScore: 89
     }
   }
 ]
@@ -183,14 +208,15 @@ function Screenshot3DViewer({
               perspective: '1000px'
             }}
           >
-            <img
+            <iframe
               src={screenshots[currentIndex]}
-              alt={`${title} screenshot ${currentIndex + 1}`}
-              className="w-full h-full object-cover"
+              title={`${title} live preview`}
+              className="w-full h-full border-0 rounded-lg"
+              loading="lazy"
+              sandbox="allow-same-origin allow-scripts allow-forms"
               onError={(e) => {
-                // Fallback to placeholder if image fails to load
-                const target = e.target as HTMLImageElement
-                target.src = `https://via.placeholder.com/800x600/f3f4f6/6b7280?text=${encodeURIComponent(title)}`
+                // Fallback to placeholder if iframe fails to load
+                console.error(`Failed to load iframe for ${title}`)
               }}
             />
             

@@ -143,7 +143,7 @@ export default async function Home() {
                   Technical <span className="gradient-text">Expertise</span>
                 </h2>
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Georgia Tech CS major focused on performant, accessible web systems with enterprise-grade reliability.
+                  Full-stack developer focused on performant, accessible web systems with enterprise-grade reliability.
                 </p>
               </div>
               

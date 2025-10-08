@@ -2,7 +2,7 @@ import { Navigation } from "@/components/site/navigation"
 
 export const metadata = {
   title: "About",
-  description: "Learn more about Akash Jain, a Georgia Tech CS major focused on building reliable, performant web systems."
+  description: "Learn more about Akash Jain, a full-stack developer focused on building reliable, performant web systems."
 }
 
 export default function AboutPage() {
@@ -17,7 +17,7 @@ export default function AboutPage() {
           
           <div className="prose prose-lg max-w-none">
             <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-              I&apos;m Akash Jain, a Georgia Tech CS major focused on performant, accessible web systems.
+              I&apos;m Akash Jain, a full-stack developer focused on performant, accessible web systems.
               I build with Next.js/TypeScript, validate with telemetry and tests, and ship with a bias 
               for clarity, reliability, and measurable outcomes.
             </p>

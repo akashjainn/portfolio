@@ -31,7 +31,7 @@ interface TimelineEvent {
 const TIMELINE_DATA: TimelineEvent[] = [
   {
     id: 'gt-start',
-    date: '2021-08',
+    date: '2022-08',
     title: 'Started at Georgia Tech',
     subtitle: 'Computer Science Major',
     description: 'Began pursuing Computer Science degree with focus on software engineering and web development.',
@@ -41,7 +41,7 @@ const TIMELINE_DATA: TimelineEvent[] = [
   },
   {
     id: 'statefarm-internship',
-    date: '2023-06',
+    date: '2024-06',
     title: 'Software Engineering Intern',
     subtitle: 'State Farm Insurance',
     description: 'Built production systems serving 2M+ monthly users. Optimized chat systems achieving 35% latency reduction.',
@@ -58,13 +58,13 @@ const TIMELINE_DATA: TimelineEvent[] = [
   {
     id: 'propsage',
     date: '2024-02',
-    title: 'PropSage - HackGT12 Winner',
+    title: 'PropSage - Top 3 Project',
     subtitle: 'Real-time Sports Prop Pricing',
-    description: 'Built evidence-aware sports betting platform with real-time odds and performance analytics.',
+    description: 'Built evidence-aware sports betting platform using TwelveLabs API with real-time odds and performance analytics.',
     type: 'project',
-    tech: ['Next.js', 'TypeScript', 'Redis', 'Server-Sent Events'],
+    tech: ['Next.js', 'TypeScript', 'TwelveLabs API', 'Server-Sent Events'],
     links: {
-      demo: 'https://propsage.vercel.app',
+      demo: 'https://propsage-web.vercel.app',
       repo: 'https://github.com/akashjainn/propsage'
     },
     metrics: [
@@ -73,56 +73,7 @@ const TIMELINE_DATA: TimelineEvent[] = [
       { label: 'Real-time Updates', value: '<100ms' }
     ]
   },
-  {
-    id: 'stocksense',
-    date: '2024-05',
-    title: 'StockSense Platform',
-    subtitle: 'Portfolio Intelligence & Analytics',
-    description: 'Comprehensive portfolio management with real-time market data and risk analytics.',
-    type: 'project',
-    tech: ['Next.js', 'MongoDB', 'Alpha Vantage API', 'Chart.js'],
-    links: {
-      demo: 'https://stocksense.vercel.app',
-      repo: 'https://github.com/akashjainn/stocksense'
-    },
-    metrics: [
-      { label: 'Data Points', value: '10K+' },
-      { label: 'Update Frequency', value: '1min' },
-      { label: 'Mobile Score', value: '98' }
-    ]
-  },
-  {
-    id: 'landsafe',
-    date: '2024-08',
-    title: 'LandSafe Toolkit',
-    subtitle: 'Location Safety & Emergency Response',
-    description: 'PWA for location-based safety with offline capabilities and emergency features.',
-    type: 'project',
-    tech: ['PWA', 'Service Workers', 'Geolocation API', 'WebRTC'],
-    links: {
-      demo: 'https://landsafe.vercel.app',
-      repo: 'https://github.com/akashjainn/landsafe'
-    },
-    metrics: [
-      { label: 'Offline Mode', value: 'Full' },
-      { label: 'Response Time', value: '<2s' },
-      { label: 'PWA Score', value: '100' }
-    ]
-  },
-  {
-    id: 'portfolio-v2',
-    date: '2024-10',
-    title: 'Portfolio 2.0 Launch',
-    subtitle: 'Enterprise-Grade Showcase',
-    description: 'Complete redesign with advanced animations, command palette, and interactive features.',
-    type: 'achievement',
-    tech: ['Next.js 14', 'Framer Motion', 'Three.js', 'Canvas API'],
-    metrics: [
-      { label: 'Lighthouse', value: '100' },
-      { label: 'Accessibility', value: 'AAA' },
-      { label: 'Load Time', value: '0.8s' }
-    ]
-  }
+
 ]
 
 const TYPE_CONFIG = {

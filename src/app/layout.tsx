@@ -17,12 +17,12 @@ export const metadata: Metadata = {
     default: 'Akash Jain — Building reliable, real-time web systems',
     template: '%s | Akash Jain'
   },
-  description: 'Georgia Tech CS major crafting accessible, measurable Next.js apps with telemetry and performance budgets. PropSage, StockSense, and more enterprise-grade projects.',
+  description: 'Full-stack developer crafting accessible, measurable Next.js apps with telemetry and performance budgets. PropSage, StockSense, and more enterprise-grade projects.',
   keywords: [
     'next.js developer',
     'typescript engineer', 
     'real-time systems',
-    'georgia tech computer science',
+    'computer science',
     'portfolio analytics',
     'accessible web development',
     'performance optimization',
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   creator: 'Akash Jain',
   openGraph: {
     title: 'Akash Jain — Building reliable, real-time web systems',
-    description: 'Georgia Tech CS major focused on performant, accessible web systems with Next.js/TypeScript.',
+    description: 'Full-stack developer focused on performant, accessible web systems with Next.js/TypeScript.',
     url: 'https://akashjain.dev',
     siteName: 'Akash Jain',
     locale: 'en_US',
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Akash Jain — Building reliable, real-time web systems',
-    description: 'Georgia Tech CS major focused on performant, accessible web systems.',
+    description: 'Full-stack developer focused on performant, accessible web systems.',
     images: ['/og-image.png']
   },
   robots: {

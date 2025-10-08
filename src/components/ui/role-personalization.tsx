@@ -271,7 +271,13 @@ function RoleSelector({ onRoleSelect }: RoleSelectorProps) {
               </Card>
 
               <div className="flex gap-3 justify-center">
-                <Button onClick={() => handleConfirm(true)} size="lg">
+                <Button onClick={() => {
+                  handleConfirm(true)
+                  // Start the guided tour after a short delay to let the modal close
+                  setTimeout(() => {
+                    window.dispatchEvent(new CustomEvent('startGuidedTour'))
+                  }, 500)
+                }} size="lg">
                   Start Personalized Tour
                 </Button>
                 <Button onClick={() => handleConfirm(false)} variant="ghost" size="lg">

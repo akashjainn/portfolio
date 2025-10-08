@@ -175,9 +175,9 @@ export function EnhancedHero() {
             }`}
             style={{ transitionDelay: '500ms' }}
           >
-            Georgia Tech CS major with experience at{' '}
-            <span className="font-semibold text-foreground">State Farm</span>, 
-            crafting accessible Next.js applications with performance budgets and telemetry.
+            Experience developing full-stack projects with{' '}
+            <span className="font-semibold text-foreground">Next.js and TypeScript</span>, 
+            crafting accessible applications with performance budgets and telemetry.
           </p>
           
           {/* Action Buttons */}
