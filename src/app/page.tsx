@@ -13,7 +13,7 @@ import { RoleBadge } from "@/components/ui/role-personalization"
 import { SmartRecommendations } from "@/components/ui/smart-recommendations"
 import { CodePlaygroundSection } from "@/components/ui/live-code-playground"
 import Link from "next/link"
-import { GuidedTour } from "@/components/site/guided-tour"
+// Guided tour removed
 
 export default async function Home() {
   // Get featured projects (limit to 3 for the homepage, excluding playground)
@@ -218,16 +218,8 @@ export default async function Home() {
         <CodePlaygroundSection />
       </main>
 
-      {/* Replay tour affordance (RSC-safe via URL deep-link) */}
-      <div className="container pb-8 text-center text-xs text-muted-foreground">
-        <Link href="/?tour=again" className="underline underline-offset-2 hover:text-foreground">
-          Replay tour
-        </Link>
-      </div>
-
       {/* Enhanced UI Components */}
       <CommandPalette />
-      <GuidedTour />
     </>
   )
 }

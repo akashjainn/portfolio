@@ -211,22 +211,7 @@ export function EnhancedHero() {
               </Link>
             </Button>
 
-            <Button 
-              size="lg" 
-              variant="ghost" 
-              className="hover:bg-muted/50 shadow-elegant group"
-              onClick={() => {
-                console.log('Tour button clicked')
-                if (typeof window !== 'undefined') {
-                  window.dispatchEvent(new CustomEvent('startGuidedTour'))
-                }
-              }}
-            >
-              <div className="mr-2 h-5 w-5 rounded-full border-2 border-primary/60 flex items-center justify-center">
-                <div className="w-2 h-2 bg-primary/60 rounded-full" />
-              </div>
-              30s Guided Tour
-            </Button>
+            {/* Guided tour button removed */}
           </div>
 
           {/* Enhanced KPI Chips */}

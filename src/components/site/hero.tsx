@@ -79,7 +79,7 @@ export function Hero() {
                 console.log('Tour button clicked')
                 // Trigger tour programmatically
                 if (typeof window !== 'undefined') {
-                  window.dispatchEvent(new CustomEvent('startGuidedTour'))
+                  // Guided tour removed
                 }
               }}
             >

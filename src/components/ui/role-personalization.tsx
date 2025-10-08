@@ -37,42 +37,13 @@ interface RoleProviderProps {
 }
 
 export function RoleProvider({ children }: RoleProviderProps) {
+  // Disable personalization globally; default to general
   const [role, setRole] = useState<UserRole>('general')
   const [isPersonalized, setPersonalized] = useState(false)
-  const [hasSelectedRole, setHasSelectedRole] = useState(false)
-
-  // Load role from localStorage on mount
-  useEffect(() => {
-    const savedRole = localStorage.getItem('portfolio-user-role') as UserRole
-    const savedPersonalization = localStorage.getItem('portfolio-personalized') === 'true'
-    const savedSelection = localStorage.getItem('portfolio-role-selected') === 'true'
-    
-    if (savedRole && savedSelection) {
-      setRole(savedRole)
-      setPersonalized(savedPersonalization)
-      setHasSelectedRole(true)
-    }
-  }, [])
-
-  // Save role to localStorage when changed
-  useEffect(() => {
-    if (hasSelectedRole) {
-      localStorage.setItem('portfolio-user-role', role)
-      localStorage.setItem('portfolio-personalized', isPersonalized.toString())
-      localStorage.setItem('portfolio-role-selected', 'true')
-    }
-  }, [role, isPersonalized, hasSelectedRole])
-
-  const handleRoleSelect = (newRole: UserRole, personalized: boolean = true) => {
-    setRole(newRole)
-    setPersonalized(personalized)
-    setHasSelectedRole(true)
-  }
 
   return (
     <RoleContext.Provider value={{ role, setRole, isPersonalized, setPersonalized }}>
       {children}
-      {!hasSelectedRole && <RoleSelector onRoleSelect={handleRoleSelect} />}
     </RoleContext.Provider>
   )
 }
@@ -270,20 +241,7 @@ function RoleSelector({ onRoleSelect }: RoleSelectorProps) {
                 </CardContent>
               </Card>
 
-              <div className="flex gap-3 justify-center">
-                <Button onClick={() => {
-                  handleConfirm(true)
-                  // Start the guided tour after a short delay to let the modal close
-                  setTimeout(() => {
-                    window.dispatchEvent(new CustomEvent('startGuidedTour'))
-                  }, 500)
-                }} size="lg">
-                  Start Personalized Tour
-                </Button>
-                <Button onClick={() => handleConfirm(false)} variant="ghost" size="lg">
-                  Browse Without Personalization
-                </Button>
-              </div>
+              {/* Guided tour and personalization start removed */}
 
               <p className="text-xs text-muted-foreground mt-4">
                 You can change this anytime using Cmd+K → &quot;Switch Role&quot;
