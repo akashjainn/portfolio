@@ -3,8 +3,7 @@
 import { createPortal } from "react-dom"
 import { useEffect, useMemo, useRef, useState } from "react"
 
-type Step = {
-  id: string
+type Ste string
   selector: string
   title: string
   description: string
@@ -30,17 +29,30 @@ export function GuidedTour() {
   const [open, setOpen] = useState(false)
   const [index, setIndex] = useState(0)
   const [targetRect, setTargetRect] = useState<ReturnType<typeof getRect>>(null)
-
+  const [reduceMotion, setReduceMotion] = useState<boolean>(() =>
+    typeof window !== 'undefined' ? window.matchMedia('(prefers-reduced-motion: reduce)').matches : false
+  )
   const overlayRef = useRef<HTMLDivElement | null>(null)
   const popoverRef = useRef<HTMLDivElement | null>(null)
 
   const steps: Step[] = useMemo(
     () => [
-      { id: 'hero', selector: '#hero', title: 'Welcome', description: 'This is the hero. In 30 seconds you\'ll know who I am, what I build, and where to go next.', placement: 'bottom' },
-      { id: 'featured-projects', selector: '#featured-projects', title: 'Featured Case Studies', description: 'Deep dives with architecture, tradeoffs, and measurable impact. Recruiters often start here.', placement: 'top' },
+      { id: 'hero', selector: '#hero', title: 'Welcome', description: 'This is the hero. In 30 seconds you’ll know who I am, what I build, and where to go next.', placement: 'bottom' },
+      { id: 'featured-projects', selector: '#featured-projects-section', title: 'Featured Case Studies', description: 'Deep dives with architecture, tradeoffs, and measurable impact. Recruiters often start here.', placement: 'top' },
+      { id: 'resume', selector: '#resume-viewer', title: 'Resume', description: 'My latest resume opens inline here. Use it alongside the case studies for quick context.', placement: 'bottom' },
     ],
     []
   )
+
+  // Start via custom event
+  useEffect(() => {
+    const handler = () => {
+      try { sessionStorage.setItem('tourActive', 'true'); sessionStorage.setItem('tourIndex', '0') } catch {}
+      setIndex(0); setOpen(true)
+    }
+    window.addEventListener('start-tour', handler as EventListener)
+    return () => window.removeEventListener('start-tour', handler as EventListener)
+  }, [])
 
   // Initialize tour from URL params
   useEffect(() => {
@@ -53,7 +65,7 @@ export function GuidedTour() {
       setIndex(0)
     }
   }, [])
-
+  
   // Simple test effect to verify the component is working
   useEffect(() => {
     console.log('GuidedTour state:', { open, index, step: steps[index]?.title })
@@ -92,8 +104,8 @@ export function GuidedTour() {
   if (!step) return null
 
   // Popover placement
-  let popoverTop = (rect?.bottom ?? 100) + 12
-  let popoverLeft = (rect?.left ?? 100)
+  let popoverTop = (rect?.bottom ?? 0) + 12
+  let popoverLeft = (rect?.left ?? 0)
   const maxWidth = 360
   if (step.placement === 'top' && rect) popoverTop = rect.top - 12
   const viewportWidth = typeof window !== 'undefined' ? window.innerWidth : 1200
@@ -114,6 +126,19 @@ export function GuidedTour() {
         <div className="text-xs text-gray-500 mb-1">Step {index + 1} of {steps.length}</div>
         <div className="text-base font-semibold mb-1 text-black">{step.title}</div>
         <p className="text-gray-600 mb-3">{step.description}</p>
+
+        {missingTarget && (
+          <div className="mb-3 text-xs text-muted-foreground">
+            Couldn’t find the target on this page. You can continue the tour manually.
+          </div>
+        )}
+
+        <div className="flex items-center gap-2 mb-3">
+          <label className="flex items-center gap-2 text-xs text-muted-foreground">
+            <input type="checkbox" checked={reduceMotion} onChange={(e) => setReduceMotion(e.target.checked)} />
+            Skip animations
+          </label>
+        </div>
 
         <div className="flex items-center justify-between gap-2">
           <button className="px-3 py-1.5 rounded-md border border-gray-300 hover:bg-gray-50 transition-colors text-black bg-white" onClick={() => setOpen(false)}>Skip</button>
