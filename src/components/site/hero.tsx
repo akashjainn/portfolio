@@ -71,8 +71,19 @@ export function Hero() {
               </Link>
             </Button>
 
-            <Button asChild size="lg" variant="ghost" className="interactive hover:bg-muted/50 shadow-elegant">
-              <Link href="/?tour=start">Start Guided Tour</Link>
+            <Button 
+              size="lg" 
+              variant="ghost" 
+              className="interactive hover:bg-muted/50 shadow-elegant"
+              onClick={() => {
+                console.log('Tour button clicked')
+                // Trigger tour programmatically
+                if (typeof window !== 'undefined') {
+                  window.dispatchEvent(new CustomEvent('startGuidedTour'))
+                }
+              }}
+            >
+              Start Guided Tour
             </Button>
           </div>
 

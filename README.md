@@ -19,7 +19,6 @@ I'm a Computer Science major at Georgia Institute of Technology with a focus on 
 - **PropSage** - Real-time sports prop pricing built for HackGT12
 - **StockSense** - Portfolio analytics with live market data integration
 - **LandSafe** - Location safety toolkit with PWA capabilities
-- **MarketRoyale** - Fantasy trading platform with real-time leaderboards
 
 ## Tech Stack
 
