@@ -6,6 +6,9 @@ import { WebsiteStructuredData, PersonStructuredData, PortfolioStructuredData } 
 import { Button } from "@/components/ui/button"
 import { CommandPalette } from "@/components/ui/command-palette"
 import { SkillsConstellation } from "@/components/ui/skills-constellation"
+import { InteractiveTimeline } from "@/components/ui/interactive-timeline"
+import { ExecutiveSummarySection } from "@/components/ui/executive-summary"
+import { Project3DShowcase } from "@/components/ui/project-3d-preview"
 import Link from "next/link"
 import { GuidedTour } from "@/components/site/guided-tour"
 
@@ -193,6 +196,17 @@ export default async function Home() {
 
         {/* Interactive Skills Section */}
         <SkillsConstellation />
+
+        {/* Executive Summary for Recruiters */}
+        <ExecutiveSummarySection />
+
+        {/* Interactive Career Timeline */}
+        <section className="py-20 bg-muted/20">
+          <InteractiveTimeline />
+        </section>
+
+        {/* 3D Project Previews */}
+        <Project3DShowcase />
       </main>
 
       {/* Replay tour affordance (RSC-safe via URL deep-link) */}
