@@ -143,11 +143,8 @@ export function EnhancedHero() {
           >
             <span className="block">
               Hi, I&apos;m{' '}
-              <span className="relative z-10">
-                <span className="font-bold text-foreground">
-                  Akash Jain
-                </span>
-                <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-primary/10 blur-lg -z-10" />
+              <span className="relative z-10 font-bold text-primary">
+                Akash Jain
               </span>
             </span>
           </h1>
@@ -190,12 +187,11 @@ export function EnhancedHero() {
             <Button 
               asChild 
               size="lg" 
-              className="bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 text-white shadow-elegant hover:shadow-primary group relative overflow-hidden"
+              className="bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 text-white shadow-elegant hover:shadow-primary group relative"
             >
-              <Link href="/projects" className="flex items-center relative z-10">
+              <Link href="/projects" className="flex items-center relative z-10 whitespace-nowrap">
                 <Target className="mr-2 h-5 w-5" />
                 View Case Studies
-                <div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-primary-400 translate-x-full group-hover:translate-x-0 transition-transform duration-300 -z-10" />
               </Link>
             </Button>
             
