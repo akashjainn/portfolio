@@ -129,7 +129,8 @@ export function SkillsConstellation() {
   }, [hoveredSkill, selectedCategory, dimensions])
 
   const getSkillSize = (level: number) => {
-    return 20 + (level - 1) * 8 // 20px to 52px based on skill level
+    // Make nodes more uniform and readable; slight size variance only
+    return 40 + (level - 3) * 4 // ~24-56px -> now ~32-48px
   }
 
   const filteredSkills = selectedCategory ? 
@@ -232,28 +233,32 @@ export function SkillsConstellation() {
                   onMouseLeave={() => setHoveredSkill(null)}
                 >
                   <div
-                    className={`w-full h-full rounded-full border-2 flex items-center justify-center text-white font-semibold text-xs shadow-lg transition-all duration-200 ${
+                    className={`w-full h-full rounded-full border-2 flex items-center justify-center text-white font-semibold text-[0.7rem] shadow-lg transition-all duration-200 ${
                       isHighlighted || isConnected ? 'ring-4 ring-opacity-30' : ''
                     }`}
                     style={{
                       backgroundColor: colors.bg,
                       borderColor: colors.border,
-                      fontSize: size < 30 ? '0.6rem' : '0.75rem',
+                      lineHeight: 1.05,
+                      textAlign: 'center',
+                      padding: '0 6px',
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
                       ...(isHighlighted || isConnected ? {
                         boxShadow: `0 0 0 4px ${colors.border}30`
                       } : {})
                     }}
+                    title={skill.name}
                   >
-                    {size >= 40 ? skill.name : skill.name.substring(0, 3)}
+                    {skill.name}
                   </div>
 
                   {/* Tooltip */}
                   <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
                     <div className="bg-background border border-border rounded-lg px-3 py-2 shadow-lg text-sm whitespace-nowrap">
                       <div className="font-semibold">{skill.name}</div>
-                      <div className="text-muted-foreground text-xs">
-                        Level {skill.level}/5 • {skill.category}
-                      </div>
+                      <div className="text-muted-foreground text-xs capitalize">{skill.category}</div>
                     </div>
                   </div>
                 </motion.div>
@@ -261,24 +266,7 @@ export function SkillsConstellation() {
             })}
           </AnimatePresence>
 
-          {/* Legend */}
-          <div className="absolute bottom-4 left-4 bg-background/80 backdrop-blur-sm border border-border/50 rounded-lg p-3">
-            <div className="text-xs text-muted-foreground mb-2">Skill Level</div>
-            <div className="flex items-center gap-2">
-              {[1, 2, 3, 4, 5].map(level => (
-                <div
-                  key={level}
-                  className="bg-muted border border-border rounded-full flex items-center justify-center text-xs font-semibold"
-                  style={{
-                    width: getSkillSize(level),
-                    height: getSkillSize(level)
-                  }}
-                >
-                  {level}
-                </div>
-              ))}
-            </div>
-          </div>
+          {/* Legend removed per request to hide skill level visuals */}
         </div>
 
         {/* Skill Details */}

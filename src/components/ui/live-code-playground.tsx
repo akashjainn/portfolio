@@ -302,15 +302,23 @@ function PlaygroundExample({
   const handleRun = () => {
     setIsRunning(true)
     setOutput('Running code...')
-    
-    // Simulate code execution
+
+    // Provide meaningful, example-specific pseudo-output
     setTimeout(() => {
-      setOutput(`// Output from ${example.title}
-✓ Code compiled successfully
-✓ No TypeScript errors
-${example.output || '// Interactive demo ready - click "Open in CodeSandbox" to test live'}`)
+      let details = ''
+      if (example.id === 'websocket-client') {
+        details = `Connected to odds stream\nSubscribed: NFL, NBA\nIncoming: { \"game\": \"ATL vs NYK\", \"home\": 1.87, \"away\": 2.12 }`
+      } else if (example.id === 'redis-cache') {
+        details = `Cache miss -> fetchFreshOdds()\nSet TTL: 30s\nSubsequent request: cache hit ✅`
+      } else if (example.id === 'portfolio-calculator') {
+        details = `Positions: 2\nTotal Value: $35,000.00\nTotal Cost: $32,500.00\nTotal PnL: $2,500.00\nTotal Return: 7.69%`
+      } else {
+        details = example.output || 'Execution complete.'
+      }
+
+      setOutput(`// Output from ${example.title}\n${details}\n\nTip: Open in CodeSandbox for a live, editable demo.`)
       setIsRunning(false)
-    }, 1500)
+    }, 900)
   }
 
   const handleReset = () => {

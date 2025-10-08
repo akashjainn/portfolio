@@ -121,8 +121,8 @@ function DeviceFrame({
 }) {
   const frameStyles = {
     desktop: "w-full max-w-4xl aspect-video bg-gray-900 rounded-lg p-2",
-    tablet: "w-80 aspect-[4/3] bg-gray-800 rounded-xl p-3",
-    mobile: "w-64 aspect-[9/19.5] bg-gray-900 rounded-3xl p-4"
+    tablet: "w-[720px] max-w-full aspect-[4/3] bg-gray-800 rounded-xl p-3",
+    mobile: "w-[390px] max-w-full aspect-[9/19.5] bg-gray-900 rounded-3xl p-4"
   }
 
   return (
@@ -208,17 +208,15 @@ function Screenshot3DViewer({
               perspective: '1000px'
             }}
           >
-            <iframe
-              src={screenshots[currentIndex]}
-              title={`${title} live preview`}
-              className="w-full h-full border-0 rounded-lg"
-              loading="lazy"
-              sandbox="allow-same-origin allow-scripts allow-forms"
-              onError={(e) => {
-                // Fallback to placeholder if iframe fails to load
-                console.error(`Failed to load iframe for ${title}`)
-              }}
-            />
+            <div className="w-full h-full overflow-hidden rounded-lg bg-white">
+              <iframe
+                src={screenshots[currentIndex]}
+                title={`${title} live preview`}
+                className="w-full h-full border-0"
+                loading="lazy"
+                sandbox="allow-same-origin allow-scripts allow-forms"
+              />
+            </div>
             
             {/* 3D Shadow Overlay */}
             <div 

@@ -144,10 +144,11 @@ export function EnhancedHero() {
             <span className="block">
               Hi, I&apos;m{' '}
               <span className="relative">
-                <span className="bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent font-bold">
+                {/* Use theme variables instead of non-existent shade tokens so text isnt transparent */}
+                <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent font-bold">
                   Akash Jain
                 </span>
-                <div className="absolute -inset-1 bg-gradient-to-r from-primary-600/20 to-primary-400/20 blur-lg -z-10" />
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-primary/10 blur-lg -z-10" />
               </span>
             </span>
           </h1>
