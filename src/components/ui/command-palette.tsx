@@ -1,8 +1,9 @@
 "use client"
 
 import { useState, useEffect, useCallback } from 'react'
-import { Search, Command, Calendar, Mail, Github, Linkedin, FileText, FolderOpen, User, Home } from 'lucide-react'
+import { Search, Command, Calendar, Mail, Github, Linkedin, FileText, FolderOpen, User, Home, Users, Code, TrendingUp, RotateCcw } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { useRole } from '@/components/ui/role-personalization'
 
 interface CommandItem {
   id: string
@@ -10,7 +11,7 @@ interface CommandItem {
   subtitle?: string
   icon: React.ComponentType<any>
   action: () => void
-  category: 'Navigation' | 'Actions' | 'Projects' | 'Contact'
+  category: 'Navigation' | 'Actions' | 'Projects' | 'Contact' | 'Personalization'
 }
 
 export function CommandPalette() {
@@ -18,6 +19,7 @@ export function CommandPalette() {
   const [query, setQuery] = useState('')
   const [selectedIndex, setSelectedIndex] = useState(0)
   const router = useRouter()
+  const { role, setRole, isPersonalized, setPersonalized } = useRole()
 
   const commands: CommandItem[] = [
     // Navigation
@@ -122,6 +124,60 @@ export function CommandPalette() {
       icon: Linkedin, 
       category: 'Contact',
       action: () => window.open('https://linkedin.com/in/akashjainn', '_blank') 
+    },
+    
+    // Personalization
+    { 
+      id: 'switch-recruiter', 
+      title: 'Switch to Recruiter View', 
+      subtitle: 'Focus on business impact & results',
+      icon: Users, 
+      category: 'Personalization',
+      action: () => {
+        setRole('recruiter')
+        setPersonalized(true)
+        setIsOpen(false)
+      }
+    },
+    { 
+      id: 'switch-developer', 
+      title: 'Switch to Developer View', 
+      subtitle: 'Technical deep dives & code',
+      icon: Code, 
+      category: 'Personalization',
+      action: () => {
+        setRole('developer')
+        setPersonalized(true)
+        setIsOpen(false)
+      }
+    },
+    { 
+      id: 'switch-manager', 
+      title: 'Switch to Manager View', 
+      subtitle: 'Leadership & business metrics',
+      icon: TrendingUp, 
+      category: 'Personalization',
+      action: () => {
+        setRole('manager')
+        setPersonalized(true)
+        setIsOpen(false)
+      }
+    },
+    { 
+      id: 'reset-personalization', 
+      title: 'Reset Personalization', 
+      subtitle: 'Back to general experience',
+      icon: RotateCcw, 
+      category: 'Personalization',
+      action: () => {
+        setRole('general')
+        setPersonalized(false)
+        setIsOpen(false)
+        // Clear localStorage
+        localStorage.removeItem('portfolio-user-role')
+        localStorage.removeItem('portfolio-personalized')
+        localStorage.removeItem('portfolio-role-selected')
+      }
     },
   ]
 
