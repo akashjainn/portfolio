@@ -245,6 +245,8 @@ export function SkillsConstellation() {
                       whiteSpace: 'nowrap',
                       overflow: 'hidden',
                       textOverflow: 'ellipsis',
+                      maxWidth: '100%',
+                      fontSize: skill.name.length > 12 ? '0.6rem' : '0.7rem',
                       ...(isHighlighted || isConnected ? {
                         boxShadow: `0 0 0 4px ${colors.border}30`
                       } : {})
@@ -287,8 +289,8 @@ export function SkillsConstellation() {
               return (
                 <div className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-xl p-6 max-w-md mx-auto">
                   <h3 className="text-lg font-semibold mb-2">{skill.name}</h3>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    Level {skill.level}/5 • {skill.category}
+                  <p className="text-sm text-muted-foreground mb-4 capitalize">
+                    {skill.category}
                   </p>
                   {connectedSkills.length > 0 && (
                     <div>

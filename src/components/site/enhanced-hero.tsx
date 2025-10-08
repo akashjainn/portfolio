@@ -132,7 +132,7 @@ export function EnhancedHero() {
           {/* Main Heading */}
           <h1 
             id="hero-title"
-            className={`text-display mb-6 transition-all duration-1000 ease-out ${
+            className={`text-display text-foreground mb-6 transition-all duration-1000 ease-out ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
             style={{ 
@@ -143,9 +143,8 @@ export function EnhancedHero() {
           >
             <span className="block">
               Hi, I&apos;m{' '}
-              <span className="relative">
-                {/* Use theme variables instead of non-existent shade tokens so text isnt transparent */}
-                <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent font-bold">
+              <span className="relative z-10">
+                <span className="font-bold text-foreground">
                   Akash Jain
                 </span>
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-primary/10 blur-lg -z-10" />

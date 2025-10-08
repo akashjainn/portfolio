@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowRight, Clock, ExternalLink, Github, Sparkles, TrendingUp } from 'lucide-react'
+import { ArrowRight, ExternalLink, Github, Sparkles, TrendingUp } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -17,7 +17,6 @@ interface Project {
   tags: string[]
   metrics?: {
     performance?: number
-    users?: string
     uptime?: string
   }
   links: {
@@ -25,8 +24,8 @@ interface Project {
     repo?: string
   }
   difficulty: 'beginner' | 'intermediate' | 'advanced'
-  businessImpact: number // 1-10 scale
   techComplexity: number // 1-10 scale
+  businessImpact: number // 1-10 scale
   relevanceScore?: number
 }
 
@@ -39,7 +38,6 @@ const ALL_PROJECTS: Project[] = [
     tags: ['Next.js', 'TypeScript', 'Redis', 'WebSockets', 'Real-time'],
     metrics: {
       performance: 94,
-      users: '500+ testers',
       uptime: '99.9%'
     },
     links: {
@@ -58,7 +56,6 @@ const ALL_PROJECTS: Project[] = [
     tags: ['Next.js', 'MongoDB', 'Alpha Vantage API', 'Chart.js', 'Prisma'],
     metrics: {
       performance: 91,
-      users: '200+ uploads',
       uptime: '99.5%'
     },
     links: {
@@ -77,7 +74,6 @@ const ALL_PROJECTS: Project[] = [
     tags: ['React Native', 'Firebase', 'Google Maps API', 'Real-time', 'Mobile'],
     metrics: {
       performance: 88,
-      users: '150+ downloads',
       uptime: '98.5%'
     },
     links: {
@@ -141,7 +137,7 @@ function calculateRelevanceScore(
     case 'recruiter':
       // Recruiters care about business impact and proven results
       score += (candidate.businessImpact / 10) * 15
-      if (candidate.metrics?.users) score += 5
+      // Prefer demos available for quick validation
       if (candidate.links.demo) score += 5
       break
     case 'developer':
@@ -360,12 +356,7 @@ function RecommendationCard({ project, index, currentProject }: RecommendationCa
                   <div className="text-xs text-muted-foreground">Performance</div>
                 </div>
               )}
-              {project.metrics.users && (
-                <div className="text-center p-2 bg-muted/30 rounded">
-                  <div className="font-bold text-primary text-sm">{project.metrics.users}</div>
-                  <div className="text-xs text-muted-foreground">Users</div>
-                </div>
-              )}
+                {/* Users metric hidden to avoid unverified claims */}
             </div>
           )}
 

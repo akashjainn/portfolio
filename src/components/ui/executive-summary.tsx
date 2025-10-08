@@ -75,7 +75,6 @@ const EXECUTIVE_SUMMARIES = [
     ],
     techStack: ["Next.js", "MongoDB", "Alpha Vantage API", "Chart.js", "Prisma"],
     metrics: {
-      users: "200+ portfolio uploads",
       performance: "1.8s LCP",
       uptime: "99.5%",
       businessImpact: "Featured on developer showcases"
@@ -172,15 +171,7 @@ function ExecutiveSummaryCard({ project }: ExecutiveSummaryProps) {
 
         {/* Key Metrics - Always Visible */}
         <div className="grid grid-cols-2 gap-3 mt-3">
-          {project.metrics.users && (
-            <div className="text-center p-2 bg-muted/30 rounded-lg">
-              <div className="flex items-center justify-center mb-1">
-                <Users className="h-3 w-3 text-primary mr-1" />
-                <span className="text-sm font-bold text-primary">{project.metrics.users}</span>
-              </div>
-              <div className="text-xs text-muted-foreground">Scale</div>
-            </div>
-          )}
+            {/* Users metric intentionally hidden to avoid unverified claims */}
           {project.metrics.performance && (
             <div className="text-center p-2 bg-muted/30 rounded-lg">
               <div className="flex items-center justify-center mb-1">
