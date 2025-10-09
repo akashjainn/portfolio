@@ -20,33 +20,33 @@ interface Connection {
 }
 
 const SKILLS: Skill[] = [
-  // Frontend
-  { id: 'react', name: 'React', level: 5, category: 'frontend', x: 330, y: 170, connections: ['next', 'typescript', 'tailwind'] },
-  { id: 'next', name: 'Next.js', level: 5, category: 'frontend', x: 500, y: 100, connections: ['react', 'typescript', 'vercel'] },
-  { id: 'typescript', name: 'TypeScript', level: 5, category: 'frontend', x: 560, y: 210, connections: ['react', 'next', 'node'] },
-  { id: 'tailwind', name: 'Tailwind', level: 4, category: 'frontend', x: 160, y: 100, connections: ['react', 'figma'] },
+  // Frontend - Top center area
+  { id: 'react', name: 'React', level: 5, category: 'frontend', x: 400, y: 200, connections: ['next', 'typescript', 'tailwind'] },
+  { id: 'next', name: 'Next.js', level: 5, category: 'frontend', x: 600, y: 120, connections: ['react', 'typescript', 'vercel'] },
+  { id: 'typescript', name: 'TypeScript', level: 5, category: 'frontend', x: 650, y: 250, connections: ['react', 'next', 'node'] },
+  { id: 'tailwind', name: 'Tailwind', level: 4, category: 'frontend', x: 200, y: 120, connections: ['react', 'figma'] },
   
-  // Backend
-  { id: 'node', name: 'Node.js', level: 4, category: 'backend', x: 640, y: 170, connections: ['typescript', 'express', 'mongodb'] },
-  { id: 'express', name: 'Express', level: 4, category: 'backend', x: 700, y: 270, connections: ['node', 'mongodb', 'postgresql'] },
-  { id: 'mongodb', name: 'MongoDB', level: 4, category: 'backend', x: 600, y: 330, connections: ['node', 'express', 'prisma'] },
-  { id: 'postgresql', name: 'PostgreSQL', level: 4, category: 'backend', x: 740, y: 200, connections: ['express', 'prisma'] },
-  { id: 'prisma', name: 'Prisma', level: 3, category: 'backend', x: 640, y: 330, connections: ['mongodb', 'postgresql', 'typescript'] },
+  // Backend - Right side
+  { id: 'node', name: 'Node.js', level: 4, category: 'backend', x: 750, y: 200, connections: ['typescript', 'express', 'mongodb'] },
+  { id: 'express', name: 'Express', level: 4, category: 'backend', x: 820, y: 320, connections: ['node', 'mongodb', 'postgresql'] },
+  { id: 'mongodb', name: 'MongoDB', level: 4, category: 'backend', x: 680, y: 380, connections: ['node', 'express', 'prisma'] },
+  { id: 'postgresql', name: 'PostgreSQL', level: 4, category: 'backend', x: 880, y: 200, connections: ['express', 'prisma'] },
+  { id: 'prisma', name: 'Prisma', level: 3, category: 'backend', x: 780, y: 380, connections: ['mongodb', 'postgresql', 'typescript'] },
   
-  // DevOps
-  { id: 'docker', name: 'Docker', level: 3, category: 'devops', x: 440, y: 370, connections: ['aws', 'vercel'] },
-  { id: 'aws', name: 'AWS', level: 3, category: 'devops', x: 540, y: 410, connections: ['docker'] },
-  { id: 'vercel', name: 'Vercel', level: 4, category: 'devops', x: 400, y: 300, connections: ['next', 'docker'] },
+  // DevOps - Bottom center
+  { id: 'docker', name: 'Docker', level: 3, category: 'devops', x: 500, y: 450, connections: ['aws', 'vercel'] },
+  { id: 'aws', name: 'AWS', level: 3, category: 'devops', x: 650, y: 500, connections: ['docker'] },
+  { id: 'vercel', name: 'Vercel', level: 4, category: 'devops', x: 450, y: 350, connections: ['next', 'docker'] },
   
-  // Design
-  { id: 'figma', name: 'Figma', level: 4, category: 'design', x: 110, y: 170, connections: ['tailwind', 'ux'] },
-  { id: 'ux', name: 'UX Design', level: 4, category: 'design', x: 70, y: 270, connections: ['figma', 'accessibility'] },
+  // Design - Left side
+  { id: 'figma', name: 'Figma', level: 4, category: 'design', x: 120, y: 200, connections: ['tailwind', 'ux'] },
+  { id: 'ux', name: 'UX Design', level: 4, category: 'design', x: 80, y: 320, connections: ['figma', 'accessibility'] },
   
-  // Soft Skills
-  { id: 'leadership', name: 'Leadership', level: 4, category: 'soft', x: 300, y: 370, connections: ['communication', 'mentoring'] },
-  { id: 'communication', name: 'Communicate', level: 5, category: 'soft', x: 200, y: 410, connections: ['leadership', 'mentoring'] },
-  { id: 'mentoring', name: 'Mentoring', level: 4, category: 'soft', x: 140, y: 370, connections: ['leadership', 'communication'] },
-  { id: 'accessibility', name: 'A11y', level: 4, category: 'soft', x: 70, y: 210, connections: ['ux', 'react'] }
+  // Soft Skills - Bottom left
+  { id: 'leadership', name: 'Leadership', level: 4, category: 'soft', x: 350, y: 450, connections: ['communication', 'mentoring'] },
+  { id: 'communication', name: 'Communicate', level: 5, category: 'soft', x: 200, y: 500, connections: ['leadership', 'mentoring'] },
+  { id: 'mentoring', name: 'Mentoring', level: 4, category: 'soft', x: 150, y: 450, connections: ['leadership', 'communication'] },
+  { id: 'accessibility', name: 'A11y', level: 4, category: 'soft', x: 80, y: 260, connections: ['ux', 'react'] }
 ]
 
 const CATEGORY_COLORS = {
@@ -62,7 +62,7 @@ export function SkillsConstellation() {
   const containerRef = useRef<HTMLDivElement>(null)
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null)
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
-  const [dimensions, setDimensions] = useState({ width: 800, height: 500 })
+  const [dimensions, setDimensions] = useState({ width: 1000, height: 600 })
 
   // Update dimensions on resize
   useEffect(() => {
@@ -130,14 +130,14 @@ export function SkillsConstellation() {
 
   const getSkillSize = (skill: Skill) => {
     // Base size for readability with single-line text
-    const baseSize = 60
-    // Add more size for longer text to ensure single-line fit
+    const baseSize = 55
+    // Add size for longer text to ensure single-line fit
     const textLength = skill.name.length
-    const textBonus = Math.max(0, (textLength - 6) * 4) // More aggressive scaling
+    const textBonus = Math.max(0, (textLength - 6) * 3) // Slightly less aggressive scaling
     // Small level variation
     const levelBonus = (skill.level - 3) * 2
     
-    return Math.max(baseSize + textBonus + levelBonus, 55) // Minimum 55px
+    return Math.max(baseSize + textBonus + levelBonus, 50) // Minimum 50px
   }
 
   const filteredSkills = selectedCategory ? 
@@ -202,7 +202,7 @@ export function SkillsConstellation() {
         <div 
           ref={containerRef}
           className="relative mx-auto bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl overflow-hidden"
-          style={{ maxWidth: '800px', height: '500px' }}
+          style={{ maxWidth: '1000px', height: '600px' }}
         >
           {/* Canvas for connections */}
           <canvas
