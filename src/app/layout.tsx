@@ -3,6 +3,8 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import '../styles/design-system.css'
 import { RoleProvider } from '@/components/ui/role-personalization'
+import { WebVitals } from '@/components/analytics/web-vitals'
+import { CommandPalette } from '@/components/command-palette/command-palette'
 
 // Configure Inter as fallback (SF Pro will be loaded via CSS when available)
 const inter = Inter({ 
@@ -76,11 +78,34 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body className={inter.className} suppressHydrationWarning>
+        {/* JSON-LD structured data */}
+        <script
+          type="application/ld+json"
+          // Using dangerouslySetInnerHTML is recommended for JSON-LD in Next.js
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Person',
+              name: 'Akash Jain',
+              url: 'https://akashjain.dev',
+              sameAs: [
+                'https://github.com/akashjainn'
+              ],
+              jobTitle: 'Full-stack Developer',
+              worksFor: {
+                '@type': 'Organization',
+                name: 'Independent'
+              }
+            })
+          }}
+        />
         <RoleProvider>
           <a href="#main-content" className="skip-link">
             Skip to main content
           </a>
           {children}
+          <WebVitals />
+          <CommandPalette />
         </RoleProvider>
       </body>
     </html>

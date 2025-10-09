@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { useRevealOnScroll, useMouseParallax } from "@/lib/animations"
 import { KpiChip } from "@/components/ui/kpi-chip"
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { ChevronDown, Sparkles, Zap, Target } from 'lucide-react'
 
 // Rotating taglines for dynamic content
@@ -19,6 +19,12 @@ const ROTATING_TAGLINES = [
 function FloatingParticles() {
   const [particles, setParticles] = useState<Array<{id: number, x: number, y: number, size: number, delay: number}>>([])
 
+  // Respect reduced motion preferences
+  const prefersReducedMotion = useMemo(() => {
+    if (typeof window === 'undefined') return false
+    return window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false
+  }, [])
+
   useEffect(() => {
     const newParticles = Array.from({length: 20}, (_, i) => ({
       id: i,
@@ -30,12 +36,14 @@ function FloatingParticles() {
     setParticles(newParticles)
   }, [])
 
+  if (prefersReducedMotion) return null
+
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
       {particles.map(particle => (
         <div
           key={particle.id}
-          className="absolute w-1 h-1 bg-primary/20 rounded-full animate-pulse"
+          className="absolute w-1 h-1 bg-primary/20 rounded-full animate-pulse motion-safe:animate-pulse motion-reduce:animate-none"
           style={{
             left: `${particle.x}%`,
             top: `${particle.y}%`,
@@ -157,6 +165,8 @@ export function EnhancedHero() {
             style={{ transitionDelay: '400ms' }}
           >
             <p 
+              aria-live="polite"
+              role="status"
               className={`text-xl sm:text-2xl lg:text-3xl text-muted-foreground max-w-3xl leading-relaxed transition-all duration-300 ${
                 isTaglineVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
               }`}

@@ -21,32 +21,32 @@ interface Connection {
 
 const SKILLS: Skill[] = [
   // Frontend
-  { id: 'react', name: 'React', level: 5, category: 'frontend', x: 300, y: 200, connections: ['next', 'typescript', 'tailwind'] },
-  { id: 'next', name: 'Next.js', level: 5, category: 'frontend', x: 450, y: 150, connections: ['react', 'typescript', 'vercel'] },
-  { id: 'typescript', name: 'TypeScript', level: 5, category: 'frontend', x: 500, y: 250, connections: ['react', 'next', 'node'] },
-  { id: 'tailwind', name: 'Tailwind CSS', level: 4, category: 'frontend', x: 200, y: 150, connections: ['react', 'figma'] },
+  { id: 'react', name: 'React', level: 5, category: 'frontend', x: 330, y: 170, connections: ['next', 'typescript', 'tailwind'] },
+  { id: 'next', name: 'Next.js', level: 5, category: 'frontend', x: 500, y: 100, connections: ['react', 'typescript', 'vercel'] },
+  { id: 'typescript', name: 'TypeScript', level: 5, category: 'frontend', x: 560, y: 210, connections: ['react', 'next', 'node'] },
+  { id: 'tailwind', name: 'Tailwind', level: 4, category: 'frontend', x: 160, y: 100, connections: ['react', 'figma'] },
   
   // Backend
-  { id: 'node', name: 'Node.js', level: 4, category: 'backend', x: 600, y: 200, connections: ['typescript', 'express', 'mongodb'] },
-  { id: 'express', name: 'Express', level: 4, category: 'backend', x: 650, y: 300, connections: ['node', 'mongodb', 'postgresql'] },
-  { id: 'mongodb', name: 'MongoDB', level: 4, category: 'backend', x: 550, y: 350, connections: ['node', 'express', 'prisma'] },
-  { id: 'postgresql', name: 'PostgreSQL', level: 4, category: 'backend', x: 700, y: 250, connections: ['express', 'prisma'] },
-  { id: 'prisma', name: 'Prisma', level: 3, category: 'backend', x: 600, y: 350, connections: ['mongodb', 'postgresql', 'typescript'] },
+  { id: 'node', name: 'Node.js', level: 4, category: 'backend', x: 640, y: 170, connections: ['typescript', 'express', 'mongodb'] },
+  { id: 'express', name: 'Express', level: 4, category: 'backend', x: 700, y: 270, connections: ['node', 'mongodb', 'postgresql'] },
+  { id: 'mongodb', name: 'MongoDB', level: 4, category: 'backend', x: 600, y: 330, connections: ['node', 'express', 'prisma'] },
+  { id: 'postgresql', name: 'PostgreSQL', level: 4, category: 'backend', x: 740, y: 200, connections: ['express', 'prisma'] },
+  { id: 'prisma', name: 'Prisma', level: 3, category: 'backend', x: 640, y: 330, connections: ['mongodb', 'postgresql', 'typescript'] },
   
   // DevOps
-  { id: 'docker', name: 'Docker', level: 3, category: 'devops', x: 400, y: 400, connections: ['aws', 'vercel'] },
-  { id: 'aws', name: 'AWS', level: 3, category: 'devops', x: 500, y: 450, connections: ['docker'] },
-  { id: 'vercel', name: 'Vercel', level: 4, category: 'devops', x: 350, y: 350, connections: ['next', 'docker'] },
+  { id: 'docker', name: 'Docker', level: 3, category: 'devops', x: 440, y: 370, connections: ['aws', 'vercel'] },
+  { id: 'aws', name: 'AWS', level: 3, category: 'devops', x: 540, y: 410, connections: ['docker'] },
+  { id: 'vercel', name: 'Vercel', level: 4, category: 'devops', x: 400, y: 300, connections: ['next', 'docker'] },
   
   // Design
-  { id: 'figma', name: 'Figma', level: 4, category: 'design', x: 150, y: 200, connections: ['tailwind', 'ux'] },
-  { id: 'ux', name: 'UX Design', level: 4, category: 'design', x: 100, y: 300, connections: ['figma', 'accessibility'] },
+  { id: 'figma', name: 'Figma', level: 4, category: 'design', x: 110, y: 170, connections: ['tailwind', 'ux'] },
+  { id: 'ux', name: 'UX Design', level: 4, category: 'design', x: 70, y: 270, connections: ['figma', 'accessibility'] },
   
   // Soft Skills
-  { id: 'leadership', name: 'Leadership', level: 4, category: 'soft', x: 250, y: 400, connections: ['communication', 'mentoring'] },
-  { id: 'communication', name: 'Communication', level: 5, category: 'soft', x: 150, y: 450, connections: ['leadership', 'mentoring'] },
-  { id: 'mentoring', name: 'Mentoring', level: 4, category: 'soft', x: 100, y: 400, connections: ['leadership', 'communication'] },
-  { id: 'accessibility', name: 'A11y', level: 4, category: 'soft', x: 50, y: 250, connections: ['ux', 'react'] }
+  { id: 'leadership', name: 'Leadership', level: 4, category: 'soft', x: 300, y: 370, connections: ['communication', 'mentoring'] },
+  { id: 'communication', name: 'Communicate', level: 5, category: 'soft', x: 200, y: 410, connections: ['leadership', 'mentoring'] },
+  { id: 'mentoring', name: 'Mentoring', level: 4, category: 'soft', x: 140, y: 370, connections: ['leadership', 'communication'] },
+  { id: 'accessibility', name: 'A11y', level: 4, category: 'soft', x: 70, y: 210, connections: ['ux', 'react'] }
 ]
 
 const CATEGORY_COLORS = {
@@ -128,9 +128,16 @@ export function SkillsConstellation() {
     })
   }, [hoveredSkill, selectedCategory, dimensions])
 
-  const getSkillSize = (level: number) => {
-    // Make nodes more uniform and readable; slight size variance only
-    return 40 + (level - 3) * 4 // ~24-56px -> now ~32-48px
+  const getSkillSize = (skill: Skill) => {
+    // Base size for readability with single-line text
+    const baseSize = 60
+    // Add more size for longer text to ensure single-line fit
+    const textLength = skill.name.length
+    const textBonus = Math.max(0, (textLength - 6) * 4) // More aggressive scaling
+    // Small level variation
+    const levelBonus = (skill.level - 3) * 2
+    
+    return Math.max(baseSize + textBonus + levelBonus, 55) // Minimum 55px
   }
 
   const filteredSkills = selectedCategory ? 
@@ -207,7 +214,7 @@ export function SkillsConstellation() {
           <AnimatePresence>
             {filteredSkills.map((skill) => {
               const colors = CATEGORY_COLORS[skill.category]
-              const size = getSkillSize(skill.level)
+              const size = getSkillSize(skill)
               const isHighlighted = hoveredSkill === skill.id
               const isConnected = hoveredSkill && skill.connections.includes(hoveredSkill)
               const shouldShow = !selectedCategory || skill.category === selectedCategory
@@ -233,20 +240,29 @@ export function SkillsConstellation() {
                   onMouseLeave={() => setHoveredSkill(null)}
                 >
                   <div
-                    className={`w-full h-full rounded-full border-2 flex items-center justify-center text-white font-semibold text-[0.7rem] shadow-lg transition-all duration-200 ${
+                    className={`w-full h-full rounded-full border-2 flex items-center justify-center text-white shadow-lg transition-all duration-200 ${
                       isHighlighted || isConnected ? 'ring-4 ring-opacity-30' : ''
+                    } ${
+                      skill.name.length <= 8 ? 'font-semibold' : 'font-medium'
                     }`}
                     style={{
                       backgroundColor: colors.bg,
                       borderColor: colors.border,
-                      lineHeight: 1.05,
+                      lineHeight: 1,
                       textAlign: 'center',
                       padding: '0 6px',
                       whiteSpace: 'nowrap',
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      maxWidth: '100%',
-                      fontSize: skill.name.length > 12 ? '0.6rem' : '0.7rem',
+                      overflow: 'visible',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: (() => {
+                        const textLength = skill.name.length
+                        if (textLength <= 6) return '0.85rem' // Short names
+                        if (textLength <= 10) return '0.75rem' // Medium names  
+                        if (textLength <= 14) return '0.65rem' // Long names
+                        return '0.55rem' // Very long names
+                      })(),
                       ...(isHighlighted || isConnected ? {
                         boxShadow: `0 0 0 4px ${colors.border}30`
                       } : {})
