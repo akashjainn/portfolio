@@ -38,8 +38,14 @@ const MOCK_PROJECTS = [
     description: "Real-time sports betting odds aggregation platform with 94% prediction accuracy. Built as a top 3 project using TwelveLabs API with live WebSocket connections and Redis caching for sub-100ms latency.",
     techStack: ["Next.js", "TypeScript", "TwelveLabs API", "Server-Sent Events", "TailwindCSS"],
     screenshots: {
-      desktop: ["https://propsage-web.vercel.app/"],
-      mobile: ["https://propsage-web.vercel.app/"]
+      desktop: [
+        "/images/projects/propsage/desktop-1.svg",
+        "/images/projects/propsage/desktop-2.svg"
+      ],
+      mobile: [
+        "/images/projects/propsage/mobile-1.svg",
+        "/images/projects/propsage/mobile-2.svg"
+      ]
     },
     liveUrl: "https://propsage-web.vercel.app/",
     repoUrl: "https://github.com/akashjainn/propsage",
@@ -63,8 +69,12 @@ const MOCK_PROJECTS = [
     description: "Comprehensive portfolio analytics platform with real-time market data integration. Features advanced risk metrics, P/L calculations, and interactive visualizations for retail investors.",
     techStack: ["Next.js", "MongoDB", "Alpha Vantage API", "Chart.js", "Prisma"],
     screenshots: {
-      desktop: ["https://stocksense-taupe.vercel.app/market"],
-      mobile: ["https://stocksense-taupe.vercel.app/market"]
+      desktop: [
+        "/images/projects/stocksense/desktop-1.svg"
+      ],
+      mobile: [
+        "/images/projects/stocksense/mobile-1.svg"
+      ]
     },
     liveUrl: "https://stocksense-taupe.vercel.app/market",
     repoUrl: "https://github.com/akashjainn/stocksense",
@@ -88,8 +98,12 @@ const MOCK_PROJECTS = [
     description: "Progressive Web App for location-based safety with offline capabilities and emergency features. Real-time location tracking and emergency response system.",
     techStack: ["PWA", "Service Workers", "Geolocation API", "WebRTC", "IndexedDB"],
     screenshots: {
-      desktop: ["https://land-safe.vercel.app/"],
-      mobile: ["https://land-safe.vercel.app/"]
+      desktop: [
+        "/images/projects/landsafe/desktop-1.svg"
+      ],
+      mobile: [
+        "/images/projects/landsafe/mobile-1.svg"
+      ]
     },
     liveUrl: "https://land-safe.vercel.app/",
     repoUrl: "https://github.com/akashjainn/landsafe",
@@ -145,12 +159,14 @@ function Screenshot3DViewer({
   screenshots, 
   title, 
   isPlaying, 
-  onTogglePlay 
+  onTogglePlay,
+  liveUrl
 }: { 
   screenshots: string[]
   title: string
   isPlaying: boolean
   onTogglePlay: () => void
+  liveUrl?: string
 }) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [perspective, setPerspective] = useState({ x: 0, y: 0 })
@@ -158,20 +174,28 @@ function Screenshot3DViewer({
   const [isLoading, setIsLoading] = useState(true)
   const containerRef = useRef<HTMLDivElement>(null)
   const iframeRef = useRef<HTMLIFrameElement>(null)
+  const currentSrc = screenshots[currentIndex] ?? ''
+
+  // Determine if current screenshot is an image (vs a live URL)
+  const isImage = (url: string) => /\.(png|jpe?g|webp|avif|svg)$/i.test(url)
 
   // Reset error state when screenshot changes
   useEffect(() => {
     setHasIframeError(false)
     setIsLoading(true)
     
-    // Try to detect if iframe can load - set a timeout to show fallback
-    const fallbackTimer = setTimeout(() => {
-      setHasIframeError(true)
-      setIsLoading(false)
-    }, 5000) // 5 second timeout
+    // If we're rendering an image, no need to set iframe error timeouts
+  if (currentSrc && !isImage(currentSrc)) {
+      // Try to detect if iframe can load - set a timeout to show fallback
+      const fallbackTimer = setTimeout(() => {
+        setHasIframeError(true)
+        setIsLoading(false)
+      }, 5000) // 5 second timeout
+      return () => clearTimeout(fallbackTimer)
+    }
     
-    return () => clearTimeout(fallbackTimer)
-  }, [currentIndex, screenshots])
+    return () => {}
+  }, [currentIndex, screenshots, currentSrc])
 
   // Auto-advance screenshots when playing
   useEffect(() => {
@@ -226,11 +250,33 @@ function Screenshot3DViewer({
             }}
           >
             <div className="w-full h-full overflow-hidden rounded-lg bg-white relative">
-              {!hasIframeError ? (
+              {isImage(currentSrc) ? (
+                // Render static image screenshot
+                <>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={currentSrc}
+                    alt={`${title} screenshot ${currentIndex + 1}`}
+                    className="w-full h-full object-cover"
+                    onLoad={() => setIsLoading(false)}
+                    onError={() => {
+                      setIsLoading(false)
+                    }}
+                  />
+                  {isLoading && (
+                    <div className="absolute inset-0 bg-gray-100 flex items-center justify-center">
+                      <div className="text-center">
+                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-2"></div>
+                        <p className="text-sm text-gray-600">Loading {title}...</p>
+                      </div>
+                    </div>
+                  )}
+                </>
+              ) : !hasIframeError ? (
                 <>
                   <iframe
                     ref={iframeRef}
-                    src={screenshots[currentIndex]}
+                    src={currentSrc}
                     title={`${title} live preview`}
                     className="w-full h-full border-0"
                     loading="lazy"
@@ -277,7 +323,7 @@ function Screenshot3DViewer({
                       This site cannot be displayed in a frame for security reasons.
                     </p>
                     <a 
-                      href={screenshots[currentIndex]} 
+                      href={liveUrl || currentSrc} 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary/90 transition-colors"
@@ -510,6 +556,7 @@ function Project3DPreview({ project }: Project3DPreviewProps) {
                 title={project.title}
                 isPlaying={isPlaying}
                 onTogglePlay={() => setIsPlaying(!isPlaying)}
+                {...(project.liveUrl ? { liveUrl: project.liveUrl } : {})}
               />
             </DeviceFrame>
           </div>
@@ -569,6 +616,7 @@ function Project3DPreview({ project }: Project3DPreviewProps) {
                   title={project.title}
                   isPlaying={isPlaying}
                   onTogglePlay={() => setIsPlaying(!isPlaying)}
+                  {...(project.liveUrl ? { liveUrl: project.liveUrl } : {})}
                 />
               </DeviceFrame>
               
