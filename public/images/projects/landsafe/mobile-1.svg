@@ -1,0 +1,7 @@
+<svg width="375" height="812" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="#0f172a"/>
+  <rect x="20" y="40" width="335" height="732" fill="#1e293b" rx="20"/>
+  <text x="187" y="400" text-anchor="middle" font-family="system-ui" font-size="16" fill="#e2e8f0">
+    LandSafe Mobile
+  </text>
+</svg>

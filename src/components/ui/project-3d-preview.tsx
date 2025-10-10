@@ -38,8 +38,8 @@ const MOCK_PROJECTS = [
     description: "Real-time sports betting odds aggregation platform with 94% prediction accuracy. Built as a top 3 project using TwelveLabs API with live WebSocket connections and Redis caching for sub-100ms latency.",
     techStack: ["Next.js", "TypeScript", "TwelveLabs API", "Server-Sent Events", "TailwindCSS"],
     screenshots: {
-      desktop: ["https://propsage-web.vercel.app/"],
-      mobile: ["https://propsage-web.vercel.app/"]
+      desktop: ["/images/projects/propsage/desktop-1.svg", "/images/projects/propsage/desktop-2.svg"],
+      mobile: ["/images/projects/propsage/mobile-1.svg", "/images/projects/propsage/mobile-2.svg"]
     },
     liveUrl: "https://propsage-web.vercel.app/",
     repoUrl: "https://github.com/akashjainn/propsage",
@@ -63,8 +63,8 @@ const MOCK_PROJECTS = [
     description: "Comprehensive portfolio analytics platform with real-time market data integration. Features advanced risk metrics, P/L calculations, and interactive visualizations for retail investors.",
     techStack: ["Next.js", "MongoDB", "Alpha Vantage API", "Chart.js", "Prisma"],
     screenshots: {
-      desktop: ["https://stocksense-taupe.vercel.app/market"],
-      mobile: ["https://stocksense-taupe.vercel.app/market"]
+      desktop: ["/images/projects/stocksense/desktop-1.svg"],
+      mobile: ["/images/projects/stocksense/mobile-1.svg"]
     },
     liveUrl: "https://stocksense-taupe.vercel.app/market",
     repoUrl: "https://github.com/akashjainn/stocksense",
@@ -88,8 +88,8 @@ const MOCK_PROJECTS = [
     description: "Progressive Web App for location-based safety with offline capabilities and emergency features. Real-time location tracking and emergency response system.",
     techStack: ["PWA", "Service Workers", "Geolocation API", "WebRTC", "IndexedDB"],
     screenshots: {
-      desktop: ["https://land-safe.vercel.app/"],
-      mobile: ["https://land-safe.vercel.app/"]
+      desktop: ["/images/projects/landsafe/desktop-1.svg"],
+      mobile: ["/images/projects/landsafe/mobile-1.svg"]
     },
     liveUrl: "https://land-safe.vercel.app/",
     repoUrl: "https://github.com/akashjainn/landsafe",
@@ -209,12 +209,23 @@ function Screenshot3DViewer({
             }}
           >
             <div className="w-full h-full overflow-hidden rounded-lg bg-white">
-              <iframe
+              <img
                 src={screenshots[currentIndex]}
-                title={`${title} live preview`}
-                className="w-full h-full border-0"
+                alt={`${title} screenshot ${currentIndex + 1}`}
+                className="w-full h-full object-cover border-0"
                 loading="lazy"
-                sandbox="allow-same-origin allow-scripts allow-forms"
+                onError={(e) => {
+                  // Fallback to placeholder if image fails to load
+                  const target = e.target as HTMLImageElement
+                  target.src = `data:image/svg+xml;base64,${btoa(`
+                    <svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="100%" height="100%" fill="#f3f4f6"/>
+                      <text x="50%" y="50%" text-anchor="middle" font-family="system-ui" font-size="18" fill="#6b7280">
+                        ${title} Preview
+                      </text>
+                    </svg>
+                  `)}`
+                }}
               />
             </div>
             

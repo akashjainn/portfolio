@@ -1,0 +1,34 @@
+<svg width="1200" height="800" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="#0f172a"/>
+  <rect x="50" y="50" width="1100" height="700" fill="#1e293b" rx="12"/>
+  
+  <!-- Mock browser chrome -->
+  <rect x="50" y="50" width="1100" height="40" fill="#374151" rx="12 12 0 0"/>
+  <circle cx="80" cy="70" r="6" fill="#ef4444"/>
+  <circle cx="105" cy="70" r="6" fill="#f59e0b"/>
+  <circle cx="130" cy="70" r="6" fill="#10b981"/>
+  
+  <!-- Mock content -->
+  <text x="600" y="300" text-anchor="middle" font-family="system-ui" font-size="28" fill="#e2e8f0" font-weight="bold">
+    PropSage
+  </text>
+  <text x="600" y="340" text-anchor="middle" font-family="system-ui" font-size="16" fill="#94a3b8">
+    Real-time sports betting props with evidence overlays
+  </text>
+  
+  <!-- Mock cards -->
+  <rect x="150" y="400" width="300" height="200" fill="#334155" rx="8"/>
+  <rect x="500" y="400" width="300" height="200" fill="#334155" rx="8"/>
+  <rect x="850" y="400" width="200" height="200" fill="#334155" rx="8"/>
+  
+  <!-- Mock text in cards -->
+  <text x="300" y="440" text-anchor="middle" font-family="system-ui" font-size="14" fill="#e2e8f0">
+    Live Odds
+  </text>
+  <text x="650" y="440" text-anchor="middle" font-family="system-ui" font-size="14" fill="#e2e8f0">
+    Player Props
+  </text>
+  <text x="950" y="440" text-anchor="middle" font-family="system-ui" font-size="14" fill="#e2e8f0">
+    Analytics
+  </text>
+</svg>
