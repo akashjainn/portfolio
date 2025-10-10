@@ -39,12 +39,12 @@ const MOCK_PROJECTS = [
     techStack: ["Next.js", "TypeScript", "TwelveLabs API", "Server-Sent Events", "TailwindCSS"],
     screenshots: {
       desktop: [
-        "/images/projects/propsage/desktop-1.svg",
-        "/images/projects/propsage/desktop-2.svg"
+        "https://propsage-web.vercel.app/",
+        "https://propsage-web.vercel.app/demo"
       ],
       mobile: [
-        "/images/projects/propsage/mobile-1.svg",
-        "/images/projects/propsage/mobile-2.svg"
+        "https://propsage-web.vercel.app/",
+        "https://propsage-web.vercel.app/demo"
       ]
     },
     liveUrl: "https://propsage-web.vercel.app/",
@@ -70,10 +70,13 @@ const MOCK_PROJECTS = [
     techStack: ["Next.js", "MongoDB", "Alpha Vantage API", "Chart.js", "Prisma"],
     screenshots: {
       desktop: [
-        "/images/projects/stocksense/desktop-1.svg"
+        "https://stocksense-taupe.vercel.app/market",
+        "https://stocksense-taupe.vercel.app/dashboard",
+        "https://stocksense-taupe.vercel.app/portfolio"
       ],
       mobile: [
-        "/images/projects/stocksense/mobile-1.svg"
+        "https://stocksense-taupe.vercel.app/market",
+        "https://stocksense-taupe.vercel.app/dashboard"
       ]
     },
     liveUrl: "https://stocksense-taupe.vercel.app/market",
@@ -99,10 +102,12 @@ const MOCK_PROJECTS = [
     techStack: ["PWA", "Service Workers", "Geolocation API", "WebRTC", "IndexedDB"],
     screenshots: {
       desktop: [
-        "/images/projects/landsafe/desktop-1.svg"
+        "https://land-safe.vercel.app/",
+        "https://land-safe.vercel.app/safety"
       ],
       mobile: [
-        "/images/projects/landsafe/mobile-1.svg"
+        "https://land-safe.vercel.app/",
+        "https://land-safe.vercel.app/safety"
       ]
     },
     liveUrl: "https://land-safe.vercel.app/",
@@ -190,7 +195,7 @@ function Screenshot3DViewer({
       const fallbackTimer = setTimeout(() => {
         setHasIframeError(true)
         setIsLoading(false)
-      }, 5000) // 5 second timeout
+      }, 8000) // 8 second timeout to allow sites to load
       return () => clearTimeout(fallbackTimer)
     }
     
@@ -280,7 +285,8 @@ function Screenshot3DViewer({
                     title={`${title} live preview`}
                     className="w-full h-full border-0"
                     loading="lazy"
-                    sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
+                    sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-top-navigation allow-modals"
+                    referrerPolicy="no-referrer-when-downgrade"
                     onLoad={() => {
                       setIsLoading(false)
                       // Check if iframe loaded successfully by trying to access its content
@@ -311,47 +317,42 @@ function Screenshot3DViewer({
                 </>
               ) : (
                 // Fallback content when iframe is blocked
-                <div className="w-full h-full bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center relative">
-                  <div className="text-center p-8 max-w-md">
-                    <div className="mb-4">
-                      <svg className="w-16 h-16 mx-auto text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                      </svg>
+                <div className="w-full h-full bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center relative overflow-hidden">
+                  <div className="text-center p-8 max-w-md z-10 relative">
+                    <div className="mb-6">
+                      <div className="w-20 h-20 mx-auto bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mb-4">
+                        <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      </div>
                     </div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">{title}</h3>
-                    <p className="text-sm text-gray-600 mb-4">
-                      This site cannot be displayed in a frame for security reasons.
+                    <h3 className="text-xl font-bold text-gray-900 mb-3">{title}</h3>
+                    <p className="text-sm text-gray-600 mb-6 leading-relaxed">
+                      Experience the full interactive website by visiting it directly. Some security features prevent embedding in frames.
                     </p>
-                    <a 
-                      href={liveUrl || currentSrc} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary/90 transition-colors"
-                    >
-                      View Live Site
-                      <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                      </svg>
-                    </a>
+                    <div className="space-y-3">
+                      <a 
+                        href={liveUrl || currentSrc} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+                      >
+                        <svg className="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                        Open Live Website
+                      </a>
+                      <p className="text-xs text-gray-500">
+                        Opens in new tab • Best viewed in desktop browser
+                      </p>
+                    </div>
                   </div>
                   
-                  {/* Subtle pattern overlay */}
-                  <div className="absolute inset-0 opacity-5">
-                    <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-                      <g fill="none" fillRule="evenodd">
-                        <g fill="currentColor" fillOpacity="1">
-                          <circle cx="7" cy="7" r="1"/>
-                          <circle cx="27" cy="7" r="1"/>
-                          <circle cx="47" cy="7" r="1"/>
-                          <circle cx="7" cy="27" r="1"/>
-                          <circle cx="27" cy="27" r="1"/>
-                          <circle cx="47" cy="27" r="1"/>
-                          <circle cx="7" cy="47" r="1"/>
-                          <circle cx="27" cy="47" r="1"/>
-                          <circle cx="47" cy="47" r="1"/>
-                        </g>
-                      </g>
-                    </svg>
+                  {/* Animated background pattern */}
+                  <div className="absolute inset-0 opacity-10">
+                    <div className="absolute top-10 left-10 w-32 h-32 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
+                    <div className="absolute top-20 right-10 w-32 h-32 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+                    <div className="absolute bottom-10 left-20 w-32 h-32 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse" style={{ animationDelay: '2s' }}></div>
                   </div>
                 </div>
               )}
