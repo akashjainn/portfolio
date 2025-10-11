@@ -27,10 +27,8 @@ const nextConfig = {
       {
         source: '/(.*)',
         headers: [
-          {
-            key: 'X-Frame-Options',
-            value: 'DENY'
-          },
+          // Allow embedding this portfolio in same-origin only (not needed for our use-case),
+          // but we control framing via CSP frame-ancestors below. Remove legacy X-Frame-Options to avoid conflicts.
           {
             key: 'X-Content-Type-Options',
             value: 'nosniff'
@@ -43,33 +41,33 @@ const nextConfig = {
             key: 'Referrer-Policy',
             value: 'strict-origin-when-cross-origin'
           },
-          {
-            key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=(), interest-cohort=()'
-          },
-          {
-            key: 'Cross-Origin-Opener-Policy',
-            value: 'same-origin'
-          },
-          {
-            key: 'Cross-Origin-Embedder-Policy',
-            value: 'require-corp'
-          },
-          {
-            key: 'Cross-Origin-Resource-Policy',
-            value: 'same-origin'
-          },
+          // Permissions-Policy kept minimal (no powerful features needed here)
+          { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
+          // Relax COOP/COEP so cross-origin iframes can render without COEP violations
+          // (we are not using SharedArrayBuffer/COOP-isolation here)
+          { key: 'Cross-Origin-Opener-Policy', value: 'same-origin-allow-popups' },
+          { key: 'Cross-Origin-Embedder-Policy', value: 'unsafe-none' },
+          // Allow loading cross-origin images used by previews
+          { key: 'Cross-Origin-Resource-Policy', value: 'cross-origin' },
           // Basic CSP suitable for static portfolio content
           {
             key: 'Content-Security-Policy',
             value: [
+              // Defaults
               "default-src 'self'",
+              // Scripts and styles for Next.js + inline styles from Tailwind JIT in dev
               "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
-              "style-src 'self' 'unsafe-inline' fonts.googleapis.com",
-              "img-src 'self' data: blob:",
-              "font-src 'self' fonts.gstatic.com",
-              "connect-src 'self'",
-              "frame-ancestors 'none'",
+              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+              // Fonts and images (allow data URIs for generated placeholders)
+              "img-src 'self' data: blob: https:",
+              "font-src 'self' https://fonts.gstatic.com",
+              // API/connect permissions
+              "connect-src 'self' https://vitals.vercel-insights.com",
+              // Allow iframes from our project sites only
+              "frame-src 'self' https://propsage-web.vercel.app https://stocksense-taupe.vercel.app https://land-safe.vercel.app http://localhost:3000 http://localhost:3001",
+              // Who may embed THIS site (we can keep strict)
+              "frame-ancestors 'self'",
+              // Misc
               "base-uri 'self'",
               "form-action 'self'"
             ].join('; ')

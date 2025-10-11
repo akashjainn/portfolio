@@ -52,12 +52,12 @@ const MOCK_PROJECTS = [
     techStack: ["Next.js", "TypeScript", "TwelveLabs API", "Server-Sent Events", "TailwindCSS"],
     screenshots: {
       desktop: [
-        "/images/projects/propsage-desktop-1.png",
-        "/images/projects/propsage-desktop-2.png"
+        "https://propsage-web.vercel.app/",
+        "https://propsage-web.vercel.app/demo"
       ],
       mobile: [
-        "/images/projects/propsage-mobile-1.png",
-        "/images/projects/propsage-mobile-2.png"
+        "https://propsage-web.vercel.app/",
+        "https://propsage-web.vercel.app/demo"
       ]
     },
     liveUrl: "https://propsage-web.vercel.app/",
@@ -83,12 +83,13 @@ const MOCK_PROJECTS = [
     techStack: ["Next.js", "MongoDB", "Alpha Vantage API", "Chart.js", "Prisma"],
     screenshots: {
       desktop: [
-        "/images/projects/stocksense-desktop-1.png",
-        "/images/projects/stocksense-desktop-2.png"
+        "https://stocksense-taupe.vercel.app/market",
+        "https://stocksense-taupe.vercel.app/dashboard",
+        "https://stocksense-taupe.vercel.app/portfolio"
       ],
       mobile: [
-        "/images/projects/stocksense-mobile-1.png",
-        "/images/projects/stocksense-mobile-2.png"
+        "https://stocksense-taupe.vercel.app/market",
+        "https://stocksense-taupe.vercel.app/dashboard"
       ]
     },
     liveUrl: "https://stocksense-taupe.vercel.app/market",
@@ -114,12 +115,12 @@ const MOCK_PROJECTS = [
     techStack: ["PWA", "Service Workers", "Geolocation API", "WebRTC", "IndexedDB"],
     screenshots: {
       desktop: [
-        "/images/projects/landsafe-desktop-1.png",
-        "/images/projects/landsafe-desktop-2.png"
+        "https://land-safe.vercel.app/",
+        "https://land-safe.vercel.app/safety"
       ],
       mobile: [
-        "/images/projects/landsafe-mobile-1.png",
-        "/images/projects/landsafe-mobile-2.png"
+        "https://land-safe.vercel.app/",
+        "https://land-safe.vercel.app/safety"
       ]
     },
     liveUrl: "https://land-safe.vercel.app/",
@@ -191,6 +192,7 @@ function Screenshot3DViewer({
   const [currentIndex, setCurrentIndex] = useState(0)
   const [perspective, setPerspective] = useState({ x: 0, y: 0 })
   const containerRef = useRef<HTMLDivElement>(null)
+  const [iframeBlocked, setIframeBlocked] = useState(false)
   const iframeRef = useRef<HTMLIFrameElement>(null)
 
   // Auto-advance screenshots when playing and in screenshot mode
