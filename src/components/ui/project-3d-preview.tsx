@@ -30,6 +30,19 @@ interface Project3DPreviewProps {
   }
 }
 
+// API endpoint for generating screenshots
+const getScreenshotUrl = (url: string, device: 'desktop' | 'mobile' = 'desktop') => {
+  const width = device === 'mobile' ? 390 : 1200
+  const height = device === 'mobile' ? 844 : 630
+  // Using a screenshot service API (multiple fallbacks)
+  const services = [
+    `https://api.screenshotmachine.com/?key=demo&url=${encodeURIComponent(url)}&dimension=${width}x${height}`,
+    `https://htmlcsstoimage.com/demo_images/screenshot.png`, // fallback
+    `https://via.placeholder.com/${width}x${height}/667eea/ffffff?text=${encodeURIComponent('Loading...')}`
+  ]
+  return services[0] // We'll implement fallback logic in the component
+}
+
 const MOCK_PROJECTS = [
   {
     title: "PropSage",
@@ -39,12 +52,12 @@ const MOCK_PROJECTS = [
     techStack: ["Next.js", "TypeScript", "TwelveLabs API", "Server-Sent Events", "TailwindCSS"],
     screenshots: {
       desktop: [
-        "https://propsage-web.vercel.app/",
-        "https://propsage-web.vercel.app/demo"
+        "/images/projects/propsage-desktop-1.png",
+        "/images/projects/propsage-desktop-2.png"
       ],
       mobile: [
-        "https://propsage-web.vercel.app/",
-        "https://propsage-web.vercel.app/demo"
+        "/images/projects/propsage-mobile-1.png",
+        "/images/projects/propsage-mobile-2.png"
       ]
     },
     liveUrl: "https://propsage-web.vercel.app/",
@@ -70,13 +83,12 @@ const MOCK_PROJECTS = [
     techStack: ["Next.js", "MongoDB", "Alpha Vantage API", "Chart.js", "Prisma"],
     screenshots: {
       desktop: [
-        "https://stocksense-taupe.vercel.app/market",
-        "https://stocksense-taupe.vercel.app/dashboard",
-        "https://stocksense-taupe.vercel.app/portfolio"
+        "/images/projects/stocksense-desktop-1.png",
+        "/images/projects/stocksense-desktop-2.png"
       ],
       mobile: [
-        "https://stocksense-taupe.vercel.app/market",
-        "https://stocksense-taupe.vercel.app/dashboard"
+        "/images/projects/stocksense-mobile-1.png",
+        "/images/projects/stocksense-mobile-2.png"
       ]
     },
     liveUrl: "https://stocksense-taupe.vercel.app/market",
@@ -102,12 +114,12 @@ const MOCK_PROJECTS = [
     techStack: ["PWA", "Service Workers", "Geolocation API", "WebRTC", "IndexedDB"],
     screenshots: {
       desktop: [
-        "https://land-safe.vercel.app/",
-        "https://land-safe.vercel.app/safety"
+        "/images/projects/landsafe-desktop-1.png",
+        "/images/projects/landsafe-desktop-2.png"
       ],
       mobile: [
-        "https://land-safe.vercel.app/",
-        "https://land-safe.vercel.app/safety"
+        "/images/projects/landsafe-mobile-1.png",
+        "/images/projects/landsafe-mobile-2.png"
       ]
     },
     liveUrl: "https://land-safe.vercel.app/",
@@ -173,45 +185,24 @@ function Screenshot3DViewer({
   onTogglePlay: () => void
   liveUrl?: string
 }) {
+  const [currentView, setCurrentView] = useState<'iframe' | 'screenshot'>('iframe')
+  const [iframeError, setIframeError] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [perspective, setPerspective] = useState({ x: 0, y: 0 })
-  const [hasIframeError, setHasIframeError] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
   const containerRef = useRef<HTMLDivElement>(null)
   const iframeRef = useRef<HTMLIFrameElement>(null)
-  const currentSrc = screenshots[currentIndex] ?? ''
 
-  // Determine if current screenshot is an image (vs a live URL)
-  const isImage = (url: string) => /\.(png|jpe?g|webp|avif|svg)$/i.test(url)
-
-  // Reset error state when screenshot changes
+  // Auto-advance screenshots when playing and in screenshot mode
   useEffect(() => {
-    setHasIframeError(false)
-    setIsLoading(true)
-    
-    // If we're rendering an image, no need to set iframe error timeouts
-  if (currentSrc && !isImage(currentSrc)) {
-      // Try to detect if iframe can load - set a timeout to show fallback
-      const fallbackTimer = setTimeout(() => {
-        setHasIframeError(true)
-        setIsLoading(false)
-      }, 8000) // 8 second timeout to allow sites to load
-      return () => clearTimeout(fallbackTimer)
-    }
-    
-    return () => {}
-  }, [currentIndex, screenshots, currentSrc])
-
-  // Auto-advance screenshots when playing
-  useEffect(() => {
-    if (!isPlaying) return
+    if (!isPlaying || currentView !== 'screenshot') return
     
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % screenshots.length)
     }, 3000)
 
     return () => clearInterval(interval)
-  }, [isPlaying, screenshots.length])
+  }, [isPlaying, screenshots.length, currentView])
 
   // 3D perspective effect on mouse move
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -221,11 +212,65 @@ function Screenshot3DViewer({
     const x = (e.clientX - rect.left - rect.width / 2) / rect.width
     const y = (e.clientY - rect.top - rect.height / 2) / rect.height
     
-    setPerspective({ x: x * 20, y: y * 20 })
+    setPerspective({ x: x * 15, y: y * 15 })
   }
 
   const handleMouseLeave = () => {
     setPerspective({ x: 0, y: 0 })
+  }
+
+  // Handle iframe load events
+  const handleIframeLoad = () => {
+    setIsLoading(false)
+    setIframeError(false)
+  }
+
+  const handleIframeError = () => {
+    setIsLoading(false)
+    setIframeError(true)
+    setCurrentView('screenshot')
+  }
+
+  // Toggle between iframe and screenshot view
+  const toggleView = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    setCurrentView(prev => prev === 'iframe' ? 'screenshot' : 'iframe')
+    setIsLoading(true)
+    if (currentView === 'screenshot') {
+      setIframeError(false)
+    }
+  }
+
+  // Create a beautiful fallback preview for when iframe fails
+  const renderFallbackPreview = (projectTitle: string) => {
+    const projectGradients = {
+      'PropSage': 'from-blue-600 via-purple-600 to-cyan-500',
+      'StockSense': 'from-green-500 via-teal-600 to-blue-600', 
+      'LandSafe': 'from-orange-500 via-red-600 to-pink-600'
+    }
+    
+    const gradient = projectGradients[projectTitle as keyof typeof projectGradients] || 'from-gray-600 to-gray-800'
+    
+    return (
+      <div className={`w-full h-full bg-gradient-to-br ${gradient} flex flex-col justify-center items-center p-8 text-white relative overflow-hidden`}>
+        <div className="text-center">
+          <div className="w-16 h-16 mx-auto mb-4 bg-white/20 rounded-full flex items-center justify-center">
+            <ExternalLink className="w-8 h-8" />
+          </div>
+          <h3 className="text-2xl font-bold mb-2">{projectTitle}</h3>
+          <p className="text-lg opacity-90 mb-6">
+            Live website preview unavailable
+          </p>
+          <Button 
+            onClick={() => window.open(liveUrl, '_blank', 'noopener,noreferrer')}
+            className="bg-white/20 hover:bg-white/30 border border-white/20"
+          >
+            <ExternalLink className="w-4 h-4 mr-2" />
+            Visit Live Site
+          </Button>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -235,11 +280,10 @@ function Screenshot3DViewer({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Screenshots Stack */}
       <div className="relative w-full h-full">
         <AnimatePresence mode="wait">
           <motion.div
-            key={currentIndex}
+            key={`${currentView}-${currentIndex}`}
             initial={{ opacity: 0, rotateY: 90 }}
             animate={{ 
               opacity: 1, 
@@ -254,105 +298,46 @@ function Screenshot3DViewer({
               perspective: '1000px'
             }}
           >
-            <div className="w-full h-full overflow-hidden rounded-lg bg-white relative">
-              {isImage(currentSrc) ? (
-                // Render static image screenshot
-                <>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={currentSrc}
-                    alt={`${title} screenshot ${currentIndex + 1}`}
-                    className="w-full h-full object-cover"
-                    onLoad={() => setIsLoading(false)}
-                    onError={() => {
-                      setIsLoading(false)
-                    }}
-                  />
-                  {isLoading && (
-                    <div className="absolute inset-0 bg-gray-100 flex items-center justify-center">
-                      <div className="text-center">
-                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-2"></div>
-                        <p className="text-sm text-gray-600">Loading {title}...</p>
-                      </div>
-                    </div>
-                  )}
-                </>
-              ) : !hasIframeError ? (
+            <div className="w-full h-full overflow-hidden rounded-lg bg-white relative group">
+              {/* Live Website Iframe */}
+              {currentView === 'iframe' && liveUrl && !iframeError && (
                 <>
                   <iframe
                     ref={iframeRef}
-                    src={currentSrc}
-                    title={`${title} live preview`}
-                    className="w-full h-full border-0"
-                    loading="lazy"
-                    sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-top-navigation allow-modals"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    onLoad={() => {
-                      setIsLoading(false)
-                      // Check if iframe loaded successfully by trying to access its content
-                      try {
-                        // If we can access the iframe, it loaded successfully
-                        if (iframeRef.current?.contentWindow) {
-                          setHasIframeError(false)
-                        }
-                      } catch (e) {
-                        // If we can't access it, it might be blocked
-                        console.log('Iframe access restricted:', e)
-                      }
-                    }}
-                    onError={() => {
-                      setHasIframeError(true)
-                      setIsLoading(false)
-                    }}
+                    src={liveUrl}
+                    className="w-full h-full border-none"
+                    onLoad={handleIframeLoad}
+                    onError={handleIframeError}
+                    sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+                    title={`${title} - Live Website`}
                   />
                   
-                  {isLoading && (
-                    <div className="absolute inset-0 bg-gray-100 flex items-center justify-center">
-                      <div className="text-center">
-                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-2"></div>
-                        <p className="text-sm text-gray-600">Loading {title}...</p>
-                      </div>
-                    </div>
-                  )}
+                  {/* Iframe interaction overlay */}
+                  <div 
+                    className="absolute inset-0 bg-transparent cursor-pointer"
+                    onClick={() => window.open(liveUrl, '_blank', 'noopener,noreferrer')}
+                  />
                 </>
-              ) : (
-                // Fallback content when iframe is blocked
-                <div className="w-full h-full bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center relative overflow-hidden">
-                  <div className="text-center p-8 max-w-md z-10 relative">
-                    <div className="mb-6">
-                      <div className="w-20 h-20 mx-auto bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mb-4">
-                        <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
-                      </div>
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">{title}</h3>
-                    <p className="text-sm text-gray-600 mb-6 leading-relaxed">
-                      Experience the full interactive website by visiting it directly. Some security features prevent embedding in frames.
+              )}
+
+              {/* Fallback content when iframe fails or screenshot mode */}
+              {(currentView === 'screenshot' || iframeError || !liveUrl) && (
+                <div 
+                  className="w-full h-full cursor-pointer"
+                  onClick={() => window.open(liveUrl, '_blank', 'noopener,noreferrer')}
+                >
+                  {renderFallbackPreview(title)}
+                </div>
+              )}
+              
+              {/* Loading State */}
+              {isLoading && (
+                <div className="absolute inset-0 bg-gray-900/80 backdrop-blur-sm flex items-center justify-center z-10">
+                  <div className="text-center text-white">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white mx-auto mb-2"></div>
+                    <p className="text-sm">
+                      Loading {currentView === 'iframe' ? 'live website' : 'preview'}...
                     </p>
-                    <div className="space-y-3">
-                      <a 
-                        href={liveUrl || currentSrc} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
-                      >
-                        <svg className="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
-                        Open Live Website
-                      </a>
-                      <p className="text-xs text-gray-500">
-                        Opens in new tab • Best viewed in desktop browser
-                      </p>
-                    </div>
-                  </div>
-                  
-                  {/* Animated background pattern */}
-                  <div className="absolute inset-0 opacity-10">
-                    <div className="absolute top-10 left-10 w-32 h-32 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
-                    <div className="absolute top-20 right-10 w-32 h-32 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-                    <div className="absolute bottom-10 left-20 w-32 h-32 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse" style={{ animationDelay: '2s' }}></div>
                   </div>
                 </div>
               )}
@@ -373,39 +358,49 @@ function Screenshot3DViewer({
       {/* Controls Overlay */}
       <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between bg-black/20 backdrop-blur-sm rounded-lg p-2">
         <div className="flex gap-2">
+          {liveUrl && (
+            <Button
+              size="sm"
+              variant="ghost"
+              className="text-white hover:bg-white/20 text-xs"
+              onClick={toggleView}
+              title={currentView === 'iframe' ? 'Show fallback preview' : 'Show live website'}
+            >
+              {currentView === 'iframe' ? <Monitor className="h-3 w-3" /> : <ExternalLink className="h-3 w-3" />}
+            </Button>
+          )}
+          {currentView === 'screenshot' && (
+            <Button
+              size="sm"
+              variant="ghost"
+              className="text-white hover:bg-white/20"
+              onClick={(e) => {
+                e.stopPropagation()
+                onTogglePlay()
+              }}
+            >
+              {isPlaying ? <Pause className="h-3 w-3" /> : <Play className="h-3 w-3" />}
+            </Button>
+          )}
+        </div>
+
+        <div className="text-xs text-white/80 text-center">
+          {currentView === 'iframe' ? 'Live Website' : `Preview ${currentIndex + 1}/${screenshots.length}`}
+          {iframeError && <div className="text-xs text-red-400">Iframe blocked</div>}
+        </div>
+
+        <div className="flex gap-2">
           <Button
             size="sm"
             variant="ghost"
             className="text-white hover:bg-white/20"
-            onClick={onTogglePlay}
+            onClick={(e) => {
+              e.stopPropagation()
+              window.open(liveUrl, '_blank', 'noopener,noreferrer')
+            }}
           >
-            {isPlaying ? <Pause className="h-3 w-3" /> : <Play className="h-3 w-3" />}
+            <ExternalLink className="h-3 w-3" />
           </Button>
-          <Button
-            size="sm"
-            variant="ghost"
-            className="text-white hover:bg-white/20"
-            onClick={() => setCurrentIndex(0)}
-          >
-            <RotateCcw className="h-3 w-3" />
-          </Button>
-        </div>
-
-        {/* Screenshot Indicators */}
-        <div className="flex gap-1">
-          {screenshots.map((_, idx) => (
-            <button
-              key={idx}
-              className={`w-2 h-2 rounded-full transition-all ${
-                idx === currentIndex ? 'bg-white' : 'bg-white/40 hover:bg-white/60'
-              }`}
-              onClick={() => setCurrentIndex(idx)}
-            />
-          ))}
-        </div>
-
-        <div className="text-xs text-white/80">
-          {currentIndex + 1} / {screenshots.length}
         </div>
       </div>
     </div>
