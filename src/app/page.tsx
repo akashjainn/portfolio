@@ -10,7 +10,6 @@ import { SkillsConstellation } from "@/components/ui/skills-constellation"
 import { ExecutiveSummarySection } from "@/components/ui/executive-summary"
 import { Project3DShowcase } from "@/components/ui/project-3d-preview"
 import { RoleBadge } from "@/components/ui/role-personalization"
-import { SmartRecommendations } from "@/components/ui/smart-recommendations"
 import { CodePlaygroundSection } from "@/components/ui/live-code-playground"
 import Link from "next/link"
 // Guided tour removed
@@ -207,9 +206,6 @@ export default async function Home() {
 
         {/* 3D Project Previews */}
         <Project3DShowcase />
-
-        {/* Smart Recommendations */}
-        <SmartRecommendations />
 
         {/* Live Code Playground */}
         <CodePlaygroundSection />
