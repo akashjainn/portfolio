@@ -188,7 +188,8 @@ function Screenshot3DViewer({
 }) {
   const [currentView, setCurrentView] = useState<'iframe' | 'screenshot'>('iframe')
   const [iframeError, setIframeError] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
+  // Only use loading for screenshot mode transitions; default to not loading for iframe
+  const [isLoading, setIsLoading] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [perspective, setPerspective] = useState({ x: 0, y: 0 })
   const containerRef = useRef<HTMLDivElement>(null)
@@ -223,6 +224,7 @@ function Screenshot3DViewer({
 
   // Handle iframe load events
   const handleIframeLoad = () => {
+    // Ensure loading overlay never persists for iframe loads
     setIsLoading(false)
     setIframeError(false)
   }
@@ -236,12 +238,19 @@ function Screenshot3DViewer({
   // Toggle between iframe and screenshot view
   const toggleView = (e: React.MouseEvent) => {
     e.stopPropagation()
-    setCurrentView(prev => prev === 'iframe' ? 'screenshot' : 'iframe')
-    setIsLoading(true)
-    if (currentView === 'screenshot') {
-      setIframeError(false)
-    }
+    setCurrentView(prev => {
+      const next = prev === 'iframe' ? 'screenshot' : 'iframe'
+      // Loading indicator is only for screenshot carousel
+      setIsLoading(next === 'screenshot')
+      if (next === 'iframe') setIframeError(false)
+      return next
+    })
   }
+
+  // If we are in iframe view for any reason, don't show loading overlay
+  useEffect(() => {
+    if (currentView === 'iframe') setIsLoading(false)
+  }, [currentView])
 
   // Create a beautiful fallback preview for when iframe fails
   const renderFallbackPreview = (projectTitle: string) => {
@@ -332,14 +341,12 @@ function Screenshot3DViewer({
                 </div>
               )}
               
-              {/* Loading State */}
-              {isLoading && (
+              {/* Loading State (only for screenshot mode) */}
+              {isLoading && currentView === 'screenshot' && (
                 <div className="absolute inset-0 bg-gray-900/80 backdrop-blur-sm flex items-center justify-center z-10">
                   <div className="text-center text-white">
                     <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white mx-auto mb-2"></div>
-                    <p className="text-sm">
-                      Loading {currentView === 'iframe' ? 'live website' : 'preview'}...
-                    </p>
+                    <p className="text-sm">Loading preview...</p>
                   </div>
                 </div>
               )}
