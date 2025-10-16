@@ -1,16 +1,13 @@
 import { Navigation } from "@/components/site/navigation"
-import { EnhancedHero } from "@/components/site/enhanced-hero"
+import InteractiveHero from "@/components/InteractiveHero"
 import { ProjectCard } from "@/components/site/project-card"
 import { getAllProjects } from "@/lib/mdx"
 import { WebsiteStructuredData, PersonStructuredData, PortfolioStructuredData } from "@/components/seo/structured-data"
 import { Button } from "@/components/ui/button"
 import { CommandPalette } from "@/components/ui/command-palette"
-import { SkillsConstellation } from "@/components/ui/skills-constellation"
 // Interactive timeline removed
 import { ExecutiveSummarySection } from "@/components/ui/executive-summary"
-import { Project3DShowcase } from "@/components/ui/project-3d-preview"
-import { RoleBadge } from "@/components/ui/role-personalization"
-import { CodePlaygroundSection } from "@/components/ui/live-code-playground"
+import { DeferredSections } from "@/components/DeferredSections"
 import Link from "next/link"
 // Guided tour removed
 
@@ -53,7 +50,7 @@ export default async function Home() {
       <PortfolioStructuredData projects={featuredProjects} />
       <Navigation />
       <main id="main-content">
-        <EnhancedHero />
+        <InteractiveHero />
         
         {/* Executive Summary Section */}
         <section className="py-16 border-b border-border/10" aria-labelledby="executive-summary">
@@ -196,19 +193,11 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* Interactive Skills Section */}
-        <SkillsConstellation />
+        {/* Interactive Skills Section, 3D Previews, Playground deferred to intersection */}
+        <DeferredSections />
 
         {/* Executive Summary for Recruiters */}
         <ExecutiveSummarySection />
-
-        {/* Interactive Career Timeline removed */}
-
-        {/* 3D Project Previews */}
-        <Project3DShowcase />
-
-        {/* Live Code Playground */}
-        <CodePlaygroundSection />
       </main>
 
       {/* Enhanced UI Components */}

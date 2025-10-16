@@ -21,7 +21,7 @@ interface ProjectFrontmatter {
     users?: string
     performance_improvement?: string
     lighthouse_mobile?: number
-  }
+  } | Array<{ label: string; value: string }>
 }
 
 interface Project {

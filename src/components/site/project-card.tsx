@@ -14,6 +14,8 @@ type ProjectMetrics = {
   lighthouse_mobile?: number
 }
 
+type MetricItem = { label: string; value: string }
+
 interface ProjectCardProps {
   title: string
   summary: string
@@ -21,7 +23,7 @@ interface ProjectCardProps {
   href: string
   demo?: string | undefined
   repo?: string
-  metrics?: ProjectMetrics | undefined
+  metrics?: ProjectMetrics | MetricItem[] | undefined
 }
 
 export function ProjectCard({ 
@@ -33,6 +35,9 @@ export function ProjectCard({
   repo,
   metrics
 }: ProjectCardProps) {
+  // Type guard to check if metrics is array format
+  const isArrayMetrics = (m: any): m is MetricItem[] => Array.isArray(m)
+  
   // Helpers to determine badge variants
   const getScoreVariant = (score: number) => {
     if (score >= 90) return 'success'
@@ -74,50 +79,65 @@ export function ProjectCard({
         </CardDescription>
         {metrics && (
           <div className="flex flex-wrap gap-2 pt-1">
-            {typeof metrics.lighthouse_mobile === 'number' && (
-              <MetricsBadge 
-                label="Lighthouse"
-                value={metrics.lighthouse_mobile}
-                unit="/100"
-                variant={getScoreVariant(metrics.lighthouse_mobile) as any}
-              />
-            )}
-            {typeof metrics.lcp_ms === 'number' && (
-              <MetricsBadge 
-                label="LCP" 
-                value={metrics.lcp_ms} 
-                unit="ms"
-                variant={getLCPVariant(metrics.lcp_ms) as any}
-              />
-            )}
-            {typeof metrics.tbt_ms === 'number' && (
-              <MetricsBadge 
-                label="TBT" 
-                value={metrics.tbt_ms} 
-                unit="ms"
-                variant={getTBTVariant(metrics.tbt_ms) as any}
-              />
-            )}
-            {typeof metrics.cls === 'number' && (
-              <MetricsBadge 
-                label="CLS" 
-                value={metrics.cls} 
-                variant={getCLSVariant(metrics.cls) as any}
-              />
-            )}
-            {metrics.a11y && (
-              <MetricsBadge 
-                label="A11y" 
-                value={metrics.a11y}
-                variant="quality"
-              />
-            )}
-            {!metrics.a11y && metrics.performance_improvement && (
-              <MetricsBadge 
-                label="Perf" 
-                value={metrics.performance_improvement}
-                variant="performance"
-              />
+            {isArrayMetrics(metrics) ? (
+              // New array format: [{ label, value }]
+              metrics.map((metric, idx) => (
+                <MetricsBadge 
+                  key={idx}
+                  label={metric.label}
+                  value={metric.value}
+                  variant="quality"
+                />
+              ))
+            ) : (
+              // Old object format with specific properties
+              <>
+                {typeof metrics.lighthouse_mobile === 'number' && (
+                  <MetricsBadge 
+                    label="Lighthouse"
+                    value={metrics.lighthouse_mobile}
+                    unit="/100"
+                    variant={getScoreVariant(metrics.lighthouse_mobile) as any}
+                  />
+                )}
+                {typeof metrics.lcp_ms === 'number' && (
+                  <MetricsBadge 
+                    label="LCP" 
+                    value={metrics.lcp_ms} 
+                    unit="ms"
+                    variant={getLCPVariant(metrics.lcp_ms) as any}
+                  />
+                )}
+                {typeof metrics.tbt_ms === 'number' && (
+                  <MetricsBadge 
+                    label="TBT" 
+                    value={metrics.tbt_ms} 
+                    unit="ms"
+                    variant={getTBTVariant(metrics.tbt_ms) as any}
+                  />
+                )}
+                {typeof metrics.cls === 'number' && (
+                  <MetricsBadge 
+                    label="CLS" 
+                    value={metrics.cls} 
+                    variant={getCLSVariant(metrics.cls) as any}
+                  />
+                )}
+                {metrics.a11y && (
+                  <MetricsBadge 
+                    label="A11y" 
+                    value={metrics.a11y}
+                    variant="quality"
+                  />
+                )}
+                {!metrics.a11y && metrics.performance_improvement && (
+                  <MetricsBadge 
+                    label="Perf" 
+                    value={metrics.performance_improvement}
+                    variant="performance"
+                  />
+                )}
+              </>
             )}
           </div>
         )}

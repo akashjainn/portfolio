@@ -59,17 +59,27 @@ export function CaseStudyLayout({ children, frontmatter, readingTime }: CaseStud
               <div>
                 <h3 className="font-medium text-sm text-muted-foreground mb-2">KEY ACHIEVEMENTS</h3>
                 <ul className="space-y-1 text-sm">
-                  {frontmatter.metrics?.lighthouse_mobile && (
-                    <li>• {frontmatter.metrics.lighthouse_mobile}/100 Lighthouse Score</li>
-                  )}
-                  {frontmatter.metrics?.lcp_ms && (
-                    <li>• {frontmatter.metrics.lcp_ms}ms LCP (Excellent)</li>
-                  )}
-                  {frontmatter.metrics?.a11y && (
-                    <li>• {frontmatter.metrics.a11y}</li>
-                  )}
-                  {frontmatter.metrics?.uptime && (
-                    <li>• {frontmatter.metrics.uptime} System Uptime</li>
+                  {Array.isArray(frontmatter.metrics) ? (
+                    // New array format
+                    frontmatter.metrics.map((metric, idx) => (
+                      <li key={idx}>• {metric.label}: {metric.value}</li>
+                    ))
+                  ) : (
+                    // Old object format
+                    <>
+                      {frontmatter.metrics?.lighthouse_mobile && (
+                        <li>• {frontmatter.metrics.lighthouse_mobile}/100 Lighthouse Score</li>
+                      )}
+                      {frontmatter.metrics?.lcp_ms && (
+                        <li>• {frontmatter.metrics.lcp_ms}ms LCP (Excellent)</li>
+                      )}
+                      {frontmatter.metrics?.a11y && (
+                        <li>• {frontmatter.metrics.a11y}</li>
+                      )}
+                      {frontmatter.metrics?.uptime && (
+                        <li>• {frontmatter.metrics.uptime} System Uptime</li>
+                      )}
+                    </>
                   )}
                 </ul>
               </div>
@@ -157,44 +167,57 @@ export function CaseStudyLayout({ children, frontmatter, readingTime }: CaseStud
           {frontmatter.metrics && (
             <div className="mt-8 p-6 border rounded-lg">
               <h2 className="text-lg font-semibold mb-4">Performance Metrics</h2>
-              <dl className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                {frontmatter.metrics.lcp_ms && (
-                  <div>
-                    <dt className="font-medium text-foreground">LCP</dt>
-                    <dd className="text-muted-foreground">{frontmatter.metrics.lcp_ms}ms</dd>
-                  </div>
-                )}
-                {frontmatter.metrics.tbt_ms && (
-                  <div>
-                    <dt className="font-medium text-foreground">TBT</dt>
-                    <dd className="text-muted-foreground">{frontmatter.metrics.tbt_ms}ms</dd>
-                  </div>
-                )}
-                {frontmatter.metrics.cls && (
-                  <div>
-                    <dt className="font-medium text-foreground">CLS</dt>
-                    <dd className="text-muted-foreground">{frontmatter.metrics.cls}</dd>
-                  </div>
-                )}
-                {frontmatter.metrics.a11y && (
-                  <div>
-                    <dt className="font-medium text-foreground">A11y</dt>
-                    <dd className="text-muted-foreground">{frontmatter.metrics.a11y}</dd>
-                  </div>
-                )}
-                {frontmatter.metrics.uptime && (
-                  <div>
-                    <dt className="font-medium text-foreground">Uptime</dt>
-                    <dd className="text-muted-foreground">{frontmatter.metrics.uptime}</dd>
-                  </div>
-                )}
-                {frontmatter.metrics.users && (
-                  <div>
-                    <dt className="font-medium text-foreground">Users</dt>
-                    <dd className="text-muted-foreground">{frontmatter.metrics.users}</dd>
-                  </div>
-                )}
-              </dl>
+              {Array.isArray(frontmatter.metrics) ? (
+                // New array format
+                <dl className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                  {frontmatter.metrics.map((metric, idx) => (
+                    <div key={idx}>
+                      <dt className="font-medium text-foreground">{metric.label}</dt>
+                      <dd className="text-muted-foreground">{metric.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              ) : (
+                // Old object format
+                <dl className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                  {frontmatter.metrics.lcp_ms && (
+                    <div>
+                      <dt className="font-medium text-foreground">LCP</dt>
+                      <dd className="text-muted-foreground">{frontmatter.metrics.lcp_ms}ms</dd>
+                    </div>
+                  )}
+                  {frontmatter.metrics.tbt_ms && (
+                    <div>
+                      <dt className="font-medium text-foreground">TBT</dt>
+                      <dd className="text-muted-foreground">{frontmatter.metrics.tbt_ms}ms</dd>
+                    </div>
+                  )}
+                  {frontmatter.metrics.cls && (
+                    <div>
+                      <dt className="font-medium text-foreground">CLS</dt>
+                      <dd className="text-muted-foreground">{frontmatter.metrics.cls}</dd>
+                    </div>
+                  )}
+                  {frontmatter.metrics.a11y && (
+                    <div>
+                      <dt className="font-medium text-foreground">A11y</dt>
+                      <dd className="text-muted-foreground">{frontmatter.metrics.a11y}</dd>
+                    </div>
+                  )}
+                  {frontmatter.metrics.uptime && (
+                    <div>
+                      <dt className="font-medium text-foreground">Uptime</dt>
+                      <dd className="text-muted-foreground">{frontmatter.metrics.uptime}</dd>
+                    </div>
+                  )}
+                  {frontmatter.metrics.users && (
+                    <div>
+                      <dt className="font-medium text-foreground">Users</dt>
+                      <dd className="text-muted-foreground">{frontmatter.metrics.users}</dd>
+                    </div>
+                  )}
+                </dl>
+              )}
             </div>
           )}
         </header>

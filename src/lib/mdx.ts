@@ -17,7 +17,8 @@ export interface ProjectFrontmatter {
   slug: string
   summary: string
   role: string
-  period: string
+  period?: string
+  timeframe?: string
   tech: string[]
   links: {
     demo?: string
@@ -32,13 +33,16 @@ export interface ProjectFrontmatter {
     users?: string
     performance_improvement?: string
     lighthouse_mobile?: number
-  }
+  } | Array<{ label: string; value: string }>
   tags: string[]
   featured?: boolean
   category?: string
   status: 'published' | 'draft'
-  publishedAt: string
+  publishedAt?: string
+  datePublished?: string
   updatedAt?: string
+  thumbnail?: string
+  cover?: string
 }
 
 // Note frontmatter schema  
@@ -214,10 +218,11 @@ export async function getAllProjects({
   }
 
   // Sort by publishedAt date (newest first)
-  projects.sort((a, b) => 
-    new Date(b.frontmatter.publishedAt).getTime() - 
-    new Date(a.frontmatter.publishedAt).getTime()
-  )
+  projects.sort((a, b) => {
+    const dateA = a.frontmatter.publishedAt || a.frontmatter.datePublished || '1970-01-01'
+    const dateB = b.frontmatter.publishedAt || b.frontmatter.datePublished || '1970-01-01'
+    return new Date(dateB).getTime() - new Date(dateA).getTime()
+  })
 
   return limit ? projects.slice(0, limit) : projects
 }
