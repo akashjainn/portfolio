@@ -25,6 +25,7 @@ export async function generateMetadata({
 
   const { frontmatter } = project
 
+  const url = `${process.env.NEXT_PUBLIC_SITE_URL}/projects/${params.slug}`;
   return {
     title: frontmatter.title,
     description: frontmatter.summary,
@@ -35,11 +36,14 @@ export async function generateMetadata({
       publishedTime: frontmatter.publishedAt,
       modifiedTime: frontmatter.updatedAt,
       tags: frontmatter.tags,
+      images: [{ url: `${url}/opengraph-image` }],
+      url,
     },
     twitter: {
       card: 'summary_large_image',
       title: frontmatter.title,
       description: frontmatter.summary,
+      images: [`${url}/opengraph-image`],
     }
   }
 }

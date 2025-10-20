@@ -35,6 +35,9 @@ export default function InteractiveHero() {
     >
       <div className="container pb-10 pt-20">
         <div className="max-w-4xl">
+          <p className="text-sm md:text-base text-muted-foreground mb-2">
+            Akash Jain — Full‑stack Developer
+          </p>
           <h1
             id="hero-title"
             ref={titleRef}
