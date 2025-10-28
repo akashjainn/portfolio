@@ -1,7 +1,7 @@
 "use client"
 
-import { useState, useEffect, useCallback } from 'react'
-import { Search, Command, Calendar, Mail, Github, Linkedin, FileText, FolderOpen, User, Home, Users, Code, TrendingUp, RotateCcw } from 'lucide-react'
+import { useState, useEffect, useCallback, useRef } from 'react'
+import { Search, Command, Calendar, Mail, Github, Linkedin, FileText, FolderOpen, User, Home } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useRole } from '@/components/ui/role-personalization'
 
@@ -11,7 +11,7 @@ interface CommandItem {
   subtitle?: string
   icon: React.ComponentType<any>
   action: () => void
-  category: 'Navigation' | 'Actions' | 'Projects' | 'Contact' | 'Personalization'
+  category: 'Navigation' | 'Actions' | 'Projects' | 'Contact'
 }
 
 export function CommandPalette() {
@@ -20,6 +20,8 @@ export function CommandPalette() {
   const [selectedIndex, setSelectedIndex] = useState(0)
   const router = useRouter()
   const { role, setRole, isPersonalized, setPersonalized } = useRole()
+  const selectedItemRef = useRef<HTMLButtonElement>(null)
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
 
   const commands: CommandItem[] = [
     // Navigation
@@ -34,7 +36,7 @@ export function CommandPalette() {
     { 
       id: 'projects', 
       title: 'Projects', 
-      subtitle: 'Case studies &amp; work',
+      subtitle: 'Case studies & work',
       icon: FolderOpen, 
       category: 'Navigation',
       action: () => router.push('/projects') 
@@ -42,7 +44,7 @@ export function CommandPalette() {
     { 
       id: 'about', 
       title: 'About', 
-      subtitle: 'Background &amp; experience',
+      subtitle: 'Background & experience',
       icon: User, 
       category: 'Navigation',
       action: () => router.push('/about') 
@@ -125,60 +127,6 @@ export function CommandPalette() {
       category: 'Contact',
       action: () => window.open('https://linkedin.com/in/akashjainn', '_blank') 
     },
-    
-    // Personalization
-    { 
-      id: 'switch-recruiter', 
-      title: 'Switch to Recruiter View', 
-      subtitle: 'Focus on business impact &amp; results',
-      icon: Users, 
-      category: 'Personalization',
-      action: () => {
-        setRole('recruiter')
-        setPersonalized(true)
-        setIsOpen(false)
-      }
-    },
-    { 
-      id: 'switch-developer', 
-      title: 'Switch to Developer View', 
-      subtitle: 'Technical deep dives &amp; code',
-      icon: Code, 
-      category: 'Personalization',
-      action: () => {
-        setRole('developer')
-        setPersonalized(true)
-        setIsOpen(false)
-      }
-    },
-    { 
-      id: 'switch-manager', 
-      title: 'Switch to Manager View', 
-      subtitle: 'Leadership &amp; business metrics',
-      icon: TrendingUp, 
-      category: 'Personalization',
-      action: () => {
-        setRole('manager')
-        setPersonalized(true)
-        setIsOpen(false)
-      }
-    },
-    { 
-      id: 'reset-personalization', 
-      title: 'Reset Personalization', 
-      subtitle: 'Back to general experience',
-      icon: RotateCcw, 
-      category: 'Personalization',
-      action: () => {
-        setRole('general')
-        setPersonalized(false)
-        setIsOpen(false)
-        // Clear localStorage
-        localStorage.removeItem('portfolio-user-role')
-        localStorage.removeItem('portfolio-personalized')
-        localStorage.removeItem('portfolio-role-selected')
-      }
-    },
   ]
 
   const filteredCommands = commands.filter(command =>
@@ -245,6 +193,25 @@ export function CommandPalette() {
     setSelectedIndex(0)
   }, [query])
 
+  // Auto-scroll selected item into view
+  useEffect(() => {
+    if (selectedItemRef.current && scrollContainerRef.current) {
+      const container = scrollContainerRef.current
+      const item = selectedItemRef.current
+      const containerRect = container.getBoundingClientRect()
+      const itemRect = item.getBoundingClientRect()
+
+      // Check if item is out of view
+      if (itemRect.bottom > containerRect.bottom) {
+        // Scroll down
+        item.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+      } else if (itemRect.top < containerRect.top) {
+        // Scroll up
+        item.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+      }
+    }
+  }, [selectedIndex])
+
   if (!isOpen) {
     return (
       <div className="fixed bottom-6 right-6 z-50">
@@ -291,7 +258,7 @@ export function CommandPalette() {
           </div>
 
           {/* Results */}
-          <div className="max-h-96 overflow-y-auto">
+          <div ref={scrollContainerRef} className="max-h-96 overflow-y-auto">
             {Object.entries(groupedCommands).length === 0 ? (
               <div className="px-4 py-8 text-center text-muted-foreground">
                 No results found for &quot;{query}&quot;
@@ -309,6 +276,7 @@ export function CommandPalette() {
                     return (
                       <button
                         key={command.id}
+                        ref={isSelected ? selectedItemRef : null}
                         onClick={() => {
                           command.action()
                           setIsOpen(false)
