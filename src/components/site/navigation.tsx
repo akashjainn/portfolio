@@ -3,7 +3,6 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { RoleBadge } from "@/components/ui/role-personalization"
 import { cn } from "@/lib/utils"
 
 interface NavItem {
@@ -68,8 +67,6 @@ export function Navigation() {
         </div>
 
         <div className="flex items-center space-x-2">
-          <RoleBadge />
-          
           <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex interactive hover:bg-muted/50 group">
             <Link href="/contact" className="flex items-center gap-2">
               Contact
