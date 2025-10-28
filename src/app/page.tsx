@@ -8,6 +8,8 @@ import { CommandPalette } from "@/components/ui/command-palette"
 // Interactive timeline removed
 import { ExecutiveSummarySection } from "@/components/ui/executive-summary"
 import { DeferredSections } from "@/components/DeferredSections"
+import { AnimatedBlobs } from "@/components/ui/animated-blobs"
+import { WaveDivider } from "@/components/ui/wave-divider"
 import Link from "next/link"
 // Guided tour removed
 
@@ -29,6 +31,7 @@ export default async function Home() {
 
   return (
     <>
+      <AnimatedBlobs />
       <WebsiteStructuredData />
       <PersonStructuredData 
         name="Akash Jain"
@@ -77,6 +80,8 @@ export default async function Home() {
             </div>
           </div>
         </section>
+        
+        <WaveDivider variant="blue-purple" className="my-0" />
         
   <section id="featured-projects-section" className="py-20" aria-labelledby="featured-projects">
           <div className="container">

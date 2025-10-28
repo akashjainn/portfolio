@@ -35,25 +35,25 @@ export default function InteractiveHero() {
     >
       <div className="container pb-10 pt-20">
         <div className="max-w-4xl">
-          <p className="text-sm md:text-base text-muted-foreground mb-2">
+          <p className="text-sm md:text-base text-muted-foreground mb-2 font-medium">
             Akash Jain — Full‑stack Developer
           </p>
           <h1
             id="hero-title"
             ref={titleRef}
-            className="text-4xl md:text-6xl font-bold tracking-tight leading-[1.1]"
+            className="text-4xl md:text-6xl font-display font-bold tracking-tight leading-[1.1]"
           >
-            Building reliable, real-time web systems
+            Building reliable, <span className="text-gradient-vibrant">real-time</span> web systems
           </h1>
-          <p className="mt-4 text-lg text-muted-foreground max-w-2xl">
+          <p className="mt-4 text-lg text-muted-foreground max-w-2xl leading-relaxed">
             Full-stack development with Next.js and TypeScript. Accessible by default, measured by telemetry, and shipped with performance budgets.
           </p>
-          <div className="mt-6">
+          <div className="mt-6 flex gap-4">
             <Link
               href="/projects/propsage"
-              className="inline-flex items-center rounded-md bg-primary px-4 py-3 text-primary-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary-foreground"
+              className="inline-flex items-center rounded-md px-6 py-3 text-sm font-semibold transition-all duration-300 bg-transparent border-2 border-vibrant-blue text-vibrant-blue hover:bg-vibrant-blue/10 hover:shadow-[0_0_20px_hsla(194,100%,50%,0.3)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-vibrant-blue"
             >
-              View PropSage case study
+              View PropSage case study →
             </Link>
           </div>
         </div>

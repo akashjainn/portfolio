@@ -56,9 +56,19 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Vibrant art-inspired accent colors
+        vibrant: {
+          blue: "hsl(194 100% 50%)",
+          pink: "hsl(335 100% 50%)",
+          purple: "hsl(271 60% 58%)",
+          orange: "hsl(16 100% 60%)",
+          yellow: "hsl(55 100% 58%)",
+          mint: "hsl(163 100% 51%)",
+        },
       },
       fontFamily: {
         sans: ["var(--font-sf-pro)", "Inter", "system-ui", "sans-serif"],
+        display: ["'Space Grotesk'", "var(--font-sf-pro)", "Inter", "system-ui", "sans-serif"],
         mono: ["var(--font-sf-mono)", "JetBrains Mono", "Consolas", "monospace"],
       },
       fontSize: {

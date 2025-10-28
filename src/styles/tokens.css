@@ -29,7 +29,7 @@
   }
 
   .dark {
-    /* Dark theme tokens */
+    /* Dark theme tokens - Professional base */
     --background: 222 10% 8%;
     --foreground: 210 20% 96%;
     --card: 220 14% 14%;
@@ -49,6 +49,25 @@
     --border: 220 13% 18%;
     --input: 220 13% 18%;
     --ring: 216 100% 50%;
+    
+    /* Vibrant accent palette - Art-inspired */
+    --electric-blue: 194 100% 50%;        /* #00D4FF */
+    --hot-pink: 335 100% 50%;             /* #FF006E */
+    --cyber-purple: 271 60% 58%;          /* #9D4EDD */
+    --neon-orange: 16 100% 60%;           /* #FF6B35 */
+    --acid-yellow: 55 100% 58%;           /* #FFE629 */
+    --neon-mint: 163 100% 51%;            /* #06FFA5 */
+    
+    /* Gradient definitions */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--electric-blue)), hsl(var(--cyber-purple)));
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--hot-pink)), hsl(var(--neon-orange)));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--neon-mint)), hsl(var(--acid-yellow)));
+    --gradient-rainbow: linear-gradient(135deg, 
+      hsl(var(--electric-blue)), 
+      hsl(var(--cyber-purple)), 
+      hsl(var(--hot-pink)), 
+      hsl(var(--neon-orange))
+    );
   }
 }
 
