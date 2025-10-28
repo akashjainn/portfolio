@@ -648,11 +648,7 @@ export function Project3DShowcase() {
             <Monitor className="h-3 w-3 mr-1" />
             Interactive Previews
           </Badge>
-          <h2 className="text-4xl font-bold mb-4">3D Project Experience</h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Immersive project previews with device switching, auto-playing screenshots, 
-            and interactive 3D effects. Experience the applications before diving into case studies.
-          </p>
+          <h2 className="text-4xl font-bold mb-4">Project Experience</h2>
         </div>
 
         {/* Project Previews */}
