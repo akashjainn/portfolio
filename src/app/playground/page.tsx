@@ -1,6 +1,8 @@
 import { Navigation } from "@/components/site/navigation"
 import { ProjectCard } from "@/components/site/project-card"
 import { getAllProjects } from "@/lib/mdx"
+import { AnimatedBlobs } from "@/components/ui/animated-blobs"
+import { WaveDivider } from "@/components/ui/wave-divider"
 
 export default async function PlaygroundPage() {
   // Get playground projects (non-career-relevant projects)
@@ -11,11 +13,12 @@ export default async function PlaygroundPage() {
 
   return (
     <>
+      <AnimatedBlobs />
       <Navigation />
       <main id="main-content" className="py-20">
         <div className="container">
           <div className="max-w-4xl">
-            <h1 className="text-4xl font-semibold tracking-[-0.02em] leading-tight mb-6">
+            <h1 className="text-4xl font-display font-semibold tracking-[-0.02em] leading-tight mb-6">
               Playground
             </h1>
             
@@ -24,6 +27,7 @@ export default async function PlaygroundPage() {
               that showcase systems thinking and problem-solving beyond traditional web development.
             </p>
             
+            <WaveDivider variant="pink-orange" className="my-8" />
             {playgroundProjects.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {playgroundProjects.map((project) => (
@@ -51,6 +55,8 @@ export default async function PlaygroundPage() {
                 </a>
               </div>
             )}
+            
+            <WaveDivider variant="mint-yellow" className="my-16" />
             
             <div className="mt-16 pt-16 border-t border-border">
               <h2 className="text-2xl font-semibold tracking-[-0.01em] leading-tight mb-6">

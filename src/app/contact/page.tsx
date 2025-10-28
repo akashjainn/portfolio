@@ -1,4 +1,6 @@
 import { Navigation } from "@/components/site/navigation"
+import { AnimatedBlobs } from "@/components/ui/animated-blobs"
+import { WaveDivider } from "@/components/ui/wave-divider"
 
 export const metadata = {
   title: "Contact",
@@ -8,15 +10,18 @@ export const metadata = {
 export default function ContactPage() {
   return (
     <>
+      <AnimatedBlobs />
       <Navigation />
       <main id="main-content" className="py-8">
         <div className="container max-w-4xl">
           <header className="mb-12">
-            <h1 className="text-4xl font-semibold tracking-[-0.02em] leading-[1.1] mb-6">Contact</h1>
+            <h1 className="text-4xl font-display font-semibold tracking-[-0.02em] leading-[1.1] mb-6">Contact</h1>
             <p className="text-xl text-muted-foreground">
               Have a role where reliability and performance matter? Let&apos;s talk.
             </p>
           </header>
+
+          <WaveDivider variant="mint-yellow" className="my-8" />
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div>
@@ -98,6 +103,8 @@ export default function ContactPage() {
               </div>
             </div>
 
+            <WaveDivider variant="pink-orange" className="my-12" />
+
             <div>
               <h2 className="text-2xl font-semibold tracking-[-0.01em] leading-tight mb-6">Quick Actions</h2>
               <div className="space-y-4">
@@ -126,7 +133,7 @@ export default function ContactPage() {
                   💻 Browse code repositories
                 </a>
                 
-                <div className="border rounded-lg p-4 bg-muted/30">
+                <div className="border-2 border-border/40 rounded-lg p-4 bg-card shadow-lg">
                   <h3 className="font-semibold mb-2">Response Time</h3>
                   <p className="text-sm text-muted-foreground">
                     I typically respond to emails within 48 hours during business days.
@@ -136,7 +143,9 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <div className="mt-16 p-6 border rounded-lg bg-muted/30">
+          <WaveDivider variant="rainbow" className="my-16" />
+
+          <div className="mt-16 p-6 border-2 border-border/40 rounded-lg bg-card shadow-lg">
             <h2 className="text-lg font-semibold mb-4">What I&apos;m looking for</h2>
             <ul className="space-y-2 text-muted-foreground">
               <li>• <strong>Full-stack engineering roles</strong> with focus on Next.js/React/TypeScript</li>

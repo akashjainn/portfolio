@@ -1,4 +1,6 @@
 import { Navigation } from "@/components/site/navigation"
+import { AnimatedBlobs } from "@/components/ui/animated-blobs"
+import { WaveDivider } from "@/components/ui/wave-divider"
 
 export const metadata = {
   title: "About",
@@ -8,11 +10,12 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <>
+      <AnimatedBlobs />
       <Navigation />
       <main id="main-content" className="py-8">
         <div className="container max-w-4xl">
           <header className="mb-12">
-            <h1 className="text-4xl font-semibold tracking-[-0.02em] leading-[1.1] mb-6">About</h1>
+            <h1 className="text-4xl font-display font-semibold tracking-[-0.02em] leading-[1.1] mb-6">About</h1>
           </header>
           
           <div className="prose prose-lg max-w-none">
@@ -21,6 +24,8 @@ export default function AboutPage() {
               I build with Next.js/TypeScript, validate with telemetry and tests, and ship with a bias 
               for clarity, reliability, and measurable outcomes.
             </p>
+
+            <WaveDivider variant="blue-purple" className="my-12" />
 
             <h2>Experience</h2>
             <div className="bg-card border-2 border-border/40 shadow-lg rounded-lg p-6 mb-8">
@@ -35,12 +40,16 @@ export default function AboutPage() {
               </ul>
             </div>
 
+            <WaveDivider variant="pink-orange" className="my-12" />
+
             <h2>Education</h2>
             <div className="bg-card border-2 border-border/40 shadow-lg rounded-lg p-6 mb-8">
               <h3 className="text-xl font-semibold mb-2">Georgia Institute of Technology</h3>
               <p className="text-muted-foreground mb-2">Bachelor of Science in Computer Science</p>
               <p className="text-sm text-muted-foreground">GPA: 3.5</p>
             </div>
+
+            <WaveDivider variant="mint-yellow" className="my-12" />
 
             <h2>Core Values</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -62,6 +71,8 @@ export default function AboutPage() {
               </div>
             </div>
 
+            <WaveDivider variant="rainbow" className="my-12" />
+
             <h2>Technical Skills</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
               {[
@@ -78,6 +89,8 @@ export default function AboutPage() {
                 </div>
               ))}
             </div>
+
+            <WaveDivider variant="blue-purple" className="my-12" />
 
             <h2>Contact</h2>
             <p className="mb-4">

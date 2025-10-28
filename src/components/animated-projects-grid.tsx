@@ -2,6 +2,7 @@
 
 import { ProjectCard } from "@/components/site/project-card"
 import { useStaggeredReveal, useRevealOnScroll } from "@/lib/animations"
+import { WaveDivider } from "@/components/ui/wave-divider"
 
 interface ProjectFrontmatter {
   slug: string
@@ -46,14 +47,14 @@ export function AnimatedProjectsGrid({ projects }: AnimatedProjectsGridProps) {
           }`}
         >
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-semibold tracking-[-0.02em] leading-[0.95] mb-6 text-balance">
-            Featured <span className="gradient-text">Projects</span>
+            Featured <span className="text-gradient-vibrant">Projects</span>
           </h1>
           <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl text-pretty leading-relaxed">
             A collection of software projects showcasing full-stack development, 
             real-time systems, performance optimization, and enterprise-grade solutions.
           </p>
           
-          <div className="divider-elegant mt-8" />
+          <WaveDivider variant="blue-purple" className="mt-8" />
         </header>
         
         {projects.length > 0 ? (

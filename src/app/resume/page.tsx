@@ -1,4 +1,6 @@
 import { Navigation } from "@/components/site/navigation"
+import { AnimatedBlobs } from "@/components/ui/animated-blobs"
+import { WaveDivider } from "@/components/ui/wave-divider"
 
 export const metadata = {
   title: "Resume",
@@ -8,13 +10,16 @@ export const metadata = {
 export default function ResumePage() {
   return (
     <>
+      <AnimatedBlobs />
       <Navigation />
       <main id="main-content" className="py-8">
         <div className="container max-w-5xl">
           <header className="mb-6">
-            <h1 className="text-3xl font-semibold tracking-[-0.02em]">Resume</h1>
+            <h1 className="text-3xl font-display font-semibold tracking-[-0.02em]">Resume</h1>
             <p className="text-muted-foreground">Inline preview with a downloadable PDF.</p>
           </header>
+
+          <WaveDivider variant="pink-orange" className="my-8" />
 
           <div className="rounded-lg border bg-card" id="resume-viewer">
             <object
