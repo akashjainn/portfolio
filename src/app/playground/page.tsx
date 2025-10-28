@@ -18,14 +18,9 @@ export default async function PlaygroundPage() {
       <main id="main-content" className="py-20">
         <div className="container">
           <div className="max-w-4xl">
-            <h1 className="text-4xl font-display font-semibold tracking-[-0.02em] leading-tight mb-6">
+            <h1 className="text-4xl font-display font-semibold tracking-[-0.02em] leading-tight mb-12">
               Playground
             </h1>
-            
-            <p className="text-lg text-muted-foreground mb-12 leading-relaxed">
-              Experimental projects, creative explorations, and technical deep-dives 
-              that showcase systems thinking and problem-solving beyond traditional web development.
-            </p>
             
             <WaveDivider variant="pink-orange" className="my-8" />
             {playgroundProjects.length > 0 ? (
@@ -55,32 +50,6 @@ export default async function PlaygroundPage() {
                 </a>
               </div>
             )}
-            
-            <WaveDivider variant="mint-yellow" className="my-16" />
-            
-            <div className="mt-16 pt-16 border-t border-border">
-              <h2 className="text-2xl font-semibold tracking-[-0.01em] leading-tight mb-6">
-                About the Playground
-              </h2>
-              <div className="prose prose-neutral max-w-none">
-                <p>
-                  This section showcases projects that demonstrate technical depth, 
-                  systems thinking, and creative problem-solving in domains outside 
-                  traditional web development. These projects highlight:
-                </p>
-                <ul>
-                  <li><strong>Low-level programming</strong> with memory and performance constraints</li>
-                  <li><strong>Systems architecture</strong> for resource-constrained environments</li>
-                  <li><strong>Creative applications</strong> of programming concepts</li>
-                  <li><strong>Experimental technologies</strong> and unconventional approaches</li>
-                </ul>
-                <p>
-                  While not directly career-relevant for web development roles, 
-                  these projects demonstrate the breadth of technical skills and 
-                  the ability to work across different programming paradigms and constraints.
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </main>
