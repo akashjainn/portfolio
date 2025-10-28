@@ -131,67 +131,7 @@ export default async function Home() {
           </div>
         </section>
         
-        <section className="py-20 bg-muted/30" aria-labelledby="about-preview">
-          <div className="container">
-            <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 id="about-preview" className="text-3xl font-display font-semibold tracking-[-0.02em] leading-tight mb-4">
-                  Technical <span className="gradient-text">Expertise</span>
-                </h2>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Full-stack developer focused on performant, accessible web systems with enterprise-grade reliability.
-                </p>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-                <div>
-                  <h3 className="text-lg font-semibold mb-4">Frontend & Full-Stack</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion"].map((skill) => (
-                      <span 
-                        key={skill}
-                        className="inline-flex items-center rounded-full border border-border/50 bg-background px-3 py-1 text-sm font-medium text-foreground hover:bg-muted/50 transition-colors"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                
-                <div>
-                  <h3 className="text-lg font-semibold mb-4">Backend & Data</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {["Node.js", "Express", "PostgreSQL", "MongoDB", "Redis", "WebSockets"].map((skill) => (
-                      <span 
-                        key={skill}
-                        className="inline-flex items-center rounded-full border border-border/50 bg-background px-3 py-1 text-sm font-medium text-foreground hover:bg-muted/50 transition-colors"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              
-              <div className="text-center">
-                <div className="bg-card border border-border/50 rounded-lg p-6 max-w-2xl mx-auto">
-                  <p className="text-muted-foreground mb-4">
-                    &ldquo;I validate with telemetry and tests, ship with performance budgets, and maintain 
-                    99.2% system uptime through reliability engineering.&rdquo;
-                  </p>
-                  <div className="flex justify-center gap-4">
-                    <Button asChild variant="outline" size="sm">
-                      <Link href="/about">Full Story</Link>
-                    </Button>
-                    <Button asChild size="sm">
-                      <Link href="/contact">Let&rsquo;s Talk</Link>
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        
 
         {/* Interactive Skills Section, 3D Previews, Playground deferred to intersection */}
         <DeferredSections />
