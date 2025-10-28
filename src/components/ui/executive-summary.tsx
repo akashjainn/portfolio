@@ -344,10 +344,6 @@ export function ExecutiveSummarySection() {
             Executive Summary
           </Badge>
           <h2 className="text-4xl font-bold mb-4">30-Second Project Overview</h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Recruiter-focused summaries highlighting business impact, technical challenges, and measurable outcomes. 
-            Expand for technical deep dives.
-          </p>
         </div>
 
         {/* Project Cards */}

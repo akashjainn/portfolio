@@ -64,7 +64,7 @@ export function ProjectCard({
   }
 
   return (
-    <Card className="group h-full flex flex-col transition-all duration-300 ease-out hover:-translate-y-1 backdrop-blur-sm border-2 border-transparent hover:border-[hsl(194_100%_50%)] hover:shadow-[0_0_20px_hsla(194,100%,50%,0.3)] bg-card/80">
+    <Card className="group h-full flex flex-col transition-all duration-300 ease-out hover:-translate-y-1 backdrop-blur-sm border-2 border-border/40 hover:border-[hsl(194_100%_50%)] hover:shadow-[0_0_20px_hsla(194,100%,50%,0.3)] bg-card shadow-lg">
       <CardHeader className="space-y-3">
         <CardTitle className="text-xl font-display font-semibold group-hover:text-gradient-vibrant transition-all duration-300 ease-out text-balance">
           <Link 

@@ -23,7 +23,7 @@ export default function AboutPage() {
             </p>
 
             <h2>Experience</h2>
-            <div className="bg-muted/30 rounded-lg p-6 mb-8">
+            <div className="bg-card border-2 border-border/40 shadow-lg rounded-lg p-6 mb-8">
               <h3 className="text-xl font-semibold mb-2">State Farm</h3>
               <p className="text-muted-foreground mb-4">Software Engineering Intern</p>
               <ul className="space-y-2">
@@ -36,7 +36,7 @@ export default function AboutPage() {
             </div>
 
             <h2>Education</h2>
-            <div className="bg-muted/30 rounded-lg p-6 mb-8">
+            <div className="bg-card border-2 border-border/40 shadow-lg rounded-lg p-6 mb-8">
               <h3 className="text-xl font-semibold mb-2">Georgia Institute of Technology</h3>
               <p className="text-muted-foreground mb-2">Bachelor of Science in Computer Science</p>
               <p className="text-sm text-muted-foreground">GPA: 3.5</p>
@@ -44,19 +44,19 @@ export default function AboutPage() {
 
             <h2>Core Values</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <div>
+              <div className="bg-card border-2 border-border/40 shadow-lg rounded-lg p-4">
                 <h3 className="font-semibold mb-2">Clarity over cleverness</h3>
                 <p className="text-sm text-muted-foreground">Code should be understandable first, performant second.</p>
               </div>
-              <div>
+              <div className="bg-card border-2 border-border/40 shadow-lg rounded-lg p-4">
                 <h3 className="font-semibold mb-2">Measurable outcomes</h3>
                 <p className="text-sm text-muted-foreground">Every feature ships with telemetry and success metrics.</p>
               </div>
-              <div>
+              <div className="bg-card border-2 border-border/40 shadow-lg rounded-lg p-4">
                 <h3 className="font-semibold mb-2">Accessibility by default</h3>
                 <p className="text-sm text-muted-foreground">WCAG 2.2 AA compliance isn&apos;t optional—it&apos;s foundational.</p>
               </div>
-              <div>
+              <div className="bg-card border-2 border-border/40 shadow-lg rounded-lg p-4">
                 <h3 className="font-semibold mb-2">Performance budgets</h3>
                 <p className="text-sm text-muted-foreground">LCP ≤2.5s, CLS ≤0.05, enforced in CI.</p>
               </div>
@@ -72,7 +72,7 @@ export default function AboutPage() {
               ].map((skill) => (
                 <div 
                   key={skill}
-                  className="bg-muted/50 rounded-lg p-3 text-center text-sm font-medium"
+                  className="bg-card border-2 border-border/40 shadow-lg rounded-lg p-3 text-center text-sm font-medium"
                 >
                   {skill}
                 </div>
@@ -86,7 +86,7 @@ export default function AboutPage() {
             <div className="flex flex-col sm:flex-row gap-4">
               <a 
                 href="mailto:akashjain1311@gmail.com" 
-                className="inline-flex items-center justify-center text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-11 rounded-md px-8"
+                className="inline-flex items-center justify-center text-sm font-semibold ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(194_100%_50%)] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-transparent border-2 border-vibrant-blue text-vibrant-blue hover:bg-vibrant-blue/10 hover:shadow-[0_0_20px_hsla(194,100%,50%,0.3)] h-11 rounded-md px-8"
               >
                 Email me
               </a>
