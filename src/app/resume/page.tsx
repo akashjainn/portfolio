@@ -1,6 +1,7 @@
 import { Navigation } from "@/components/site/navigation"
 import { AnimatedBlobs } from "@/components/ui/animated-blobs"
 import { WaveDivider } from "@/components/ui/wave-divider"
+import { CommandPalette } from "@/components/ui/command-palette"
 
 export const metadata = {
   title: "Resume",
@@ -12,6 +13,7 @@ export default function ResumePage() {
     <>
       <AnimatedBlobs />
       <Navigation />
+      <CommandPalette />
       <main id="main-content" className="py-8">
         <div className="container max-w-5xl">
           <header className="mb-6">

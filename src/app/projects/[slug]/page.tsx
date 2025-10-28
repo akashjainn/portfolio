@@ -4,6 +4,7 @@ import CaseStudyLayout from "@/components/CaseStudyLayout"
 import { getProjectBySlug, getProjectSlugs } from "@/lib/mdx"
 import { ProjectStructuredData } from "@/components/seo/structured-data"
 import { projectJsonLd } from "@/lib/seo"
+import { CommandPalette } from "@/components/ui/command-palette"
 
 export async function generateStaticParams() {
   const slugs = getProjectSlugs()
@@ -82,6 +83,7 @@ export default async function ProjectPage({
         }}
       />
       <Navigation />
+      <CommandPalette />
       <main id="main-content">
         <CaseStudyLayout
           title={frontmatter.title}

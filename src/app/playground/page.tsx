@@ -3,6 +3,7 @@ import { ProjectCard } from "@/components/site/project-card"
 import { getAllProjects } from "@/lib/mdx"
 import { AnimatedBlobs } from "@/components/ui/animated-blobs"
 import { WaveDivider } from "@/components/ui/wave-divider"
+import { CommandPalette } from "@/components/ui/command-palette"
 
 export default async function PlaygroundPage() {
   // Get playground projects (non-career-relevant projects)
@@ -15,6 +16,7 @@ export default async function PlaygroundPage() {
     <>
       <AnimatedBlobs />
       <Navigation />
+      <CommandPalette />
       <main id="main-content" className="py-20">
         <div className="container">
           <div className="max-w-4xl">

@@ -2,6 +2,7 @@ import { Navigation } from "@/components/site/navigation"
 import { getAllProjects } from "@/lib/mdx"
 import { AnimatedProjectsGrid } from "@/components/animated-projects-grid"
 import { AnimatedBlobs } from "@/components/ui/animated-blobs"
+import { CommandPalette } from "@/components/ui/command-palette"
 
 export const metadata = {
   title: "Projects",
@@ -17,6 +18,7 @@ export default async function ProjectsPage() {
     <>
       <AnimatedBlobs />
       <Navigation />
+      <CommandPalette />
       <AnimatedProjectsGrid projects={projects} />
     </>
   )

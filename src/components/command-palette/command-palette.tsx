@@ -7,10 +7,14 @@ import { Command, CommandDialog, CommandEmpty, CommandGroup, CommandInput, Comma
 const links = [
   { label: 'Home', href: '/' },
   { label: 'Projects', href: '/projects' },
-  { label: 'Propsage', href: '/projects/propsage' },
-  { label: 'StockSense', href: '/projects/stocksense' },
   { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
+  { label: 'Resume', href: '/resume' },
+  { label: 'Playground', href: '/playground' },
+  { label: 'Propsage', href: '/projects/propsage' },
+  { label: 'StockSense', href: '/projects/stocksense' },
+  { label: 'LandSafe', href: '/projects/landsafe' },
+  { label: 'Adventure Time GBA', href: '/projects/adventuretime-gba' },
 ]
 
 export function CommandPalette() {
