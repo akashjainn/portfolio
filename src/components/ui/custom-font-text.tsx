@@ -77,10 +77,11 @@ export function CustomFontText({
             <Image
               src={imagePath}
               alt=""
-              width={40}
-              height={40}
-              className="w-auto h-full object-contain"
+              width={80}
+              height={80}
+              className="w-auto h-full object-contain mix-blend-multiply dark:mix-blend-lighten"
               draggable={false}
+              style={{ filter: 'contrast(1.1)' }}
             />
           </span>
         )

@@ -37,7 +37,8 @@ export function Navigation() {
           <CustomFontText 
             text="AJ" 
             alt="Akash Jain"
-            letterClassName="h-6 md:h-7"
+            letterClassName="h-8 md:h-10"
+            className="gap-0"
           />
         </Link>
 
