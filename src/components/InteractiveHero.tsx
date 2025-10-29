@@ -41,7 +41,6 @@ export default function InteractiveHero() {
               text="Akash Jain" 
               alt="Akash Jain"
               letterClassName="h-12 md:h-16 lg:h-20"
-              className="gap-0.5 md:gap-1"
             />
           </div>
           <p className="text-sm md:text-base text-muted-foreground mb-2 font-medium">

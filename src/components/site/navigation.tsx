@@ -38,7 +38,6 @@ export function Navigation() {
             text="AJ" 
             alt="Akash Jain"
             letterClassName="h-8 md:h-10"
-            className="gap-0"
           />
         </Link>
 

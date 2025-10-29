@@ -58,7 +58,7 @@ export function CustomFontText({
   }
 
   return (
-    <div className={cn("inline-flex items-center gap-0.5", className)} aria-label={alt || text}>
+    <div className={cn("inline-flex items-center -space-x-1", className)} aria-label={alt || text}>
       {text.split('').map((char, index) => {
         const imagePath = getImagePath(char)
         
@@ -79,9 +79,8 @@ export function CustomFontText({
               alt=""
               width={80}
               height={80}
-              className="w-auto h-full object-contain mix-blend-multiply dark:mix-blend-lighten"
+              className="w-auto h-full object-contain"
               draggable={false}
-              style={{ filter: 'contrast(1.1)' }}
             />
           </span>
         )
