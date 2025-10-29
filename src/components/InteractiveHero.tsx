@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react"
 import Link from "next/link"
+import { CustomFontText } from "@/components/ui/custom-font-text"
 
 /**
  * Minimal, high-performance hero:
@@ -35,8 +36,16 @@ export default function InteractiveHero() {
     >
       <div className="container pb-10 pt-20">
         <div className="max-w-4xl">
+          <div className="mb-4">
+            <CustomFontText 
+              text="Akash Jain" 
+              alt="Akash Jain"
+              letterClassName="h-8 md:h-10"
+              className="gap-1"
+            />
+          </div>
           <p className="text-sm md:text-base text-muted-foreground mb-2 font-medium">
-            Akash Jain — Full‑stack Developer
+            Full‑stack Developer
           </p>
           <h1
             id="hero-title"
