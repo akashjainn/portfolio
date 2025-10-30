@@ -35,7 +35,7 @@ const EXECUTIVE_SUMMARIES = [
     title: "PropSage",
     slug: "propsage",
     category: "Sports Tech",
-    timeline: "2 weeks (Hackathon)",
+  timeline: "2 days (Hackathon)",
     impact: [
       "Top 3 for projects using TwelveLabs API (HackGT12)",
       "94% prediction accuracy achieved",
