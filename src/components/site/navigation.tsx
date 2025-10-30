@@ -4,7 +4,6 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import { CustomFontText } from "@/components/ui/custom-font-text"
 
 interface NavItem {
   href: string
@@ -31,14 +30,10 @@ export function Navigation() {
       >
         <Link 
           href="/"
-          className="font-display font-bold text-xl interactive hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20 focus-visible:ring-offset-2 rounded-md transition-all duration-200"
+          className="font-display font-bold text-xl interactive hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20 focus-visible:ring-offset-2 rounded-md transition-all duration-200"
           aria-label="Akash Jain - Home"
         >
-          <CustomFontText 
-            text="AJ" 
-            alt="Akash Jain"
-            letterClassName="h-8 md:h-10"
-          />
+          <span className="gradient-text">AJ</span>
         </Link>
 
         <div className="hidden md:flex items-center space-x-1">

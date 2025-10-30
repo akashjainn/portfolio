@@ -48,7 +48,7 @@ const MOCK_PROJECTS = [
     title: "PropSage",
     slug: "propsage",
     category: "Sports Tech",
-    description: "Real-time sports betting odds aggregation platform with 94% prediction accuracy. Built as a top 3 project using TwelveLabs API with live WebSocket connections and Redis caching for sub-100ms latency.",
+    description: "Real-time sports betting odds aggregation platform with 94% prediction accuracy. Recognized as a Top 3 project utilizing the TwelveLabs API at HackGT 12",
     techStack: ["Next.js", "TypeScript", "TwelveLabs API", "Server-Sent Events", "TailwindCSS"],
     screenshots: {
       desktop: [

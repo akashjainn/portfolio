@@ -60,7 +60,7 @@ const TIMELINE_DATA: TimelineEvent[] = [
     date: '2024-02',
     title: 'PropSage - Top 3 Project',
     subtitle: 'Real-time Sports Prop Pricing',
-    description: 'Built evidence-aware sports betting platform using TwelveLabs API with real-time odds and performance analytics.',
+    description: 'Received recognition as Top 3 project using TwelveLabs API at HackGT 12; built an evidence-aware sports betting platform with real-time odds and performance analytics.',
     type: 'project',
     tech: ['Next.js', 'TypeScript', 'TwelveLabs API', 'Server-Sent Events'],
     links: {
