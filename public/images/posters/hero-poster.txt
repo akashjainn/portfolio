@@ -1,0 +1,1 @@
+Placeholder poster. Replace with optimized hero poster (e.g., 1600x900 jpg, quality 70, blurDataURL inline in component).

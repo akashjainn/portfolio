@@ -4,11 +4,20 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { useRevealOnScroll, useMouseParallax } from "@/lib/animations"
 import { KpiChip } from "@/components/ui/kpi-chip"
+import dynamic from 'next/dynamic'
+import { SceneGate } from '@/components/three/SceneGate'
+import { EffectsPrefsProvider, useEffectsPrefs } from '@/context/EffectsPrefsContext'
 
-export function Hero() {
+// Feature flag for progressive enhancement
+const FEATURE_3D = process.env.NEXT_PUBLIC_FEATURE_HERO_3D === 'true'
+
+const HeroCanvas = dynamic(() => import('@/components/three/HeroCanvas'), { ssr: false })
+
+function HeroInner() {
   const { elementRef, isVisible } = useRevealOnScroll()
   const parallaxRef1 = useMouseParallax(0.02)
   const parallaxRef2 = useMouseParallax(0.015)
+  const { reduceEffects, pauseMotion, setReduceEffects, setPauseMotion } = useEffectsPrefs()
 
   return (
     <section 
@@ -16,6 +25,11 @@ export function Hero() {
       className="min-h-screen flex items-center justify-center relative overflow-hidden"
       aria-labelledby="hero-title"
     >
+      {FEATURE_3D && (
+        <SceneGate posterSrc="/images/posters/hero-poster.jpg" className="absolute inset-0" >
+          <HeroCanvas />
+        </SceneGate>
+      )}
       <div className="container relative z-10">
         <div 
           ref={elementRef}
@@ -85,6 +99,16 @@ export function Hero() {
             >
               Start Guided Tour
             </Button>
+            {FEATURE_3D && (
+              <div className="flex flex-col gap-2 mt-2 sm:mt-0" aria-label="Visual effect controls">
+                <Button size="sm" variant={reduceEffects ? 'outline' : 'secondary'} onClick={() => setReduceEffects(!reduceEffects)}>
+                  {reduceEffects ? 'Enable Effects' : 'Reduce Effects'}
+                </Button>
+                <Button size="sm" variant={pauseMotion ? 'outline' : 'secondary'} onClick={() => setPauseMotion(!pauseMotion)}>
+                  {pauseMotion ? 'Resume Motion' : 'Pause Motion'}
+                </Button>
+              </div>
+            )}
           </div>
 
           {/* Proof chips */}
@@ -125,5 +149,13 @@ export function Hero() {
         className="absolute bottom-0 left-0 w-80 h-80 bg-secondary/5 rounded-full blur-3xl pointer-events-none transition-transform duration-300 ease-out"
       />
     </section>
+  )
+}
+
+export function Hero() {
+  return (
+    <EffectsPrefsProvider>
+      <HeroInner />
+    </EffectsPrefsProvider>
   )
 }

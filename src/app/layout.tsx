@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import '../styles/design-system.css'
 import { RoleProvider } from '@/components/ui/role-personalization'
+import { EffectsPrefsProvider } from '@/context/EffectsPrefsContext'
 import { WebVitals } from '@/components/analytics/web-vitals'
 import { CommandPalette } from '@/components/command-palette/command-palette'
 
@@ -100,12 +101,14 @@ export default function RootLayout({
           }}
         />
         <RoleProvider>
+          <EffectsPrefsProvider>
           <a href="#main-content" className="skip-link">
             Skip to main content
           </a>
           {children}
           <WebVitals />
           <CommandPalette />
+          </EffectsPrefsProvider>
         </RoleProvider>
       </body>
     </html>
