@@ -3,7 +3,8 @@
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Html, Text } from "@react-three/drei";
 import { InstancedMesh } from "three";
-import { memo, useMemo, useRef } from "react";
+import { memo, useMemo, useRef, useLayoutEffect } from "react";
+import * as THREE from "three";
 
 type SkillCloudProps = {
   skills: string[];
@@ -18,42 +19,51 @@ function seededRandom(seed: number) {
 }
 
 const CloudPoints = memo(function CloudPoints({ skills, reducedMotion }: SkillCloudProps) {
-  const ref = useRef<InstancedMesh>(null);
+  const ref = useRef<InstancedMesh>(null!);
   const count = skills.length;
-  const data = useMemo(() => {
-    // Distribute on a sphere with deterministic randomness (stable layout across renders)
+  const positions = useMemo(() => {
     const rnd = seededRandom(0xA11A5);
-    const pts = [];
+    const pts: [number, number, number][] = [];
     for (let i = 0; i < count; i++) {
       const u = rnd();
       const v = rnd();
       const theta = 2 * Math.PI * u;
       const phi = Math.acos(2 * v - 1);
-      const r = 1.2; // sphere radius
-      const x = r * Math.sin(phi) * Math.cos(theta);
-      const y = r * Math.cos(phi);
-      const z = r * Math.sin(phi) * Math.sin(theta);
-      pts.push([x, y, z]);
+      const r = 1.2;
+      pts.push([
+        r * Math.sin(phi) * Math.cos(theta),
+        r * Math.cos(phi),
+        r * Math.sin(phi) * Math.sin(theta),
+      ]);
     }
     return pts;
   }, [count]);
 
-  useFrame((state, delta) => {
+  useLayoutEffect(() => {
+    const dummy = new THREE.Object3D();
+    positions.forEach(([x, y, z], i) => {
+      dummy.position.set(x, y, z);
+      dummy.rotation.set(
+        Math.atan2(y, z) * 0.1,
+        Math.atan2(x, z) * 0.1,
+        Math.atan2(y, x) * 0.1
+      );
+      dummy.scale.setScalar(1);
+      dummy.updateMatrix();
+      ref.current.setMatrixAt(i, dummy.matrix);
+    });
+    ref.current.instanceMatrix.needsUpdate = true;
+  }, [positions]);
+
+  useFrame((_state, delta) => {
     if (!ref.current) return;
-    // Slow rotation for depth (disabled if reducedMotion)
-    const rot = reducedMotion ? 0 : delta * 0.1;
-    ref.current.rotation.y += rot;
+    ref.current.rotation.y += reducedMotion ? 0 : delta * 0.15;
   });
 
   return (
     <instancedMesh ref={ref} args={[undefined, undefined, count]}>
       <sphereGeometry args={[0.015, 12, 12]} />
-      <meshStandardMaterial metalness={0.5} roughness={0.2} />
-      {data.map(([x, y, z], i) => {
-        const m = ref.current!.getMatrixAt;
-        // setMatrixAt can be used directly; but we can set at init:
-        return null;
-      })}
+      <meshStandardMaterial metalness={0.5} roughness={0.25} />
     </instancedMesh>
   );
 });

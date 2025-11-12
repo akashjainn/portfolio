@@ -69,7 +69,12 @@ export const metadata: Metadata = {
   verification: {
     google: 'your-google-verification-code',
   },
-}
+  other: {
+    link: [
+      { rel: "prefetch", as: "image", href: "/images/posters/hero-poster.jpg" },
+    ],
+  },
+};
 
 export default function RootLayout({
   children,
