@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Html, Text } from "@react-three/drei";
+import { Text } from "@react-three/drei";
 import { InstancedMesh } from "three";
 import { memo, useMemo, useRef, useLayoutEffect } from "react";
 import * as THREE from "three";

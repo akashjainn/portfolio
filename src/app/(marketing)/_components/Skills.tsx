@@ -1,5 +1,5 @@
 "use client";
-import { useEffectsPrefs } from "@/components/EffectsPrefsContext";
+import { useEffectsPrefs } from "@/context/EffectsPrefsContext";
 import dynamic from "next/dynamic";
 
 const SkillCloud = dynamic(() => import("@/components/three/SkillCloud"), { ssr: false });

@@ -3,7 +3,7 @@
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Suspense, useRef, useEffect } from 'react'
 import { Environment, MeshTransmissionMaterial } from '@react-three/drei'
-import { EffectComposer, Bloom } from 'react-three/postprocessing'
+import { EffectComposer, Bloom } from '@react-three/postprocessing'
 import * as THREE from 'three'
 import { useEffectsPrefs } from '@/context/EffectsPrefsContext'
 import { logMetric } from '@/lib/web-vitals'
@@ -31,38 +31,40 @@ function GlassMonogram() {
   )
 }
 
-  const { pauseMotion } = useEffectsPrefs()
-  const first = useRef<number | null>(null);
-
-  useFrame((state) => {
+function MetricsTracker() {
+  const first = useRef<number | null>(null)
+  useFrame(() => {
     if (first.current == null) {
-      first.current = performance.now();
-      logMetric("hero_ttff_ms", first.current);
+      first.current = performance.now()
+      logMetric('hero_ttff_ms', first.current)
     }
-  });
-
-  // average FPS over first 3s
+  })
   useEffect(() => {
-    let frames = 0;
-    let raf: number;
-    const start = performance.now();
+    let frames = 0
+    let raf: number
+    const start = performance.now()
     const loop = () => {
-      frames++;
-      const t = performance.now() - start;
+      frames++
+      const t = performance.now() - start
       if (t < 3000) {
-        raf = requestAnimationFrame(loop);
+        raf = requestAnimationFrame(loop)
       } else {
-        logMetric("hero_avg_fps_3s", (frames / (t / 1000)));
+        logMetric('hero_avg_fps_3s', frames / (t / 1000))
       }
-    };
-    raf = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(raf);
-  }, []);
+    }
+    raf = requestAnimationFrame(loop)
+    return () => cancelAnimationFrame(raf)
+  }, [])
+  return null
+}
 
+export default function HeroCanvas() {
+  const { pauseMotion } = useEffectsPrefs()
   return (
     <Canvas dpr={[1, 1.5]} gl={{ powerPreference: 'high-performance', antialias: true }} camera={{ position: [0, 0, 6], fov: 50 }} className="absolute inset-0">
       <Suspense fallback={null}>
         <color attach="background" args={["#0d0f11"]} />
+        <MetricsTracker />
         {!pauseMotion && <CameraRig />}
         <GlassMonogram />
         <Environment preset="studio" />
