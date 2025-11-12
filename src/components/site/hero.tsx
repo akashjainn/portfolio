@@ -8,8 +8,10 @@ import dynamic from 'next/dynamic'
 import { SceneGate } from '@/components/three/SceneGate'
 import { EffectsPrefsProvider, useEffectsPrefs } from '@/context/EffectsPrefsContext'
 
-// Feature flag for progressive enhancement
-const FEATURE_3D = process.env.NEXT_PUBLIC_FEATURE_HERO_3D === 'true'
+// Feature flag for progressive enhancement - check both build-time and runtime
+const FEATURE_3D = typeof window !== 'undefined' 
+  ? (window as any).__NEXT_PUBLIC_FEATURE_HERO_3D === 'true' || process.env.NEXT_PUBLIC_FEATURE_HERO_3D === 'true'
+  : process.env.NEXT_PUBLIC_FEATURE_HERO_3D === 'true'
 
 const HeroCanvas = dynamic(() => import('@/components/three/HeroCanvas'), { ssr: false })
 
@@ -18,6 +20,9 @@ function HeroInner() {
   const parallaxRef1 = useMouseParallax(0.02)
   const parallaxRef2 = useMouseParallax(0.015)
   const { reduceEffects, pauseMotion, setReduceEffects, setPauseMotion } = useEffectsPrefs()
+
+  // Debug log
+  console.log('FEATURE_3D:', FEATURE_3D, 'env:', process.env.NEXT_PUBLIC_FEATURE_HERO_3D)
 
   return (
     <section 

@@ -20,23 +20,39 @@ export function SceneGate({ posterSrc, children, className }: SceneGateProps) {
   const [showScene, setShowScene] = useState(false)
 
   useEffect(() => {
-    // simple heuristic: require FPS > 30 & not reduced
-    if (!prefersReduced && !reduceEffects && perf.fps > 30) setShowScene(true)
-  }, [prefersReduced, reduceEffects, perf.fps])
+    // Start with optimistic render, then check perf
+    // Initial FPS is 60 from useWebGLPerf, so show scene unless user prefers reduced motion
+    const shouldShow = !prefersReduced && !reduceEffects
+    console.log('SceneGate decision:', { prefersReduced, reduceEffects, fps: perf.fps, shouldShow })
+    
+    if (shouldShow) {
+      setShowScene(true)
+    }
+    
+    // Later, if perf drops below threshold, hide the scene
+    if (showScene && perf.fps < 30 && perf.fps !== 60) {
+      console.log('SceneGate: hiding scene due to low FPS')
+      setShowScene(false)
+    }
+  }, [prefersReduced, reduceEffects, perf.fps, showScene])
 
 
   if (!showScene) {
     return (
-      <div className={className} aria-hidden="true">
+      <div className={className} aria-hidden="true" style={{ background: '#0d0f11' }}>
+        {/* Fallback solid color background if poster fails to load */}
         <Image
           src={posterSrc}
           alt="Hero poster"
           fill
           sizes="(max-width:768px) 100vw, 1200px"
           priority
-          placeholder="blur"
-          blurDataURL="/images/posters/hero-poster-blur.jpg"
           className="object-cover select-none pointer-events-none"
+          onError={(e) => {
+            console.warn('Hero poster failed to load:', posterSrc)
+            // Hide the image on error, showing the dark background
+            e.currentTarget.style.display = 'none'
+          }}
         />
         <noscript>
           {/* eslint-disable-next-line @next/next/no-img-element */}
