@@ -58,12 +58,12 @@ export default function ModelViewer({
   const [error, setError] = useState<string | null>(null)
 
   return (
-    <div className={`relative ${className} bg-gradient-to-b from-gray-900 to-black rounded-xl overflow-hidden border border-gray-800`}>
+    <div className={`relative ${className} bg-background rounded-xl overflow-hidden border-2 border-border/40`}>
       {error ? (
-        <div className="absolute inset-0 flex items-center justify-center text-red-500">
+        <div className="absolute inset-0 flex items-center justify-center text-destructive">
           <div className="text-center">
             <p className="text-xl mb-2">Failed to load model</p>
-            <p className="text-sm text-gray-400">{error}</p>
+            <p className="text-sm text-muted-foreground">{error}</p>
           </div>
         </div>
       ) : (
@@ -80,7 +80,7 @@ export default function ModelViewer({
             gl.toneMappingExposure = 1.2
           }}
         >
-          <color attach="background" args={['#0a0a0a']} />
+          <color attach="background" args={['hsl(var(--background))']} />
           
           <Suspense fallback={<LoadingPlaceholder />}>
             <FBXModel modelPath={modelPath} autoRotate={autoRotate} />
@@ -128,7 +128,7 @@ export default function ModelViewer({
       )}
 
       {showControls && !error && (
-        <div className="absolute bottom-4 left-4 bg-black/80 backdrop-blur-sm px-4 py-2 rounded-lg text-xs text-gray-400 border border-gray-700">
+        <div className="absolute bottom-4 left-4 bg-card/95 backdrop-blur-sm px-4 py-2 rounded-lg text-xs text-muted-foreground border border-border shadow-lg">
           <p>🖱️ Left click + drag to rotate</p>
           <p>🖱️ Right click + drag to pan</p>
           <p>🖱️ Scroll to zoom</p>

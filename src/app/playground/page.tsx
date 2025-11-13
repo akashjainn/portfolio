@@ -38,10 +38,10 @@ export default async function PlaygroundPage() {
             </p>
             
             {/* Featured 3D Asset Showcase */}
-            <div className="mb-16 bg-gradient-to-br from-gray-900 via-black to-gray-900 rounded-2xl border border-gray-800 p-8">
+            <div className="mb-16 bg-card border-2 border-border/40 rounded-2xl p-8 shadow-lg hover:border-[hsl(194_100%_50%)] hover:shadow-[0_0_20px_hsla(194,100%,50%,0.3)] transition-all duration-300">
               <div className="mb-6">
-                <h2 className="text-2xl font-semibold mb-2">VR Game Assets - Interactive 3D Viewer</h2>
-                <p className="text-gray-400">
+                <h2 className="text-2xl font-display font-semibold mb-2 text-foreground">VR Game Assets - Interactive 3D Viewer</h2>
+                <p className="text-muted-foreground leading-relaxed">
                   Custom vine and tree models created for the VR Bomb Defusal Puzzle game. 
                   Drag to rotate, scroll to zoom, right-click to pan.
                 </p>
@@ -52,20 +52,15 @@ export default async function PlaygroundPage() {
                 showControls={true}
                 className="w-full h-[500px]"
               />
-              <div className="mt-4 flex gap-3">
+              <div className="mt-4">
                 <a
                   href="/projects/vr-puzzle-game"
-                  className="inline-flex items-center gap-2 bg-primary-red text-white px-4 py-2 rounded-lg hover:bg-dark-red transition-colors text-sm font-medium"
+                  className="inline-flex items-center gap-2 bg-foreground text-background px-4 py-2 rounded-lg hover:opacity-90 transition-all duration-200 text-sm font-medium shadow-elegant hover:shadow-elegant-lg"
                 >
-                  View Full Project →
-                </a>
-                <a
-                  href="https://github.com/akashjainn/VR-Puzzle-Game"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 border border-gray-700 text-gray-300 px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors text-sm font-medium"
-                >
-                  GitHub Repo
+                  View Full Project
+                  <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
                 </a>
               </div>
             </div>
