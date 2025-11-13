@@ -66,12 +66,12 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold">LinkedIn</h3>
                     <a 
-                      href="https://linkedin.com/in/akashjain1311"
+                      href="https://www.linkedin.com/in/akash-jain-687673209/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="link"
                     >
-                      linkedin.com/in/akashjain1311
+                      linkedin.com/in/akash-jain-687673209
                     </a>
                   </div>
                 </div>
