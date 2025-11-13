@@ -9,6 +9,7 @@ import { Callout } from '@/components/ui/callout'
 import { Tldr } from '@/components/mdx/tldr'
 import { Diagram } from '@/components/mdx/diagram'
 import { MetricGrid } from '@/components/mdx/metric-grid'
+import ModelViewer from '@/components/three/ModelViewer'
 import rehypeSlug from 'rehype-slug'
 
 // Project frontmatter schema
@@ -122,6 +123,7 @@ export async function getProjectBySlug(slug: string): Promise<ProjectData | null
         Tldr,
         Diagram,
         MetricGrid,
+        ModelViewer,
       },
       options: {
         mdxOptions: {
