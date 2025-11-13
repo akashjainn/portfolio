@@ -1,10 +1,10 @@
 # Akash Jain - Portfolio
 
-My name is Akash Jain, and this is my professional portfolio showcasing my work as a full-stack developer and Georgia Tech CS student.
+My name is Akash Jain, and this is my professional portfolio showcasing my work as a full-stack developer and Georgia Tech Computer Science and Design student.
 
 ## About
 
-I'm a Computer Science major at Georgia Institute of Technology with a focus on building reliable, performant web systems. I specialize in Next.js/TypeScript development and have experience delivering enterprise-scale solutions.
+I'm a Computer Science and Design student at Georgia Institute of Technology with a 3.6 GPA, focused on building reliable, performant web systems. I specialize in Next.js/TypeScript development and have experience delivering enterprise-scale solutions.
 
 ## Key Achievements
 
@@ -12,7 +12,7 @@ I'm a Computer Science major at Georgia Institute of Technology with a focus on 
 - **35% latency reduction** achieved in chat systems optimization
 - **99.98% uptime** maintained across services
 - **22% engagement increase** delivered on platform improvements
-- **Georgia Tech CS**: 3.5 GPA with focus on software engineering
+- **Georgia Tech CS + Design**: 3.6 GPA with focus on software engineering and user experience
 
 ## Featured Projects
 

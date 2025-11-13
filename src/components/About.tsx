@@ -52,7 +52,7 @@ export default function About() {
   }
 
   const achievements = [
-    { metric: "3.5", label: "GPA at Georgia Tech", icon: "🎓" },
+    { metric: "3.6", label: "GPA at Georgia Tech", icon: "🎓" },
     { metric: "2M+", label: "Monthly Messages Handled", icon: "💬" },
     { metric: "99.98%", label: "System Uptime Achieved", icon: "⚡" },
     { metric: "35%", label: "Latency Reduction", icon: "🚀" },
@@ -137,8 +137,8 @@ export default function About() {
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.8, delay: 0.2 }}
                 >
-                  I&apos;m a 3rd-year Computer Science student at <span className="text-primary-red font-semibold">Georgia Institute of Technology</span> 
-                  with an unwavering passion for building software that makes a difference. My journey began with 
+                  I&apos;m a Computer Science and Design student at <span className="text-primary-red font-semibold">Georgia Institute of Technology</span> 
+                  with a 3.6 GPA and an unwavering passion for building software that makes a difference. My journey began with 
                   curiosity about how technology shapes our world, and has evolved into hands-on experience creating 
                   scalable, production-ready systems.
                 </motion.p>

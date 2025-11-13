@@ -62,7 +62,7 @@ function HeroInner() {
             }`}
             style={{ transitionDelay: '400ms' }}
           >
-            Georgia Tech CS major crafting accessible, measurable Next.js apps with telemetry 
+            Georgia Tech Computer Science and Design student (3.6 GPA) crafting accessible, measurable Next.js apps with telemetry 
             and performance budgets.
           </p>
           

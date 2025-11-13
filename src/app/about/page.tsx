@@ -47,8 +47,8 @@ export default function AboutPage() {
             <h2>Education</h2>
             <div className="bg-card border-2 border-border/40 shadow-lg rounded-lg p-6 mb-8">
               <h3 className="text-xl font-semibold mb-2">Georgia Institute of Technology</h3>
-              <p className="text-muted-foreground mb-2">Bachelor of Science in Computer Science</p>
-              <p className="text-sm text-muted-foreground">GPA: 3.5</p>
+              <p className="text-muted-foreground mb-2">Bachelor of Science in Computer Science and Design</p>
+              <p className="text-sm text-muted-foreground">GPA: 3.6</p>
             </div>
 
             <WaveDivider variant="mint-yellow" className="my-12" />

@@ -24,7 +24,7 @@ export default function Hero() {
   const codeSnippet = `const akash = {
   role: "Software Engineer",
   location: "Atlanta, GA",
-  education: "Georgia Tech CS",
+  education: "Georgia Tech CS + Design (3.6 GPA)",
   passion: ["Innovation", "Technology", "Problem Solving"],
   currentFocus: "Building the Future",
   availability: "Open to Opportunities"
@@ -226,7 +226,7 @@ console.log("Ready to create something amazing!");`
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
               className="absolute -bottom-6 -left-6 bg-dark-red text-white px-4 py-2 rounded-lg font-mono text-sm font-semibold"
             >
-              Georgia Tech CS
+              Georgia Tech CS + Design
             </motion.div>
           </motion.div>
         </div>
