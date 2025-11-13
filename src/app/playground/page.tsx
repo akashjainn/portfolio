@@ -40,7 +40,7 @@ export default async function PlaygroundPage() {
             {/* Finn's Quest Adventure Time Game Demo */}
             <div className="mb-12 bg-card border-2 border-border/40 rounded-2xl p-8 shadow-lg hover:border-[hsl(280_100%_70%)] hover:shadow-[0_0_20px_hsla(280,100%,70%,0.3)] transition-all duration-300">
               <div className="mb-6">
-                <h2 className="text-2xl font-display font-semibold mb-2 text-foreground">Finn's Quest - Adventure Time GBA Game</h2>
+                <h2 className="text-2xl font-display font-semibold mb-2 text-foreground">Finn&apos;s Quest - Adventure Time GBA Game</h2>
                 <p className="text-muted-foreground leading-relaxed">
                   A fully playable Game Boy Advance game featuring Finn from Adventure Time. 
                   Built with custom sprites, animations, and game mechanics.
