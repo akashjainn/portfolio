@@ -22,7 +22,7 @@ updatedAt: "2024-11-13"
 
 VR Bomb Defusal Puzzle is an immersive virtual reality game built for the **Meta Quest 3** using **Unity 6000.0.35f1**. Players must carefully cut color-coded vines in the correct sequence to defuse a bomb before time runs out. One wrong cut and it's game over!
 
-## 🎮 Gameplay
+## Gameplay
 
 The core gameplay loop is intense and satisfying:
 - **Observe** the bomb and identify the vine cutting pattern
@@ -31,7 +31,7 @@ The core gameplay loop is intense and satisfying:
 - **Avoid** wrong cuts - three strikes and the bomb explodes!
 - **Race** against time to complete the sequence before the timer expires
 
-## 🛠️ Technical Implementation
+## Technical Implementation
 
 ### Core Systems
 
@@ -87,7 +87,7 @@ public class BombController : MonoBehaviour {
 }
 ```
 
-## 🎨 3D Assets
+## 3D Assets
 
 I created custom 3D models for the game environment, including stylized vines and trees that fit the bomb defusal theme. The models were designed with VR performance in mind - optimized poly counts while maintaining visual fidelity.
 
@@ -100,22 +100,21 @@ I created custom 3D models for the game environment, including stylized vines an
   />
 </div>
 
-## 🎥 Gameplay Demo
+## Gameplay Demo
 
 Watch the bomb defusal mechanics in action:
 
-<div className="my-8 rounded-xl overflow-hidden border border-gray-800">
-  <video 
-    controls 
-    className="w-full"
-    poster="/images/projects/vr-puzzle-thumb.jpg"
-  >
-    <source src="/videos/vr-bomb-demo.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
+<div className="my-8 rounded-xl overflow-hidden border border-gray-800 relative" style={{ paddingBottom: '56.25%' }}>
+  <iframe
+    className="absolute top-0 left-0 w-full h-full"
+    src="https://www.youtube.com/embed/DEcJXqHXCf0"
+    title="VR Bomb Defusal Puzzle - Gameplay Demo"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowFullScreen
+  />
 </div>
 
-## 🏗️ Architecture & Patterns
+## Architecture & Patterns
 
 ### Event-Driven Design
 All vine cuts trigger UnityEvents, allowing modular attachment of:
@@ -146,7 +145,7 @@ void OnDisable() {
 }
 ```
 
-## 📦 Tech Stack
+## Tech Stack
 
 - **Engine**: Unity 6000.0.35f1
 - **Platform**: Meta Quest 3 (Android/OpenXR)
@@ -155,16 +154,16 @@ void OnDisable() {
 - **Rendering**: Universal Render Pipeline (URP)
 - **SDK**: Meta XR All-in-One SDK
 
-## 🎯 Key Features
+## Key Features
 
-✅ **Physics-based cutting** with velocity validation  
-✅ **Pattern-based puzzle system** (ScriptableObject driven)  
-✅ **Strike counter** and time limit for tension  
-✅ **Hand tracking** and controller support  
-✅ **Extensible event system** for feedback  
-✅ **Optimized for Quest 3** standalone performance  
+**Physics-based cutting** with velocity validation  
+**Pattern-based puzzle system** (ScriptableObject driven)  
+**Strike counter** and time limit for tension  
+**Hand tracking** and controller support  
+**Extensible event system** for feedback  
+**Optimized for Quest 3** standalone performance  
 
-## 🔮 Future Improvements
+## Future Improvements
 
 Potential enhancements for the project:
 - Object pooling for VFX particles
@@ -173,7 +172,7 @@ Potential enhancements for the project:
 - Multiplayer co-op mode
 - Level editor with custom pattern creator
 
-## 📚 What I Learned
+## What I Learned
 
 This project deepened my understanding of:
 - **VR interaction design** - Making actions feel natural and intuitive
