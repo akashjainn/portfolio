@@ -30,13 +30,15 @@ State Farm needed to modernize their customer-facing support experience with a r
 ## Live Widget
 
 <div className="not-prose my-8 w-full">
-  <div className="relative w-full overflow-hidden rounded-lg border border-border/50 bg-muted/30 aspect-[64/33]">
+  <div className="relative w-full overflow-hidden rounded-lg border border-border/50 bg-muted/30" style={{ aspectRatio: '64/33' }}>
     <iframe
       className="absolute inset-0 h-full w-full"
       src="https://player.mux.com/kyk01xShiF6VqNCDkkq59CTlHBtnCW9N2hAfTue02FwiM"
       style={{ border: "none" }}
-      allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+      allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen"
       allowFullScreen
+      loading="lazy"
+      sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-presentation"
       title="State Farm Chat Widget Demo"
     />
   </div>
