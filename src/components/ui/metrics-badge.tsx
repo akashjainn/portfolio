@@ -4,11 +4,11 @@ import { cn } from '@/lib/utils'
 interface MetricsBadgeProps {
   label: string
   value: string | number
-  unit?: string
-  variant?: 'performance' | 'accessibility' | 'quality' | 'success' | 'warning' | 'error'
-  icon?: ReactNode
-  className?: string
-  description?: string
+  unit?: string | undefined
+  variant?: 'performance' | 'accessibility' | 'quality' | 'success' | 'warning' | 'error' | undefined
+  icon?: ReactNode | undefined
+  className?: string | undefined
+  description?: string | undefined
 }
 
 const variantStyles = {

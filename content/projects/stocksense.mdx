@@ -7,12 +7,15 @@ tech: ["Next.js", "TypeScript", "MongoDB", "Alpha Vantage", "Alpaca", "SSE"]
 links: 
   demo: "https://stocksense-taupe.vercel.app"
   repo: "https://github.com/akashjainn/stocksense"
-metrics: 
-  lcp_ms: 1600
-  tbt_ms: 85
-  cls: 0.02
-  a11y: "Axe: 0 serious violations"
-  lighthouse_mobile: 96
+metrics:
+  - label: "Lighthouse"
+    value: "96/100"
+  - label: "LCP"
+    value: "1.6s"
+  - label: "TBT"
+    value: "85ms"
+  - label: "CLS"
+    value: "0.02"
 summary: "Real-time portfolio analytics with CSV ingestion, health monitoring, and risk assessment dashboards."
 thumbnail: "/images/projects/stocksense/cover.avif"
 featured: true

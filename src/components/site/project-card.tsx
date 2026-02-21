@@ -1,9 +1,11 @@
 import Link from "next/link"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
 import { MetricsBadge } from "@/components/ui/metrics-badge"
+import { ProjectChip } from "@/components/ui/project-chip"
+import { ProjectActions } from "@/components/ui/project-actions"
+import { MetricsRow, MetricItem } from "@/components/ui/metrics-row"
 
-type ProjectMetrics = {
+type ProjectMetrics = MetricItem[] | {
   lcp_ms?: number
   tbt_ms?: number
   cls?: number
@@ -14,8 +16,6 @@ type ProjectMetrics = {
   lighthouse_mobile?: number
 }
 
-type MetricItem = { label: string; value: string }
-
 interface ProjectCardProps {
   title: string
   summary: string
@@ -23,7 +23,7 @@ interface ProjectCardProps {
   href: string
   demo?: string | undefined
   repo?: string
-  metrics?: ProjectMetrics | MetricItem[] | undefined
+  metrics?: ProjectMetrics | undefined
 }
 
 export function ProjectCard({ 
@@ -35,38 +35,66 @@ export function ProjectCard({
   repo,
   metrics
 }: ProjectCardProps) {
-  // Type guard to check if metrics is array format
-  const isArrayMetrics = (m: any): m is MetricItem[] => Array.isArray(m)
+  // Convert old object format to new array format if needed
+  const normalizeMetrics = (m: ProjectMetrics | undefined): MetricItem[] | undefined => {
+    if (!m) return undefined
+    if (Array.isArray(m)) return m
+    
+    // Old format conversion
+    const result: MetricItem[] = []
+    const oldMetrics = m as Record<string, any>
+    
+    if (oldMetrics.lighthouse_mobile !== undefined) {
+      result.push({
+        label: 'Lighthouse',
+        value: `${oldMetrics.lighthouse_mobile}/100`,
+        variant: oldMetrics.lighthouse_mobile >= 90 ? 'success' : oldMetrics.lighthouse_mobile >= 50 ? 'warning' : 'error'
+      })
+    }
+    if (oldMetrics.lcp_ms !== undefined) {
+      result.push({
+        label: 'LCP',
+        value: `${oldMetrics.lcp_ms}ms`,
+        variant: oldMetrics.lcp_ms <= 2500 ? 'success' : oldMetrics.lcp_ms <= 4000 ? 'warning' : 'error'
+      })
+    }
+    if (oldMetrics.tbt_ms !== undefined) {
+      result.push({
+        label: 'TBT',
+        value: `${oldMetrics.tbt_ms}ms`,
+        variant: oldMetrics.tbt_ms <= 200 ? 'success' : oldMetrics.tbt_ms <= 600 ? 'warning' : 'error'
+      })
+    }
+    if (oldMetrics.cls !== undefined) {
+      result.push({
+        label: 'CLS',
+        value: String(oldMetrics.cls),
+        variant: oldMetrics.cls <= 0.1 ? 'success' : oldMetrics.cls <= 0.25 ? 'warning' : 'error'
+      })
+    }
+    if (oldMetrics.a11y) {
+      result.push({
+        label: 'A11y',
+        value: oldMetrics.a11y,
+        variant: 'quality'
+      })
+    }
+    if (!oldMetrics.a11y && oldMetrics.performance_improvement) {
+      result.push({
+        label: 'Perf',
+        value: oldMetrics.performance_improvement,
+        variant: 'performance'
+      })
+    }
+    
+    return result.length > 0 ? result : undefined
+  }
   
-  // Helpers to determine badge variants
-  const getScoreVariant = (score: number) => {
-    if (score >= 90) return 'success'
-    if (score >= 50) return 'warning'
-    return 'error'
-  }
-
-  const getLCPVariant = (value: number) => {
-    if (value <= 2500) return 'success'
-    if (value <= 4000) return 'warning'
-    return 'error'
-  }
-
-  const getTBTVariant = (value: number) => {
-    if (value <= 200) return 'success'
-    if (value <= 600) return 'warning'
-    return 'error'
-  }
-
-  const getCLSVariant = (value: number) => {
-    if (value <= 0.1) return 'success'
-    if (value <= 0.25) return 'warning'
-    return 'error'
-  }
-
+  const normalizedMetrics = normalizeMetrics(metrics)
   return (
-    <Card className="group h-full flex flex-col transition-all duration-300 ease-out hover:-translate-y-1 backdrop-blur-sm border-2 border-border/40 hover:border-[hsl(194_100%_50%)] hover:shadow-[0_0_20px_hsla(194,100%,50%,0.3)] bg-card shadow-lg">
-      <CardHeader className="space-y-3">
-        <CardTitle className="text-xl font-display font-semibold group-hover:text-gradient-vibrant transition-all duration-300 ease-out text-balance">
+    <Card className="group flex flex-col h-fit transition-all duration-300 ease-out hover:-translate-y-1 backdrop-blur-sm border-2 border-border/40 hover:border-[hsl(194_100%_50%)] hover:shadow-[0_0_20px_hsla(194,100%,50%,0.3)] bg-card shadow-lg">
+      <CardHeader className="pb-4 space-y-3">
+        <CardTitle className="line-clamp-2 text-xl font-display font-semibold group-hover:text-gradient-vibrant transition-all duration-300 ease-out text-balance">
           <Link 
             href={href}
             className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(194_100%_50%)] focus-visible:ring-offset-2 rounded-md block"
@@ -74,131 +102,27 @@ export function ProjectCard({
             {title}
           </Link>
         </CardTitle>
-        <CardDescription className="text-muted-foreground line-clamp-2 text-pretty leading-relaxed">
+        <CardDescription className="line-clamp-2 text-muted-foreground text-pretty leading-relaxed">
           {summary}
         </CardDescription>
-        {metrics && (
-          <div className="flex flex-wrap gap-2 pt-1">
-            {isArrayMetrics(metrics) ? (
-              // New array format: [{ label, value }]
-              metrics.map((metric, idx) => (
-                <MetricsBadge 
-                  key={idx}
-                  label={metric.label}
-                  value={metric.value}
-                  variant="quality"
-                />
-              ))
-            ) : (
-              // Old object format with specific properties
-              <>
-                {typeof metrics.lighthouse_mobile === 'number' && (
-                  <MetricsBadge 
-                    label="Lighthouse"
-                    value={metrics.lighthouse_mobile}
-                    unit="/100"
-                    variant={getScoreVariant(metrics.lighthouse_mobile) as any}
-                  />
-                )}
-                {typeof metrics.lcp_ms === 'number' && (
-                  <MetricsBadge 
-                    label="LCP" 
-                    value={metrics.lcp_ms} 
-                    unit="ms"
-                    variant={getLCPVariant(metrics.lcp_ms) as any}
-                  />
-                )}
-                {typeof metrics.tbt_ms === 'number' && (
-                  <MetricsBadge 
-                    label="TBT" 
-                    value={metrics.tbt_ms} 
-                    unit="ms"
-                    variant={getTBTVariant(metrics.tbt_ms) as any}
-                  />
-                )}
-                {typeof metrics.cls === 'number' && (
-                  <MetricsBadge 
-                    label="CLS" 
-                    value={metrics.cls} 
-                    variant={getCLSVariant(metrics.cls) as any}
-                  />
-                )}
-                {metrics.a11y && (
-                  <MetricsBadge 
-                    label="A11y" 
-                    value={metrics.a11y}
-                    variant="quality"
-                  />
-                )}
-                {!metrics.a11y && metrics.performance_improvement && (
-                  <MetricsBadge 
-                    label="Perf" 
-                    value={metrics.performance_improvement}
-                    variant="performance"
-                  />
-                )}
-              </>
-            )}
-          </div>
-        )}
+        {normalizedMetrics && <MetricsRow metrics={normalizedMetrics} maxVisible={4} layout="wrap" />}
       </CardHeader>
       
-      <CardContent className="flex h-full flex-col">
-        <div className="flex flex-wrap gap-2">
+      <CardContent className="flex flex-col gap-4">
+        <div className="flex flex-wrap gap-2 max-h-[50px] overflow-hidden">
           {tags.map((tag, index) => (
-            <span
+            <ProjectChip
               key={tag}
-              className="inline-flex items-center rounded-full bg-muted/50 border border-border/50 px-3 py-1 text-xs font-medium text-foreground transition-all duration-200 hover:bg-muted hover:border-border hover:scale-105 cursor-default"
+              variant="tech"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {tag}
-            </span>
+            </ProjectChip>
           ))}
         </div>
         
-        <div className="mt-auto pt-6 flex gap-2">
-          <Button asChild variant="outline" size="sm" className="flex-1 interactive shadow-elegant hover:shadow-elegant-lg group/btn">
-            <Link href={href} className="flex items-center justify-center gap-2">
-              Case study
-              <svg className="h-3 w-3 transition-transform group-hover/btn:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </Link>
-          </Button>
-          
-          {demo && (
-            <Button asChild variant="ghost" size="sm" className="interactive group/demo">
-              <Link 
-                href={demo} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                aria-label={`View live demo of ${title} (opens in new tab)`}
-                className="flex items-center gap-2"
-              >
-                <svg className="h-3 w-3 transition-transform group-hover/demo:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-                Demo
-              </Link>
-            </Button>
-          )}
-          
-          {repo && (
-            <Button asChild variant="ghost" size="sm" className="interactive group/code">
-              <Link 
-                href={repo} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                aria-label={`View source code for ${title} (opens in new tab)`}
-                className="flex items-center gap-2"
-              >
-                <svg className="h-3 w-3 transition-transform group-hover/code:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                </svg>
-                Code
-              </Link>
-            </Button>
-          )}
+        <div className="mt-auto pt-2">
+          <ProjectActions href={href} demo={demo} repo={repo} variant="teaser" />
         </div>
       </CardContent>
     </Card>
