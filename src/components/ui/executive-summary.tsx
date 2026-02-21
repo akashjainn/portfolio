@@ -96,7 +96,7 @@ const EXECUTIVE_SUMMARIES = [
   },
   {
     title: "State Farm Systems",
-    slug: "statefarm",
+    slug: "statefarm-chat",
     category: "Enterprise",
     timeline: "12 weeks (Internship)",
     impact: [
