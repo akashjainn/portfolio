@@ -27,7 +27,7 @@ function HeroInner() {
   return (
     <section 
       id="hero" 
-      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center relative overflow-visible"
       aria-labelledby="hero-title"
     >
       {FEATURE_3D && (
@@ -44,7 +44,7 @@ function HeroInner() {
         >
           <h1 
             id="hero-title"
-            className={`font-display font-semibold tracking-[-0.02em] leading-tight mb-6 text-balance transition-all duration-1000 ease-out ${
+            className={`font-display font-semibold tracking-[-0.02em] leading-normal pb-[0.08em] mb-6 text-balance transition-all duration-1000 ease-out ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
             style={{ transitionDelay: '200ms' }}

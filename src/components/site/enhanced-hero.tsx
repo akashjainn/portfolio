@@ -39,7 +39,7 @@ function FloatingParticles() {
   if (prefersReducedMotion) return null
 
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="absolute inset-0 overflow-visible pointer-events-none">
       {particles.map(particle => (
         <div
           key={particle.id}
@@ -88,7 +88,7 @@ export function EnhancedHero() {
   return (
     <section 
       id="hero" 
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-background via-background to-muted/20"
+      className="relative min-h-screen flex items-center justify-center overflow-visible bg-gradient-to-br from-background via-background to-muted/20"
       aria-labelledby="hero-title"
     >
       {/* Floating Particles */}

@@ -31,7 +31,7 @@ export default function InteractiveHero() {
   return (
     <section
       aria-labelledby="hero-title"
-      className="relative isolate min-h-[72vh] flex items-end overflow-hidden bg-gradient-to-br from-background via-background to-muted/30"
+      className="relative isolate min-h-[72vh] flex items-end overflow-visible bg-gradient-to-br from-background via-background to-muted/30"
     >
       <div className="container pb-10 pt-20">
         <div className="max-w-4xl">
@@ -41,7 +41,7 @@ export default function InteractiveHero() {
           <h1
             id="hero-title"
             ref={titleRef}
-            className="text-4xl md:text-6xl font-display font-bold tracking-tight leading-tight"
+            className="text-4xl md:text-6xl font-display font-bold tracking-tight leading-normal pb-[0.08em]"
           >
             Building intelligent, <span className="text-gradient-vibrant">real-world</span> systems
           </h1>

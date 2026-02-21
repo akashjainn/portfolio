@@ -9,7 +9,7 @@
 
 export function AnimatedBlobs() {
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none" aria-hidden="true">
+    <div className="fixed inset-0 -z-10 overflow-visible pointer-events-none" aria-hidden="true">
       {/* Blob 1 - Electric Blue to Cyber Purple */}
       <svg 
         className="absolute -top-1/4 -left-1/4 w-[800px] h-[800px] opacity-15 animate-blob-slow"
