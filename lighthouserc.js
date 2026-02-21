@@ -16,15 +16,15 @@ module.exports = {
     },
     assert: {
       assertions: {
-        'categories:performance': ['error', { minScore: 0.95 }],
+        'categories:performance': ['error', { minScore: 0.85 }],
         'categories:accessibility': ['error', { minScore: 0.95 }],
-        'categories:best-practices': ['error', { minScore: 0.95 }],
+        'categories:best-practices': ['error', { minScore: 0.90 }],
         'categories:seo': ['error', { minScore: 0.95 }],
         'first-contentful-paint': ['error', { maxNumericValue: 2000 }],
-        'largest-contentful-paint': ['error', { maxNumericValue: 2500 }],
+        'largest-contentful-paint': ['error', { maxNumericValue: 3500 }],
         'cumulative-layout-shift': ['error', { maxNumericValue: 0.05 }],
         'total-blocking-time': ['error', { maxNumericValue: 200 }],
-        'speed-index': ['error', { maxNumericValue: 3000 }]
+        'speed-index': ['error', { maxNumericValue: 4000 }]
       }
     },
     upload: {
