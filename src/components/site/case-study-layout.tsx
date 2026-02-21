@@ -15,7 +15,7 @@ export function CaseStudyLayout({ children, frontmatter, readingTime }: CaseStud
   return (
     <article className="py-8">
       <ReadingProgress targetId="cs-main" />
-      <div className="container max-w-6xl">
+      <div className="container max-w-full">
         {/* Breadcrumb */}
         <nav className="mb-8" aria-label="Breadcrumb">
           <Link 
