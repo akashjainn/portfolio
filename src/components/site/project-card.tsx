@@ -143,7 +143,7 @@ export function ProjectCard({
         )}
       </CardHeader>
       
-      <CardContent className="flex-1 flex flex-col justify-between space-y-6">
+      <CardContent className="flex flex-col gap-4">
         <div className="flex flex-wrap gap-2">
           {tags.map((tag, index) => (
             <span
