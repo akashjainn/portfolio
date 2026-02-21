@@ -109,7 +109,7 @@ const EXECUTIVE_SUMMARIES = [
       users: "2M+ MAU",
       performance: "35% faster",
       uptime: "99.98%",
-      businessImpact: "$100K+ cost savings"
+      businessImpact: "Reduced backend costs ~$50K annually via connection pooling"
     },
     links: {
       demo: undefined,
