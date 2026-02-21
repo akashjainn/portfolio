@@ -9,7 +9,7 @@ import { ChevronDown, Sparkles, Zap, Target } from 'lucide-react'
 
 // Rotating taglines for dynamic content
 const ROTATING_TAGLINES = [
-  "Building reliable, real-time web systems",
+  "Building intelligent, real-world systems",
   "Crafting performant, accessible experiences", 
   "Delivering enterprise-scale solutions",
   "Creating measurable digital impact"

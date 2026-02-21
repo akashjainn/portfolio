@@ -41,9 +41,9 @@ export default function InteractiveHero() {
           <h1
             id="hero-title"
             ref={titleRef}
-            className="text-4xl md:text-6xl font-display font-bold tracking-tight leading-[1.1]"
+            className="text-4xl md:text-6xl font-display font-bold tracking-tight leading-tight"
           >
-            Building reliable, <span className="text-gradient-vibrant">real-time</span> web systems
+            Building intelligent, <span className="text-gradient-vibrant">real-world</span> systems
           </h1>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl leading-relaxed">
             Full-stack development with Next.js and TypeScript. Accessible by default, measured by telemetry, and shipped with performance budgets.

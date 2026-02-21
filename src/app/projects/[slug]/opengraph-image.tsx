@@ -9,7 +9,7 @@ export const contentType = "image/png";
 export default async function Image({ params }: { params: { slug: string } }) {
   const project = await getProjectBySlug(params.slug);
   const title = project?.frontmatter?.title ?? "Akash Jain — Portfolio";
-  const summary = project?.frontmatter?.summary ?? "Building reliable, real-time web systems";
+  const summary = project?.frontmatter?.summary ?? "Building intelligent, real-world systems";
 
   return new ImageResponse(
     (

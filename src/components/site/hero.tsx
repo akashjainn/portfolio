@@ -44,7 +44,7 @@ function HeroInner() {
         >
           <h1 
             id="hero-title"
-            className={`font-display font-semibold tracking-[-0.02em] leading-[0.95] mb-6 text-balance transition-all duration-1000 ease-out ${
+            className={`font-display font-semibold tracking-[-0.02em] leading-tight mb-6 text-balance transition-all duration-1000 ease-out ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
             style={{ transitionDelay: '200ms' }}
@@ -52,7 +52,7 @@ function HeroInner() {
             <span style={{
               fontSize: 'clamp(36px, 5vw, 56px)'
             }}>
-              Building reliable, <span className="gradient-text">real-time</span> web systems
+              Building intelligent, <span className="gradient-text">real-world</span> systems
             </span>
           </h1>
           
