@@ -143,7 +143,7 @@ export function ProjectCard({
         )}
       </CardHeader>
       
-      <CardContent className="flex flex-col gap-4">
+      <CardContent className="flex h-full flex-col">
         <div className="flex flex-wrap gap-2">
           {tags.map((tag, index) => (
             <span
@@ -156,7 +156,7 @@ export function ProjectCard({
           ))}
         </div>
         
-        <div className="flex gap-2">
+        <div className="mt-auto pt-6 flex gap-2">
           <Button asChild variant="outline" size="sm" className="flex-1 interactive shadow-elegant hover:shadow-elegant-lg group/btn">
             <Link href={href} className="flex items-center justify-center gap-2">
               Case study

@@ -60,7 +60,7 @@ export function AnimatedProjectsGrid({ projects }: AnimatedProjectsGridProps) {
         {projects.length > 0 ? (
           <div 
             ref={containerRef}
-            className="grid grid-auto-fit-md gap-6"
+            className="grid grid-auto-fit-md gap-6 items-start"
           >
             {projects.map((project, index) => (
               <div
