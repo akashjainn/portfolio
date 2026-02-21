@@ -23,9 +23,59 @@ updatedAt: "2024-12-20"
 
 # State Farm Customer Chat Widget — Scaling Enterprise Support at 2M+ Users
 
-## Context & Problem
+State Farm needed to modernize their customer-facing support experience with a redesigned chat widget that could handle massive scale while maintaining exceptional reliability. The system now serves 2M+ monthly users with 99.98% uptime, zero message loss, and sub-200ms response times.
 
-State Farm needed to modernize their customer-facing support experience with a redesigned chat widget that could handle massive scale while maintaining exceptional reliability. The legacy system had become difficult to maintain, lacked modern design system integration, and struggled with real-time message delivery reliability.
+## Live Widget
+
+<div className="my-8">
+  <div className="relative rounded-lg overflow-hidden border border-border/50 bg-muted/30">
+    <img 
+      src="/images/projects/statefarm/widget-integration.png" 
+      alt="State Farm contact page with chat widget embedded on right side"
+      className="w-full"
+    />
+  </div>
+  <p className="text-sm text-muted-foreground mt-4 text-center">
+    Chat widget integrated into State Farm's customer care contact page, providing seamless support access.
+  </p>
+</div>
+
+### Interface Overview
+
+The widget prioritizes clarity, accessibility, and intuitive interaction patterns for users across different technical skill levels:
+
+<div className="my-8">
+  <div className="grid grid-cols-3 gap-4">
+    <div className="relative rounded-lg overflow-hidden border border-border/50 bg-muted/30">
+      <img 
+        src="/images/projects/statefarm/welcome-screen.png" 
+        alt="Virtual assistant welcome screen with security notice and greeting"
+        className="w-full object-cover"
+      />
+    </div>
+    <div className="relative rounded-lg overflow-hidden border border-border/50 bg-muted/30">
+      <img 
+        src="/images/projects/statefarm/conversation-example.png" 
+        alt="Chat conversation showing user question about rate increases with agent response"
+        className="w-full object-cover"
+      />
+    </div>
+    <div className="relative rounded-lg overflow-hidden border border-border/50 bg-muted/30">
+      <img 
+        src="/images/projects/statefarm/end-chat-dialog.png" 
+        alt="End chat confirmation dialog with Yes/No buttons"
+        className="w-full object-cover"
+      />
+    </div>
+  </div>
+  <p className="text-sm text-muted-foreground mt-4 text-center">
+    Three key user interface screens: welcome and security messaging, conversational interaction with contextual responses, and session termination with confirmation.
+  </p>
+</div>
+
+**Live Demo**: [state-farm.com/customer-care/contact-us](https://www.statefarm.com/customer-care/contact-us)
+
+## Context & Problem
 
 **Core challenges**:
 - **Design System Integration**: Align with State Farm's new design system while maintaining backward compatibility
@@ -384,59 +434,6 @@ export class ChatMessageComponent implements OnInit {
   }
 }
 ```
-
-## User Experience & Interface Design
-
-The chat widget is embedded directly into State Farm's customer care pages and follows their enterprise design system. The interface prioritizes clarity, accessibility, and intuitive interaction patterns for users across different technical skill levels.
-
-### Widget Integration
-
-![State Farm contact page with embedded chat widget](https://www.statefarm.com/customer-care/contact-us)
-
-The widget is embedded as a persistent panel on the right side of the customer care contact page, providing immediate access to chat support while users explore self-service options.
-
-<div className="my-8">
-  <div className="relative rounded-lg overflow-hidden border border-border/50 bg-muted/30">
-    <img 
-      src="/images/projects/statefarm/widget-integration.png" 
-      alt="State Farm contact page with chat widget embedded on right side"
-      className="w-full"
-    />
-  </div>
-</div>
-
-### Initial Welcome Screen, Conversation Flow & Session Management
-
-The widget greets users with a clear system message about security and privacy, followed by the virtual assistant introduction. Users can ask questions naturally with guided responses and quick-action buttons. Sessions end gracefully with a confirmation dialog, with state preserved for transcript logging.
-
-<div className="my-8">
-  <div className="grid grid-cols-3 gap-4">
-    <div className="relative rounded-lg overflow-hidden border border-border/50 bg-muted/30">
-      <img 
-        src="/images/projects/statefarm/welcome-screen.png" 
-        alt="Virtual assistant welcome screen with security notice and greeting"
-        className="w-full object-cover"
-      />
-    </div>
-    <div className="relative rounded-lg overflow-hidden border border-border/50 bg-muted/30">
-      <img 
-        src="/images/projects/statefarm/conversation-example.png" 
-        alt="Chat conversation showing user question about rate increases with agent response"
-        className="w-full object-cover"
-      />
-    </div>
-    <div className="relative rounded-lg overflow-hidden border border-border/50 bg-muted/30">
-      <img 
-        src="/images/projects/statefarm/end-chat-dialog.png" 
-        alt="End chat confirmation dialog with Yes/No buttons"
-        className="w-full object-cover"
-      />
-    </div>
-  </div>
-  <p className="text-sm text-muted-foreground mt-4 text-center">
-    Three key user interface screens: welcome and security messaging, conversational interaction with contextual responses, and session termination with confirmation.
-  </p>
-</div>
 
 ## Scale & Performance Metrics
 
