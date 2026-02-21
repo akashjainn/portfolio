@@ -258,13 +258,13 @@ function ExecutiveSummaryCard({ project }: ExecutiveSummaryProps) {
                   {activeTab === 'impact' && (
                     <div>
                       <div className="grid grid-cols-2 gap-3 mb-3">
-                        <div className="text-center p-3 bg-success-50 border border-success-200 rounded-lg">
-                          <div className="font-bold text-success-700">{project.metrics.uptime || 'N/A'}</div>
-                          <div className="text-xs text-success-600">Uptime</div>
+                        <div className="flex flex-col items-center justify-center p-3 min-h-[80px] bg-success-50 border border-success-200 rounded-lg">
+                          <div className="font-bold text-success-700 line-clamp-2">{project.metrics.uptime || 'N/A'}</div>
+                          <div className="text-xs text-success-600 mt-1">Uptime</div>
                         </div>
-                        <div className="text-center p-3 bg-primary-50 border border-primary-200 rounded-lg">
-                          <div className="font-bold text-primary-700">{project.metrics.businessImpact || 'N/A'}</div>
-                          <div className="text-xs text-primary-600">Business Value</div>
+                        <div className="flex flex-col items-center justify-center p-3 min-h-[80px] bg-primary-50 border border-primary-200 rounded-lg">
+                          <div className="font-bold text-primary-700 line-clamp-2 text-center">{project.metrics.businessImpact || 'N/A'}</div>
+                          <div className="text-xs text-primary-600 mt-1">Business Value</div>
                         </div>
                       </div>
                     </div>

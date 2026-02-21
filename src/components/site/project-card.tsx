@@ -109,7 +109,7 @@ export function ProjectCard({
       </CardHeader>
       
       <CardContent className="flex flex-col gap-4">
-        <div className="flex flex-wrap gap-2 max-h-[50px] overflow-hidden">
+        <div className="flex flex-wrap gap-2">
           {tags.map((tag, index) => (
             <ProjectChip
               key={tag}
