@@ -5,7 +5,7 @@ import { CommandPalette } from "@/components/ui/command-palette"
 
 export const metadata = {
   title: "About",
-  description: "I'm Akash Jain, a full-stack developer building distributed, data-driven applications from interface to infrastructure. My work spans Next.js, backend services, real-time messaging, and cloud deployment, with a focus on observability, reliability, and measurable outcomes."
+  description: "I'm Akash Jain, a full-stack developer building distributed, data-driven systems end-to-end — from interface to infrastructure. My work spans Next.js, backend services, real-time messaging, and cloud deployment, with a focus on performance, observability, reliability, and measurable impact."
 }
 
 export default function AboutPage() {
@@ -22,7 +22,7 @@ export default function AboutPage() {
           
           <div className="prose prose-lg max-w-none">
             <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-              I&apos;m Akash Jain, a full-stack developer building distributed, data-driven applications from interface to infrastructure. My work spans Next.js, backend services, real-time messaging, and cloud deployment, with a focus on observability, reliability, and measurable outcomes. I build distributed, real-time software systems end-to-end — from interfaces to infrastructure — with a focus on performance, observability, and reliability.
+              I&apos;m Akash Jain, a full-stack developer building distributed, data-driven systems end-to-end — from interface to infrastructure. My work spans Next.js, backend services, real-time messaging, and cloud deployment, with a focus on performance, observability, reliability, and measurable impact.
             </p>
 
             <WaveDivider variant="blue-purple" className="my-12" />
