@@ -154,11 +154,6 @@ body {
   .prose li {
     @apply mb-2;
   }
-
-  /* Ensure not-prose elements escape prose constraints */
-  .not-prose {
-    all: revert;
-  }
 }
 
 /* Button component styles */
