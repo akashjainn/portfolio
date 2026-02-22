@@ -104,14 +104,22 @@ I created custom 3D models for the game environment, including stylized vines an
 
 Watch the bomb defusal mechanics in action:
 
-<div className="my-8 rounded-xl overflow-hidden border border-gray-800 relative" style={{ paddingBottom: '56.25%' }}>
-  <iframe
-    className="absolute top-0 left-0 w-full h-full"
-    src="https://www.youtube.com/embed/DEcJXqHXCf0"
-    title="VR Bomb Defusal Puzzle - Gameplay Demo"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    allowFullScreen
-  />
+<div className="not-prose my-8 w-full">
+  <div className="relative w-full overflow-hidden rounded-lg border border-border/50 bg-muted/30" style={{ aspectRatio: '16/9', minHeight: '300px', backgroundColor: '#1a1a1a' }}>
+    <iframe
+      className="absolute inset-0 w-full h-full"
+      src="https://player.mux.com/rkpwWuwfgST6rnv8CJaEXL39fCP1yghNfNCWlN2NkG00"
+      style={{ border: "none" }}
+      allow="accelerometer; autoplay; encrypted-media; picture-in-picture; fullscreen"
+      allowFullScreen
+      title="VR Bomb Defusal Puzzle - Gameplay Demo"
+    />
+  </div>
+  <div className="text-sm text-muted-foreground mt-4 text-center">
+    Experience the vine cutting mechanics and pattern recognition gameplay in real-time.
+    <br />
+    <span className="text-xs">Live demo streaming powered by Mux with adaptive bitrate delivery.</span>
+  </div>
 </div>
 
 ## Architecture & Patterns
