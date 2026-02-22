@@ -43,10 +43,10 @@ export default function InteractiveHero() {
             ref={titleRef}
             className="text-4xl md:text-6xl font-display font-bold tracking-tight leading-normal pb-[0.08em]"
           >
-            Building intelligent, <span className="text-gradient-vibrant">real-world</span> systems
+            Performant, accessible systems <span className="text-gradient-vibrant">validated</span> by data
           </h1>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl leading-relaxed">
-            Full-stack development with Next.js and TypeScript. Accessible by default, measured by telemetry, and shipped with performance budgets.
+            I build with Next.js/TypeScript, validate with telemetry and tests, and ship with a bias for clarity, reliability, and measurable outcomes.
           </p>
           <div className="mt-6 flex gap-4">
             <Link

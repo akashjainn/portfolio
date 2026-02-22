@@ -5,7 +5,7 @@ import { CommandPalette } from "@/components/ui/command-palette"
 
 export const metadata = {
   title: "About",
-  description: "Learn more about Akash Jain, a full-stack developer focused on building reliable, performant web systems."
+  description: "Full-stack developer focused on performant, accessible web systems. Building with Next.js/TypeScript, validated by telemetry and tests, shipped with clarity and reliability."
 }
 
 export default function AboutPage() {
