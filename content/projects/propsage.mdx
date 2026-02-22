@@ -36,11 +36,11 @@ Sports betting props markets suffer from information asymmetry and poor real-tim
 ## Live Demo
 
 <div className="not-prose my-8 w-full">
-  <div className="relative w-full overflow-hidden rounded-lg border border-border/50 bg-muted/30" style={{ paddingBottom: '56.25%', backgroundColor: '#1a1a1a' }}>
+  <div className="overflow-hidden rounded-lg border border-border/50" style={{ position: 'relative', width: '100%', paddingBottom: '56.25%', backgroundColor: '#1a1a1a' }}>
     <iframe
-      className="absolute inset-0 w-full h-full"
+      className="absolute inset-0"
       src="https://player.mux.com/oME9aDX3m005vFyQonj2dk0238wExGN8xMKh4nC501QukI?metadata-video-title=propsage+demo&video-title=propsage+demo&muted=true"
-      style={{ border: "none" }}
+      style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }}
       allow="accelerometer; autoplay; encrypted-media; picture-in-picture; fullscreen; gyroscope"
       title="PropSage Demo - Real-time sports betting props with evidence overlays"
     ></iframe>
