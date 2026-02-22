@@ -17,10 +17,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL('https://akashjain.dev'),
   title: {
-    default: 'Akash Jain — Full-stack Developer',
+    default: 'Akash Jain — Building intelligent, real-world systems',
     template: '%s | Akash Jain'
   },
-  description: 'Full-stack developer focused on performant, accessible web systems. I build with Next.js/TypeScript, validate with telemetry and tests, and ship with a bias for clarity, reliability, and measurable outcomes.',
+  description: 'Full-stack developer crafting accessible, measurable Next.js apps with telemetry and performance budgets. PropSage, StockSense, and more enterprise-grade projects.',
   keywords: [
     'next.js developer',
     'typescript engineer', 
@@ -34,8 +34,8 @@ export const metadata: Metadata = {
   authors: [{ name: 'Akash Jain', url: 'https://akashjain.dev' }],
   creator: 'Akash Jain',
   openGraph: {
-    title: 'Akash Jain — Full-stack Developer',
-    description: 'Full-stack developer focused on performant, accessible web systems with Next.js/TypeScript. Validated by data, built with clarity.',
+    title: 'Akash Jain — Building intelligent, real-world systems',
+    description: 'Full-stack developer focused on performant, accessible web systems with Next.js/TypeScript.',
     url: 'https://akashjain.dev',
     siteName: 'Akash Jain',
     locale: 'en_US',
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Akash Jain - Full-stack Developer'
+        alt: 'Akash Jain - Building intelligent, real-world systems'
       }
     ]
   },
