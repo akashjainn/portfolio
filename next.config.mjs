@@ -38,7 +38,7 @@ const nextConfig = {
               "font-src 'self' https://fonts.gstatic.com",
               "connect-src 'self' https://vitals.vercel-insights.com https://raw.githack.com https://raw.githubusercontent.com https://cdn.jsdelivr.net https://stream.mux.com https://image.mux.com",
               "media-src 'self' blob: https://stream.mux.com",
-              "frame-src 'self' https://www.youtube.com https://propsage-web.vercel.app https://stocksense-taupe.vercel.app https://land-safe.vercel.app http://localhost:3000 http://localhost:3001",
+              "frame-src 'self' https://www.youtube.com https://player.mux.com https://propsage-web.vercel.app https://stocksense-taupe.vercel.app https://land-safe.vercel.app http://localhost:3000 http://localhost:3001",
               "frame-ancestors 'self'",
               "base-uri 'self'",
               "form-action 'self'",
