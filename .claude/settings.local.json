@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp \"/c/Users/akash/Downloads/Akash Jain_Neuralink_20260402.pdf\" \"/c/Users/akash/Documents/portfolio/public/Akash_Jain_Resume.pdf\")",
+      "Bash(cp \"/c/Users/akash/Documents/portfolio/public/Akash_Jain_Resume.pdf\" \"/c/Users/akash/Documents/portfolio/public/resume.pdf\")"
+    ]
+  }
+}
