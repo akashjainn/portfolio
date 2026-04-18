@@ -70,9 +70,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <body>
-        <a href="#main-content" className="journal-skip-link">
-          Skip to main content
-        </a>
         {children}
       </body>
     </html>
