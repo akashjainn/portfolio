@@ -87,7 +87,9 @@
 
 /* --- Reduce motion: zero everything --------------------- */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  .journal-root *,
+  .journal-root *::before,
+  .journal-root *::after {
     transition-duration: 0ms !important;
     animation-duration: 0ms !important;
     animation-iteration-count: 1 !important;
@@ -109,7 +111,7 @@
 }
 
 /* --- Skip link ------------------------------------------ */
-.skip-link {
+.journal-skip-link {
   position: absolute;
   top: -100%;
   left: var(--s-4);
@@ -121,7 +123,7 @@
   border: 1px solid var(--rule);
   z-index: 100;
 }
-.skip-link:focus {
+.journal-skip-link:focus {
   top: var(--s-4);
 }
 

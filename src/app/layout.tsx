@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     siteName: 'Akash Jain',
     locale: 'en_US',
     type: 'website',
-    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Akash Jain — Field Journal' }],
   },
   twitter: {
     card: 'summary_large_image',
@@ -63,8 +63,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${sourceSerif4.variable} ${jetBrainsMono.variable}`}
       suppressHydrationWarning
     >
-      <body suppressHydrationWarning>
-        <a href="#main-content" className="skip-link">
+      <body>
+        <a href="#main-content" className="journal-skip-link">
           Skip to main content
         </a>
         {children}
