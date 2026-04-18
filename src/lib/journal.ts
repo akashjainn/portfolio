@@ -32,6 +32,24 @@ export interface JournalEntry {
   readingTime: number
 }
 
+export interface JournalSummary {
+  frontmatter: JournalFrontmatter
+  readingTime: number
+}
+
+function isValidJournalFrontmatter(data: unknown): data is JournalFrontmatter {
+  if (!data || typeof data !== 'object') return false
+  const d = data as Record<string, unknown>
+  return (
+    typeof d.title === 'string' &&
+    typeof d.slug === 'string' &&
+    typeof d.entryNo === 'number' &&
+    (d.status === 'published' || d.status === 'draft') &&
+    Array.isArray(d.tags) &&
+    d.artifact != null
+  )
+}
+
 const journalDir = path.join(process.cwd(), 'content/journal')
 
 function readingTime(text: string): number {
@@ -50,28 +68,50 @@ export async function getJournalEntry(
   slug: string,
   components: Record<string, React.ComponentType<any>> = {}
 ): Promise<JournalEntry | null> {
-  const fullPath = path.join(journalDir, `${slug}.mdx`)
-  if (!fs.existsSync(fullPath)) return null
+  try {
+    const fullPath = path.join(journalDir, `${slug}.mdx`)
+    if (!fs.existsSync(fullPath)) return null
 
-  const raw = fs.readFileSync(fullPath, 'utf8')
-  const { data, content } = matter(raw)
+    const raw = fs.readFileSync(fullPath, 'utf8')
+    const { data, content } = matter(raw)
 
-  const { content: compiledSource } = await compileMDX({
-    source: content,
-    components,
-    options: {
-      mdxOptions: {
-        remarkPlugins: [remarkGfm],
-        rehypePlugins: [rehypeSlug],
+    if (!isValidJournalFrontmatter(data)) {
+      console.error(`[journal] invalid frontmatter in ${slug}.mdx`, data)
+      return null
+    }
+
+    const { content: compiledSource } = await compileMDX({
+      source: content,
+      components,
+      options: {
+        mdxOptions: {
+          remarkPlugins: [remarkGfm],
+          rehypePlugins: [rehypeSlug],
+        },
       },
-    },
-  })
+    })
 
-  return {
-    frontmatter: data as JournalFrontmatter,
-    content,
-    compiledSource,
-    readingTime: readingTime(content),
+    return {
+      frontmatter: data,
+      content,
+      compiledSource,
+      readingTime: readingTime(content),
+    }
+  } catch (error) {
+    console.error(`[journal] error reading entry "${slug}":`, error)
+    return null
+  }
+}
+
+async function getJournalSummary(slug: string): Promise<JournalSummary | null> {
+  try {
+    const fullPath = path.join(journalDir, `${slug}.mdx`)
+    if (!fs.existsSync(fullPath)) return null
+    const { data, content } = matter(fs.readFileSync(fullPath, 'utf8'))
+    if (!isValidJournalFrontmatter(data)) return null
+    return { frontmatter: data, readingTime: readingTime(content) }
+  } catch {
+    return null
   }
 }
 
@@ -83,12 +123,12 @@ export async function getAllJournalEntries({
   status?: 'published' | 'draft' | 'all'
   kind?: JournalFrontmatter['kind']
   limit?: number
-} = {}): Promise<JournalEntry[]> {
+} = {}): Promise<JournalSummary[]> {
   const slugs = getJournalSlugs()
-  const entries: JournalEntry[] = []
+  const entries: JournalSummary[] = []
 
   for (const slug of slugs) {
-    const entry = await getJournalEntry(slug)
+    const entry = await getJournalSummary(slug)
     if (!entry) continue
     if (status !== 'all' && entry.frontmatter.status !== status) continue
     if (kind !== undefined && entry.frontmatter.kind !== kind) continue
