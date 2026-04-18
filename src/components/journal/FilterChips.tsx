@@ -36,10 +36,17 @@ export function FilterChips({ totalCount, counts }: FilterChipsProps) {
       }
     })
 
-    // Update counter display
+    const count = kind === 'all' ? totalCount : (counts[kind as JournalFrontmatter['kind']] ?? 0)
+
+    // Update aria-live region
     if (counterRef.current) {
-      const count = kind === 'all' ? totalCount : (counts[kind as JournalFrontmatter['kind']] ?? 0)
       counterRef.current.textContent = String(count)
+    }
+
+    // Update visible kicker
+    const visibleCounter = document.getElementById('entry-count-display')
+    if (visibleCounter) {
+      visibleCounter.textContent = String(count)
     }
   }
 
@@ -50,7 +57,14 @@ export function FilterChips({ totalCount, counts }: FilterChipsProps) {
         id="filter-count"
         aria-live="polite"
         aria-atomic="true"
-        style={{ display: 'none' }}
+        style={{
+          position: 'absolute',
+          width: 1,
+          height: 1,
+          overflow: 'hidden',
+          clip: 'rect(0,0,0,0)',
+          whiteSpace: 'nowrap',
+        }}
       />
       <div className="chip-row" role="group" aria-label="Filter entries by kind">
         {CHIPS.map(({ kind, label, icon }) => (
