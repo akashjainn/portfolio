@@ -4,7 +4,6 @@ import './globals.css'
 
 const sourceSerif4 = Source_Serif_4({
   subsets: ['latin'],
-  axes: ['opsz'],
   weight: ['300', '400', '500'],
   style: ['normal', 'italic'],
   variable: '--font-serif',
