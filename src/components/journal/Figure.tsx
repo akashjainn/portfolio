@@ -14,9 +14,10 @@ export function Figure({ children, caption, figLabel = 'FIG.', source, aspectRat
         margin: 'var(--s-7) 0',
         aspectRatio: aspectRatio ?? undefined,
         position: 'relative',
+        width: '100%',
       }}
     >
-      <div style={{ width: '100%', height: '100%' }}>{children}</div>
+      <div style={{ width: '100%', height: '100%', display: 'flex' }}>{children}</div>
       <figcaption className="cap">
         <span>{figLabel} — {caption}</span>
         {source && <span style={{ color: 'var(--ink-3)' }}>{source}</span>}

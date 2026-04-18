@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import type { JournalArtifact } from '@/lib/journal'
 
 interface GBAEmulatorProps {
@@ -9,49 +9,6 @@ interface GBAEmulatorProps {
 
 export function GBAEmulator({ artifact }: GBAEmulatorProps) {
   const containerRef = useRef<HTMLDivElement>(null)
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const emulatorRef = useRef<any>(null)
-
-  useEffect(() => {
-    const loadEmulator = async () => {
-      if (!canvasRef.current) return
-
-      // Load emulatorjs library
-      const script = document.createElement('script')
-      script.src = 'https://www.emulatorjs.com/demos/full.js'
-      script.async = true
-
-      script.onload = async () => {
-        const canvas = canvasRef.current
-        if (!canvas || !(window as any).EJS_player) return
-
-        try {
-          // Initialize emulator
-          const emu = new (window as any).EJS_player({
-            element: canvas,
-            gameUrl: '/assets/adventuretime.gba',
-            core: 'gba',
-            fps: 60,
-            autoplay: false,
-          })
-
-          emulatorRef.current = emu
-        } catch (err) {
-          console.error('Failed to initialize emulator:', err)
-        }
-      }
-
-      document.body.appendChild(script)
-
-      return () => {
-        if (document.body.contains(script)) {
-          document.body.removeChild(script)
-        }
-      }
-    }
-
-    loadEmulator()
-  }, [])
 
   return (
     <div
@@ -92,22 +49,18 @@ export function GBAEmulator({ artifact }: GBAEmulatorProps) {
               overflow: 'hidden',
               position: 'relative',
             }}
-            ref={canvasRef}
           >
-            <div
+            <iframe
+              src="https://www.emulatorjs.com/roms/gba/index.html?rom=/assets/adventuretime.gba"
               style={{
                 width: '100%',
                 height: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'var(--ink-3)',
-                fontSize: 'var(--t-meta)',
-                textAlign: 'center',
+                border: 'none',
+                borderRadius: 4,
               }}
-            >
-              Loading emulator...
-            </div>
+              title="Adventure Time GBA - Playable"
+              allow="fullscreen"
+            />
           </div>
         </div>
 
@@ -177,3 +130,4 @@ export function GBAEmulator({ artifact }: GBAEmulatorProps) {
     </div>
   )
 }
+

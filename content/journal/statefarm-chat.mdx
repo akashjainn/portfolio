@@ -41,7 +41,7 @@ My summer was narrow on paper: rebuild the State Farm customer chat widget in An
 <PressedSpecimen />
 
 <Figure caption="FIG. 01 — Live widget on statefarm.com/customer-care" meta="Aug 2025 · Mux stream" aspectRatio="16 / 9">
-  <div style={{ background: '#1a1a1a', border: '1px solid var(--rule)' }}>
+  <div style={{ background: '#1a1a1a', border: '1px solid var(--rule)', width: '100%', height: '100%', flex: 1 }}>
     <iframe src="https://player.mux.com/kyk01xShiF6VqNCDkkq59CTlHBtnCW9N2hAfTue02FwiM" style={{ width: '100%', height: '100%', border: 0, display: 'block' }} allow="autoplay; encrypted-media; picture-in-picture; fullscreen" title="State Farm chat widget live demo" loading="lazy" />
   </div>
 </Figure>
@@ -51,24 +51,24 @@ My summer was narrow on paper: rebuild the State Farm customer chat widget in An
 A welcome screen that has to promise confidentiality without sounding like a compliance warning. A conversation view that has to stay readable one-handed on a phone in a parking lot. An end-chat dialog that has to be kind to someone who might have been frustrated for nine minutes already.
 
 <Figure caption="FIG. 02 — Welcome · Conversation · End chat. Captured from statefarm.com." meta="Apr 2026">
-  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--s-3)' }}>
+  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--s-3)', width: '100%', height: '100%' }}>
     <figure style={{ margin: 0, display: 'flex', flexDirection: 'column', gap: 'var(--s-2)' }}>
-      <div style={{ background: '#fff', border: '1px solid var(--rule)', padding: 'var(--s-2)', display: 'flex', justifyContent: 'center' }}>
-        <img src="/assets/sf-welcome.png" alt="Virtual assistant welcome screen with confidentiality notice and greeting" loading="lazy" />
+      <div style={{ background: 'var(--cream)', border: '1px solid var(--rule)', padding: 'var(--s-2)', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', minHeight: 0 }}>
+        <img src="/assets/sf-welcome.png" alt="Virtual assistant welcome screen with confidentiality notice and greeting" style={{ width: '100%', height: 'auto', display: 'block' }} loading="lazy" />
       </div>
-      <figcaption className="note" style={{ textTransform: 'uppercase', letterSpacing: '.14em' }}>01 &middot; Welcome</figcaption>
+      <figcaption style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--ink-3)', letterSpacing: '.1em', textTransform: 'uppercase' }}>01 &middot; Welcome</figcaption>
     </figure>
     <figure style={{ margin: 0, display: 'flex', flexDirection: 'column', gap: 'var(--s-2)' }}>
-      <div style={{ background: '#fff', border: '1px solid var(--rule)', padding: 'var(--s-2)', display: 'flex', justifyContent: 'center' }}>
-        <img src="/assets/sf-dialogue.png" alt="Conversation view with quote flow and quick-reply chips" loading="lazy" />
+      <div style={{ background: 'var(--cream)', border: '1px solid var(--rule)', padding: 'var(--s-2)', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', minHeight: 0 }}>
+        <img src="/assets/sf-dialogue.png" alt="Conversation view with quote flow and quick-reply chips" style={{ width: '100%', height: 'auto', display: 'block' }} loading="lazy" />
       </div>
-      <figcaption className="note" style={{ textTransform: 'uppercase', letterSpacing: '.14em' }}>02 &middot; Conversation</figcaption>
+      <figcaption style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--ink-3)', letterSpacing: '.1em', textTransform: 'uppercase' }}>02 &middot; Conversation</figcaption>
     </figure>
     <figure style={{ margin: 0, display: 'flex', flexDirection: 'column', gap: 'var(--s-2)' }}>
-      <div style={{ background: '#fff', border: '1px solid var(--rule)', padding: 'var(--s-2)', display: 'flex', justifyContent: 'center' }}>
-        <img src="/assets/sf-endchat.png" alt="End-chat confirmation dialog with Yes and No options" loading="lazy" />
+      <div style={{ background: 'var(--cream)', border: '1px solid var(--rule)', padding: 'var(--s-2)', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', minHeight: 0 }}>
+        <img src="/assets/sf-endchat.png" alt="End-chat confirmation dialog with Yes and No options" style={{ width: '100%', height: 'auto', display: 'block' }} loading="lazy" />
       </div>
-      <figcaption className="note" style={{ textTransform: 'uppercase', letterSpacing: '.14em' }}>03 &middot; End chat</figcaption>
+      <figcaption style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--ink-3)', letterSpacing: '.1em', textTransform: 'uppercase' }}>03 &middot; End chat</figcaption>
     </figure>
   </div>
 </Figure>
