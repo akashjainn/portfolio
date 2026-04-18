@@ -1,0 +1,90 @@
+---
+slug: statefarm-chat
+title: "A chat widget, two million times a month"
+headline: "A chat widget, two million times a month"
+titleHtml: "A chat widget,<br><em>two million times a month</em>."
+summary: "Rebuilt State Farm's customer-facing chat widget in Angular on Amazon Connect, with offline queueing, persistent WebSockets, and zero message loss at 2M+ monthly sessions."
+tags: ["Angular", "AWS", "Amazon Connect", "WebSockets"]
+status: published
+entryNo: 2
+kind: case
+publishedAt: "2025-08-15"
+dateDisplay: "May 2025"
+dateEnd: "Aug 2025"
+kicker: "Entry No. 02 · Case study · Enterprise"
+kvPairs:
+  - key: "Dates"
+    value: "May — Aug 2025"
+  - key: "Place"
+    value: "Bloomington, IL"
+  - key: "Role"
+    value: "SWE Intern"
+  - key: "Stack"
+    value: "Angular · AWS · Connect"
+  - key: "Live"
+    value: "statefarm.com"
+    href: "https://www.statefarm.com/customer-care/contact-us"
+contents: "§ 1   The brief\n§ 2   Three screens\n§ 3   Why WebSockets, really\n§ 4   The offline queue\n§ 5   What I got wrong"
+atAGlance: "99.98% uptime. Zero message loss. 180ms mean response. 15k+ concurrent sessions. Shipped on State Farm's new design system."
+artifact:
+  type: ribbon
+  caption: "FIG. 2 — 30-day uptime ribbon, production window"
+  aspectRatio: "8/1"
+---
+
+<p className="lede">The hardest part of writing a chat widget for two million people a month is not the concurrency. It's the 3% of sessions where the user's signal drops for nine seconds in the middle of a sentence, and the widget has to pretend nothing happened.</p>
+
+<SectionHeading n="01">The brief.</SectionHeading>
+
+My summer was narrow on paper: rebuild the State Farm customer chat widget in Angular on top of the company's new design system, sit it on Amazon Connect, and don't drop messages. I spent the first two weeks mostly reading — the existing widget, the design system source, the Amazon Connect SDK, the tickets people had been filing about dropped messages for the last eighteen months.
+
+<PressedSpecimen />
+
+<Figure caption="FIG. 01 — Live widget on statefarm.com/customer-care" meta="Aug 2025 · Mux stream">
+  <div style={{ aspectRatio: '16 / 9', background: '#1a1a1a', border: '1px solid var(--rule)' }}>
+    <iframe src="https://player.mux.com/kyk01xShiF6VqNCDkkq59CTlHBtnCW9N2hAfTue02FwiM" style={{ width: '100%', height: '100%', border: 0, display: 'block' }} allow="autoplay; encrypted-media; picture-in-picture; fullscreen" title="State Farm chat widget live demo" loading="lazy" />
+  </div>
+</Figure>
+
+<SectionHeading n="02">Three screens do most of the work.</SectionHeading>
+
+A welcome screen that has to promise confidentiality without sounding like a compliance warning. A conversation view that has to stay readable one-handed on a phone in a parking lot. An end-chat dialog that has to be kind to someone who might have been frustrated for nine minutes already.
+
+<Figure caption="FIG. 02 — Welcome · Conversation · End chat. Captured from statefarm.com." meta="Apr 2026">
+  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--s-3)' }}>
+    <figure style={{ margin: 0, display: 'flex', flexDirection: 'column', gap: 'var(--s-2)' }}>
+      <div style={{ background: '#fff', border: '1px solid var(--rule)', padding: 'var(--s-2)', display: 'flex', justifyContent: 'center' }}>
+        <img src="/assets/sf-welcome.png" alt="Virtual assistant welcome screen with confidentiality notice and greeting" loading="lazy" />
+      </div>
+      <figcaption className="note" style={{ textTransform: 'uppercase', letterSpacing: '.14em' }}>01 &middot; Welcome</figcaption>
+    </figure>
+    <figure style={{ margin: 0, display: 'flex', flexDirection: 'column', gap: 'var(--s-2)' }}>
+      <div style={{ background: '#fff', border: '1px solid var(--rule)', padding: 'var(--s-2)', display: 'flex', justifyContent: 'center' }}>
+        <img src="/assets/sf-dialogue.png" alt="Conversation view with quote flow and quick-reply chips" loading="lazy" />
+      </div>
+      <figcaption className="note" style={{ textTransform: 'uppercase', letterSpacing: '.14em' }}>02 &middot; Conversation</figcaption>
+    </figure>
+    <figure style={{ margin: 0, display: 'flex', flexDirection: 'column', gap: 'var(--s-2)' }}>
+      <div style={{ background: '#fff', border: '1px solid var(--rule)', padding: 'var(--s-2)', display: 'flex', justifyContent: 'center' }}>
+        <img src="/assets/sf-endchat.png" alt="End-chat confirmation dialog with Yes and No options" loading="lazy" />
+      </div>
+      <figcaption className="note" style={{ textTransform: 'uppercase', letterSpacing: '.14em' }}>03 &middot; End chat</figcaption>
+    </figure>
+  </div>
+</Figure>
+
+<PullQuote>The concurrency isn't the hard part. The lost nine seconds are.</PullQuote>
+
+<SectionHeading n="03">Why WebSockets, really.</SectionHeading>
+
+The existing widget polled. Two seconds on, two seconds off, cheerful about it. It worked, in the sense that messages eventually arrived. The reason we moved to a persistent WebSocket wasn't latency — it was that polling hides disconnections. A dropped poll looks identical to an empty poll. With a socket, a disconnect is an event; the widget can see it, hold outgoing messages, and reconnect with exponential backoff up to thirty seconds. A dropped poll is a mystery. A dropped socket is a problem you can solve.
+
+<SectionHeading n="04">The offline queue.</SectionHeading>
+
+The piece I'm proudest of is also the one nobody will ever notice. Outgoing messages go into a local queue the instant they're typed, optimistically rendered, tagged with a client ID. They drain to the socket when it's open; they sit when it isn't. On reconnect, the queue replays in order and deduplicates on the server by delivery ID. The effect is that a nine-second signal drop mid-sentence feels like a half-second pause. The user never gets the "message failed" red icon that every other support widget I've used seems to love.
+
+<SectionHeading n="05">What I got wrong.</SectionHeading>
+
+I spent a week convinced persistent sockets would never pass the security review — then sat in the review, heard the actual objection (connection limits on a specific firewall tier, not the socket itself), and walked out with a fix that took an afternoon. The lesson I keep re-learning: when something seems blocked, find the person who would know, ask them directly, and spend less time arguing with the wall in your head.
+
+<p className="note" style={{ marginTop: 'var(--s-6)' }}>Written April 2026. Published under the State Farm Summer 2025 internship. All code and systems described were shipped to production; screenshots are from the live widget on statefarm.com/contact-us.</p>

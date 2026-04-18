@@ -16,6 +16,40 @@ const nextConfig = {
     deviceSizes: [640,750,828,1080,1200,1920,2048,3840],
     imageSizes: [16,32,48,64,96,128,256,384],
   },
+  async redirects() {
+    return [
+      {
+        source: '/projects',
+        destination: '/journal',
+        permanent: true,
+      },
+      {
+        source: '/projects/:slug',
+        destination: '/journal/:slug',
+        permanent: true,
+      },
+      {
+        source: '/contact',
+        destination: '/about',
+        permanent: true,
+      },
+      {
+        source: '/resume',
+        destination: '/Akash-Jain-CV.pdf',
+        permanent: true,
+      },
+      {
+        source: '/notes/:slug*',
+        destination: '/journal',
+        permanent: true,
+      },
+      {
+        source: '/playground',
+        destination: '/journal?filter=playground',
+        permanent: true,
+      },
+    ]
+  },
   async headers() {
     return [
       {

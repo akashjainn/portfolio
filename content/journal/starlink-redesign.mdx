@@ -1,0 +1,61 @@
+---
+slug: starlink-redesign
+title: "Internet, quietly, from low orbit"
+headline: "Internet, quietly, from low orbit"
+titleHtml: "Internet, quietly,<br>from <em>low orbit</em>."
+summary: "A self-directed redesign of the Starlink marketing homepage. What the page would feel like if quiet were a feature. Done on a weekend, from admiration."
+tags: ["UI Design", "CSS", "Next.js", "Design Systems"]
+status: published
+entryNo: 7
+kind: study
+publishedAt: "2026-03-01"
+dateDisplay: "Feb 2026"
+dateEnd: "Mar 2026"
+kicker: "Entry No. 07 · Personal study · Drawn with admiration"
+kvPairs:
+  - key: "Dates"
+    value: "Feb — Mar 2026"
+  - key: "Kind"
+    value: "Self-directed study"
+  - key: "Tools"
+    value: "Next.js · Tailwind"
+  - key: "Subject"
+    value: "Starlink marketing"
+  - key: "Source"
+    value: "github.com/akashjainn/starlink-redesign"
+    href: "https://github.com/akashjainn/starlink-redesign"
+contents: "§ 1   The hero, without the hero video\n§ 2   Numbers, with dates\n§ 3   Three plans, priced honestly\n§ 4   What's missing, on purpose\n§ 5   Why this page"
+atAGlance: "I've been quietly fascinated by satellite networking for years. This is the sketch of a building I liked."
+artifact:
+  type: horizon
+  caption: "FIG. 7 — CSS satellite-pass horizon animation"
+  aspectRatio: "16/5"
+---
+
+<p className="lede">This is a redesign of Starlink's marketing homepage, done on a weekend because I found the subject interesting. It is a study, not a pitch. A fleet of refrigerators in low orbit has to behave like a boring ISP by the time the packet reaches your laptop — and I wanted to see what the page would feel like if the design respected that quietness rather than shouting over it.</p>
+
+<SectionHeading n="01">The hero, without the hero video.</SectionHeading>
+
+The current Starlink page opens on a rotating globe and a video of a rocket. Both are beautiful. Neither tells you what Starlink is, what it costs, or whether it works where you live. The redesign opens on one sentence and a horizon.
+
+<PressedSpecimen />
+
+<SectionHeading n="02">Numbers, with dates.</SectionHeading>
+
+Every number on a satellite-ISP page is either marketing or a measurement. The difference is whether it wears a date. I gave every number a timestamp. If the page is served in June with Q1 figures, it says so.
+
+<PullQuote>Every number on a satellite-ISP page is either marketing or a measurement. The difference is the date.</PullQuote>
+
+<SectionHeading n="03">Three plans, priced honestly.</SectionHeading>
+
+The current page walks a user through plans via a carousel. Carousels hide information. Three plans fit on one screen at most viewports. They rank by what the user actually cares about in order: speed, latency, data, hardware.
+
+<SectionHeading n="04">What's missing, on purpose.</SectionHeading>
+
+No hero video. No rotating globe. No neon. No "coming soon" badges on plans that are already available in most states. The horizon strip is a plain CSS gradient with a few pixels of white for stars — it loads in zero bytes beyond the stylesheet and says more about Starlink than three seconds of rendered motion. The dark mode is paper-colored, not terminal-black, so the design language reads as continuous with the rest of my journal, not grafted on.
+
+<SectionHeading n="05">Why this page.</SectionHeading>
+
+Because the subject has held my attention for two years and I wanted to hold a version of it in my hands. That's the only honest reason to do work like this. It's a sketch of a building I liked, done on a weekend, shared because I liked how it came out.
+
+<p className="note" style={{ marginTop: 'var(--s-6)' }}>Not affiliated with SpaceX or Starlink. All numbers are illustrative for the purposes of this study.</p>

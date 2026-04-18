@@ -1,0 +1,72 @@
+---
+slug: propsage
+title: "Evidence before edges: the PropSage case"
+headline: "Evidence before edges: the PropSage case"
+titleHtml: "Evidence before edges:<br><em>the PropSage case</em>."
+summary: "A sports-props platform that pivoted from beating the market to explaining it. Sub-2s LCP, 400ms evidence-clip latency, offline demo that holds with the cable unplugged."
+tags: ["Next.js", "WebSockets", "TwelveLabs", "Perplexity"]
+status: published
+entryNo: 4
+kind: case
+publishedAt: "2025-10-15"
+dateDisplay: "Sep 2025"
+dateEnd: "Present"
+kicker: "Entry No. 04 · Case study · Sports analytics"
+kvPairs:
+  - key: "Dates"
+    value: "Sep 2025 — Present"
+  - key: "Role"
+    value: "Lead · Full-stack"
+  - key: "Stack"
+    value: "Next.js · WS · TwelveLabs · Perplexity"
+  - key: "Recog."
+    value: "HackGT 12"
+  - key: "Live"
+    value: "propsage-web.vercel.app"
+    href: "https://propsage-web.vercel.app/"
+  - key: "Source"
+    value: "github.com/akashjainn/propsage"
+    href: "https://github.com/akashjainn/propsage"
+contents: "§ 1   The wrong question\n§ 2   Ingestion & math\n§ 3   Evidence overlay\n§ 4   What we got wrong\n§ 5   Where it's going"
+atAGlance: "Sub-2s LCP on LTE. Line-move to evidence-clip latency under 400ms. Offline demo holds with the cable unplugged."
+artifact:
+  type: graph
+  caption: "FIG. 4 — Evidence graph, comparable-selection model"
+  aspectRatio: "4/3"
+---
+
+<p className="lede">The first version of PropSage tried to beat the market. The version that won tried to <em>explain</em> the market, and that turned out to be the harder problem by a mile.</p>
+
+<SectionHeading n="01">The wrong question.</SectionHeading>
+
+We started HackGT twelve hours in the hole. The plan was to price sports props better than a sportsbook — a fine idea that you find out is other people's full-time job about three prompts into a Gemini session. The odds were already close to fair; the models were already ensemble-averaged; the edges we could imagine building in a weekend were edges the market had already priced out.
+
+So we switched problems. Instead of predicting the line, we would *explain* why the line was where it was — pull the relevant game clip the moment a prop moved, overlay the evidence on the chart, and let the user draw their own conclusion. TwelveLabs' video-search API made the video half of that tractable. The rest was pipeline plumbing.
+
+<PressedSpecimen />
+
+<Figure caption="FIG. 01 — Dashboard walkthrough, offline demo mode." meta="Oct 2025 · Mux stream">
+  <div style={{ aspectRatio: '64 / 33', background: '#000', border: '1px solid var(--rule)' }}>
+    <iframe src="https://player.mux.com/oME9aDX3m005vFyQonj2dk0238wExGN8xMKh4nC501QukI" style={{ width: '100%', height: '100%', border: 0, display: 'block' }} allow="autoplay; encrypted-media; picture-in-picture; fullscreen" title="PropSage dashboard walkthrough" loading="lazy" />
+  </div>
+</Figure>
+
+<SectionHeading n="02">Ingestion and the fair-line math.</SectionHeading>
+
+Live odds stream in over a WebSocket server, separated from the Next.js app so the two scale independently. Player stats and line history land behind a thin in-memory cache; the whole thing runs against local JSON in offline mode, which matters more than it sounds. The fair-line math is a short function with a long bibliography: Bayesian blending of priors, a Monte Carlo for the edge and confidence interval, evidence deltas that shift μ and σ with bounded influence. Nothing novel in isolation. The interesting part is that every number in the UI can be traced back to the line of code that produced it — which is the thing that turns a demo into something a person would trust.
+
+<PullQuote>The user does not want a better number. The user wants to know whether to trust the number.</PullQuote>
+
+<SectionHeading n="03">The evidence overlay.</SectionHeading>
+
+When a line moves more than a threshold, the system queries TwelveLabs for recent clips matching the player and the stat, ranks them by semantic relevance, and surfaces the top three below the chart. The effect is that a line move stops being a red arrow and starts being a thirty-second clip: here is the injury that moved the line, here is the quote from the post-game presser. The design work is mostly about not overselling it — the clips are evidence, not causation, and the UI has to say that without saying it.
+
+<SectionHeading n="04">What we got wrong.</SectionHeading>
+
+Three things, in order of how embarrassing they were. (1) We tried to do the odds blending client-side for the first hour, which turned the dashboard into a space heater. (2) We wrote the WebSocket server in the Next.js API route layer, which works until you try to scale it and then mysteriously doesn't. (3) We shipped the first demo without an offline mode, which meant the HackGT judges saw a spinner for thirty seconds because the venue Wi-Fi was honest about its capacity. The offline demo was written the week after and is now the feature I show first at every demo.
+
+<SectionHeading n="05">Where it's going.</SectionHeading>
+
+I'm rewriting the evidence overlay so the demo holds without a network at all — pre-baked clips, deterministic line moves, no loading states. After that: feature-flagged experiments for the line-move thresholds, a small public dashboard for model accuracy over time, and a writeup of the Bayesian piece for anyone who wants to fork it. PropSage is the project I want to keep coming back to for the next year.
+
+<p className="note" style={{ marginTop: 'var(--s-6)' }}>Written April 2026. Full technical writeup, API contracts, and source at <a href="https://github.com/akashjainn/propsage">github.com/akashjainn/propsage</a>. Live demo at <a href="https://propsage-web.vercel.app/">propsage-web.vercel.app</a>.</p>
