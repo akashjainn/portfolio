@@ -2,7 +2,23 @@
   "permissions": {
     "allow": [
       "Bash(cp \"/c/Users/akash/Downloads/Akash Jain_Neuralink_20260402.pdf\" \"/c/Users/akash/Documents/portfolio/public/Akash_Jain_Resume.pdf\")",
-      "Bash(cp \"/c/Users/akash/Documents/portfolio/public/Akash_Jain_Resume.pdf\" \"/c/Users/akash/Documents/portfolio/public/resume.pdf\")"
+      "Bash(cp \"/c/Users/akash/Documents/portfolio/public/Akash_Jain_Resume.pdf\" \"/c/Users/akash/Documents/portfolio/public/resume.pdf\")",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(ls -d .worktrees)",
+      "Bash(ls -d worktrees)",
+      "Read(//c/Users/akash/.config/superpowers/worktrees/portfolio/field-journal-redesign/**)",
+      "Bash(npm install *)",
+      "Bash(npm test *)",
+      "Bash(npm run *)",
+      "Bash(git *)",
+      "Bash(node -e ' *)",
+      "Bash(node -e \"console.log\\(require\\('./package.json'\\).dependencies.next\\)\")",
+      "Bash(mkdir -p \"C:/Users/akash/.config/superpowers/worktrees/portfolio/field-journal-redesign/src/components/journal\")",
+      "Bash(mkdir -p \"C:/Users/akash/.config/superpowers/worktrees/portfolio/field-journal-redesign/src/app/\\(journal\\)/journal/[slug]\")",
+      "Bash(npm list *)",
+      "Bash(rm \"C:/Users/akash/.config/superpowers/worktrees/portfolio/field-journal-redesign/src/app/about/page.tsx\")",
+      "Bash(rmdir \"C:/Users/akash/.config/superpowers/worktrees/portfolio/field-journal-redesign/src/app/about/\")"
     ]
   }
 }
