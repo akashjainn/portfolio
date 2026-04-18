@@ -1,3 +1,5 @@
+import type { ReactElement } from 'react'
+
 type IconName =
   | 'external-link'
   | 'back-arrow'
@@ -17,7 +19,7 @@ interface WoodcutIconProps {
   'aria-hidden'?: boolean
 }
 
-const paths: Record<IconName, React.ReactElement> = {
+const paths: Record<IconName, ReactElement> = {
   'external-link': (
     <>
       <path d="M8 4H4v12h12v-4" strokeLinecap="round" strokeLinejoin="round" />
