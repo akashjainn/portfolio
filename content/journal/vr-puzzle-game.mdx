@@ -1,0 +1,189 @@
+---
+slug: vr-puzzle-game
+title: "Building <em>Presence</em> in 60ms"
+summary: "A VR puzzle game with procedurally generated vine-tree environments, custom physics, and a full asset pipeline from Blender to WebXR."
+tags: ["WebXR", "Three.js", "Blender", "React Three Fiber"]
+status: published
+entryNo: 5
+kind: specimen
+publishedAt: "2024-01-15"
+artifact:
+  type: model
+  src: "/models/vine-trees.fbx"
+  caption: "FIG. 5 — Vine-tree environment, drag to inspect"
+  aspectRatio: "4/3"
+---
+
+## Overview
+
+VR Bomb Defusal Puzzle is an immersive virtual reality game built for the **Meta Quest 3** using **Unity 6000.0.35f1**. Players must carefully cut color-coded vines in the correct sequence to defuse a bomb before time runs out. One wrong cut and it's game over!
+
+## Gameplay
+
+The core gameplay loop is intense and satisfying:
+- **Observe** the bomb and identify the vine cutting pattern
+- **Grab** your blade tool using VR hand tracking
+- **Cut** vines in the correct color sequence (e.g., Red → Blue → Green → Green → Red)
+- **Avoid** wrong cuts - three strikes and the bomb explodes!
+- **Race** against time to complete the sequence before the timer expires
+
+## Technical Implementation
+
+### Core Systems
+
+**Vine Cutting Mechanics**
+- Physics-based blade interaction using trigger colliders
+- Velocity-gated cutting (minimum speed required)
+- State management with idempotent `Cut()` operations
+- UnityEvent system for modular feedback
+
+**Bomb Controller**
+- ScriptableObject-based pattern system for data-driven sequences
+- Real-time validation of player actions
+- Strike counter and timer systems
+- Event-driven architecture for extensible gameplay
+
+**VR Integration**
+- Meta XR SDK and OpenXR for Quest 3 support
+- XR Interaction Toolkit for natural hand interactions
+- Input System for action-based controls
+- Hand tracking and controller support
+
+### Key Components
+
+```csharp
+// Vine.cs - Individual vine behavior
+public class Vine : MonoBehaviour {
+    public VineColor color;
+    public UnityEvent onCut;
+    
+    public void Cut() {
+        if (isCut) return;
+        isCut = true;
+        onCut?.Invoke();
+    }
+}
+
+// BombController.cs - Game orchestration
+public class BombController : MonoBehaviour {
+    [SerializeField] private BombPattern patternAsset;
+    [SerializeField] private int maxStrikes = 3;
+    [SerializeField] private float timeLimit = 60f;
+    
+    private void HandleVineCut(Vine vine) {
+        if (vine.color == targetOrder[currentIndex]) {
+            // Correct cut!
+            onCorrectCut?.Invoke();
+        } else {
+            // Wrong cut - add strike
+            strikes++;
+            onWrongCut?.Invoke();
+        }
+    }
+}
+```
+
+## 3D Assets
+
+I created custom 3D models for the game environment, including stylized vines and trees that fit the bomb defusal theme. The models were designed with VR performance in mind - optimized poly counts while maintaining visual fidelity.
+
+<div className="my-8">
+  <ModelViewer 
+    modelPath="/models/vine-trees.fbx"
+    autoRotate={true}
+    showControls={true}
+    className="w-full h-[600px]"
+  />
+</div>
+
+## Gameplay Demo
+
+Watch the bomb defusal mechanics in action:
+
+<div className="not-prose" style={{ margin: '2rem 0', width: '100%' }}>  
+  <div style={{ width: '100%', aspectRatio: '16 / 9', backgroundColor: '#1a1a1a' }}>
+    <iframe
+      src="https://player.mux.com/rkpwWuwfgST6rnv8CJaEXL39fCP1yghNfNCWlN2NkG00"
+      style={{ width: '100%', height: '100%', border: 'none', display: 'block' }}
+      allow="accelerometer; autoplay; encrypted-media; picture-in-picture; fullscreen; gyroscope"
+      title="VR Bomb Defusal Puzzle - Gameplay Demo"
+    ></iframe>
+  </div>
+</div>
+
+<div className="text-sm text-muted-foreground mt-4 text-center">
+    Experience the vine cutting mechanics and pattern recognition gameplay in real-time.
+    <br />
+    <span className="text-xs">Live demo streaming powered by Mux with adaptive bitrate delivery.</span>
+  </div>
+
+## Architecture & Patterns
+
+### Event-Driven Design
+All vine cuts trigger UnityEvents, allowing modular attachment of:
+- Audio feedback (SFX)
+- Haptic feedback
+- Visual effects (particles, color changes)
+- Score/progress updates
+
+### Data-Driven Configuration
+Bomb patterns are ScriptableObjects, making it easy to:
+- Create new puzzle sequences without code
+- Test different difficulty levels
+- Share patterns across levels
+
+### Clean State Management
+```csharp
+void StartRound() {
+    ResetRound();
+    _active = true;
+    // Subscribe to vine events in OnEnable
+}
+
+void OnDisable() {
+    // Always cleanup listeners to prevent memory leaks
+    foreach (var vine in vines) {
+        vine.onCut.RemoveListener(HandleVineCut);
+    }
+}
+```
+
+## Tech Stack
+
+- **Engine**: Unity 6000.0.35f1
+- **Platform**: Meta Quest 3 (Android/OpenXR)
+- **VR Framework**: XR Interaction Toolkit 3.2.1
+- **Input**: Unity Input System 1.13.1
+- **Rendering**: Universal Render Pipeline (URP)
+- **SDK**: Meta XR All-in-One SDK
+
+## Key Features
+
+**Physics-based cutting** with velocity validation  
+**Pattern-based puzzle system** (ScriptableObject driven)  
+**Strike counter** and time limit for tension  
+**Hand tracking** and controller support  
+**Extensible event system** for feedback  
+**Optimized for Quest 3** standalone performance  
+
+## Future Improvements
+
+Potential enhancements for the project:
+- Object pooling for VFX particles
+- Haptic feedback integration
+- Progressive difficulty system
+- Multiplayer co-op mode
+- Level editor with custom pattern creator
+
+## What I Learned
+
+This project deepened my understanding of:
+- **VR interaction design** - Making actions feel natural and intuitive
+- **Event-driven architecture** - Clean separation of concerns
+- **Unity optimization** - Performance profiling for mobile VR
+- **XR development workflow** - Building and deploying to Quest headsets
+- **Physics programming** - Collision detection and trigger systems
+
+---
+
+The full source code and detailed setup instructions are available in the [GitHub repository](https://github.com/akashjainn/VR-Puzzle-Game).

@@ -1,0 +1,49 @@
+---
+slug: starlink-redesign
+title: "What the Starlink UI <em>Chose Not to Say</em>"
+summary: "A personal redesign study of the Starlink app interface — examining information hierarchy, signal-strength communication, and the satellite pass animation."
+tags: ["UI Design", "CSS", "Next.js", "Design Systems"]
+status: published
+entryNo: 7
+kind: study
+publishedAt: "2024-11-01"
+artifact:
+  type: horizon
+  caption: "FIG. 7 — CSS satellite-pass horizon animation"
+  aspectRatio: "16/5"
+---
+
+## Why the Starlink App Feels Incomplete
+
+The Starlink app has one job: tell you whether the sky is clear enough to get a connection. It mostly fails at this, not because the engineering is bad, but because the information hierarchy treats signal strength as a secondary concern rather than the primary one.
+
+## 01 — What the App Currently Shows
+
+The home screen surfaces:
+- A large dish illustration that animates when connected
+- A connection status label ("CONNECTED" / "NO SIGNAL")
+- A numeric download speed in Mbps
+
+Signal obstruction — the most actionable metric for a user with a misaligned dish — is buried two taps deep under "Advanced."
+
+## 02 — The Redesign Hypothesis
+
+**Move the obstruction map to the home screen.** A user who installs Starlink on a cabin in the Appalachians needs to know if the pine tree at bearing 220° is blocking 40% of their sky coverage. That information should cost zero taps.
+
+## 03 — The Horizon Artifact
+
+The artifact below is the CSS animation I built to prototype the satellite-pass visualization — a simplified arc tracing the satellite's apparent path across the cleared sky window. No JavaScript. The timing function approximates the actual orbital speed curve of a LEO satellite at ~550km altitude.
+
+<PressedSpecimen />
+
+## 04 — What I Changed
+
+1. **Obstruction map → first screen.** The sky clearance donut moved to the hero of the home card.
+2. **Speed as context, not headline.** Mbps moved to a secondary data row beneath the sky graphic.
+3. **Horizon arc on signal loss.** When the signal drops, the animation shows the last-known satellite arc fading — communicating "it will be back" rather than "something broke."
+
+## 05 — What This Taught Me
+
+The hardest part of interface design for infrastructure products is resisting the temptation to celebrate the engineering. Starlink is remarkable — but the user doesn't want to celebrate it. They want to watch a movie.
+
+Information hierarchy should be organized by *user urgency*, not engineering pride.
