@@ -1,0 +1,59 @@
+---
+slug: artrium
+title: "Teaching a room to see: the ARTrium game"
+headline: "Teaching a room to see: the ARTrium game"
+titleHtml: "Teaching a room<br>to see: <em>the ARTrium game</em>."
+summary: "A body-tracking installation for K–12 STEM outreach at Georgia Tech's IDEA Lab. Full-body pose over WebSocket into Unity at ~30 fps, played by 400+ students."
+tags: ["Python", "Mediapipe", "OpenCV", "Unity"]
+status: published
+entryNo: 5
+kind: specimen
+publishedAt: "2025-08-01"
+dateDisplay: "Aug 2024"
+dateEnd: "Present"
+kicker: "Entry No. 05 · Specimen · Computer vision · Unity"
+kvPairs:
+  - key: "Dates"
+    value: "Aug 2024 — Present"
+  - key: "Place"
+    value: "Georgia Tech · IDEA Lab"
+  - key: "Role"
+    value: "Research asst. · CV & Unity"
+  - key: "Stack"
+    value: "Python · Mediapipe · OpenCV · Unity"
+  - key: "For"
+    value: "K–12 outreach"
+contents: "§ 1   What the game is\n§ 2   The pipe\n§ 3   Surviving children\n§ 4   What it's teaching"
+atAGlance: "Full-body pose over WebSocket into Unity at ~30 fps. Runs on classroom hardware. Has been played by 400+ K–12 students with no setup other than a camera."
+artifact:
+  type: none
+  caption: "FIG. 5 — Electronic ARTrium installation"
+---
+
+<p className="lede">A VR-ish bomb-defusal game that you play with your whole body. Stand in front of a camera. The room notices you. Dodge the lasers, cut the right wire. Nine-year-olds are extremely hard on software and this entry is mostly about that.</p>
+
+<SectionHeading n="01">What the game is.</SectionHeading>
+
+Electronic ARTrium is a touring installation we built in the Georgia Tech IDEA Lab for K–12 STEM outreach. A camera watches the player. A Mediapipe pipeline turns their body into a stream of 3D landmarks. A Unity scene reads those landmarks and places a small humanoid rig in a room full of hazards: lasers to duck, wires to touch, a bomb timer counting down. The goal is not the game — the goal is to teach a middle-schooler that computers can see, and to do it in thirty seconds without a slide deck.
+
+<Figure caption="FIG. 01 — A run-through of the bomb-defusal level." meta="Spring 2025 · IDEA Lab, GT">
+  <div style={{ aspectRatio: '16 / 9', background: '#000', border: '1px solid var(--rule)' }}>
+    <iframe src="https://player.mux.com/rkpwWuwfgST6rnv8CJaEXL39fCP1yghNfNCWlN2NkG00" style={{ width: '100%', height: '100%', border: 0, display: 'block' }} allow="autoplay; encrypted-media; picture-in-picture; fullscreen" title="Electronic ARTrium gameplay demo" loading="lazy" />
+  </div>
+</Figure>
+
+<SectionHeading n="02">The pipe.</SectionHeading>
+
+Python owns the camera. Mediapipe gives us 33 pose landmarks in 3D; we smooth them with a small one-euro filter to keep the rig from twitching. Coordinates get serialised to a compact binary frame and sent over a local WebSocket to Unity at whatever frame rate the laptop can sustain — usually 28–32 Hz on the classroom hardware, faster on anything newer. Unity reads the stream, drives the rig, and runs the game logic. Two processes, one socket, no GPU. The whole pipeline runs on a 2019 Dell Precision with integrated graphics because that's what the school has.
+
+<PullQuote>Nine-year-olds are the best adversarial test set I have ever had access to.</PullQuote>
+
+<SectionHeading n="03">Surviving children.</SectionHeading>
+
+The first version of the game assumed the player would stand in front of the camera and behave. Children do not do this. They stand half-out of frame. They stand on each other. They wear hoodies over their hands. They run sideways out of the room and come back. The second version added a "visibility guard" — a small confidence check on the hip and shoulder landmarks — and fell back to a ghost rig if more than 30% of the skeleton went missing. The third version learned to handle two people in frame by picking the one with the larger bounding box. The fourth version, still in progress, wants to gracefully handle wheelchairs.
+
+<SectionHeading n="04">What it's teaching me.</SectionHeading>
+
+This project is the reason I'm careful about other people's Wi-Fi now. It's the reason I believe in small, boring bits of state like "last known good pose." It's the reason my PropSage offline demo exists. You cannot predict which failure mode you will see in a gymnasium in south Georgia in October, so the system has to degrade in ways the children never notice. The bomb keeps ticking. That's the whole trick.
+
+<p className="note" style={{ marginTop: 'var(--s-6)' }}>Built with the IDEA Lab at Georgia Tech. Source, build instructions, and the outreach-day protocol are on <a href="https://github.com/akashjainn">GitHub</a>. Currently touring Atlanta-area middle schools.</p>

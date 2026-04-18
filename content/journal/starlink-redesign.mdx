@@ -1,49 +1,61 @@
 ---
 slug: starlink-redesign
-title: "What the Starlink UI <em>Chose Not to Say</em>"
-summary: "A personal redesign study of the Starlink app interface — examining information hierarchy, signal-strength communication, and the satellite pass animation."
+title: "Internet, quietly, from low orbit"
+headline: "Internet, quietly, from low orbit"
+titleHtml: "Internet, quietly,<br>from <em>low orbit</em>."
+summary: "A self-directed redesign of the Starlink marketing homepage. What the page would feel like if quiet were a feature. Done on a weekend, from admiration."
 tags: ["UI Design", "CSS", "Next.js", "Design Systems"]
 status: published
 entryNo: 7
 kind: study
-publishedAt: "2024-11-01"
+publishedAt: "2026-03-01"
+dateDisplay: "Feb 2026"
+dateEnd: "Mar 2026"
+kicker: "Entry No. 07 · Personal study · Drawn with admiration"
+kvPairs:
+  - key: "Dates"
+    value: "Feb — Mar 2026"
+  - key: "Kind"
+    value: "Self-directed study"
+  - key: "Tools"
+    value: "Next.js · Tailwind"
+  - key: "Subject"
+    value: "Starlink marketing"
+  - key: "Source"
+    value: "github.com/akashjainn/starlink-redesign"
+    href: "https://github.com/akashjainn/starlink-redesign"
+contents: "§ 1   The hero, without the hero video\n§ 2   Numbers, with dates\n§ 3   Three plans, priced honestly\n§ 4   What's missing, on purpose\n§ 5   Why this page"
+atAGlance: "I've been quietly fascinated by satellite networking for years. This is the sketch of a building I liked."
 artifact:
   type: horizon
   caption: "FIG. 7 — CSS satellite-pass horizon animation"
   aspectRatio: "16/5"
 ---
 
-## Why the Starlink App Feels Incomplete
+<p className="lede">This is a redesign of Starlink's marketing homepage, done on a weekend because I found the subject interesting. It is a study, not a pitch. A fleet of refrigerators in low orbit has to behave like a boring ISP by the time the packet reaches your laptop — and I wanted to see what the page would feel like if the design respected that quietness rather than shouting over it.</p>
 
-The Starlink app has one job: tell you whether the sky is clear enough to get a connection. It mostly fails at this, not because the engineering is bad, but because the information hierarchy treats signal strength as a secondary concern rather than the primary one.
+<SectionHeading n="01">The hero, without the hero video.</SectionHeading>
 
-## 01 — What the App Currently Shows
-
-The home screen surfaces:
-- A large dish illustration that animates when connected
-- A connection status label ("CONNECTED" / "NO SIGNAL")
-- A numeric download speed in Mbps
-
-Signal obstruction — the most actionable metric for a user with a misaligned dish — is buried two taps deep under "Advanced."
-
-## 02 — The Redesign Hypothesis
-
-**Move the obstruction map to the home screen.** A user who installs Starlink on a cabin in the Appalachians needs to know if the pine tree at bearing 220° is blocking 40% of their sky coverage. That information should cost zero taps.
-
-## 03 — The Horizon Artifact
-
-The artifact below is the CSS animation I built to prototype the satellite-pass visualization — a simplified arc tracing the satellite's apparent path across the cleared sky window. No JavaScript. The timing function approximates the actual orbital speed curve of a LEO satellite at ~550km altitude.
+The current Starlink page opens on a rotating globe and a video of a rocket. Both are beautiful. Neither tells you what Starlink is, what it costs, or whether it works where you live. The redesign opens on one sentence and a horizon.
 
 <PressedSpecimen />
 
-## 04 — What I Changed
+<SectionHeading n="02">Numbers, with dates.</SectionHeading>
 
-1. **Obstruction map → first screen.** The sky clearance donut moved to the hero of the home card.
-2. **Speed as context, not headline.** Mbps moved to a secondary data row beneath the sky graphic.
-3. **Horizon arc on signal loss.** When the signal drops, the animation shows the last-known satellite arc fading — communicating "it will be back" rather than "something broke."
+Every number on a satellite-ISP page is either marketing or a measurement. The difference is whether it wears a date. I gave every number a timestamp. If the page is served in June with Q1 figures, it says so.
 
-## 05 — What This Taught Me
+<PullQuote>Every number on a satellite-ISP page is either marketing or a measurement. The difference is the date.</PullQuote>
 
-The hardest part of interface design for infrastructure products is resisting the temptation to celebrate the engineering. Starlink is remarkable — but the user doesn't want to celebrate it. They want to watch a movie.
+<SectionHeading n="03">Three plans, priced honestly.</SectionHeading>
 
-Information hierarchy should be organized by *user urgency*, not engineering pride.
+The current page walks a user through plans via a carousel. Carousels hide information. Three plans fit on one screen at most viewports. They rank by what the user actually cares about in order: speed, latency, data, hardware.
+
+<SectionHeading n="04">What's missing, on purpose.</SectionHeading>
+
+No hero video. No rotating globe. No neon. No "coming soon" badges on plans that are already available in most states. The horizon strip is a plain CSS gradient with a few pixels of white for stars — it loads in zero bytes beyond the stylesheet and says more about Starlink than three seconds of rendered motion. The dark mode is paper-colored, not terminal-black, so the design language reads as continuous with the rest of my journal, not grafted on.
+
+<SectionHeading n="05">Why this page.</SectionHeading>
+
+Because the subject has held my attention for two years and I wanted to hold a version of it in my hands. That's the only honest reason to do work like this. It's a sketch of a building I liked, done on a weekend, shared because I liked how it came out.
+
+<p className="note" style={{ marginTop: 'var(--s-6)' }}>Not affiliated with SpaceX or Starlink. All numbers are illustrative for the purposes of this study.</p>

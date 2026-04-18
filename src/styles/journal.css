@@ -1,354 +1,350 @@
-/* =========================================================
-   FIELD JOURNAL — Design System
-   ========================================================= */
+/* ============================================================
+   Akash Jain — Field Journal
+   Shared stylesheet for all /journal pages + home + about
+   ============================================================ */
 
-/* --- Fonts (loaded via next/font, CSS vars injected) --- */
-/* --font-serif: set by layout.tsx via next/font/google     */
-/* --font-mono:  set by layout.tsx via next/font/google     */
+:root{
+  --cream:     #F4ECDC;
+  --cream-2:   #EADFC9;
+  --rule:      #D7C8AC;
+  --ink:       #2B2118;
+  --ink-2:     #4A3C2E;
+  --ink-3:     #6B5A47;
+  --terra:     #B95C2F;
+  --moss:      #56643A;
+  --ochre:     #AE7A18;
 
-/* --- Spacing scale ---------------------------------------- */
-:root {
-  --s-1: 4px;
-  --s-2: 8px;
-  --s-3: 12px;
-  --s-4: 16px;
-  --s-5: 24px;
-  --s-6: 32px;
-  --s-7: 48px;
-  --s-8: 72px;
-  --s-9: 112px;
+  --t-note: 12px;
+  --t-meta: 13px;
+  --t-body: 18px;
+  --t-lede: 22px;
+  --t-h3: 28px;
+  --t-h2: 38px;
+  --t-h1: 56px;
+
+  --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px;
+  --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 72px; --s-9: 112px;
+
+  --serif: var(--font-serif, "Source Serif 4"), Georgia, serif;
+  --mono:  var(--font-mono, "JetBrains Mono"), ui-monospace, monospace;
+  --sans:  var(--font-sans, "Inter Tight"), -apple-system, system-ui, sans-serif;
+  --ease:  cubic-bezier(.2,.6,.2,1);
 }
 
-/* --- Color tokens — light mode (default) ----------------- */
-:root {
-  --cream:      #F4ECDC;
-  --cream-2:    #EADFC9;
-  --rule:       #D7C8AC;
-  --ink:        #2B2118;
-  --ink-2:      #4A3C2E;
-  --ink-3:      #6B5A47;
-  --terra:      #B95C2F;
-  --terra-deep: #8F401E;
-  --moss:       #56643A;
-  --ochre:      #AE7A18;
-  --focus:      #B95C2F;
-  --danger:     #8B2E1A;
-  --success:    #3F4A28;
-}
-
-/* --- Color tokens — dark mode ---------------------------- */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --cream:      #1C1811;
-    --cream-2:    #24201A;
-    --rule:       #3A3226;
-    --ink:        #EEE3CE;
-    --ink-2:      #C9BCA3;
-    --ink-3:      #9A8D74;
-    --terra:      #D2784C;
-    --terra-deep: #C4633A;
-    --moss:       #8CA05E;
-    --ochre:      #D6A845;
-    --focus:      #D2784C;
-    --danger:     #D2694C;
-    --success:    #9FB36E;
+@media (prefers-color-scheme: dark){
+  :root{
+    --cream:   #1C1811;
+    --cream-2: #24201A;
+    --rule:    #3A3226;
+    --ink:     #EEE3CE;
+    --ink-2:   #C9BCA3;
+    --ink-3:   #9A8D74;
+    --terra:   #D2784C;
+    --moss:    #8CA05E;
+    --ochre:   #D6A845;
   }
 }
 
-.dark {
-  --cream:      #1C1811;
-  --cream-2:    #24201A;
-  --rule:       #3A3226;
-  --ink:        #EEE3CE;
-  --ink-2:      #C9BCA3;
-  --ink-3:      #9A8D74;
-  --terra:      #D2784C;
-  --terra-deep: #C4633A;
-  --moss:       #8CA05E;
-  --ochre:      #D6A845;
-  --focus:      #D2784C;
-  --danger:     #D2694C;
-  --success:    #9FB36E;
-}
-
-/* --- Prose measure --------------------------------------- */
-:root {
-  --measure:        68ch;
-  --measure-narrow: 52ch;
-}
-
-/* --- Motion tokens --------------------------------------- */
-:root {
-  --ease-journal: cubic-bezier(.2, .6, .2, 1);
-  --t-fast:  200ms;
-  --t-mid:   250ms;
-  --t-slow:  300ms;
-}
-
-/* --- Reduce motion: zero everything --------------------- */
-@media (prefers-reduced-motion: reduce) {
-  .journal-root *,
-  .journal-root *::before,
-  .journal-root *::after {
-    transition-duration: 0ms !important;
-    animation-duration: 0ms !important;
-    animation-iteration-count: 1 !important;
-  }
-}
-
-/* --- Base reset for journal pages ----------------------- */
-.journal-root {
-  background-color: var(--cream);
-  color: var(--ink);
-  font-family: var(--font-serif), Georgia, serif;
+*{box-sizing:border-box}
+html,body{margin:0; background:var(--cream); color:var(--ink);}
+body{
+  font-family: var(--serif);
+  font-size: var(--t-body);
+  line-height: 1.55;
+  font-feature-settings: "onum","kern";
   -webkit-font-smoothing: antialiased;
 }
+::selection{ background: var(--terra); color: var(--cream); }
+img{ max-width:100%; height:auto; display:block; }
 
-/* --- Focus ring ----------------------------------------- */
-.journal-root *:focus-visible {
-  outline: 2px solid var(--focus);
-  outline-offset: 2px;
+a{
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  transition: border-color .2s var(--ease), color .2s var(--ease);
+}
+a:hover{ color: var(--terra); border-color: var(--terra); }
+a.plain{ border-bottom: 0; }
+a.plain:hover{ color: var(--terra); }
+
+/* --------------- page frame + ruled margin --------------- */
+.page{ max-width: 1180px; margin: 0 auto; padding: var(--s-8) var(--s-7); position: relative; }
+@media (max-width: 720px){ .page{ padding: var(--s-6) var(--s-5); } }
+
+.ruled{ position: relative; }
+.ruled::before{
+  content:""; position:absolute; left: 38.2%; top:0; bottom:0; width:1px;
+  background: repeating-linear-gradient(to bottom, var(--rule) 0 6px, transparent 6px 10px);
+  opacity:.7; pointer-events:none;
+}
+@media (max-width: 900px){ .ruled::before{ display:none; } }
+
+/* --------------- header / nav --------------- */
+.site-nav{
+  display:flex; justify-content: space-between; align-items: baseline;
+  padding-bottom: var(--s-4);
+  border-bottom: 1px solid var(--ink);
+  margin-bottom: var(--s-7);
+  gap: var(--s-4);
+}
+.site-nav .brand{
+  font-family: var(--serif);
+  font-weight: 400; font-style: italic;
+  font-size: 22px; letter-spacing: -.01em;
+}
+.site-nav .brand a{ border:0; display:inline-flex; align-items:center; color: var(--terra); }
+.site-nav .brand img{ height: 34px; width: auto; display:block; }
+@media (max-width: 560px){ .site-nav .brand img{ height: 28px; } }
+.site-nav .links{
+  display:flex; gap: var(--s-5);
+  font-family: var(--mono); font-size: var(--t-note);
+  text-transform: uppercase; letter-spacing: .14em;
+}
+.site-nav .links a{ border-bottom: 0; color: var(--ink-2); }
+.site-nav .links a[aria-current="page"]{ color: var(--terra); }
+@media (max-width: 560px){
+  .site-nav .links{ gap: var(--s-3); flex-wrap: wrap; }
 }
 
-/* --- Skip link ------------------------------------------ */
-.journal-skip-link {
-  position: absolute;
-  top: -100%;
-  left: var(--s-4);
-  padding: var(--s-2) var(--s-4);
-  background: var(--cream);
-  color: var(--ink);
-  font-family: var(--font-mono), monospace;
-  font-size: 14px;
-  border: 1px solid var(--rule);
-  z-index: 100;
-}
-.journal-skip-link:focus {
-  top: var(--s-4);
-}
-
-/* --- Typography scale ------------------------------------ */
-.journal-root h1.masthead {
-  font-size: clamp(40px, 6vw, 72px);
+/* --------------- typography --------------- */
+h1.masthead-title{
+  font-family: var(--serif);
   font-weight: 300;
+  font-size: clamp(40px, 6vw, 80px);
+  line-height: .98;
+  letter-spacing: -.02em;
   font-style: italic;
-  font-variation-settings: 'opsz' 60;
+  margin: 0;
+}
+h1.masthead-title em{ font-style: normal; color: var(--terra); }
+
+h2.phase{
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: var(--t-h2);
   line-height: 1.05;
-  color: var(--ink);
+  letter-spacing: -.01em;
+  margin: var(--s-9) 0 var(--s-5);
+  max-width: 22ch;
 }
-
-.journal-root h1.masthead em {
-  font-style: normal;
-  color: var(--terra);
+h2.phase .no{
+  display:block;
+  font-family: var(--mono); font-size: var(--t-note);
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--terra); font-weight: 500;
+  margin-bottom: var(--s-3);
 }
-
-.journal-root h1.entry-title {
-  font-size: clamp(36px, 4.5vw, 54px);
-  font-weight: 400;
-  font-variation-settings: 'opsz' 48;
-  line-height: 1.1;
+h3{
+  font-family: var(--serif);
+  font-weight: 500; font-style: italic;
+  font-size: var(--t-h3); line-height: 1.2;
+  letter-spacing: -.005em;
+  margin: var(--s-6) 0 var(--s-3);
 }
-
-.journal-root h1.entry-title em {
-  font-style: normal;
-  color: var(--terra);
+p{ margin: 0 0 var(--s-4); max-width: 64ch; }
+p.lede{
+  font-size: var(--t-lede); line-height: 1.45;
+  color: var(--ink-2); font-style: italic; max-width: 54ch;
 }
-
-.journal-root h2.phase {
-  font-size: clamp(24px, 3vw, 40px);
-  font-weight: 400;
-  font-variation-settings: 'opsz' 36;
+.note{
+  font-family: var(--mono); font-size: var(--t-meta);
+  color: var(--ink-3); letter-spacing: .02em;
 }
-
-.journal-root h3.entry-heading {
-  font-size: clamp(22px, 2.5vw, 30px);
-  font-weight: 500;
-  font-style: italic;
-  font-variation-settings: 'opsz' 24;
+.kbd{
+  font-family: var(--mono); font-size: var(--t-meta);
+  padding: 1px 6px; border: 1px solid var(--rule); border-radius: 2px;
+  color: var(--ink-2);
 }
+code{ font-family: var(--mono); font-size: 15px; color: var(--ink-2); }
 
-.journal-root h4 {
-  font-size: clamp(18px, 2vw, 22px);
-  font-weight: 500;
-  font-variation-settings: 'opsz' 18;
-}
-
-.journal-root p {
-  font-size: 18px;
-  font-weight: 400;
-  font-variation-settings: 'opsz' 14;
-  line-height: 1.65;
-  max-width: var(--measure);
-}
-
-.journal-root .small, .journal-root small {
-  font-size: 16px;
-  font-variation-settings: 'opsz' 12;
-  line-height: 1.5;
-}
-
-.journal-root .mono, .journal-root code, .journal-root kbd {
-  font-family: var(--font-mono), monospace;
-  font-size: 14px;
-}
-
-/* --- Golden-ratio ruled margin -------------------------- */
-.ruled {
-  position: relative;
-}
-
-@media (min-width: 900px) {
-  .ruled::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 38.2%;
-    width: 1px;
-    height: 100%;
-    border-left: 1px dashed var(--rule);
-    opacity: 0.7;
-    pointer-events: none;
-  }
-}
-
-/* --- Two-column grid helpers ---------------------------- */
-.grid-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+/* --------------- grid helpers --------------- */
+.grid-2{
+  display:grid;
+  grid-template-columns: 38.2% 1fr;
   gap: var(--s-7);
+  align-items: start;
+}
+.grid-2 .gutter{
+  padding-right: var(--s-5);
+  font-family: var(--mono); font-size: var(--t-meta);
+  color: var(--ink-3);
+  text-transform: uppercase; letter-spacing: .1em;
+  line-height: 1.8;
+  position: sticky; top: var(--s-5);
+}
+@media (max-width: 900px){
+  .grid-2{ grid-template-columns: 1fr; gap: var(--s-4); }
+  .grid-2 .gutter{ position: static; border-left: 2px solid var(--terra); padding-left: var(--s-3); }
 }
 
-@media (max-width: 768px) {
-  .grid-2 {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* --- Entry row ------------------------------------------ */
-.entry-row {
-  display: grid;
+/* --------------- entry list (index + home) --------------- */
+.entries{ margin-top: var(--s-5); border-top: 1px solid var(--ink); }
+.entry{
+  display:grid;
   grid-template-columns: 130px 1fr 200px;
   gap: var(--s-5);
   padding: var(--s-5) 0;
   border-bottom: 1px solid var(--rule);
-  align-items: start;
-  transition: background var(--t-mid) var(--ease-journal),
-              padding-left var(--t-mid) var(--ease-journal);
-  cursor: pointer;
-  text-decoration: none;
-  color: inherit;
+  align-items: baseline;
+  transition: background .25s var(--ease), padding .25s var(--ease);
+}
+.entry:hover{
+  background: rgba(185,92,47,.06);
+  padding-left: var(--s-3);
+  padding-right: var(--s-3);
+}
+.entry .dt{
+  font-family: var(--mono); font-size: var(--t-note);
+  color: var(--ink-3); text-transform: uppercase; letter-spacing: .14em;
+  line-height: 1.6;
+}
+.entry .dt em{ display:block; font-style: normal; color: var(--terra); }
+.entry .hd a{ border:0; }
+.entry .hd h3{
+  margin: 0 0 var(--s-2);
+  font-style: normal; font-weight: 500;
+  font-size: 26px;
+}
+.entry:hover .hd h3{ color: var(--terra); }
+.entry .hd p{ margin:0; color: var(--ink-2); font-size: 17px; }
+.entry .tags{
+  font-family: var(--mono); font-size: var(--t-note);
+  color: var(--ink-3); text-transform: uppercase; letter-spacing: .1em;
+  text-align: right;
+}
+.entry .tags span{ display:block; }
+@media (max-width: 720px){
+  .entry{ grid-template-columns: 1fr; gap: var(--s-2); }
+  .entry .tags{ text-align: left; }
 }
 
-.entry-row:hover {
-  background: var(--cream-2);
-  padding-left: var(--s-4);
+/* --------------- project head (entry detail) --------------- */
+.proj-head{
+  display:grid;
+  grid-template-columns: 1fr 280px;
+  gap: var(--s-6);
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: var(--s-5);
+  margin-bottom: var(--s-5);
+}
+.proj-head .kicker{
+  font-family: var(--mono); font-size: var(--t-note);
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink-3); margin-bottom: var(--s-3);
+}
+.proj-head h1{
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(34px, 5.2vw, 64px);
+  line-height: 1.0; margin: 0; letter-spacing: -.01em;
+}
+.proj-head h1 em{ font-style: italic; color: var(--terra); }
+.proj-head dl.kv{
+  font-family: var(--mono); font-size: var(--t-note);
+  line-height: 1.9; color: var(--ink-3);
+  text-transform: uppercase; letter-spacing: .08em;
+  margin: 0;
+}
+.proj-head dl.kv dt{ display:inline-block; width: 78px; }
+.proj-head dl.kv dd{ display:inline; margin:0; color: var(--ink); }
+.proj-head dl.kv div{ border-bottom: 1px dotted var(--rule); padding: 4px 0; }
+@media (max-width: 900px){ .proj-head{ grid-template-columns: 1fr; } }
+
+.proj-body{
+  display:grid;
+  grid-template-columns: 38.2% 1fr;
+  gap: var(--s-7);
+}
+.proj-body .gutter{
+  position: sticky; top: var(--s-5);
+  align-self: start;
+}
+.proj-body .gutter h5{
+  font-family: var(--mono); font-size: var(--t-note);
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink-3); margin: 0 0 var(--s-2);
+}
+.proj-body .gutter p{
+  font-family: var(--serif); font-size: 16px;
+  color: var(--ink-2); font-style: italic;
+  max-width: 28ch;
+}
+.proj-body .main p{ font-size: 18px; }
+.proj-body .main h2{
+  font-family: var(--serif); font-weight: 500;
+  font-size: 26px; line-height: 1.2;
+  margin: var(--s-7) 0 var(--s-3);
+  letter-spacing: -.005em;
+}
+.proj-body .main h2 .num{
+  font-family: var(--mono); font-size: 13px;
+  letter-spacing: .16em; color: var(--terra);
+  text-transform: uppercase; font-weight: 500;
+  display:block; margin-bottom: 4px;
+}
+@media (max-width: 900px){
+  .proj-body{ grid-template-columns: 1fr; gap: var(--s-4); }
+  .proj-body .gutter{ border-left: 2px solid var(--terra); padding-left: var(--s-3); position: static; }
 }
 
-@media (max-width: 700px) {
-  .entry-row {
-    grid-template-columns: 1fr;
-    gap: var(--s-2);
-  }
-}
-
-/* --- Figure / pressed-specimen box ---------------------- */
-.figure {
+/* --------------- figure / pull quote --------------- */
+.figure{
   background: var(--cream-2);
   border: 1px solid var(--rule);
-  overflow: hidden;
+  padding: var(--s-5);
+  margin: var(--s-5) 0;
 }
-
-.figure .cap {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: var(--s-2) var(--s-4);
-  font-family: var(--font-mono), monospace;
-  font-size: 12px;
+.figure .cap{
+  display:flex; justify-content: space-between; gap: var(--s-3);
+  font-family: var(--mono); font-size: var(--t-note);
+  text-transform: uppercase; letter-spacing: .12em;
   color: var(--ink-3);
+  margin-top: var(--s-3);
   border-top: 1px solid var(--rule);
-}
-
-/* --- Pull quote ----------------------------------------- */
-.pull-quote {
-  border-left: 2px solid var(--terra);
-  padding-left: var(--s-5);
-  margin: var(--s-7) 0;
-  font-size: clamp(20px, 2.5vw, 28px);
-  font-style: italic;
-  font-variation-settings: 'opsz' 24;
-  max-width: var(--measure-narrow);
-  color: var(--ink-2);
-}
-
-/* --- kv definition list --------------------------------- */
-dl.kv {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: var(--s-2) var(--s-5);
-  font-family: var(--font-mono), monospace;
-  font-size: 13px;
-}
-
-dl.kv dt { color: var(--ink-3); }
-dl.kv dd { color: var(--ink-2); margin: 0; }
-
-/* --- Section heading with number ------------------------ */
-h2.numbered .num {
-  font-family: var(--font-mono), monospace;
-  font-size: 12px;
-  color: var(--ink-3);
-  margin-right: var(--s-3);
-  vertical-align: middle;
-}
-
-/* --- Filter chips --------------------------------------- */
-.chip-row {
-  display: flex;
+  padding-top: var(--s-3);
   flex-wrap: wrap;
-  gap: var(--s-2);
 }
-
-.chip {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--s-2);
-  padding: var(--s-2) var(--s-4);
-  border: 1px solid var(--rule);
-  background: transparent;
-  color: var(--ink-2);
-  font-family: var(--font-mono), monospace;
-  font-size: 12px;
-  cursor: pointer;
-  transition: background var(--t-fast) var(--ease-journal),
-              color var(--t-fast) var(--ease-journal),
-              border-color var(--t-fast) var(--ease-journal);
-}
-
-.chip:hover {
-  background: var(--cream-2);
-  border-color: var(--ink-3);
+.pull{
+  font-family: var(--serif); font-style: italic;
+  font-size: 28px; line-height: 1.25;
   color: var(--ink);
+  border-left: 2px solid var(--terra);
+  padding: var(--s-2) 0 var(--s-2) var(--s-4);
+  margin: var(--s-6) 0;
+  max-width: 36ch;
 }
 
-.chip[aria-pressed="true"] {
-  background: var(--terra);
-  border-color: var(--terra);
-  color: var(--cream);
+/* --------------- tag chip (journal index filter) --------------- */
+.chips{
+  display:flex; flex-wrap: wrap; gap: var(--s-2);
+  margin: var(--s-5) 0 var(--s-6);
 }
-
-/* --- Inset box (NowStrip) ------------------------------- */
-.inset-box {
-  background: var(--cream-2);
+.chip{
+  font-family: var(--mono); font-size: var(--t-note);
+  text-transform: uppercase; letter-spacing: .14em;
+  padding: 6px 12px;
   border: 1px solid var(--rule);
-  padding: var(--s-6);
-  display: grid;
-  grid-template-columns: 140px 1fr;
-  gap: var(--s-5);
+  color: var(--ink-2);
+  background: transparent;
+  cursor: pointer;
+  transition: all .2s var(--ease);
+}
+.chip:hover{ color: var(--terra); border-color: var(--terra); }
+.chip[aria-pressed="true"]{
+  color: var(--cream); background: var(--terra); border-color: var(--terra);
 }
 
-@media (max-width: 600px) {
-  .inset-box {
-    grid-template-columns: 1fr;
-  }
+/* --------------- footer --------------- */
+footer.site-foot{
+  margin-top: var(--s-9);
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--ink);
+  display:flex; justify-content: space-between; gap: var(--s-5);
+  font-family: var(--mono); font-size: var(--t-note);
+  text-transform: uppercase; letter-spacing: .14em;
+  color: var(--ink-3); flex-wrap: wrap;
+}
+
+/* --------------- reduced motion --------------- */
+@media (prefers-reduced-motion: reduce){
+  *{ transition: none !important; animation: none !important; }
 }

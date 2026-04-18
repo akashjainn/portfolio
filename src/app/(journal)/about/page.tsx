@@ -1,117 +1,67 @@
+import Link from 'next/link'
+import { SiteNav } from '@/components/journal/SiteNav'
+
 export const metadata = {
-  title: 'About',
+  title: 'About — Akash Jain',
   description: 'Akash Jain — software engineer, Georgia Tech CS, reliability engineering.',
 }
 
 export default function AboutPage() {
   return (
-    <div style={{ padding: 'var(--s-8) var(--s-7)' }}>
-      <p
-        style={{
-          fontFamily: 'var(--font-mono), monospace',
-          fontSize: 12,
-          color: 'var(--ink-3)',
-          textTransform: 'uppercase',
-          letterSpacing: '0.08em',
-          margin: '0 0 var(--s-4)',
-        }}
-      >
-        Atlanta, GA · Spring 2026
-      </p>
+    <main className="page ruled" id="main-content">
+      <SiteNav />
 
-      <h1 className="masthead" style={{ marginBottom: 'var(--s-8)' }}>
-        On <em>making things work</em>
-      </h1>
+      <header style={{ borderBottom: '1px solid var(--ink)', paddingBottom: 'var(--s-5)', marginBottom: 'var(--s-5)' }}>
+        <div className="note" style={{ textTransform: 'uppercase', letterSpacing: '.14em', marginBottom: 'var(--s-3)' }}>
+          Colophon &middot; who, where, what this is made of
+        </div>
+        <h1 className="masthead-title" style={{ fontSize: 'clamp(34px, 4.6vw, 56px)' }}>
+          The short version is<br />on the CV. The long<br />version is <em>everywhere else</em>.
+        </h1>
+      </header>
 
-      <div
-        className="grid-2 ruled"
-        style={{ gap: 'var(--s-8)', alignItems: 'start' }}
-      >
-        <aside
-          style={{
-            position: 'sticky',
-            top: 'var(--s-7)',
-            fontFamily: 'var(--font-mono), monospace',
-            fontSize: 12,
-            color: 'var(--ink-3)',
-          }}
-        >
-          <section style={{ marginBottom: 'var(--s-6)' }}>
-            <p style={{ margin: '0 0 var(--s-2)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-              Typefaces
-            </p>
-            <p style={{ margin: 0, lineHeight: 1.8 }}>
-              Source Serif 4<br />
-              JetBrains Mono
-            </p>
-          </section>
-          <section style={{ marginBottom: 'var(--s-6)' }}>
-            <p style={{ margin: '0 0 var(--s-2)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-              Stack
-            </p>
-            <p style={{ margin: 0, lineHeight: 1.8 }}>
-              Next.js 14<br />
-              TypeScript<br />
-              MDX<br />
-              Vercel
-            </p>
-          </section>
-          <section>
-            <p style={{ margin: '0 0 var(--s-2)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-              Links
-            </p>
-            <p style={{ margin: 0, lineHeight: 1.8 }}>
-              <a href="https://github.com/akashjainn" style={{ color: 'var(--terra-deep)' }}>
-                GitHub
-              </a>
-              <br />
-              <a href="https://linkedin.com/in/akashjainn" style={{ color: 'var(--terra-deep)' }}>
-                LinkedIn
-              </a>
-              <br />
-              <a href="/Akash-Jain-CV.pdf" style={{ color: 'var(--terra-deep)' }}>
-                CV (PDF)
-              </a>
-            </p>
-          </section>
+      <div className="grid-2">
+        <aside className="gutter">
+          Colophon<br />
+          Source Serif 4<br />
+          JetBrains Mono<br />
+          Inter Tight<br />
+          Next.js &middot; Vercel<br />
+          MDX content<br />
+          &asymp;38kb JS on index<br />
+          <br />
+          Elsewhere<br />
+          <Link href="mailto:akashjain1311@gmail.com">Email</Link><br />
+          <Link href="https://github.com/akashjainn" target="_blank" rel="noopener noreferrer">GitHub</Link><br />
+          <Link href="https://www.linkedin.com/in/akash-jain-687673209/" target="_blank" rel="noopener noreferrer">LinkedIn</Link>
         </aside>
-
-        <div
-          style={{
-            fontFamily: 'var(--font-serif), Georgia, serif',
-            fontSize: 18,
-            lineHeight: 1.65,
-            color: 'var(--ink)',
-          }}
-        >
-          <p>
-            I&apos;m a software engineer finishing a computer science degree at Georgia Tech. Most of my work sits at the edge where systems have to be reliable — messaging infrastructure that can&apos;t drop packets, satellite uplinks that have to stay up when the weather turns bad, real estate models that have to explain why they got it wrong.
+        <div>
+          <p className="lede">
+            I&apos;m Akash. I study computer science at Georgia Tech. I write here about what it&apos;s actually like to build things &mdash; the problems before the solutions, the three versions I had to throw away, and the quiet decisions that added up to the one that shipped.
           </p>
           <p>
-            This journal started as a way to write down what I actually learned — not the final architecture, but the three versions that failed before it. A case study that only shows the shipped design is an advertisement, not an explanation.
+            I grew up building small things that were mostly broken. I still do. The difference now is that the broken ones are part of the method: I post them alongside the finished work and let you watch them converge, or not.
           </p>
           <p>
-            I&apos;m interested in the gap between what metrics say and what users feel. An uptime ribbon that shows 99.98% doesn&apos;t tell you whether the two-second reconnect during a claim submission cost someone their session. Writing helps me think about that gap carefully.
+            I care about programs that feel hand-made at scale. Chat widgets that don&apos;t drop messages for two million people a month. Hackathon demos that still hold up when you unplug the network. Marketing pages that respect their subject enough to tell the truth about it.
           </p>
           <p>
-            Outside engineering: I read about information design, watch competitive chess, and occasionally attempt to debug my sourdough starter.
+            This summer I&apos;ll be interning at SpaceX on Starlink. Before that: State Farm, and now Georgia Tech&apos;s Office of Information Technology, where I&apos;m replacing legacy CMS templates with something closer to human.
           </p>
           <p>
-            If you want to work together or just argue about data visualization — the contact link is in the nav.
+            If you&apos;re hiring for something where that kind of work matters &mdash; send a note.
           </p>
-
-          <p
-            style={{
-              fontFamily: 'var(--font-mono), monospace',
-              fontSize: 12,
-              color: 'var(--ink-3)',
-              marginTop: 'var(--s-8)',
-            }}
-          >
-            — Akash Jain, April 2026
+          <p className="note" style={{ marginTop: 'var(--s-6)' }}>
+            &mdash; Akash Jain, Atlanta, April 2026.
           </p>
         </div>
       </div>
-    </div>
+
+      <footer className="site-foot">
+        <span>&copy; Akash Jain &middot; 2026</span>
+        <span>Field Journal &middot; Vol. I</span>
+        <span>Atlanta, GA</span>
+      </footer>
+    </main>
   )
 }

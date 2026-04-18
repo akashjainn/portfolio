@@ -1,156 +1,111 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import '../styles/journal.css'
 import { SiteNav } from '@/components/journal/SiteNav'
-import { SiteFooter } from '@/components/journal/SiteFooter'
-import { NowStrip } from '@/components/journal/NowStrip'
-import { EntryRow } from '@/components/journal/EntryRow'
 import { getAllJournalEntries } from '@/lib/journal'
 
 export default async function Home() {
   const recentEntries = await getAllJournalEntries({ limit: 4 })
 
   return (
-    <div className="journal-root" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <main className="page" id="main-content">
       <SiteNav />
-      <main id="main-content" style={{ flex: 1, padding: '0 var(--s-7)' }}>
-        {/* Hero */}
-        <section
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 240px',
-            gap: 'var(--s-7)',
-            padding: 'var(--s-8) 0 var(--s-7)',
-            borderBottom: '1px solid var(--ink)',
-            alignItems: 'end',
-          }}
-        >
-          <div>
-            <p
-              style={{
-                fontFamily: 'var(--font-mono), monospace',
-                fontSize: 12,
-                color: 'var(--ink-3)',
-                margin: '0 0 var(--s-4)',
-                textTransform: 'uppercase',
-                letterSpacing: '0.08em',
-              }}
-            >
-              Atlanta, GA · Spring 2026 · Vol. I
-            </p>
-            <h1 className="masthead">
-              A field journal of{' '}
-              <em>software work</em>
-            </h1>
+
+      {/* Hero */}
+      <section style={{ display: 'grid', gridTemplateColumns: '1fr 240px', gap: 'var(--s-7)', alignItems: 'end', paddingBottom: 'var(--s-6)', borderBottom: '1px solid var(--ink)', marginBottom: 'var(--s-5)' }}>
+        <div>
+          <div className="note" style={{ textTransform: 'uppercase', letterSpacing: '.14em', marginBottom: 'var(--s-3)' }}>
+            Atlanta, GA &middot; Spring 2026 &middot; Vol. I
           </div>
-          <aside
-            style={{
-              fontFamily: 'var(--font-mono), monospace',
-              fontSize: 13,
-              color: 'var(--ink-2)',
-              paddingBottom: 8,
-            }}
-          >
-            <p style={{ margin: '0 0 var(--s-2)', color: 'var(--ink-3)', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-              Currently
-            </p>
-            <p style={{ margin: 0 }}>SpaceX / Starlink</p>
-            <p style={{ margin: 'var(--s-1) 0 0', color: 'var(--ink-3)' }}>Reliability engineering</p>
-          </aside>
-        </section>
+          <h1 className="masthead-title">
+            I build <em>reliable</em> systems,<br />
+            and I write down<br />
+            what they taught me.
+          </h1>
+        </div>
+        <aside style={{ textAlign: 'right', fontFamily: 'var(--mono)', fontSize: 'var(--t-note)', color: 'var(--ink-3)', textTransform: 'uppercase', letterSpacing: '.12em', lineHeight: 1.7 }}>
+          Currently<br />
+          <strong style={{ display: 'block', fontFamily: 'var(--serif)', fontStyle: 'italic', fontSize: 20, color: 'var(--ink)', textTransform: 'none', letterSpacing: '-.005em', marginTop: 4, fontWeight: 400 }}>
+            Interning at SpaceX
+          </strong>
+          on Starlink &middot; summer &apos;26
+        </aside>
+      </section>
 
-        {/* Now strip */}
-        <NowStrip date="April 2026">
-          Working on reliability tooling for satellite uplink scheduling. Writing about the gap between what latency graphs show and what users actually feel.
-        </NowStrip>
+      {/* Now strip */}
+      <section style={{ padding: 'var(--s-5)', background: 'var(--cream-2)', border: '1px solid var(--ink)', display: 'grid', gridTemplateColumns: '140px 1fr', gap: 'var(--s-5)', marginBottom: 'var(--s-8)' }}>
+        <div style={{ fontFamily: 'var(--mono)', fontSize: 'var(--t-note)', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--terra)' }}>
+          Now &middot; Apr 18
+        </div>
+        <div>
+          <p>
+            Rewriting <Link href="https://propsage-web.vercel.app/" target="_blank" rel="noopener noreferrer">PropSage</Link>&apos;s evidence overlay so the demo holds with the network cable unplugged. Reading about satellite routing on the side &mdash; partly because I&apos;ll be at SpaceX this summer, mostly because I&apos;ve found the subject fascinating for years.
+          </p>
+          <p className="note" style={{ margin: 0 }}>Updates weekly. If this line goes stale, the site is broken.</p>
+        </div>
+      </section>
 
-        {/* Recent entries */}
-        <section aria-labelledby="recent-entries-heading" style={{ marginBottom: 'var(--s-8)' }}>
-          <h2
-            id="recent-entries-heading"
-            style={{
-              fontFamily: 'var(--font-mono), monospace',
-              fontSize: 11,
-              fontWeight: 400,
-              color: 'var(--ink-3)',
-              textTransform: 'uppercase',
-              letterSpacing: '0.1em',
-              margin: '0 0 var(--s-4)',
-            }}
-          >
-            Recent entries
-          </h2>
-
-          {recentEntries.map((entry) => (
-            <EntryRow key={entry.frontmatter.slug} frontmatter={entry.frontmatter} />
-          ))}
-
-          <div style={{ marginTop: 'var(--s-6)' }}>
-            <Link
-              href="/journal"
-              style={{
-                fontFamily: 'var(--font-mono), monospace',
-                fontSize: 13,
-                color: 'var(--terra-deep)',
-                textDecoration: 'none',
-              }}
-            >
-              See all entries →
+      {/* Recent entries */}
+      <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 400, fontSize: 28, margin: '0 0 var(--s-3)', letterSpacing: '-.005em' }}>
+        Recent entries
+      </h2>
+      <div className="entries">
+        {recentEntries.map((entry) => {
+          const { frontmatter } = entry
+          const dateStr = frontmatter.dateDisplay ?? new Date(frontmatter.publishedAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
+          const endStr = frontmatter.dateEnd ?? 'Present'
+          const kindLabel = { case: 'Case study', specimen: 'Specimen', study: 'Personal study', playground: 'Playground' }[frontmatter.kind]
+          return (
+            <Link key={frontmatter.slug} className="entry" href={`/journal/${frontmatter.slug}`} style={{ display: 'grid', color: 'inherit', textDecoration: 'none', borderBottom: '1px solid var(--rule)' }}>
+              <div className="dt">
+                {dateStr} &mdash;<em>{endStr}</em>
+              </div>
+              <div className="hd">
+                <h3>{frontmatter.headline ?? frontmatter.title.replace(/<[^>]+>/g, '')}</h3>
+                <p>{frontmatter.summary}</p>
+              </div>
+              <div className="tags">
+                <span>{kindLabel}</span>
+                <span>{frontmatter.tags.slice(0, 2).join(' \u00B7 ')}</span>
+                {frontmatter.tags[2] && <span>{frontmatter.tags[2]}</span>}
+              </div>
             </Link>
-          </div>
-        </section>
+          )
+        })}
+      </div>
 
-        {/* Colophon */}
-        <section
-          aria-label="Colophon"
-          className="grid-2 ruled"
-          style={{ padding: 'var(--s-7) 0', borderTop: '1px solid var(--rule)' }}
-        >
-          <div
-            style={{
-              position: 'sticky',
-              top: 'var(--s-7)',
-              alignSelf: 'start',
-              fontFamily: 'var(--font-mono), monospace',
-              fontSize: 12,
-              color: 'var(--ink-3)',
-            }}
-          >
-            <p style={{ margin: '0 0 var(--s-2)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Colophon</p>
-            <p style={{ margin: 0 }}>Source Serif 4 · JetBrains Mono</p>
-            <p style={{ margin: 'var(--s-2) 0 0' }}>Next.js 14 · Deployed on Vercel</p>
-          </div>
+      <p style={{ marginTop: 'var(--s-6)' }}>
+        <Link href="/journal">See all entries &rarr;</Link>
+      </p>
+
+      {/* Colophon */}
+      <section style={{ marginTop: 'var(--s-9)' }} className="ruled">
+        <div className="grid-2">
+          <aside className="gutter">
+            Colophon<br />
+            Source Serif 4<br />
+            JetBrains Mono<br />
+            Set on oak cream<br />
+            Hand-lettered mark
+          </aside>
           <div>
+            <p className="lede">Written and built by Akash Jain in Atlanta. Source Serif 4 for prose, JetBrains Mono for metadata, a hand-lettered wordmark I drew myself. Everything here is a project, not a claim.</p>
             <p>
-              I&apos;m a software engineer at Georgia Tech finishing a CS degree, spending most of my time thinking about systems that have to work when they can&apos;t afford not to — real-time messaging, satellite uplinks, distributed coordination.
-            </p>
-            <p>
-              This journal is where I write down what I actually learned — including the three versions that failed before the one that shipped.
-            </p>
-            <p>
-              If you want to see the work without reading about it, start with{' '}
-              <Link href="/journal/statefarm-chat" style={{ color: 'var(--terra-deep)' }}>
-                the State Farm entry
-              </Link>
-              {' '}or{' '}
-              <Link href="/journal/propsage" style={{ color: 'var(--terra-deep)' }}>
-                PropSage
-              </Link>
-              .
-            </p>
-            <p
-              style={{
-                fontFamily: 'var(--font-mono), monospace',
-                fontSize: 12,
-                color: 'var(--ink-3)',
-                marginTop: 'var(--s-6)',
-              }}
-            >
-              — Akash Jain
+              Say hello: <Link href="mailto:akashjain1311@gmail.com">akashjain1311@gmail.com</Link>
+              &nbsp;&middot;&nbsp;
+              <Link href="https://github.com/akashjainn" target="_blank" rel="noopener noreferrer">github.com/akashjainn</Link>
+              &nbsp;&middot;&nbsp;
+              <Link href="https://www.linkedin.com/in/akash-jain-687673209/" target="_blank" rel="noopener noreferrer">LinkedIn</Link>
             </p>
           </div>
-        </section>
-      </main>
-      <SiteFooter />
-    </div>
+        </div>
+      </section>
+
+      <footer className="site-foot">
+        <span>&copy; Akash Jain &middot; 2026</span>
+        <span>Field Journal &middot; Vol. I</span>
+        <span>Atlanta, GA</span>
+      </footer>
+    </main>
   )
 }

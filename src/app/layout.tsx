@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Source_Serif_4, JetBrains_Mono } from 'next/font/google'
+import { Source_Serif_4, JetBrains_Mono, Inter_Tight } from 'next/font/google'
 import './globals.css'
 
 const sourceSerif4 = Source_Serif_4({
@@ -14,6 +14,13 @@ const jetBrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   weight: ['400', '500'],
   variable: '--font-mono',
+  display: 'swap',
+})
+
+const interTight = Inter_Tight({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-sans',
   display: 'swap',
 })
 
@@ -59,7 +66,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${sourceSerif4.variable} ${jetBrainsMono.variable}`}
+      className={`${sourceSerif4.variable} ${jetBrainsMono.variable} ${interTight.variable}`}
       suppressHydrationWarning
     >
       <body>

@@ -1,12 +1,14 @@
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { SiteNav } from '@/components/journal/SiteNav'
 import { getJournalEntry, getJournalSlugs } from '@/lib/journal'
-import { EntryHead } from '@/components/journal/EntryHead'
 import { PressedSpecimen } from '@/components/journal/PressedSpecimen'
 import { PullQuote } from '@/components/journal/PullQuote'
 import { Figure } from '@/components/journal/Figure'
 import { SectionHeading } from '@/components/journal/SectionHeading'
+import type { JournalKvPair } from '@/lib/journal'
 
-// No-op stubs for legacy MDX components that may appear in old content
+// No-op stubs for legacy MDX components
 function ModelViewer() { return null }
 function VideoWithCaptions() { return null }
 function Callout({ children }: { children: React.ReactNode }) { return <div>{children}</div> }
@@ -21,14 +23,14 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const entry = await getJournalEntry(params.slug)
   if (!entry) return { title: 'Entry Not Found' }
+  const { frontmatter: fm } = entry
   return {
-    title: entry.frontmatter.title.replace(/<[^>]+>/g, ''),
-    description: entry.frontmatter.summary,
+    title: fm.headline ?? fm.title.replace(/<[^>]+>/g, ''),
+    description: fm.summary,
   }
 }
 
 export default async function JournalEntryPage({ params }: { params: { slug: string } }) {
-  // Get metadata first to know the artifact type for PressedSpecimen
   const meta = await getJournalEntry(params.slug)
   if (!meta) notFound()
 
@@ -46,47 +48,84 @@ export default async function JournalEntryPage({ params }: { params: { slug: str
   })
   if (!entry) notFound()
 
-  const { frontmatter, compiledSource, readingTime } = entry
+  const { frontmatter: fm, compiledSource, readingTime } = entry
+
+  const kindLabel: Record<string, string> = {
+    case: 'Case study',
+    specimen: 'Specimen',
+    study: 'Personal study',
+    playground: 'Playground',
+  }
+
+  const footerLabel = `Entry No. ${String(fm.entryNo).padStart(2, '0')} · ${fm.headline ?? fm.title.replace(/<[^>]+>/g, '')}`
 
   return (
-    <article style={{ padding: '0 var(--s-7)' }}>
-      <EntryHead frontmatter={frontmatter} readingTime={readingTime} />
+    <main className="page" id="main-content">
+      <SiteNav />
 
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: '38.2% 1fr',
-          gap: 'var(--s-7)',
-          padding: 'var(--s-7) 0',
-        }}
-      >
-        <aside
-          style={{
-            position: 'sticky',
-            top: 'var(--s-7)',
-            alignSelf: 'start',
-            fontFamily: 'var(--font-mono), monospace',
-            fontSize: 12,
-            color: 'var(--ink-3)',
-          }}
-        >
-          <p style={{ margin: '0 0 var(--s-3)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-            At a glance
-          </p>
-          <p style={{ margin: 0, lineHeight: 1.6 }}>{frontmatter.summary}</p>
+      {/* proj-head */}
+      <div className="proj-head">
+        <div>
+          <div className="kicker">
+            {fm.kicker ?? `Entry No. ${String(fm.entryNo).padStart(2, '0')} · ${kindLabel[fm.kind]}`}
+          </div>
+          <h1 dangerouslySetInnerHTML={{ __html: fm.titleHtml ?? fm.title }} />
+        </div>
+        <dl className="kv">
+          {(fm.kvPairs ?? []).map((kv: JournalKvPair) => (
+            <div key={kv.key}>
+              <dt>{kv.key}</dt>
+              <dd>
+                {kv.href ? (
+                  <Link href={kv.href} target="_blank" rel="noopener noreferrer">
+                    {kv.value}
+                  </Link>
+                ) : kv.value}
+              </dd>
+            </div>
+          ))}
+          {!fm.kvPairs && (
+            <>
+              <div><dt>Published</dt><dd>{new Date(fm.publishedAt).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</dd></div>
+              <div><dt>Reading</dt><dd>{readingTime} min</dd></div>
+            </>
+          )}
+        </dl>
+      </div>
+
+      {/* proj-body */}
+      <div className="proj-body">
+        <aside className="gutter">
+          {fm.contents && (
+            <>
+              <h5>Contents</h5>
+              <p dangerouslySetInnerHTML={{ __html: fm.contents.replace(/\n/g, '<br/>') }} />
+            </>
+          )}
+          {fm.atAGlance && (
+            <>
+              <h5 style={{ marginTop: fm.contents ? 'var(--s-5)' : 0 }}>At a glance</h5>
+              <p>{fm.atAGlance}</p>
+            </>
+          )}
+          {!fm.contents && !fm.atAGlance && (
+            <p style={{ fontStyle: 'italic' }}>{fm.summary}</p>
+          )}
         </aside>
 
-        <div
-          style={{
-            fontFamily: 'var(--font-serif), Georgia, serif',
-            fontSize: 18,
-            lineHeight: 1.65,
-            color: 'var(--ink)',
-          }}
-        >
+        <div className="main">
           {compiledSource}
+          <p style={{ marginTop: 'var(--s-6)' }}>
+            <Link href="/journal">&larr; Back to the journal</Link>
+          </p>
         </div>
       </div>
-    </article>
+
+      <footer className="site-foot">
+        <span>&copy; Akash Jain &middot; 2026</span>
+        <span>{footerLabel}</span>
+        <span>Atlanta, GA</span>
+      </footer>
+    </main>
   )
 }

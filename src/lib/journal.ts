@@ -12,16 +12,30 @@ export interface JournalArtifact {
   aspectRatio?: string
 }
 
+export interface JournalKvPair {
+  key: string
+  value: string
+  href?: string
+}
+
 export interface JournalFrontmatter {
   slug: string
   title: string
-  summary: string
+  headline?: string      // plain text for entry list h3
+  titleHtml?: string     // HTML with <em> for proj-head h1
+  summary: string        // "At a glance" short description
   tags: string[]
   status: 'published' | 'draft'
   entryNo: number
   kind: 'case' | 'specimen' | 'study' | 'playground'
   publishedAt: string
   updatedAt?: string
+  dateDisplay?: string   // e.g. "Sep 2025"
+  dateEnd?: string       // e.g. "Present" or "Aug 2025"
+  kicker?: string        // e.g. "Entry No. 02 · Case study · Enterprise"
+  kvPairs?: JournalKvPair[]
+  contents?: string      // TOC as newline-separated "§ N  Label" strings
+  atAGlance?: string     // brief performance/outcome summary
   artifact: JournalArtifact
 }
 
