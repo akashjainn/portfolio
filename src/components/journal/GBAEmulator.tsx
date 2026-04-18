@@ -1,12 +1,61 @@
+'use client'
+
+import { useEffect, useRef } from 'react'
 import type { JournalArtifact } from '@/lib/journal'
 
-interface GBAViewportProps {
+interface GBAEmulatorProps {
   artifact: JournalArtifact
 }
 
-export function GBAViewport({ artifact }: GBAViewportProps) {
+export function GBAEmulator({ artifact }: GBAEmulatorProps) {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const emulatorRef = useRef<any>(null)
+
+  useEffect(() => {
+    const loadEmulator = async () => {
+      if (!canvasRef.current) return
+
+      // Load emulatorjs library
+      const script = document.createElement('script')
+      script.src = 'https://www.emulatorjs.com/demos/full.js'
+      script.async = true
+
+      script.onload = async () => {
+        const canvas = canvasRef.current
+        if (!canvas || !(window as any).EJS_player) return
+
+        try {
+          // Initialize emulator
+          const emu = new (window as any).EJS_player({
+            element: canvas,
+            gameUrl: '/assets/adventuretime.gba',
+            core: 'gba',
+            fps: 60,
+            autoplay: false,
+          })
+
+          emulatorRef.current = emu
+        } catch (err) {
+          console.error('Failed to initialize emulator:', err)
+        }
+      }
+
+      document.body.appendChild(script)
+
+      return () => {
+        if (document.body.contains(script)) {
+          document.body.removeChild(script)
+        }
+      }
+    }
+
+    loadEmulator()
+  }, [])
+
   return (
     <div
+      ref={containerRef}
       style={{
         display: 'flex',
         alignItems: 'center',
@@ -26,9 +75,7 @@ export function GBAViewport({ artifact }: GBAViewportProps) {
           padding: '24px 20px 48px',
           boxShadow: '0 8px 32px rgba(0,0,0,0.25)',
         }}
-        aria-label="Game Boy Advance viewport"
       >
-        {/* Screen bezel */}
         <div
           style={{
             background: '#2A2A2A',
@@ -37,7 +84,6 @@ export function GBAViewport({ artifact }: GBAViewportProps) {
             marginBottom: 16,
           }}
         >
-          {/* Screen */}
           <div
             style={{
               aspectRatio: '3/2',
@@ -46,22 +92,25 @@ export function GBAViewport({ artifact }: GBAViewportProps) {
               overflow: 'hidden',
               position: 'relative',
             }}
+            ref={canvasRef}
           >
-            <iframe
-              src="https://www.emulatorjs.com/roms/gba/index.html?rom=/assets/adventuretime.gba"
+            <div
               style={{
                 width: '100%',
                 height: '100%',
-                border: 'none',
-                borderRadius: 4,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'var(--ink-3)',
+                fontSize: 'var(--t-meta)',
+                textAlign: 'center',
               }}
-              title="Adventure Time GBA - Playable"
-              allow="fullscreen"
-            />
+            >
+              Loading emulator...
+            </div>
           </div>
         </div>
 
-        {/* D-pad placeholder */}
         <div
           style={{
             display: 'flex',
