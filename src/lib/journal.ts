@@ -36,6 +36,7 @@ export interface JournalFrontmatter {
   kvPairs?: JournalKvPair[]
   contents?: string      // TOC as newline-separated "§ N  Label" strings
   atAGlance?: string     // brief performance/outcome summary
+  theme?: string         // e.g. "sl" for Starlink dark theme
   artifact: JournalArtifact
 }
 

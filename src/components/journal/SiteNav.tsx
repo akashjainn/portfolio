@@ -6,7 +6,7 @@ const NAV_LINKS = [
   { href: '/journal', label: 'Journal' },
   { href: '/about', label: 'About' },
   { href: '/Akash-Jain-CV.pdf', label: 'CV', external: true },
-  { href: 'mailto:akashjain1311@gmail.com', label: 'Contact', external: true },
+  { href: '/contact', label: 'Contact' },
 ] as const
 
 export function SiteNav() {
