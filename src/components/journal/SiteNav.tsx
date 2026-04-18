@@ -18,9 +18,9 @@ export function SiteNav() {
       <div className="brand">
         <Link href="/" className="plain" aria-label="Akash Jain — home">
           <Image
-            src="/assets/wordmark-tight.svg"
+            src="/assets/logo.svg"
             alt="Akash Jain"
-            width={85}
+            width={93}
             height={34}
             priority
           />
