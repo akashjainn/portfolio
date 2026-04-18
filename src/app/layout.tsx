@@ -1,59 +1,47 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Source_Serif_4, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
-import '../styles/design-system.css'
-import { RoleProvider } from '@/components/ui/role-personalization'
-import { EffectsPrefsProvider } from '@/context/EffectsPrefsContext'
-import { WebVitals } from '@/components/analytics/web-vitals'
-import { CommandPalette } from '@/components/command-palette/command-palette'
 
-// Configure Inter as fallback (SF Pro will be loaded via CSS when available)
-const inter = Inter({ 
+const sourceSerif4 = Source_Serif_4({
   subsets: ['latin'],
-  variable: '--font-inter',
+  axes: ['opsz'],
+  weight: ['300', '400', '500'],
+  style: ['normal', 'italic'],
+  variable: '--font-serif',
+  display: 'swap',
+})
+
+const jetBrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-mono',
   display: 'swap',
 })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://akashjain.dev'),
   title: {
-    default: 'Akash Jain — Building intelligent, real-world systems',
-    template: '%s | Akash Jain'
+    default: 'Akash Jain — Field Journal',
+    template: '%s | Akash Jain',
   },
-  description: 'Full-stack developer crafting accessible, measurable Next.js apps with telemetry and performance budgets. PropSage, StockSense, and more enterprise-grade projects.',
-  keywords: [
-    'next.js developer',
-    'typescript engineer', 
-    'real-time systems',
-    'computer science',
-    'portfolio analytics',
-    'accessible web development',
-    'performance optimization',
-    'telemetry monitoring'
-  ],
+  description:
+    'A field journal of software work by Akash Jain — case studies, specimens, and personal study.',
   authors: [{ name: 'Akash Jain', url: 'https://akashjain.dev' }],
   creator: 'Akash Jain',
   openGraph: {
-    title: 'Akash Jain — Building intelligent, real-world systems',
-    description: 'Full-stack developer focused on performant, accessible web systems with Next.js/TypeScript.',
+    title: 'Akash Jain — Field Journal',
+    description: 'Case studies, specimens, and personal study.',
     url: 'https://akashjain.dev',
     siteName: 'Akash Jain',
     locale: 'en_US',
     type: 'website',
-    images: [
-      {
-        url: '/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'Akash Jain - Building intelligent, real-world systems'
-      }
-    ]
+    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Akash Jain — Building intelligent, real-world systems',
-    description: 'Full-stack developer focused on performant, accessible web systems.',
-    images: ['/og-image.png']
+    title: 'Akash Jain — Field Journal',
+    description: 'Case studies, specimens, and personal study.',
+    images: ['/og-image.png'],
   },
   robots: {
     index: true,
@@ -66,50 +54,20 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  verification: {
-    google: 'your-google-verification-code',
-  },
-};
+}
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
-      <body className={inter.className} suppressHydrationWarning>
-        {/* JSON-LD structured data */}
-        <script
-          type="application/ld+json"
-          // Using dangerouslySetInnerHTML is recommended for JSON-LD in Next.js
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'Person',
-              name: 'Akash Jain',
-              url: 'https://akashjain.dev',
-              sameAs: [
-                'https://github.com/akashjainn'
-              ],
-              jobTitle: 'Full-stack Developer',
-              worksFor: {
-                '@type': 'Organization',
-                name: 'Independent'
-              }
-            })
-          }}
-        />
-        <RoleProvider>
-          <EffectsPrefsProvider>
-          <a href="#main-content" className="skip-link">
-            Skip to main content
-          </a>
-          {children}
-          <WebVitals />
-          <CommandPalette />
-          </EffectsPrefsProvider>
-        </RoleProvider>
+    <html
+      lang="en"
+      className={`${sourceSerif4.variable} ${jetBrainsMono.variable}`}
+      suppressHydrationWarning
+    >
+      <body suppressHydrationWarning>
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
+        {children}
       </body>
     </html>
   )

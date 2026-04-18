@@ -1,0 +1,352 @@
+/* =========================================================
+   FIELD JOURNAL — Design System
+   ========================================================= */
+
+/* --- Fonts (loaded via next/font, CSS vars injected) --- */
+/* --font-serif: set by layout.tsx via next/font/google     */
+/* --font-mono:  set by layout.tsx via next/font/google     */
+
+/* --- Spacing scale ---------------------------------------- */
+:root {
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 72px;
+  --s-9: 112px;
+}
+
+/* --- Color tokens — light mode (default) ----------------- */
+:root {
+  --cream:      #F4ECDC;
+  --cream-2:    #EADFC9;
+  --rule:       #D7C8AC;
+  --ink:        #2B2118;
+  --ink-2:      #4A3C2E;
+  --ink-3:      #6B5A47;
+  --terra:      #B95C2F;
+  --terra-deep: #8F401E;
+  --moss:       #56643A;
+  --ochre:      #AE7A18;
+  --focus:      #B95C2F;
+  --danger:     #8B2E1A;
+  --success:    #3F4A28;
+}
+
+/* --- Color tokens — dark mode ---------------------------- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --cream:      #1C1811;
+    --cream-2:    #24201A;
+    --rule:       #3A3226;
+    --ink:        #EEE3CE;
+    --ink-2:      #C9BCA3;
+    --ink-3:      #9A8D74;
+    --terra:      #D2784C;
+    --terra-deep: #C4633A;
+    --moss:       #8CA05E;
+    --ochre:      #D6A845;
+    --focus:      #D2784C;
+    --danger:     #D2694C;
+    --success:    #9FB36E;
+  }
+}
+
+.dark {
+  --cream:      #1C1811;
+  --cream-2:    #24201A;
+  --rule:       #3A3226;
+  --ink:        #EEE3CE;
+  --ink-2:      #C9BCA3;
+  --ink-3:      #9A8D74;
+  --terra:      #D2784C;
+  --terra-deep: #C4633A;
+  --moss:       #8CA05E;
+  --ochre:      #D6A845;
+  --focus:      #D2784C;
+  --danger:     #D2694C;
+  --success:    #9FB36E;
+}
+
+/* --- Prose measure --------------------------------------- */
+:root {
+  --measure:        68ch;
+  --measure-narrow: 52ch;
+}
+
+/* --- Motion tokens --------------------------------------- */
+:root {
+  --ease-journal: cubic-bezier(.2, .6, .2, 1);
+  --t-fast:  200ms;
+  --t-mid:   250ms;
+  --t-slow:  300ms;
+}
+
+/* --- Reduce motion: zero everything --------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0ms !important;
+    animation-duration: 0ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* --- Base reset for journal pages ----------------------- */
+.journal-root {
+  background-color: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-serif), Georgia, serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Focus ring ----------------------------------------- */
+.journal-root *:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* --- Skip link ------------------------------------------ */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--s-4);
+  padding: var(--s-2) var(--s-4);
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-mono), monospace;
+  font-size: 14px;
+  border: 1px solid var(--rule);
+  z-index: 100;
+}
+.skip-link:focus {
+  top: var(--s-4);
+}
+
+/* --- Typography scale ------------------------------------ */
+.journal-root h1.masthead {
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 300;
+  font-style: italic;
+  font-variation-settings: 'opsz' 60;
+  line-height: 1.05;
+  color: var(--ink);
+}
+
+.journal-root h1.masthead em {
+  font-style: normal;
+  color: var(--terra);
+}
+
+.journal-root h1.entry-title {
+  font-size: clamp(36px, 4.5vw, 54px);
+  font-weight: 400;
+  font-variation-settings: 'opsz' 48;
+  line-height: 1.1;
+}
+
+.journal-root h1.entry-title em {
+  font-style: normal;
+  color: var(--terra);
+}
+
+.journal-root h2.phase {
+  font-size: clamp(24px, 3vw, 40px);
+  font-weight: 400;
+  font-variation-settings: 'opsz' 36;
+}
+
+.journal-root h3.entry-heading {
+  font-size: clamp(22px, 2.5vw, 30px);
+  font-weight: 500;
+  font-style: italic;
+  font-variation-settings: 'opsz' 24;
+}
+
+.journal-root h4 {
+  font-size: clamp(18px, 2vw, 22px);
+  font-weight: 500;
+  font-variation-settings: 'opsz' 18;
+}
+
+.journal-root p {
+  font-size: 18px;
+  font-weight: 400;
+  font-variation-settings: 'opsz' 14;
+  line-height: 1.65;
+  max-width: var(--measure);
+}
+
+.journal-root .small, .journal-root small {
+  font-size: 16px;
+  font-variation-settings: 'opsz' 12;
+  line-height: 1.5;
+}
+
+.journal-root .mono, .journal-root code, .journal-root kbd {
+  font-family: var(--font-mono), monospace;
+  font-size: 14px;
+}
+
+/* --- Golden-ratio ruled margin -------------------------- */
+.ruled {
+  position: relative;
+}
+
+@media (min-width: 900px) {
+  .ruled::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 38.2%;
+    width: 1px;
+    height: 100%;
+    border-left: 1px dashed var(--rule);
+    opacity: 0.7;
+    pointer-events: none;
+  }
+}
+
+/* --- Two-column grid helpers ---------------------------- */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-7);
+}
+
+@media (max-width: 768px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Entry row ------------------------------------------ */
+.entry-row {
+  display: grid;
+  grid-template-columns: 130px 1fr 200px;
+  gap: var(--s-5);
+  padding: var(--s-5) 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: start;
+  transition: background var(--t-mid) var(--ease-journal),
+              padding-left var(--t-mid) var(--ease-journal);
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.entry-row:hover {
+  background: var(--cream-2);
+  padding-left: var(--s-4);
+}
+
+@media (max-width: 700px) {
+  .entry-row {
+    grid-template-columns: 1fr;
+    gap: var(--s-2);
+  }
+}
+
+/* --- Figure / pressed-specimen box ---------------------- */
+.figure {
+  background: var(--cream-2);
+  border: 1px solid var(--rule);
+  overflow: hidden;
+}
+
+.figure .cap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--s-2) var(--s-4);
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  color: var(--ink-3);
+  border-top: 1px solid var(--rule);
+}
+
+/* --- Pull quote ----------------------------------------- */
+.pull-quote {
+  border-left: 2px solid var(--terra);
+  padding-left: var(--s-5);
+  margin: var(--s-7) 0;
+  font-size: clamp(20px, 2.5vw, 28px);
+  font-style: italic;
+  font-variation-settings: 'opsz' 24;
+  max-width: var(--measure-narrow);
+  color: var(--ink-2);
+}
+
+/* --- kv definition list --------------------------------- */
+dl.kv {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--s-2) var(--s-5);
+  font-family: var(--font-mono), monospace;
+  font-size: 13px;
+}
+
+dl.kv dt { color: var(--ink-3); }
+dl.kv dd { color: var(--ink-2); margin: 0; }
+
+/* --- Section heading with number ------------------------ */
+h2.numbered .num {
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  color: var(--ink-3);
+  margin-right: var(--s-3);
+  vertical-align: middle;
+}
+
+/* --- Filter chips --------------------------------------- */
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: var(--s-2) var(--s-4);
+  border: 1px solid var(--rule);
+  background: transparent;
+  color: var(--ink-2);
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease-journal),
+              color var(--t-fast) var(--ease-journal),
+              border-color var(--t-fast) var(--ease-journal);
+}
+
+.chip:hover {
+  background: var(--cream-2);
+  border-color: var(--ink-3);
+  color: var(--ink);
+}
+
+.chip[aria-pressed="true"] {
+  background: var(--terra);
+  border-color: var(--terra);
+  color: var(--cream);
+}
+
+/* --- Inset box (NowStrip) ------------------------------- */
+.inset-box {
+  background: var(--cream-2);
+  border: 1px solid var(--rule);
+  padding: var(--s-6);
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: var(--s-5);
+}
+
+@media (max-width: 600px) {
+  .inset-box {
+    grid-template-columns: 1fr;
+  }
+}
