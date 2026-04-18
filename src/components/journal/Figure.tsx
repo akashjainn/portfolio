@@ -12,13 +12,26 @@ export function Figure({ children, caption, figLabel = 'FIG.', source, aspectRat
       className="figure"
       style={{
         margin: 'var(--s-7) 0',
-        aspectRatio: aspectRatio ?? undefined,
-        position: 'relative',
+        display: 'flex',
+        flexDirection: 'column',
         width: '100%',
       }}
     >
-      <div style={{ width: '100%', height: '100%', display: 'flex' }}>{children}</div>
-      <figcaption className="cap">
+      {/* Media wrapper owns the aspect ratio */}
+      <div
+        style={{
+          width: '100%',
+          aspectRatio: aspectRatio ?? undefined,
+          position: 'relative',
+          overflow: 'hidden',
+          display: 'flex',
+        }}
+      >
+        {children}
+      </div>
+
+      {/* Caption sits outside the ratio-controlled box */}
+      <figcaption className="cap" style={{ marginTop: 'var(--s-3)' }}>
         <span>{figLabel} — {caption}</span>
         {source && <span style={{ color: 'var(--ink-3)' }}>{source}</span>}
       </figcaption>

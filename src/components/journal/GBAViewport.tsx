@@ -14,13 +14,14 @@ export function GBAViewport({ artifact }: GBAViewportProps) {
         height: '100%',
         padding: 'var(--s-5)',
         background: 'var(--cream-2)',
+        minWidth: 0,
       }}
     >
       <div
         style={{
           position: 'relative',
           width: '100%',
-          maxWidth: 480,
+          maxWidth: 360,
           background: '#B0A89A',
           borderRadius: '16px 16px 24px 24px',
           padding: '24px 20px 48px',
@@ -47,17 +48,26 @@ export function GBAViewport({ artifact }: GBAViewportProps) {
               position: 'relative',
             }}
           >
-            <iframe
-              src="https://www.emulatorjs.com/roms/gba/index.html?rom=/assets/adventuretime.gba"
+            <div
               style={{
                 width: '100%',
                 height: '100%',
-                border: 'none',
-                borderRadius: 4,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: '#000',
+                color: '#EEE',
+                fontSize: '14px',
+                textAlign: 'center',
+                padding: '20px',
               }}
-              title="Adventure Time GBA - Playable"
-              allow="fullscreen"
-            />
+            >
+              <div>
+                <p style={{ margin: '0 0 10px 0', fontSize: '12px', color: '#999' }}>Playable GBA Emulator</p>
+                <p style={{ margin: 0 }}>Visit{' '}<a href="https://github.com/akashjainn/adventureTimeGame" target="_blank" rel="noopener noreferrer" style={{ color: '#0ea' }}>github.com/akashjainn/adventureTimeGame</a></p>
+                <p style={{ margin: '10px 0 0 0', fontSize: '12px' }}>to play in browser or on original hardware</p>
+              </div>
+            </div>
           </div>
         </div>
 
