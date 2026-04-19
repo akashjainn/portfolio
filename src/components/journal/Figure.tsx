@@ -9,14 +9,15 @@ interface FigureProps {
 export function Figure({ children, caption, figLabel, source, aspectRatio }: FigureProps) {
   return (
     <figure
+      className="figure"
       style={{
-        margin: 0,
+        margin: 'var(--s-5) 0',
         display: 'flex',
         flexDirection: 'column',
         width: '100%',
       }}
     >
-      {/* Media wrapper owns the aspect ratio */}
+      {/* Media wrapper owns the aspect ratio, fills full width */}
       <div
         style={{
           width: '100%',
@@ -29,7 +30,7 @@ export function Figure({ children, caption, figLabel, source, aspectRatio }: Fig
         {children}
       </div>
 
-      {/* Caption sits below with its own padding/styling */}
+      {/* Caption sits below with CSS styling */}
       <figcaption className="cap">
         {figLabel && <span>{figLabel} — {caption}</span>}
         {!figLabel && <span>{caption}</span>}
