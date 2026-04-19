@@ -6,12 +6,11 @@ interface FigureProps {
   aspectRatio?: string
 }
 
-export function Figure({ children, caption, figLabel = 'FIG.', source, aspectRatio }: FigureProps) {
+export function Figure({ children, caption, figLabel, source, aspectRatio }: FigureProps) {
   return (
     <figure
-      className="figure"
       style={{
-        margin: 'var(--s-7) 0',
+        margin: 0,
         display: 'flex',
         flexDirection: 'column',
         width: '100%',
@@ -30,9 +29,10 @@ export function Figure({ children, caption, figLabel = 'FIG.', source, aspectRat
         {children}
       </div>
 
-      {/* Caption sits outside the ratio-controlled box */}
-      <figcaption className="cap" style={{ marginTop: 'var(--s-3)' }}>
-        <span>{figLabel} — {caption}</span>
+      {/* Caption sits below with its own padding/styling */}
+      <figcaption className="cap">
+        {figLabel && <span>{figLabel} — {caption}</span>}
+        {!figLabel && <span>{caption}</span>}
         {source && <span style={{ color: 'var(--ink-3)' }}>{source}</span>}
       </figcaption>
     </figure>
