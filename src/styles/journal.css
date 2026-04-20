@@ -290,21 +290,17 @@ code{ font-family: var(--mono); font-size: 15px; color: var(--ink-2); }
 .figure{
   background: var(--cream-2);
   border: 1px solid var(--rule);
+  padding: var(--s-5);
   margin: var(--s-5) 0;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-.figure > div:first-child {
-  width: 100%;
 }
 .figure .cap{
   display:flex; justify-content: space-between; gap: var(--s-3);
   font-family: var(--mono); font-size: var(--t-note);
   text-transform: uppercase; letter-spacing: .12em;
   color: var(--ink-3);
-  padding: var(--s-5);
+  margin-top: var(--s-3);
   border-top: 1px solid var(--rule);
+  padding-top: var(--s-3);
   flex-wrap: wrap;
 }
 .pull{

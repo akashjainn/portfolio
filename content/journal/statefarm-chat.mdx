@@ -38,7 +38,7 @@ artifact:
 
 My summer was narrow on paper: rebuild the State Farm customer chat widget in Angular on top of the company's new design system, sit it on Amazon Connect, and don't drop messages. I spent the first two weeks mostly reading — the existing widget, the design system source, the Amazon Connect SDK, the tickets people had been filing about dropped messages for the last eighteen months.
 
-<Figure caption="FIG. 01 — Live widget on statefarm.com/customer-care" meta="Aug 2025 · Mux stream" aspectRatio="16 / 9">
+<Figure caption="FIG. 01 — Live widget on statefarm.com/customer-care" meta="Aug 2025 · Mux stream" aspectRatio="16 / 9" background="#1a1a1a">
   <iframe src="https://player.mux.com/kyk01xShiF6VqNCDkkq59CTlHBtnCW9N2hAfTue02FwiM" style={{ width: '100%', height: '100%', border: 0, display: 'block' }} allow="autoplay; encrypted-media; picture-in-picture; fullscreen" title="State Farm chat widget live demo" loading="lazy" />
 </Figure>
 
@@ -47,25 +47,25 @@ My summer was narrow on paper: rebuild the State Farm customer chat widget in An
 A welcome screen that has to promise confidentiality without sounding like a compliance warning. A conversation view that has to stay readable one-handed on a phone in a parking lot. An end-chat dialog that has to be kind to someone who might have been frustrated for nine minutes already.
 
 <Figure caption="FIG. 02 — Welcome · Conversation · End chat. Captured from statefarm.com." meta="Apr 2026">
-  <div style={{ display: 'flex', gap: 'var(--s-4)', justifyContent: 'center', alignItems: 'flex-start', width: '100%', maxWidth: '750px', margin: '0 auto', minWidth: 0 }}>
-    <div style={{ flex: '1 1 0', maxWidth: '180px', minWidth: 0, display: 'flex', flexDirection: 'column', gap: 'var(--s-2)', alignItems: 'center' }}>
-      <div style={{ background: 'var(--cream)', border: '2px solid #8C2A1F', borderRadius: '12px', overflow: 'hidden', aspectRatio: '9/16', width: '100%' }}>
-        <img src="/assets/sf-welcome.png" alt="Virtual assistant welcome screen with confidentiality notice and greeting" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} loading="lazy" />
+  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--s-3)' }}>
+    <figure style={{ margin: 0, display: 'flex', flexDirection: 'column', gap: 'var(--s-2)' }}>
+      <div style={{ background: '#fff', border: '1px solid var(--rule)', padding: 'var(--s-2)', display: 'flex', justifyContent: 'center' }}>
+        <img src="/assets/sf-welcome.png" alt="Virtual assistant welcome screen with confidentiality notice and greeting" loading="lazy" />
       </div>
-      <div style={{ fontSize: 'var(--t-note)', color: 'var(--ink-3)', textAlign: 'center', textTransform: 'uppercase', letterSpacing: '.1em', fontFamily: 'var(--font-mono)', whiteSpace: 'nowrap' }}>01 · Welcome</div>
-    </div>
-    <div style={{ flex: '1 1 0', maxWidth: '180px', minWidth: 0, display: 'flex', flexDirection: 'column', gap: 'var(--s-2)', alignItems: 'center' }}>
-      <div style={{ background: 'var(--cream)', border: '2px solid #8C2A1F', borderRadius: '12px', overflow: 'hidden', aspectRatio: '9/16', width: '100%' }}>
-        <img src="/assets/sf-dialogue.png" alt="Conversation view with quote flow and quick-reply chips" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} loading="lazy" />
+      <figcaption className="note" style={{ textTransform: 'uppercase', letterSpacing: '.14em' }}>01 · Welcome</figcaption>
+    </figure>
+    <figure style={{ margin: 0, display: 'flex', flexDirection: 'column', gap: 'var(--s-2)' }}>
+      <div style={{ background: '#fff', border: '1px solid var(--rule)', padding: 'var(--s-2)', display: 'flex', justifyContent: 'center' }}>
+        <img src="/assets/sf-dialogue.png" alt="Conversation view with quote flow and quick-reply chips" loading="lazy" />
       </div>
-      <div style={{ fontSize: 'var(--t-note)', color: 'var(--ink-3)', textAlign: 'center', textTransform: 'uppercase', letterSpacing: '.1em', fontFamily: 'var(--font-mono)', whiteSpace: 'nowrap' }}>02 · Conversation</div>
-    </div>
-    <div style={{ flex: '1 1 0', maxWidth: '180px', minWidth: 0, display: 'flex', flexDirection: 'column', gap: 'var(--s-2)', alignItems: 'center' }}>
-      <div style={{ background: 'var(--cream)', border: '2px solid #8C2A1F', borderRadius: '12px', overflow: 'hidden', aspectRatio: '9/16', width: '100%' }}>
-        <img src="/assets/sf-endchat.png" alt="End-chat confirmation dialog with Yes and No options" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} loading="lazy" />
+      <figcaption className="note" style={{ textTransform: 'uppercase', letterSpacing: '.14em' }}>02 · Conversation</figcaption>
+    </figure>
+    <figure style={{ margin: 0, display: 'flex', flexDirection: 'column', gap: 'var(--s-2)' }}>
+      <div style={{ background: '#fff', border: '1px solid var(--rule)', padding: 'var(--s-2)', display: 'flex', justifyContent: 'center' }}>
+        <img src="/assets/sf-endchat.png" alt="End-chat confirmation dialog with Yes and No options" loading="lazy" />
       </div>
-      <div style={{ fontSize: 'var(--t-note)', color: 'var(--ink-3)', textAlign: 'center', textTransform: 'uppercase', letterSpacing: '.1em', fontFamily: 'var(--font-mono)', whiteSpace: 'nowrap' }}>03 · End chat</div>
-    </div>
+      <figcaption className="note" style={{ textTransform: 'uppercase', letterSpacing: '.14em' }}>03 · End chat</figcaption>
+    </figure>
   </div>
 </Figure>
 

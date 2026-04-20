@@ -3,38 +3,25 @@ interface FigureProps {
   caption: string
   figLabel?: string
   source?: string
+  meta?: string
   aspectRatio?: string
+  background?: string
 }
 
-export function Figure({ children, caption, figLabel, source, aspectRatio }: FigureProps) {
+export function Figure({ children, caption, figLabel, source, meta, aspectRatio, background }: FigureProps) {
+  const metaText = source ?? meta
   return (
-    <figure
-      className="figure"
-      style={{
-        margin: 'var(--s-5) 0',
-        display: 'flex',
-        flexDirection: 'column',
+    <figure className="figure" style={{ margin: 'var(--s-5) 0' }}>
+      <div style={{
         width: '100%',
-      }}
-    >
-      {/* Media wrapper owns the aspect ratio, fills full width */}
-      <div
-        style={{
-          width: '100%',
-          aspectRatio: aspectRatio ?? undefined,
-          position: 'relative',
-          overflow: 'hidden',
-          display: 'flex',
-        }}
-      >
+        aspectRatio: aspectRatio ?? undefined,
+        background: background,
+      }}>
         {children}
       </div>
-
-      {/* Caption sits below with CSS styling */}
       <figcaption className="cap">
-        {figLabel && <span>{figLabel} — {caption}</span>}
-        {!figLabel && <span>{caption}</span>}
-        {source && <span style={{ color: 'var(--ink-3)' }}>{source}</span>}
+        <span>{figLabel ? `${figLabel} — ${caption}` : caption}</span>
+        {metaText && <span>{metaText}</span>}
       </figcaption>
     </figure>
   )

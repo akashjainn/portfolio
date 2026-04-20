@@ -30,7 +30,19 @@
       "Bash(bash /tmp/audit.sh)",
       "Bash(bash /tmp/transitive_analysis.sh)",
       "Bash(bash /tmp/check_unused_imports.sh)",
-      "Bash(bash /tmp/final_audit.sh)"
+      "Bash(bash /tmp/final_audit.sh)",
+      "WebFetch(domain:api.anthropic.com)",
+      "Bash(cp \"/c/Users/akash/.claude/projects/C--Users-akash-Documents-portfolio/50785685-d1b8-42aa-a2d5-829c5cb1e3ac/tool-results/webfetch-1776640080728-ka3m7q.bin\" /tmp/design.gz)",
+      "Bash(gunzip -f /tmp/design.gz)",
+      "Read(//tmp/**)",
+      "Read(//c/tmp/**)",
+      "Bash(tar xf *)",
+      "Bash(curl -s http://localhost:3000/journal/propsage)",
+      "Bash(curl -s \"http://localhost:3000/journal/propsage\")",
+      "Bash(npx kill-port *)",
+      "Bash(python3 -c \"import sys; html=sys.stdin.read\\(\\); import re; print\\('\\\\n'.join\\(re.findall\\(r'style=\\\\\"[^\\\\\"]{0,200}\\\\\"', html\\)[:10]\\)\\)\")",
+      "Bash(curl -s \"http://localhost:3000/journal/statefarm-chat\")",
+      "Bash(curl -s \"http://localhost:3000/journal/vr-puzzle-game\")"
     ]
   }
 }
