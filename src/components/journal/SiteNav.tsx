@@ -20,8 +20,8 @@ export function SiteNav() {
           <Image
             src="/assets/logo.svg"
             alt="Akash Jain"
-            width={93}
-            height={34}
+            width={153}
+            height={56}
             priority
           />
         </Link>

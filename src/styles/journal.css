@@ -93,8 +93,8 @@ a.plain:hover{ color: var(--terra); }
   font-size: 22px; letter-spacing: -.01em;
 }
 .site-nav .brand a{ border:0; display:inline-flex; align-items:center; color: var(--terra); }
-.site-nav .brand img{ height: 34px; width: auto; display:block; }
-@media (max-width: 560px){ .site-nav .brand img{ height: 28px; } }
+.site-nav .brand img{ height: 56px; width: auto; display:block; }
+@media (max-width: 560px){ .site-nav .brand img{ height: 40px; } }
 .site-nav .links{
   display:flex; gap: var(--s-5);
   font-family: var(--mono); font-size: var(--t-note);
