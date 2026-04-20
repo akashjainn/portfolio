@@ -144,11 +144,11 @@ test.describe('Accessibility Tests', () => {
     
     // Check for proper hierarchy (no skipping levels)
     for (let i = 1; i < headingLevels.length; i++) {
-      const currentLevel = headingLevels[i]
-      const previousLevel = headingLevels[i - 1]
-      
+      const currentLevel = headingLevels[i]!
+      const previousLevel = headingLevels[i - 1]!
+
       // Can go same level, one level deeper, or any level up
-      const isValidProgression = 
+      const isValidProgression =
         currentLevel === previousLevel || // Same level
         currentLevel === previousLevel + 1 || // One level deeper
         currentLevel < previousLevel // Any level up
