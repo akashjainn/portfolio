@@ -99,6 +99,7 @@ export async function getJournalEntry(
       source: content,
       components,
       options: {
+        blockJS: false,
         mdxOptions: {
           remarkPlugins: [remarkGfm],
           rehypePlugins: [rehypeSlug],
