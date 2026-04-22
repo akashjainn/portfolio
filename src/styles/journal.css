@@ -46,7 +46,9 @@
 }
 
 *{box-sizing:border-box}
-html,body{margin:0; background:var(--cream); color:var(--ink);}
+html,body{margin:0; background:var(--cream); color:var(--ink); overflow-x:hidden;}
+pre{ overflow-x:auto; max-width:100%; }
+pre, code{ word-break:normal; overflow-wrap:anywhere; }
 body{
   font-family: var(--serif);
   font-size: var(--t-body);

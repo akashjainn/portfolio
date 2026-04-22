@@ -25,7 +25,7 @@ The portfolio is built around the journal entry as the unit of trust. Most CS st
 
 5. **Performance is editorial discipline.** A page that loads slowly didn't respect the reader's time. The performance budget is a design constraint. Each artifact has a cost in both kilobytes and attention; it ships only if the entry is better for it.
 
-6. **Two papers, one hand.** Light mode is aged cream; dark mode is dark-stained walnut. Both feel like the same person made two versions of the same publication — not an inverted palette.
+6. **One papers, one hand.** One effective color palette. No switching between modes.
 
 ---
 

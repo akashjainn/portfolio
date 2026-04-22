@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "postinstall": "cp -r node_modules/@emulatorjs/emulatorjs/data public/emulatorjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -58,6 +59,7 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",
+    "@emulatorjs/emulatorjs": "^4.2.3",
     "@next/bundle-analyzer": "^14.2.33",
     "@playwright/test": "^1.46.1",
     "@testing-library/jest-dom": "^6.9.1",
