@@ -24,7 +24,7 @@ export function GBAViewport({ artifact }: GBAViewportProps) {
   useEffect(() => {
     setIsTouchDevice(window.matchMedia('(pointer: coarse)').matches)
 
-    const w = window as Record<string, unknown>
+    const w = window as unknown as Record<string, unknown>
     w.EJS_player = '#gba-player'
     w.EJS_core = 'gba'
     w.EJS_gameUrl = '/assets/adventuretime.gba'
