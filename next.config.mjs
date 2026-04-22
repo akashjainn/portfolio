@@ -69,6 +69,7 @@ const nextConfig = {
               "media-src 'self' blob: https://stream.mux.com",
               "frame-src 'self' blob: https://www.youtube.com https://player.mux.com https://propsage-web.vercel.app https://stocksense-taupe.vercel.app https://land-safe.vercel.app http://localhost:3000 http://localhost:3001 http://localhost:3002",
               "worker-src blob: 'self'",
+              "child-src blob: 'self'",
               "frame-ancestors 'self'",
               "base-uri 'self'",
               "form-action 'self'",

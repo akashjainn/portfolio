@@ -256,6 +256,8 @@ code{ font-family: var(--mono); font-size: 15px; color: var(--ink-2); }
   grid-template-columns: 38.2% 1fr;
   gap: var(--s-7);
 }
+.proj-body .gutter,
+.proj-body .main{ min-width: 0; }
 .proj-body .gutter{
   position: sticky; top: var(--s-5);
   align-self: start;

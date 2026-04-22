@@ -22,14 +22,16 @@ export function GBAViewport({ artifact }: GBAViewportProps) {
   const scriptRef = useRef<HTMLScriptElement | null>(null)
 
   useEffect(() => {
-    setIsTouchDevice(window.matchMedia('(pointer: coarse)').matches)
+    const isTouch = window.matchMedia('(pointer: coarse)').matches
+    setIsTouchDevice(isTouch)
 
     const w = window as unknown as Record<string, unknown>
     w.EJS_player = '#gba-player'
     w.EJS_core = 'gba'
     w.EJS_gameUrl = '/assets/adventuretime.gba'
     w.EJS_pathtodata = 'https://cdn.emulatorjs.org/stable/data/'
-    w.EJS_VirtualGamepad = true
+    w.EJS_VirtualGamepad = isTouch
+    w.EJS_startOnLoaded = true
     w.EJS_Buttons = { playPause: false, restart: true, mute: true, settings: false, fullscreen: false }
 
     const script = document.createElement('script')
@@ -42,18 +44,28 @@ export function GBAViewport({ artifact }: GBAViewportProps) {
         document.body.removeChild(scriptRef.current)
         scriptRef.current = null
       }
-      for (const key of ['EJS_player', 'EJS_core', 'EJS_gameUrl', 'EJS_pathtodata', 'EJS_VirtualGamepad', 'EJS_Buttons']) {
+      for (const key of ['EJS_player', 'EJS_core', 'EJS_gameUrl', 'EJS_pathtodata', 'EJS_VirtualGamepad', 'EJS_startOnLoaded', 'EJS_Buttons']) {
         delete w[key]
       }
     }
   }, [])
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-      {/* GBA shell — fills the figure's content width */}
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: 16,
+        width: '100%',
+        boxSizing: 'border-box',
+      }}
+    >
+      {/* GBA shell — max 480px, centered */}
       <div
         style={{
           width: '100%',
+          maxWidth: 480,
           background: '#B0A89A',
           borderRadius: '16px 16px 24px 24px',
           padding: '20px 20px 40px',
@@ -63,23 +75,41 @@ export function GBAViewport({ artifact }: GBAViewportProps) {
         aria-label="Game Boy Advance"
       >
         {/* Screen bezel */}
-        <div style={{ background: '#2A2A2A', borderRadius: 8, padding: 8, marginBottom: 16 }}>
+        <div
+          style={{
+            background: '#2A2A2A',
+            borderRadius: 8,
+            padding: 8,
+            marginBottom: 16,
+          }}
+        >
+          {/* EmulatorJS mounts into this element */}
           <div
             id="gba-player"
             style={{
-              aspectRatio: '3/2',
               width: '100%',
+              aspectRatio: '3/2',
               background: '#000',
               borderRadius: 4,
-              overflow: 'hidden',
               display: 'block',
+              position: 'relative',
             }}
           />
         </div>
 
         {/* Controls row */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 8px' }}>
-          <div style={{ width: 48, height: 48, background: '#888', borderRadius: 4, flexShrink: 0 }} aria-hidden="true" />
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            padding: '0 8px',
+          }}
+        >
+          <div
+            style={{ width: 48, height: 48, background: '#888', borderRadius: 4, flexShrink: 0 }}
+            aria-hidden="true"
+          />
           <div
             style={{
               fontFamily: 'var(--font-mono), monospace',
@@ -118,7 +148,15 @@ export function GBAViewport({ artifact }: GBAViewportProps) {
       {/* Desktop keyboard guide */}
       {!isTouchDevice && (
         <div
-          style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center' }}
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: 8,
+            justifyContent: 'center',
+            width: '100%',
+            maxWidth: 480,
+            boxSizing: 'border-box',
+          }}
           aria-label="Keyboard controls"
         >
           {BUTTON_TILES.map(({ label, key, bg }) => (
