@@ -12,7 +12,10 @@ export default async function Home() {
       <SiteNav />
 
       {/* Hero */}
-      <section style={{ display: 'grid', gridTemplateColumns: '1fr 240px', gap: 'var(--s-7)', alignItems: 'end', paddingBottom: 'var(--s-6)', borderBottom: '1px solid var(--ink)', marginBottom: 'var(--s-5)' }}>
+      <section
+        className="grid grid-cols-1 sm:grid-cols-[1fr_240px] gap-[var(--s-5)] sm:gap-[var(--s-7)]"
+        style={{ alignItems: 'end', paddingBottom: 'var(--s-6)', borderBottom: '1px solid var(--ink)', marginBottom: 'var(--s-5)' }}
+      >
         <div>
           <div className="note" style={{ textTransform: 'uppercase', letterSpacing: '.14em', marginBottom: 'var(--s-3)' }}>
             Atlanta, GA &middot; Spring 2026 &middot; Vol. I
