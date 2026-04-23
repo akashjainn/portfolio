@@ -36,7 +36,10 @@ export default async function Home() {
       </section>
 
       {/* Now strip */}
-      <section style={{ padding: 'var(--s-5)', background: 'var(--cream-2)', border: '1px solid var(--ink)', display: 'grid', gridTemplateColumns: '140px 1fr', gap: 'var(--s-5)', marginBottom: 'var(--s-8)' }}>
+      <section
+        className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-[var(--s-3)] sm:gap-[var(--s-5)]"
+        style={{ padding: 'var(--s-5)', background: 'var(--cream-2)', border: '1px solid var(--ink)', marginBottom: 'var(--s-8)' }}
+      >
         <div style={{ fontFamily: 'var(--mono)', fontSize: 'var(--t-note)', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--terra)' }}>
           Now &middot; Apr 18
         </div>
