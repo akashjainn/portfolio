@@ -124,7 +124,7 @@ h1.masthead-title em{ font-style: normal; color: var(--terra); }
 h2.phase{
   font-family: var(--serif);
   font-weight: 400;
-  font-size: var(--t-h2);
+  font-size: clamp(24px, 4vw, 38px);
   line-height: 1.05;
   letter-spacing: -.01em;
   margin: var(--s-9) 0 var(--s-5);
@@ -136,6 +136,9 @@ h2.phase .no{
   letter-spacing: .18em; text-transform: uppercase;
   color: var(--terra); font-weight: 500;
   margin-bottom: var(--s-3);
+}
+@media (max-width: 720px){
+  h2.phase{ margin-top: var(--s-6); }
 }
 h3{
   font-family: var(--serif);
