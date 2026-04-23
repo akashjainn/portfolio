@@ -48,7 +48,9 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
       "Bash(curl *)",
       "Bash(xargs grep *)",
-      "Bash(C:/Users/akash/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.7/scripts/start-server.sh *)"
+      "Bash(C:/Users/akash/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.7/scripts/start-server.sh *)",
+      "Bash(npx eslint *)",
+      "Bash(node *)"
     ]
   }
 }
