@@ -63,9 +63,10 @@ Redesign `GBAViewport.tsx` to produce a more accurate, taller GBA shell with a r
 ### Screen Bezel
 - Background: `#1e1e1e`
 - Border radius: `10px`
-- Padding: `10px`
+- Padding: `6px` (reduced from 10px to give more screen real-estate)
 - Box shadow: `inset 0 3px 8px rgba(0,0,0,0.7), 0 1px 0 rgba(255,255,255,0.1)`
 - Inner bevel ring: `border: 2px solid #111` on the bezel div
+- Screen div itself: `aspect-ratio: 3/2`, `width: 100%` — fills the full bezel width so it appears larger within the taller shell
 
 ### D-pad (in shell)
 - Three-column CSS grid, 3×3 cells where corners are empty
