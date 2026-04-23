@@ -7,15 +7,192 @@ interface GBAViewportProps {
   artifact: JournalArtifact
 }
 
-const BUTTON_TILES = [
-  { label: '↑↓←→', key: 'Arrows', bg: '#444' },
-  { label: 'A', key: 'Z', bg: '#8B2E1A' },
-  { label: 'B', key: 'X', bg: '#2B4A8A' },
-  { label: 'START', key: 'Enter', bg: '#555' },
-  { label: 'SELECT', key: 'Shift', bg: '#555' },
-  { label: 'L', key: 'A', bg: '#555' },
-  { label: 'R', key: 'S', bg: '#555' },
-]
+function DPad({ variant }: { variant: 'shell' | 'guide' }) {
+  const size = variant === 'guide' ? 42 : 36
+  const isGuide = variant === 'guide'
+
+  const armStyle: React.CSSProperties = {
+    width: size,
+    height: size,
+    background: isGuide
+      ? 'linear-gradient(180deg, #c0bdb5, #8a8880)'
+      : 'linear-gradient(180deg, #2a2a2a, #1a1a1a)',
+    border: isGuide ? '2px solid #777' : '1px solid #3a3a3a',
+    boxShadow: isGuide ? '0 3px 0 #555' : 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: isGuide ? '#333' : '#888',
+    fontSize: size * 0.45,
+    userSelect: 'none' as const,
+  }
+
+  return (
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: `${size}px ${size}px ${size}px`,
+        gridTemplateRows: `${size}px ${size}px ${size}px`,
+      }}
+      aria-hidden="true"
+    >
+      <div />
+      <div style={{ ...armStyle, borderRadius: isGuide ? '8px 8px 0 0' : '4px 4px 0 0' }}>▲</div>
+      <div />
+      <div style={{ ...armStyle, borderRadius: isGuide ? '8px 0 0 8px' : '4px 0 0 4px' }}>◀</div>
+      <div style={{
+        width: size,
+        height: size,
+        background: isGuide ? '#999' : '#1a1a1a',
+        border: isGuide ? '2px solid #777' : '1px solid #3a3a3a',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+        <div style={{
+          width: size * 0.28,
+          height: size * 0.28,
+          borderRadius: '50%',
+          background: isGuide ? '#777' : '#333',
+        }} />
+      </div>
+      <div style={{ ...armStyle, borderRadius: isGuide ? '0 8px 8px 0' : '0 4px 4px 0' }}>▶</div>
+      <div />
+      <div style={{ ...armStyle, borderRadius: isGuide ? '0 0 8px 8px' : '0 0 4px 4px' }}>▼</div>
+      <div />
+    </div>
+  )
+}
+
+function GameButton({ label, color, size }: { label: string; color: 'red' | 'blue'; size: number }) {
+  const isRed = color === 'red'
+  return (
+    <div
+      style={{
+        width: size,
+        height: size,
+        borderRadius: '50%',
+        background: isRed
+          ? 'radial-gradient(circle at 35% 30%, #d94f3f, #8B2E1A)'
+          : 'radial-gradient(circle at 35% 30%, #4080d0, #2B4A8A)',
+        border: `2px solid ${isRed ? '#6a1a0a' : '#1a2a6a'}`,
+        boxShadow: isRed
+          ? '0 4px 0 #5a1208, 0 6px 10px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,160,140,0.4)'
+          : '0 4px 0 #162258, 0 6px 10px rgba(0,0,0,0.35), inset 0 1px 0 rgba(140,170,255,0.4)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: size * 0.35,
+        color: 'white',
+        fontWeight: 900,
+        fontFamily: 'Arial, sans-serif',
+        userSelect: 'none' as const,
+        flexShrink: 0,
+      }}
+      aria-hidden="true"
+    >
+      {label}
+    </div>
+  )
+}
+
+function KeyboardGuide() {
+  const labelStyle: React.CSSProperties = {
+    fontSize: 11,
+    fontWeight: 700,
+    color: '#444',
+    letterSpacing: '0.5px',
+    fontFamily: 'Arial, sans-serif',
+  }
+
+  const shoulderBtnStyle: React.CSSProperties = {
+    padding: '10px 18px',
+    background: 'linear-gradient(180deg, #d0cfc8, #a8a6a0)',
+    borderRadius: '8px 8px 4px 4px',
+    border: '2px solid #888',
+    boxShadow: '0 4px 0 #666, 0 6px 8px rgba(0,0,0,0.2)',
+    fontSize: 14,
+    fontWeight: 700,
+    color: '#333',
+    letterSpacing: '1px',
+    fontFamily: 'Arial, sans-serif',
+  }
+
+  const pillBtnStyle: React.CSSProperties = {
+    padding: '8px 20px',
+    background: 'linear-gradient(180deg, #b8b5ae, #888680)',
+    borderRadius: 20,
+    border: '2px solid #777',
+    boxShadow: '0 4px 0 #555, 0 6px 8px rgba(0,0,0,0.2)',
+    fontSize: 10,
+    fontWeight: 700,
+    color: '#333',
+    letterSpacing: '2px',
+    fontFamily: 'Arial, sans-serif',
+  }
+
+  return (
+    <div
+      style={{
+        width: '100%',
+        maxWidth: 520,
+        background: '#f0ede8',
+        borderRadius: 12,
+        padding: '20px 24px',
+        boxSizing: 'border-box',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: 16,
+      }}
+      aria-label="Keyboard controls"
+    >
+      <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap', justifyContent: 'center' }}>
+        {/* L shoulder */}
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+          <div style={shoulderBtnStyle}>L</div>
+          <span style={labelStyle}>A key</span>
+        </div>
+
+        {/* D-pad */}
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+          <DPad variant="guide" />
+          <span style={labelStyle}>Arrow keys</span>
+        </div>
+
+        {/* B (left) A (right) — matches real GBA layout */}
+        <div style={{ display: 'flex', gap: 10, alignItems: 'flex-end' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+            <GameButton label="B" color="blue" size={52} />
+            <span style={labelStyle}>X key</span>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+            <GameButton label="A" color="red" size={52} />
+            <span style={labelStyle}>Z key</span>
+          </div>
+        </div>
+
+        {/* R shoulder */}
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+          <div style={shoulderBtnStyle}>R</div>
+          <span style={labelStyle}>S key</span>
+        </div>
+      </div>
+
+      {/* SELECT / START */}
+      <div style={{ display: 'flex', gap: 16 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+          <div style={pillBtnStyle}>SELECT</div>
+          <span style={labelStyle}>Shift</span>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+          <div style={pillBtnStyle}>START</div>
+          <span style={labelStyle}>Enter</span>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 export function GBAViewport({ artifact }: GBAViewportProps) {
   const [isTouchDevice, setIsTouchDevice] = useState(false)
@@ -61,125 +238,164 @@ export function GBAViewport({ artifact }: GBAViewportProps) {
         boxSizing: 'border-box',
       }}
     >
-      {/* GBA shell — max 480px, centered */}
+      {/* GBA shell — Arctic Silver, max 520px */}
       <div
         style={{
           width: '100%',
-          maxWidth: 480,
-          background: '#B0A89A',
-          borderRadius: '16px 16px 24px 24px',
-          padding: '20px 20px 40px',
-          boxShadow: '0 8px 32px rgba(0,0,0,0.25)',
+          maxWidth: 520,
+          background: 'linear-gradient(160deg, #d0cfc8 0%, #b0aea5 100%)',
+          borderRadius: '14px 14px 28px 28px',
+          boxShadow: '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.6)',
           boxSizing: 'border-box',
+          overflow: 'hidden',
         }}
         aria-label="Game Boy Advance"
       >
-        {/* Screen bezel */}
-        <div
-          style={{
-            background: '#2A2A2A',
-            borderRadius: 8,
-            padding: 8,
-            marginBottom: 16,
-          }}
-        >
-          {/* EmulatorJS mounts into this element */}
+        {/* Shoulder tabs */}
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <div
-            id="gba-player"
             style={{
-              width: '100%',
-              aspectRatio: '3/2',
-              background: '#000',
-              borderRadius: 4,
-              display: 'block',
-              position: 'relative',
+              padding: '8px 24px',
+              background: 'linear-gradient(160deg, #b8b5ae, #8a8880)',
+              borderRadius: '14px 0 8px 0',
+              fontSize: 12,
+              fontWeight: 700,
+              fontFamily: 'monospace',
+              color: '#444',
+              letterSpacing: '1px',
             }}
-          />
+            aria-hidden="true"
+          >L</div>
+          <div
+            style={{
+              padding: '8px 24px',
+              background: 'linear-gradient(160deg, #b8b5ae, #8a8880)',
+              borderRadius: '0 14px 0 8px',
+              fontSize: 12,
+              fontWeight: 700,
+              fontFamily: 'monospace',
+              color: '#444',
+              letterSpacing: '1px',
+            }}
+            aria-hidden="true"
+          >R</div>
         </div>
 
-        {/* Controls row */}
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            padding: '0 8px',
-          }}
-        >
-          <div
-            style={{ width: 48, height: 48, background: '#888', borderRadius: 4, flexShrink: 0 }}
-            aria-hidden="true"
-          />
+        {/* Body */}
+        <div style={{ padding: '16px 20px 28px' }}>
+          {/* Screen bezel */}
           <div
             style={{
-              fontFamily: 'var(--font-mono), monospace',
-              fontSize: 9,
-              color: '#888',
-              textAlign: 'center',
-              letterSpacing: '0.1em',
+              background: '#1e1e1e',
+              borderRadius: 10,
+              padding: 6,
+              marginBottom: 18,
+              boxShadow: 'inset 0 3px 8px rgba(0,0,0,0.7), 0 1px 0 rgba(255,255,255,0.1)',
+              border: '2px solid #111',
             }}
           >
-            GAME BOY<br />ADVANCE
+            <div
+              id="gba-player"
+              style={{
+                width: '100%',
+                aspectRatio: '3/2',
+                background: '#000',
+                borderRadius: 4,
+                display: 'block',
+                position: 'relative',
+              }}
+            />
           </div>
-          <div style={{ display: 'flex', gap: 8, flexShrink: 0 }} aria-hidden="true">
-            {(['B', 'A'] as const).map((btn) => (
-              <div
-                key={btn}
-                style={{
-                  width: 20,
-                  height: 20,
-                  borderRadius: '50%',
-                  background: btn === 'A' ? '#8B2E1A' : '#2B4A8A',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: 9,
-                  color: 'white',
-                  fontFamily: 'var(--font-mono), monospace',
-                }}
-              >
-                {btn}
+
+          {/* Controls row: D-pad · brand · A/B */}
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              padding: '0 4px',
+              marginBottom: 14,
+            }}
+          >
+            <DPad variant="shell" />
+
+            <div
+              style={{
+                fontFamily: 'monospace',
+                fontSize: 8,
+                color: 'rgba(0,0,0,0.35)',
+                textAlign: 'center',
+                letterSpacing: '2px',
+                fontWeight: 700,
+                textTransform: 'uppercase',
+              }}
+            >
+              GAME BOY<br />ADVANCE
+            </div>
+
+            {/* B left/lower, A right/higher — matches real GBA diagonal layout */}
+            <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+              <div style={{ paddingTop: 14 }}>
+                <GameButton label="B" color="blue" size={44} />
               </div>
+              <div style={{ paddingBottom: 14 }}>
+                <GameButton label="A" color="red" size={44} />
+              </div>
+            </div>
+          </div>
+
+          {/* Start / Select */}
+          <div style={{ display: 'flex', justifyContent: 'center', gap: 20, marginBottom: 18 }}>
+            {(['SELECT', 'START'] as const).map((btn) => (
+              <div key={btn} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+                <div
+                  style={{
+                    fontSize: 7,
+                    fontFamily: 'monospace',
+                    color: 'rgba(0,0,0,0.4)',
+                    letterSpacing: '1px',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  {btn}
+                </div>
+                <div
+                  style={{
+                    width: 52,
+                    height: 13,
+                    background: 'linear-gradient(180deg, #999, #777)',
+                    borderRadius: 20,
+                    border: '1px solid #666',
+                    boxShadow: '0 3px 0 #555',
+                    transform: 'rotate(-15deg)',
+                  }}
+                  aria-hidden="true"
+                />
+              </div>
+            ))}
+          </div>
+
+          {/* Speaker grille */}
+          <div
+            style={{ display: 'flex', justifyContent: 'flex-end', gap: 5, paddingRight: 4 }}
+            aria-hidden="true"
+          >
+            {Array.from({ length: 10 }).map((_, i) => (
+              <div
+                key={i}
+                style={{
+                  width: 5,
+                  height: 5,
+                  borderRadius: '50%',
+                  background: 'rgba(0,0,0,0.18)',
+                }}
+              />
             ))}
           </div>
         </div>
       </div>
 
-      {/* Desktop keyboard guide */}
-      {!isTouchDevice && (
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: 8,
-            justifyContent: 'center',
-            width: '100%',
-            maxWidth: 480,
-            boxSizing: 'border-box',
-          }}
-          aria-label="Keyboard controls"
-        >
-          {BUTTON_TILES.map(({ label, key, bg }) => (
-            <div key={label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
-              <div
-                style={{
-                  background: bg,
-                  color: 'white',
-                  borderRadius: 6,
-                  padding: '4px 8px',
-                  fontSize: 11,
-                  fontFamily: 'var(--font-mono), monospace',
-                  minWidth: 36,
-                  textAlign: 'center',
-                }}
-              >
-                {label}
-              </div>
-              <div style={{ fontSize: 9, color: 'var(--ink-3)' }}>{key}</div>
-            </div>
-          ))}
-        </div>
-      )}
+      {!isTouchDevice && <KeyboardGuide />}
     </div>
   )
 }
