@@ -20,9 +20,18 @@ export function SiteNav() {
           <Image
             src="/assets/logo.svg"
             alt="Akash Jain"
-            width={153}
+            width={243}
             height={56}
             priority
+            className="logo-light"
+          />
+          <Image
+            src="/assets/logo-inverted.svg"
+            alt="Akash Jain"
+            width={243}
+            height={56}
+            priority
+            className="logo-dark"
           />
         </Link>
       </div>
