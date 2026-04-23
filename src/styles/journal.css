@@ -95,8 +95,8 @@ a.plain:hover{ color: var(--terra); }
   font-size: 22px; letter-spacing: -.01em;
 }
 .site-nav .brand a{ border:0; display:inline-flex; align-items:center; color: var(--terra); }
-.site-nav .brand img{ height: 56px; width: auto; display:block; }
-@media (max-width: 560px){ .site-nav .brand img{ height: 40px; } }
+.site-nav .brand img{ height: 80px; width: auto; display:block; }
+@media (max-width: 560px){ .site-nav .brand img{ height: 52px; } }
 .site-nav .brand img.logo-dark{ display: none; }
 @media (prefers-color-scheme: dark){ .site-nav .brand img.logo-light{ display: none; } .site-nav .brand img.logo-dark{ display: block; } }
 .site-nav .links{
