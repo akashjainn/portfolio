@@ -250,7 +250,7 @@ code{ font-family: var(--mono); font-size: 15px; color: var(--ink-2); }
 .proj-head dl.kv dt{ display:inline-block; width: 78px; }
 .proj-head dl.kv dd{ display:inline; margin:0; color: var(--ink); }
 .proj-head dl.kv div{ border-bottom: 1px dotted var(--rule); padding: 4px 0; }
-@media (max-width: 900px){ .proj-head{ grid-template-columns: 1fr; } }
+@media (max-width: 720px){ .proj-head{ grid-template-columns: 1fr; } }
 
 .proj-body{
   display:grid;
