@@ -105,7 +105,7 @@ a.plain:hover{ color: var(--terra); }
 .site-nav .links a{ border-bottom: 0; color: var(--ink-2); }
 .site-nav .links a[aria-current="page"]{ color: var(--terra); }
 @media (max-width: 560px){
-  .site-nav .links{ gap: 8px; flex-wrap: nowrap; }
+  .site-nav .links{ gap: var(--s-2); flex-wrap: nowrap; }
   .site-nav .links a{ font-size: 11px; }
 }
 
