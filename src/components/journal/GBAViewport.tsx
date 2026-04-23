@@ -96,102 +96,12 @@ function GameButton({ label, color, size }: { label: string; color: 'red' | 'blu
   )
 }
 
-function KeyboardGuide() {
-  const labelStyle: React.CSSProperties = {
-    fontSize: 11,
-    fontWeight: 700,
-    color: '#444',
-    letterSpacing: '0.5px',
-    fontFamily: 'Arial, sans-serif',
-  }
-
-  const shoulderBtnStyle: React.CSSProperties = {
-    padding: '10px 18px',
-    background: 'linear-gradient(180deg, #d0cfc8, #a8a6a0)',
-    borderRadius: '8px 8px 4px 4px',
-    border: '2px solid #888',
-    boxShadow: '0 4px 0 #666, 0 6px 8px rgba(0,0,0,0.2)',
-    fontSize: 14,
-    fontWeight: 700,
-    color: '#333',
-    letterSpacing: '1px',
-    fontFamily: 'Arial, sans-serif',
-  }
-
-  const pillBtnStyle: React.CSSProperties = {
-    padding: '8px 20px',
-    background: 'linear-gradient(180deg, #b8b5ae, #888680)',
-    borderRadius: 20,
-    border: '2px solid #777',
-    boxShadow: '0 4px 0 #555, 0 6px 8px rgba(0,0,0,0.2)',
-    fontSize: 10,
-    fontWeight: 700,
-    color: '#333',
-    letterSpacing: '2px',
-    fontFamily: 'Arial, sans-serif',
-  }
-
-  return (
-    <div
-      style={{
-        width: '100%',
-        maxWidth: 520,
-        background: '#f0ede8',
-        borderRadius: 12,
-        padding: '20px 24px',
-        boxSizing: 'border-box',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: 16,
-      }}
-      aria-label="Keyboard controls"
-    >
-      <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap', justifyContent: 'center' }}>
-        {/* L shoulder */}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
-          <div style={shoulderBtnStyle}>L</div>
-          <span style={labelStyle}>A key</span>
-        </div>
-
-        {/* D-pad */}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
-          <DPad variant="guide" />
-          <span style={labelStyle}>Arrow keys</span>
-        </div>
-
-        {/* B (left) A (right) — matches real GBA layout */}
-        <div style={{ display: 'flex', gap: 10, alignItems: 'flex-end' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
-            <GameButton label="B" color="blue" size={52} />
-            <span style={labelStyle}>X key</span>
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
-            <GameButton label="A" color="red" size={52} />
-            <span style={labelStyle}>Z key</span>
-          </div>
-        </div>
-
-        {/* R shoulder */}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
-          <div style={shoulderBtnStyle}>R</div>
-          <span style={labelStyle}>S key</span>
-        </div>
-      </div>
-
-      {/* SELECT / START */}
-      <div style={{ display: 'flex', gap: 16 }}>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
-          <div style={pillBtnStyle}>SELECT</div>
-          <span style={labelStyle}>Shift</span>
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
-          <div style={pillBtnStyle}>START</div>
-          <span style={labelStyle}>Enter</span>
-        </div>
-      </div>
-    </div>
-  )
+const keyHint: React.CSSProperties = {
+  fontSize: 9,
+  fontFamily: 'monospace',
+  color: 'rgba(0,0,0,0.38)',
+  letterSpacing: '0.5px',
+  userSelect: 'none' as const,
 }
 
 export function GBAViewport({ artifact }: GBAViewportProps) {
@@ -255,30 +165,40 @@ export function GBAViewport({ artifact }: GBAViewportProps) {
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <div
             style={{
-              padding: '8px 24px',
+              padding: '6px 24px 8px',
               background: 'linear-gradient(160deg, #b8b5ae, #8a8880)',
               borderRadius: '14px 0 8px 0',
-              fontSize: 12,
-              fontWeight: 700,
               fontFamily: 'monospace',
               color: '#444',
               letterSpacing: '1px',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: 2,
             }}
             aria-hidden="true"
-          >L</div>
+          >
+            <span style={{ fontSize: 12, fontWeight: 700 }}>L</span>
+            <span style={keyHint}>A key</span>
+          </div>
           <div
             style={{
-              padding: '8px 24px',
+              padding: '6px 24px 8px',
               background: 'linear-gradient(160deg, #b8b5ae, #8a8880)',
               borderRadius: '0 14px 0 8px',
-              fontSize: 12,
-              fontWeight: 700,
               fontFamily: 'monospace',
               color: '#444',
               letterSpacing: '1px',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: 2,
             }}
             aria-hidden="true"
-          >R</div>
+          >
+            <span style={{ fontSize: 12, fontWeight: 700 }}>R</span>
+            <span style={keyHint}>S key</span>
+          </div>
         </div>
 
         {/* Body */}
@@ -317,7 +237,10 @@ export function GBAViewport({ artifact }: GBAViewportProps) {
               marginBottom: 14,
             }}
           >
-            <DPad variant="shell" />
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+              <DPad variant="shell" />
+              <span style={keyHint}>Arrows</span>
+            </div>
 
             <div
               style={{
@@ -334,19 +257,24 @@ export function GBAViewport({ artifact }: GBAViewportProps) {
             </div>
 
             {/* B left/lower, A right/higher — matches real GBA diagonal layout */}
-            <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-              <div style={{ paddingTop: 14 }}>
+            <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3, marginTop: 14 }}>
                 <GameButton label="B" color="blue" size={44} />
+                <span style={keyHint}>X key</span>
               </div>
-              <div style={{ paddingBottom: 14 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3 }}>
                 <GameButton label="A" color="red" size={44} />
+                <span style={keyHint}>Z key</span>
               </div>
             </div>
           </div>
 
           {/* Start / Select */}
           <div style={{ display: 'flex', justifyContent: 'center', gap: 20, marginBottom: 18 }}>
-            {(['SELECT', 'START'] as const).map((btn) => (
+            {([
+              { btn: 'SELECT', key: 'Shift' },
+              { btn: 'START', key: 'Enter' },
+            ] as const).map(({ btn, key }) => (
               <div key={btn} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
                 <div
                   style={{
@@ -371,6 +299,7 @@ export function GBAViewport({ artifact }: GBAViewportProps) {
                   }}
                   aria-hidden="true"
                 />
+                <span style={{ ...keyHint, marginTop: 4 }}>{key}</span>
               </div>
             ))}
           </div>
@@ -395,7 +324,6 @@ export function GBAViewport({ artifact }: GBAViewportProps) {
         </div>
       </div>
 
-      {!isTouchDevice && <KeyboardGuide />}
     </div>
   )
 }

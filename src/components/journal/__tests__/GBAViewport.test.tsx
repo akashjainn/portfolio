@@ -38,15 +38,17 @@ describe('GBAViewport', () => {
     expect(document.getElementById('gba-player')).toBeInTheDocument()
   })
 
-  it('shows keyboard guide on non-touch devices', () => {
-    mockMatchMedia(false)
+  it('renders key hints inside the shell', () => {
     render(<GBAViewport artifact={artifact} />)
-    expect(screen.getByLabelText('Keyboard controls')).toBeInTheDocument()
+    expect(screen.getByText('Z key')).toBeInTheDocument()
+    expect(screen.getByText('X key')).toBeInTheDocument()
+    expect(screen.getByText('Arrows')).toBeInTheDocument()
   })
 
-  it('hides keyboard guide on touch devices', () => {
+  it('renders on touch devices without a separate keyboard guide', () => {
     mockMatchMedia(true)
     render(<GBAViewport artifact={artifact} />)
     expect(screen.queryByLabelText('Keyboard controls')).not.toBeInTheDocument()
+    expect(screen.getByLabelText('Game Boy Advance')).toBeInTheDocument()
   })
 })
