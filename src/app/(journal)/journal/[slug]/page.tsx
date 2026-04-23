@@ -70,6 +70,11 @@ export default async function JournalEntryPage({ params }: { params: { slug: str
             {fm.kicker ?? `Entry No. ${String(fm.entryNo).padStart(2, '0')} · ${kindLabel[fm.kind]}`}
           </div>
           <h1 dangerouslySetInnerHTML={{ __html: fm.titleHtml ?? fm.title }} />
+          {fm.liveUrl && (
+            <Link href={fm.liveUrl} target="_blank" rel="noopener noreferrer" className="proj-cta">
+              View live site &rarr;
+            </Link>
+          )}
         </div>
         <dl className="kv">
           {(fm.kvPairs ?? []).map((kv: JournalKvPair) => (

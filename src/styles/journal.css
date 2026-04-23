@@ -246,6 +246,16 @@ code{ font-family: var(--mono); font-size: 15px; color: var(--ink-2); }
   line-height: 1.0; margin: 0; letter-spacing: -.01em;
 }
 .proj-head h1 em{ font-style: italic; color: var(--terra); }
+.proj-cta{
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--mono); font-size: var(--t-note);
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--terra); border: 1px solid var(--terra);
+  padding: 8px 14px; margin-top: var(--s-4);
+  text-decoration: none;
+  transition: background .15s ease, color .15s ease;
+}
+.proj-cta:hover{ background: var(--terra); color: var(--cream); }
 .proj-head dl.kv{
   font-family: var(--mono); font-size: var(--t-note);
   line-height: 1.9; color: var(--ink-3);

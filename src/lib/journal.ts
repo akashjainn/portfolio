@@ -37,6 +37,7 @@ export interface JournalFrontmatter {
   contents?: string      // TOC as newline-separated "§ N  Label" strings
   atAGlance?: string     // brief performance/outcome summary
   theme?: string         // e.g. "sl" for Starlink dark theme
+  liveUrl?: string       // URL to the live deployed project
   artifact: JournalArtifact
 }
 
