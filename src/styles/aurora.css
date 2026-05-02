@@ -574,6 +574,7 @@ a.entry:hover .arrow { transform: translateX(6px); color: var(--fg); border-colo
   -webkit-background-clip: text; background-clip: text;
   color: transparent; -webkit-text-fill-color: transparent;
   padding-right: 0.15em; /* italic overhang clips last char without this */
+  -webkit-box-decoration-break: clone; box-decoration-break: clone; /* extend padding to every line fragment */
 }
 .proj-head dl.kv {
   font-family: var(--mono);
