@@ -435,7 +435,7 @@ a.entry:hover .arrow { transform: translateX(6px); color: var(--fg); border-colo
     0 0 8px rgba(255,255,255,.45),
     0 0 18px rgba(141,132,255,.35);
   transition: width .18s var(--ease), height .18s var(--ease),
-              box-shadow .18s var(--ease), opacity .18s var(--ease);
+              box-shadow .18s var(--ease);
 }
 .cursor.hover::before {
   width: 9px;
