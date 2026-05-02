@@ -368,7 +368,6 @@ a.entry::after {
   opacity: 0;
   pointer-events: none;
   transition: opacity .3s var(--ease);
-  z-index: 1;
 }
 
 a.entry:hover::after {
