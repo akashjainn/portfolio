@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 120" width="100%" role="img" aria-label="Akash Jain">
+  <title>Akash Jain</title>
+  <g transform="translate(10, 10) scale(0.5)">
+    <path fill="#111111" fill-rule="evenodd"
+          d="M100 25 L114 72 L97 82 L121 92 L104 102 L127 112 L111 122 L134 132 L145 175 L55 175 Z M90 120 L110 120 L125 175 L75 175 Z"/>
+  </g>
+  <text x="135" y="60"
+        font-family="Futura, 'Avenir Next', 'Neue Haas Grotesk Display', 'Helvetica Neue', Arial, sans-serif"
+        font-size="28"
+        font-weight="500"
+        fill="#111111"
+        letter-spacing="11.2"
+        dominant-baseline="central">AKASH JAIN</text>
+</svg>

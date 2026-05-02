@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" role="img" aria-label="Akash Jain logo">
+  <title>Akash Jain</title>
+  <defs>
+    <linearGradient id="halo" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FACC92"/>
+      <stop offset="32%" stop-color="#E5547D"/>
+      <stop offset="56%" stop-color="#C73E8E"/>
+      <stop offset="78%" stop-color="#6B4FBB"/>
+      <stop offset="100%" stop-color="#4DCFE0"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#halo)" fill-rule="evenodd"
+        d="M100 25 L114 72 L97 82 L121 92 L104 102 L127 112 L111 122 L134 132 L145 175 L55 175 Z M90 120 L110 120 L125 175 L75 175 Z"/>
+</svg>

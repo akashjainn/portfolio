@@ -45,7 +45,7 @@ export default async function Home() {
         </div>
         <div>
           <p>
-            Wrapped <Link href="/journal/stupid-together">Stupid Together</Link>, an AI anime short I directed solo in ComfyUI &mdash; LoRA-trained characters, 90s OVA style, sixteen shots. Reading about satellite routing on the side &mdash; SpaceX internship starts this summer.
+            Wrapped <Link href="/journal/stupid-together">Stupid Together</Link>, an AI anime short I directed solo in ComfyUI &mdash; LoRA-trained characters, 90s OVA style, sixteen shots. Reading about satellite routing on the side &mdash; SpaceX internship starts in 2 weeks.
           </p>
         </div>
       </section>
