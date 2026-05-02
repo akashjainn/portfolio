@@ -31,7 +31,7 @@ export function AuroraEffects() {
 
       const onOut = (e: PointerEvent) => {
         if (!hovering) return
-        const movingTo = e.relatedTarget as Element | null
+        const movingTo = e.relatedTarget instanceof Element ? e.relatedTarget : null
         if (!movingTo?.closest(interactive)) {
           hovering = false
           cursorEl.classList.remove('hover')
