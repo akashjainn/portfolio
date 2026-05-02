@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
 
 const LINKS = [
   { href: '/journal', label: 'Journal' },
@@ -13,19 +13,23 @@ const LINKS = [
 
 export function NavPill() {
   const pathname = usePathname()
-  const [scrolled, setScrolled] = useState(false)
+  const navRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 80)
+    const nav = navRef.current
+    if (!nav) return
+    const handler = () => {
+      nav.style.top = window.scrollY > 80 ? '14px' : '22px'
+    }
     window.addEventListener('scroll', handler, { passive: true })
     return () => window.removeEventListener('scroll', handler)
   }, [])
 
   return (
     <nav
+      ref={navRef}
       className="nav-pill"
       aria-label="primary"
-      style={{ top: scrolled ? '14px' : '22px' }}
     >
       <Link href="/" className="home" aria-label="Home">
         <svg viewBox="0 0 200 200" width="22" height="22" aria-hidden="true">

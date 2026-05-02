@@ -7,24 +7,11 @@ export function AuroraEffects() {
     document.documentElement.classList.add('js-ready')
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches
 
-    // ── Aurora pointer parallax — event-driven, CSS transition handles smoothing ──
-    const field = document.querySelector('.aurora-field') as HTMLElement | null
-    let cleanupField: (() => void) | null = null
-    if (field && !reduced) {
-      const onMove = (e: PointerEvent) => {
-        const w = window.innerWidth, h = window.innerHeight
-        const tx = (e.clientX / w - 0.5) * 40
-        const ty = (e.clientY / h - 0.5) * 40
-        field.style.transform = `translate3d(${tx}px, ${ty}px, 0)`
-      }
-      window.addEventListener('pointermove', onMove, { passive: true })
-      cleanupField = () => window.removeEventListener('pointermove', onMove)
-    }
-
     // ── Bite cursor (desktop fine pointer only) ──────────────────
+    // Aurora parallax is now a CSS animation — no JS needed, no rAF, no repaint on interaction.
     let cursorEl: HTMLDivElement | null = null
     let svgDefs: SVGSVGElement | null = null
-    let cleanupCursor: (() => void) | null = null
+    const cleaners: Array<() => void> = []
 
     if (matchMedia('(hover: hover) and (pointer: fine)').matches && !reduced) {
       svgDefs = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
@@ -55,12 +42,12 @@ export function AuroraEffects() {
       document.body.appendChild(cursorEl)
 
       let target: Element | null = null
-      const interactive = 'a, button, a.entry, [data-bite], input[type="submit"], input[type="button"], summary'
+      let cachedRect: DOMRect | null = null
+      const interactive = 'a, button, [data-bite], input[type="submit"], input[type="button"], summary'
 
-      // Snap with transition (used on enter/leave), direct set without (used during move)
-      const setCursor = (x: number, y: number, w: number, h: number, withTransition: boolean) => {
+      const setCursor = (x: number, y: number, w: number, h: number, snap: boolean) => {
         if (!cursorEl) return
-        cursorEl.style.transition = withTransition
+        cursorEl.style.transition = snap
           ? 'transform 0.1s ease-out, width 0.1s ease-out, height 0.1s ease-out'
           : 'none'
         cursorEl.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`
@@ -69,10 +56,15 @@ export function AuroraEffects() {
       }
 
       const onMove = (e: PointerEvent) => {
-        if (target) {
-          const r = target.getBoundingClientRect()
+        if (target && cachedRect) {
           const pad = 4
-          setCursor(r.left + r.width / 2, r.top + r.height / 2, r.width + pad * 2, r.height + pad * 2, false)
+          setCursor(
+            cachedRect.left + cachedRect.width / 2,
+            cachedRect.top + cachedRect.height / 2,
+            cachedRect.width + pad * 2,
+            cachedRect.height + pad * 2,
+            false
+          )
         } else {
           setCursor(e.clientX, e.clientY, 1, 1, false)
         }
@@ -82,11 +74,17 @@ export function AuroraEffects() {
         const el = (e.target as Element).closest(interactive)
         if (el !== target) {
           target = el
+          cachedRect = target ? target.getBoundingClientRect() : null
           cursorEl?.classList.toggle('hover', !!target)
-          if (target) {
-            const r = target.getBoundingClientRect()
+          if (target && cachedRect) {
             const pad = 4
-            setCursor(r.left + r.width / 2, r.top + r.height / 2, r.width + pad * 2, r.height + pad * 2, true)
+            setCursor(
+              cachedRect.left + cachedRect.width / 2,
+              cachedRect.top + cachedRect.height / 2,
+              cachedRect.width + pad * 2,
+              cachedRect.height + pad * 2,
+              true
+            )
           }
         }
       }
@@ -94,9 +92,15 @@ export function AuroraEffects() {
       const onOut = (e: PointerEvent) => {
         if (target && !target.contains(e.relatedTarget as Node)) {
           target = null
+          cachedRect = null
           cursorEl?.classList.remove('hover')
           setCursor(e.clientX, e.clientY, 1, 1, true)
         }
+      }
+
+      // Invalidate cached rect on scroll so cursor tracks element's new position
+      const onScroll = () => {
+        if (target) cachedRect = target.getBoundingClientRect()
       }
 
       const onDown = () => cursorEl?.classList.add('bite')
@@ -104,16 +108,18 @@ export function AuroraEffects() {
       const onLeave = () => { if (cursorEl) cursorEl.style.opacity = '0' }
       const onEnter = () => { if (cursorEl) cursorEl.style.opacity = '1' }
 
-      window.addEventListener('pointermove', onMove, { passive: true })
-      window.addEventListener('pointerover', onOver, { passive: true })
-      window.addEventListener('pointerout', onOut, { passive: true })
-      window.addEventListener('pointerdown', onDown, { passive: true })
-      window.addEventListener('pointerup', onUp, { passive: true })
-      window.addEventListener('pointercancel', onUp, { passive: true })
-      window.addEventListener('pointerleave', onLeave)
-      window.addEventListener('pointerenter', onEnter)
+      const opts = { passive: true } as const
+      window.addEventListener('pointermove', onMove, opts)
+      window.addEventListener('pointerover', onOver, opts)
+      window.addEventListener('pointerout', onOut, opts)
+      window.addEventListener('pointerdown', onDown, opts)
+      window.addEventListener('pointerup', onUp, opts)
+      window.addEventListener('pointercancel', onUp, opts)
+      window.addEventListener('pointerleave', onLeave, opts)
+      window.addEventListener('pointerenter', onEnter, opts)
+      window.addEventListener('scroll', onScroll, opts)
 
-      cleanupCursor = () => {
+      cleaners.push(() => {
         window.removeEventListener('pointermove', onMove)
         window.removeEventListener('pointerover', onOver)
         window.removeEventListener('pointerout', onOut)
@@ -122,12 +128,12 @@ export function AuroraEffects() {
         window.removeEventListener('pointercancel', onUp)
         window.removeEventListener('pointerleave', onLeave)
         window.removeEventListener('pointerenter', onEnter)
-      }
+        window.removeEventListener('scroll', onScroll)
+      })
     }
 
     return () => {
-      cleanupField?.()
-      cleanupCursor?.()
+      cleaners.forEach(fn => fn())
       cursorEl?.remove()
       svgDefs?.remove()
       document.documentElement.classList.remove('js-ready')
