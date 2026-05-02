@@ -236,7 +236,7 @@ code { font-family: var(--mono); font-size: 14px; color: var(--fg-2); }
   line-height: .98;
   letter-spacing: -.035em;
   margin: 0;
-  max-width: 18ch;
+  max-width: 26ch;
 }
 .hero .currently {
   display: inline-flex; flex-direction: column;
@@ -633,12 +633,12 @@ a.entry:hover .arrow { transform: translateX(6px); color: var(--fg); border-colo
   color: var(--fg);
   letter-spacing: -.015em;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: var(--s-4);
 }
 .proj-body .main h2 .num {
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: 15px;
   letter-spacing: .16em;
   background: var(--aurora);
   -webkit-background-clip: text; background-clip: text;
