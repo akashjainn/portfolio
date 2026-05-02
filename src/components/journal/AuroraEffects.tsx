@@ -67,41 +67,55 @@ export function AuroraEffects() {
 
       // ── Magnetic tilt ───────────────────────────────────────────────────────
       let tiltTarget: HTMLElement | null = null
+      let rafId = 0
+      let pendingX = 0
+      let pendingY = 0
+
+      const applyTilt = () => {
+        rafId = 0
+        if (!tiltTarget) return
+        const rect  = tiltTarget.getBoundingClientRect()
+        const xNorm = ((pendingX - rect.left) / rect.width  - 0.5) * 2
+        const yNorm = ((pendingY - rect.top)  / rect.height - 0.5) * 2
+        tiltTarget.style.transform = `perspective(800px) rotateY(${(xNorm * 6).toFixed(2)}deg) rotateX(${(-yNorm * 6).toFixed(2)}deg) scale(1.02)`
+        tiltTarget.style.setProperty('--mx', `${((pendingX - rect.left) / rect.width  * 100).toFixed(1)}%`)
+        tiltTarget.style.setProperty('--my', `${((pendingY - rect.top)  / rect.height * 100).toFixed(1)}%`)
+      }
 
       const onTiltMove = (e: MouseEvent) => {
         const card = (e.target as Element).closest('a.entry') as HTMLElement | null
 
         if (card !== tiltTarget) {
-          // reset previous card immediately (CSS spring-back via transition)
           if (tiltTarget) {
+            if (rafId) { cancelAnimationFrame(rafId); rafId = 0 }
             tiltTarget.style.transition = ''
             tiltTarget.style.transform  = ''
             tiltTarget.style.willChange = ''
+            tiltTarget.style.removeProperty('--mx')
+            tiltTarget.style.removeProperty('--my')
           }
           tiltTarget = card
           if (card) {
-            // disable transform transition while actively moving so it tracks instantly
-            card.style.transition  = 'transform 0s, border-color .35s, background .35s'
-            card.style.willChange  = 'transform'
+            card.style.transition = 'transform 0s, border-color .35s, background .35s'
+            card.style.willChange = 'transform'
           }
         }
 
         if (!card) return
 
-        const rect  = card.getBoundingClientRect()
-        const xNorm = ((e.clientX - rect.left) / rect.width  - 0.5) * 2  // -1 to 1
-        const yNorm = ((e.clientY - rect.top)  / rect.height - 0.5) * 2  // -1 to 1
-        card.style.transform = `perspective(800px) rotateY(${(xNorm * 6).toFixed(2)}deg) rotateX(${(-yNorm * 6).toFixed(2)}deg) scale(1.02)`
-        card.style.setProperty('--mx', `${((e.clientX - rect.left) / rect.width  * 100).toFixed(1)}%`)
-        card.style.setProperty('--my', `${((e.clientY - rect.top)  / rect.height * 100).toFixed(1)}%`)
+        pendingX = e.clientX
+        pendingY = e.clientY
+        if (!rafId) rafId = requestAnimationFrame(applyTilt)
       }
 
       const onTiltReset = () => {
         if (!tiltTarget) return
-        // restore CSS transition so spring-back animates over .5s
+        if (rafId) { cancelAnimationFrame(rafId); rafId = 0 }
         tiltTarget.style.transition = ''
         tiltTarget.style.transform  = ''
         tiltTarget.style.willChange = ''
+        tiltTarget.style.removeProperty('--mx')
+        tiltTarget.style.removeProperty('--my')
         tiltTarget = null
       }
 
@@ -111,10 +125,14 @@ export function AuroraEffects() {
       cleaners.push(() => {
         window.removeEventListener('mousemove',  onTiltMove)
         window.removeEventListener('mouseleave', onTiltReset)
+        if (rafId) { cancelAnimationFrame(rafId); rafId = 0 }
         if (tiltTarget) {
           tiltTarget.style.transition = ''
           tiltTarget.style.transform  = ''
           tiltTarget.style.willChange = ''
+          tiltTarget.style.removeProperty('--mx')
+          tiltTarget.style.removeProperty('--my')
+          tiltTarget = null
         }
       })
 
