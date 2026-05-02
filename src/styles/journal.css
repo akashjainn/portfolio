@@ -195,6 +195,7 @@ code{ font-family: var(--mono); font-size: 15px; color: var(--ink-2); }
   border-bottom: 1px solid var(--rule);
   align-items: baseline;
   transition: background .25s var(--ease), padding .25s var(--ease);
+  cursor: pointer;
 }
 .entry:hover{
   background: rgba(185,92,47,.06);
