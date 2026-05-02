@@ -252,15 +252,9 @@ code { font-family: var(--mono); font-size: 14px; color: var(--fg-2); }
 .hero .currently .when { font-family: var(--mono); font-size: 11px; color: var(--fg-2); letter-spacing: .04em; }
 
 /* Constrain hero text so it doesn't bleed under the absolute hero-mark SVG */
-.hero-content {
-  display: contents; /* transparent to layout on mobile; children are direct hero grid items */
-}
 @media (min-width: 640px) {
-  .hero-content {
-    display: grid;
-    gap: var(--s-8);
+  .hero > :not(.hero-mark) {
     max-width: min(600px, 56%);
-    align-content: start;
   }
 }
 

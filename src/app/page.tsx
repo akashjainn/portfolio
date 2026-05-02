@@ -33,29 +33,27 @@ export default async function Home() {
             </svg>
           </div>
 
-          <div className="hero-content">
-            <div className="meta">
-              <span className="eyebrow">Atlanta, GA &middot; Spring 2026 &middot; Vol. II</span>
-              <span className="dots" aria-hidden="true">
-                <i /><i /><i /><i /><i />
-              </span>
+          <div className="meta">
+            <span className="eyebrow">Atlanta, GA &middot; Spring 2026 &middot; Vol. II</span>
+            <span className="dots" aria-hidden="true">
+              <i /><i /><i /><i /><i />
+            </span>
+          </div>
+
+          <h1>
+            I build <em className="aurora-text">reliable</em> systems,<br />
+            and I write down<br />
+            what they taught me.
+          </h1>
+
+          <div style={{ display: 'flex', gap: 40, alignItems: 'center', flexWrap: 'wrap' }}>
+            <div className="currently">
+              <span className="label">Currently</span>
+              <span className="who">Interning at SpaceX</span>
+              <span className="when">on Starlink &middot; summer &apos;26</span>
             </div>
-
-            <h1>
-              I build <em className="aurora-text">reliable</em> systems,<br />
-              and I write down<br />
-              what they taught me.
-            </h1>
-
-            <div style={{ display: 'flex', gap: 40, alignItems: 'center', flexWrap: 'wrap' }}>
-              <div className="currently">
-                <span className="label">Currently</span>
-                <span className="who">Interning at SpaceX</span>
-                <span className="when">on Starlink &middot; summer &apos;26</span>
-              </div>
-              <div style={{ fontSize: 15, color: 'var(--fg-2)', maxWidth: '36ch' }}>
-                Computer science at Georgia Tech, third year. I write down what each system teaches me &mdash; slowly, in the open.
-              </div>
+            <div style={{ fontSize: 15, color: 'var(--fg-2)', maxWidth: '36ch' }}>
+              Computer science at Georgia Tech, third year. I write down what each system teaches me &mdash; slowly, in the open.
             </div>
           </div>
         </section>
