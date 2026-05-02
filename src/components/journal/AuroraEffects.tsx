@@ -139,21 +139,36 @@ export function AuroraEffects() {
       // ── Aurora halo ring ────────────────────────────────────────────────────
       const HALO_LARGE = 180  // px — for a.entry cards
       const HALO_SMALL = 50   // px — for nav links, chips, buttons
+      let lastHaloTarget: Element | null = null
 
       const onHaloEnter = (e: PointerEvent) => {
         const target = (e.target as Element).closest(interactive)
-        if (!target) return
+        if (!target || target === lastHaloTarget) return
+        lastHaloTarget = target
         const size = target.matches('a.entry') ? HALO_LARGE : HALO_SMALL
         const halo = document.createElement('span')
         halo.className = 'halo'
-        halo.style.cssText = `left:${e.clientX}px;top:${e.clientY}px;width:${size}px;height:${size}px;`
+        halo.style.left   = `${e.clientX}px`
+        halo.style.top    = `${e.clientY}px`
+        halo.style.width  = `${size}px`
+        halo.style.height = `${size}px`
         document.body.appendChild(halo)
+        // primary cleanup: animationend
         halo.addEventListener('animationend', () => halo.remove(), { once: true })
+        // fallback: if animationend never fires (animation:none mid-session), remove after 600ms
+        setTimeout(() => halo.isConnected && halo.remove(), 600)
+      }
+
+      const onHaloLeave = (e: PointerEvent) => {
+        const leaving = (e.target as Element).closest(interactive)
+        if (leaving === lastHaloTarget) lastHaloTarget = null
       }
 
       document.body.addEventListener('pointerenter', onHaloEnter, { passive: true, capture: true })
+      document.body.addEventListener('pointerleave', onHaloLeave, { passive: true, capture: true })
       cleaners.push(() => {
         document.body.removeEventListener('pointerenter', onHaloEnter, { capture: true })
+        document.body.removeEventListener('pointerleave', onHaloLeave, { capture: true })
         document.querySelectorAll('.halo').forEach(h => h.remove())
       })
     }
