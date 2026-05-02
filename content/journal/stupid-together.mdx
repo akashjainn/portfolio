@@ -1,0 +1,95 @@
+---
+slug: stupid-together
+title: "Character, by training: Stupid Together"
+headline: "Character, by training: Stupid Together"
+titleHtml: "Character, by training:<br><em>Stupid Together</em>."
+summary: "A solo-directed 90s sci-fi anime short built in ComfyUI. Two trained character LoRAs keep Rayana and Mai recognizable across sixteen generated keyframes."
+tags: ["ComfyUI", "LoRA", "InstantID", "NoobAI XL"]
+status: published
+entryNo: 8
+kind: specimen
+publishedAt: "2026-04-28"
+dateDisplay: "Mar 2026"
+dateEnd: "Apr 2026"
+kicker: "Entry No. 08 · Specimen · AI filmmaking"
+kvPairs:
+  - key: "Dates"
+    value: "Mar — Apr 2026"
+  - key: "Role"
+    value: "Director · Solo"
+  - key: "Stack"
+    value: "ComfyUI · LoRA · InstantID"
+  - key: "Base"
+    value: "NoobAI XL vPred"
+  - key: "Format"
+    value: "~90 sec · 16 shots"
+contents: "§ 1   The film\n§ 2   Before the scene, the dataset\n§ 3   Training the characters\n§ 4   The generation pipeline\n§ 5   What it's teaching me"
+atAGlance: "Sixteen keyframes. Two trained character LoRAs. One NoobAI XL checkpoint. Rayana and Mai stay themselves across every generated scene. Delivered April 2026."
+artifact:
+  type: none
+  caption: "FIG. 8 — ComfyUI character generation workflow"
+---
+
+<p className="lede">The hard part of making an anime character consistent is not the drawing — it is making them the same person in every frame. That is what a LoRA is for. Not the style, not the scene: the continuity of the face.</p>
+
+<SectionHeading n="01">The film.</SectionHeading>
+
+*Stupid Together* is a 90-second anime short about two friends arguing over the last cigarette in a pack. Rayana is a worn-down android: jet-black bob, red hoodie, mustard skull-and-bat print, fingerless gloves. Mai is a catgirl: auburn hair, slit pupils, navy bandana, a tail that does what it wants. They fight for it, street-fighter-style. Mai wins. Rayana cries. Mai shares it anyway.
+
+The world is cyberpunk. The style is 90s OVA — halftone, heavy linework, cel shading, a limited palette. Neither character mentions being an android or a catgirl; the world is just the air they breathe. The film is about the cigarette.
+
+I wrote it, directed it, trained the models, and ran every generation. Sixteen shots. Roughly ninety seconds.
+
+<Figure caption="FIG. 00 — Stupid Together, full cut." meta="Apr 2026 · Mux">
+  <div style={{ aspectRatio: '16 / 9', background: '#000', border: '1px solid var(--rule)' }}>
+    <iframe src="https://player.mux.com/x7QV32dPC39EQHoyzarv4zCfBnYYASYaLUZ8pkQeuQc" style={{ width: '100%', height: '100%', border: 0, display: 'block' }} allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture" allowFullScreen title="Stupid Together — full cut" loading="lazy" />
+  </div>
+</Figure>
+
+<SectionHeading n="02">Before the scene, the dataset.</SectionHeading>
+
+Character work starts with photographs. I took portraits of two people — clean lighting, neutral backgrounds, several angles each — and ran them through a ComfyUI pipeline pairing InstantID for face lock with a NoobAI XL checkpoint pushed toward cel shading. Each photo makes two passes: a low-denoise img2img to hold the bone structure, then a higher-denoise pass to coax out the halftone and the flattened palette of late-80s OVAs. ControlNet depth and openpose keep the composition honest.
+
+The output of this stage is not a film. It is a dataset. Every image is hand-culled and captioned manually — automated captioning gets the clothes wrong and the era completely wrong, so every `.txt` is written by hand. The captions are what the LoRA will learn to respond to. Bad captions produce a character who does not remember her own outfit.
+
+<SectionHeading n="03">Training the characters.</SectionHeading>
+
+Two characters, two training runs, the same config. `kohya_ss` against NoobAI XL vPred: rank 16, alpha 8, AdamW8bit optimizer, cosine learning rate schedule, four epochs, batch size one. The finished LoRAs are `r4yn_chr_v1` (Rayana) and `m41_chr_v1` (Mai).
+
+A third LoRA — a pre-built retro sci-fi style LoRA — carries the era. Identity and style travel separately. The checkpoint provides the rendering engine, the character LoRAs provide the people, the style LoRA provides the decade. They stack. The three-way weight balance is what you tune by hand until the character is recognizable, the style is correct, and the outfit is still there.
+
+<PullQuote>Identity and style travel separately. The checkpoint is the engine. The LoRA is the passenger.</PullQuote>
+
+<SectionHeading n="04">The generation pipeline.</SectionHeading>
+
+Two workflows handle production. The solo workflow generates one character at a time — cleaner, faster, used for close-ups. The dual workflow uses regional prompting to place both characters in the same frame without cross-contamination: the model runs both LoRAs in series; the CLIP encoders run in parallel, one per character. Chaining CLIP in series was the first mistake. Cross-contamination means Rayana starts wearing Mai's clothes.
+
+<Figure caption="FIG. 01 — Single-character generation. InstantID provides the face reference; the character LoRA provides identity; the style LoRA provides the era." meta="Apr 2026 · ComfyUI">
+  <div style={{ aspectRatio: '16 / 9', background: 'var(--cream-2)', border: '1px solid var(--rule)', overflow: 'hidden' }}>
+    <img src="/images/comfyUI/single-character-gen.png" alt="ComfyUI single-character workflow showing InstantID, character LoRA, and style LoRA nodes" style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} loading="lazy" />
+  </div>
+</Figure>
+
+<Figure caption="FIG. 02 — Dual-character generation. LoRAs stack in the model; CLIP branches run in parallel to prevent cross-contamination between characters." meta="Apr 2026 · ComfyUI">
+  <div style={{ aspectRatio: '16 / 9', background: 'var(--cream-2)', border: '1px solid var(--rule)', overflow: 'hidden' }}>
+    <img src="/images/comfyUI/dual-character-gen.png" alt="ComfyUI dual-character workflow with regional prompting and parallel CLIP encoders for Rayana and Mai" style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} loading="lazy" />
+  </div>
+</Figure>
+
+Keyframes render to 1024×1024 at 30 steps, cfg 5.0, dpmpp_2m karras. DaVinci Resolve scales them to a 1920×1080 timeline — a 1.875× upscale with about 24% top-and-bottom crop. Most subjects are centered in the generation, so the crop rarely cuts anything important. Hero shots get animated with WanVideo 2.1 I2V 14B — still frame in, two-second clip out — running on an RTX 3060 12GB at roughly two to three minutes per clip.
+
+<Figure caption="FIG. 03 — Animation workflow. WanVideo 2.1 I2V 14B converts still keyframes to short clips at 16 fps." meta="Apr 2026 · ComfyUI">
+  <div style={{ aspectRatio: '16 / 9', background: 'var(--cream-2)', border: '1px solid var(--rule)', overflow: 'hidden' }}>
+    <img src="/images/comfyUI/animation-gen.png" alt="ComfyUI WanVideo animation workflow converting keyframes to animated clips" style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} loading="lazy" />
+  </div>
+</Figure>
+
+<SectionHeading n="05">What it's teaching me.</SectionHeading>
+
+The biggest lesson is that prompt engineering for character consistency is not a writing problem — it is a vocabulary problem. The model knows what "fingerless gloves" means in a hundred different contexts; it needs weight on the specific context you want and negative weight on the contexts it defaults to. "Android damage" at high strength removes the outfit. At 0.7 it adds texture. There is a narrow register where the character is herself, and most of the work is finding it and writing it down so the next session can find it again.
+
+The second lesson is that the hard shot is not the fight. The hard shot is the shared cigarette at the end — two characters, one frame, one hand holding out and the other taking. The model has strong opinions about what hands near each other should do, and those opinions are wrong in ways that are very difficult to describe in a negative prompt.
+
+The third lesson is that the pipeline is not the film. Sixty rendered variants hand-culled down to sixteen keyframes — and what makes the cut is composition and expression, not render statistics. The best shot is almost never the one with the best technical output.
+
+<p className="note" style={{ marginTop: 'var(--s-6)' }}>Directed and built solo, Atlanta, April 2026. Script, training configs, and ComfyUI workflows in the production folder. Editing and sound design in DaVinci Resolve.</p>

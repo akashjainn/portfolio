@@ -50,7 +50,16 @@
       "Bash(xargs grep *)",
       "Bash(C:/Users/akash/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.7/scripts/start-server.sh *)",
       "Bash(npx eslint *)",
-      "Bash(node *)"
+      "Bash(node *)",
+      "Bash(Start-Process -NoNewWindow -FilePath \"npm\" -ArgumentList \"run\",\"dev\")",
+      "Bash(Start-Sleep 2)",
+      "PowerShell(Start-Process -NoNewWindow npm -ArgumentList \"run\",\"dev\" -RedirectStandardOutput \"$env:TEMP\\\\nextjs-out.txt\" -RedirectStandardError \"$env:TEMP\\\\nextjs-err.txt\"; Start-Sleep 10; Invoke-WebRequest -Uri \"http://localhost:3000/journal/stupid-together\" -UseBasicParsing -TimeoutSec 15 | Select-Object -ExpandProperty StatusCode)",
+      "PowerShell(Get-Content *)",
+      "PowerShell(Start-Sleep 8; Invoke-WebRequest -Uri \"http://localhost:3001/journal/stupid-together\" -UseBasicParsing -TimeoutSec 15 | Select-Object StatusCode, @{N='BodyPreview';E={$_.Content.Substring\\(0,[Math]::Min\\(200,$_.Content.Length\\)\\)}})",
+      "PowerShell(try { $r = Invoke-WebRequest -Uri \"http://localhost:3001/journal/stupid-together\" -UseBasicParsing -TimeoutSec 20; $r.StatusCode } catch { $_.Exception.Message })",
+      "PowerShell(try { $r = Invoke-WebRequest -Uri \"http://localhost:3001/journal\" -UseBasicParsing -TimeoutSec 20; if \\($r.Content -match \"stupid-together\"\\) { \"entry found in index\" } else { \"entry NOT in index\" } } catch { $_.Exception.Message })",
+      "PowerShell(try { $r = Invoke-WebRequest -Uri \"http://localhost:3001/journal/stupid-together\" -UseBasicParsing -TimeoutSec 20; if \\($r.Content -match \"mux.com\"\\) { \"video embed found\" } else { \"video embed MISSING\" } } catch { $_.Exception.Message })",
+      "PowerShell(try { $r = Invoke-WebRequest -Uri \"http://localhost:3001/\" -UseBasicParsing -TimeoutSec 20; if \\($r.Content -match \"stupid-together\"\\) { \"entry in homepage recent entries\" } else { \"entry NOT on homepage\" } } catch { $_.Exception.Message })"
     ]
   }
 }
