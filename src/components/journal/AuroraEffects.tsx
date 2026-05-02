@@ -136,7 +136,26 @@ export function AuroraEffects() {
         }
       })
 
-      // ── Halo ring — added in Task 6 ─────────────────────────────────────────
+      // ── Aurora halo ring ────────────────────────────────────────────────────
+      const HALO_LARGE = 180  // px — for a.entry cards
+      const HALO_SMALL = 50   // px — for nav links, chips, buttons
+
+      const onHaloEnter = (e: PointerEvent) => {
+        const target = (e.target as Element).closest(interactive)
+        if (!target) return
+        const size = target.matches('a.entry') ? HALO_LARGE : HALO_SMALL
+        const halo = document.createElement('span')
+        halo.className = 'halo'
+        halo.style.cssText = `left:${e.clientX}px;top:${e.clientY}px;width:${size}px;height:${size}px;`
+        document.body.appendChild(halo)
+        halo.addEventListener('animationend', () => halo.remove(), { once: true })
+      }
+
+      document.body.addEventListener('pointerenter', onHaloEnter, { passive: true, capture: true })
+      cleaners.push(() => {
+        document.body.removeEventListener('pointerenter', onHaloEnter, { capture: true })
+        document.querySelectorAll('.halo').forEach(h => h.remove())
+      })
     }
 
     return () => {
