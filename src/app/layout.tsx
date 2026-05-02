@@ -48,6 +48,10 @@ export const metadata: Metadata = {
     title: 'Akash Jain — Vol. II',
     description: 'Field journal of reliable systems, written from Atlanta.',
   },
+  icons: {
+    icon: '/assets/favicon-bitten-a.svg',
+    shortcut: '/assets/favicon-bitten-a.svg',
+  },
   robots: { index: true, follow: true },
 }
 

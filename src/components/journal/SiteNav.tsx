@@ -39,14 +39,15 @@ export function SiteNav() {
         {NAV_LINKS.map(({ href, label, ...rest }) => {
           const external = 'external' in rest && rest.external
           const isCurrent = !external && pathname === href
+          if (external) {
+            return (
+              <a key={href} href={href} target="_blank" rel="noopener noreferrer">
+                {label}
+              </a>
+            )
+          }
           return (
-            <Link
-              key={href}
-              href={href}
-              target={external ? '_blank' : undefined}
-              rel={external ? 'noopener noreferrer' : undefined}
-              aria-current={isCurrent ? 'page' : undefined}
-            >
+            <Link key={href} href={href} aria-current={isCurrent ? 'page' : undefined}>
               {label}
             </Link>
           )

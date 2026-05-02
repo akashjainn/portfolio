@@ -47,12 +47,23 @@ export function NavPill() {
           const external = 'external' in link ? link.external : false
           const isHide = 'hideSmall' in link && link.hideSmall
           const isCurrent = !external && pathname === href
+          if (external) {
+            return (
+              <a
+                key={href}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={isHide ? 'hide-sm' : ''}
+              >
+                {label}
+              </a>
+            )
+          }
           return (
             <Link
               key={href}
               href={href}
-              target={external ? '_blank' : undefined}
-              rel={external ? 'noopener noreferrer' : undefined}
               aria-current={isCurrent ? 'page' : undefined}
               className={isHide ? 'hide-sm' : ''}
             >
