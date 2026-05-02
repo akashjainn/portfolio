@@ -481,6 +481,29 @@ a.entry:hover .arrow { transform: translateX(6px); color: var(--fg); border-colo
 }
 @media (hover: none) { .cursor { display: none; } }
 
+/* ── Aurora halo ring ── */
+@keyframes halo-expand {
+  from { transform: translate(-50%, -50%) scale(0); opacity: .85; }
+  to   { transform: translate(-50%, -50%) scale(1); opacity: 0;   }
+}
+
+.halo {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  animation: halo-expand 500ms ease-out forwards;
+  /* aurora gradient ring: conic gradient masked to a ring shape */
+  background: conic-gradient(
+    from 0deg,
+    #FACC92, #E5547D, #C73E8E, #6B4FBB, #4DCFE0, #FACC92
+  );
+  -webkit-mask:
+    radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 2px));
+  mask:
+    radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 2px));
+}
+
 /* ── Journal chip filter ── */
 .chips {
   display: flex; flex-wrap: wrap; gap: var(--s-2);
