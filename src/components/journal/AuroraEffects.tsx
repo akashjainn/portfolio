@@ -7,32 +7,27 @@ export function AuroraEffects() {
     document.documentElement.classList.add('js-ready')
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches
 
-    // ── Aurora pointer parallax ──────────────────────────────────
+    // ── Aurora pointer parallax — event-driven, CSS transition handles smoothing ──
     const field = document.querySelector('.aurora-field') as HTMLElement | null
-    let rafField: number
+    let cleanupField: (() => void) | null = null
     if (field && !reduced) {
-      let tx = 0, ty = 0, cx = 0, cy = 0
       const onMove = (e: PointerEvent) => {
         const w = window.innerWidth, h = window.innerHeight
-        tx = (e.clientX / w - .5) * 40
-        ty = (e.clientY / h - .5) * 40
+        const tx = (e.clientX / w - 0.5) * 40
+        const ty = (e.clientY / h - 0.5) * 40
+        field.style.transform = `translate3d(${tx}px, ${ty}px, 0)`
       }
       window.addEventListener('pointermove', onMove, { passive: true })
-      const tick = () => {
-        cx += (tx - cx) * .04
-        cy += (ty - cy) * .04
-        field.style.transform = `translate3d(${cx}px, ${cy}px, 0)`
-        rafField = requestAnimationFrame(tick)
-      }
-      rafField = requestAnimationFrame(tick)
+      cleanupField = () => window.removeEventListener('pointermove', onMove)
     }
 
     // ── Bite cursor (desktop fine pointer only) ──────────────────
     let cursorEl: HTMLDivElement | null = null
-    let rafCursor: number
+    let svgDefs: SVGSVGElement | null = null
+    let cleanupCursor: (() => void) | null = null
+
     if (matchMedia('(hover: hover) and (pointer: fine)').matches && !reduced) {
-      // Shared gradient defs referenced by fang paths
-      const svgDefs = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+      svgDefs = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
       svgDefs.setAttribute('width', '0')
       svgDefs.setAttribute('height', '0')
       svgDefs.style.cssText = 'position:absolute;width:0;height:0;pointer-events:none;overflow:hidden;'
@@ -59,67 +54,82 @@ export function AuroraEffects() {
         <span class="fang br">${fangSVG}</span>`
       document.body.appendChild(cursorEl)
 
-      let px = -100, py = -100
-      let ccx = -100, ccy = -100
-      let cw = 1, ch = 1
       let target: Element | null = null
-
-      window.addEventListener('pointermove', (e) => { px = e.clientX; py = e.clientY }, { passive: true })
-
       const interactive = 'a, button, a.entry, [data-bite], input[type="submit"], input[type="button"], summary'
 
-      const tickCursor = () => {
-        let nx, ny, nw, nh
+      // Snap with transition (used on enter/leave), direct set without (used during move)
+      const setCursor = (x: number, y: number, w: number, h: number, withTransition: boolean) => {
+        if (!cursorEl) return
+        cursorEl.style.transition = withTransition
+          ? 'transform 0.1s ease-out, width 0.1s ease-out, height 0.1s ease-out'
+          : 'none'
+        cursorEl.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`
+        cursorEl.style.width = w + 'px'
+        cursorEl.style.height = h + 'px'
+      }
+
+      const onMove = (e: PointerEvent) => {
         if (target) {
           const r = target.getBoundingClientRect()
           const pad = 4
-          nx = r.left + r.width / 2
-          ny = r.top + r.height / 2
-          nw = r.width + pad * 2
-          nh = r.height + pad * 2
+          setCursor(r.left + r.width / 2, r.top + r.height / 2, r.width + pad * 2, r.height + pad * 2, false)
         } else {
-          nx = px; ny = py; nw = 1; nh = 1
+          setCursor(e.clientX, e.clientY, 1, 1, false)
         }
-        const k = target ? 0.28 : 0.32
-        ccx += (nx - ccx) * k
-        ccy += (ny - ccy) * k
-        cw  += (nw - cw)  * k
-        ch  += (nh - ch)  * k
-        if (cursorEl) {
-          cursorEl.style.transform = `translate(${ccx}px, ${ccy}px) translate(-50%, -50%)`
-          cursorEl.style.width  = cw + 'px'
-          cursorEl.style.height = ch + 'px'
-        }
-        rafCursor = requestAnimationFrame(tickCursor)
       }
-      rafCursor = requestAnimationFrame(tickCursor)
 
-      window.addEventListener('pointerover', (e) => {
+      const onOver = (e: PointerEvent) => {
         const el = (e.target as Element).closest(interactive)
         if (el !== target) {
           target = el
           cursorEl?.classList.toggle('hover', !!target)
+          if (target) {
+            const r = target.getBoundingClientRect()
+            const pad = 4
+            setCursor(r.left + r.width / 2, r.top + r.height / 2, r.width + pad * 2, r.height + pad * 2, true)
+          }
         }
-      }, { passive: true })
+      }
 
-      window.addEventListener('pointerout', (e) => {
+      const onOut = (e: PointerEvent) => {
         if (target && !target.contains(e.relatedTarget as Node)) {
           target = null
           cursorEl?.classList.remove('hover')
+          setCursor(e.clientX, e.clientY, 1, 1, true)
         }
-      }, { passive: true })
+      }
 
-      window.addEventListener('pointerdown', () => cursorEl?.classList.add('bite'), { passive: true })
-      window.addEventListener('pointerup', () => cursorEl?.classList.remove('bite'), { passive: true })
-      window.addEventListener('pointercancel', () => cursorEl?.classList.remove('bite'), { passive: true })
-      window.addEventListener('pointerleave', () => { if (cursorEl) cursorEl.style.opacity = '0' })
-      window.addEventListener('pointerenter', () => { if (cursorEl) cursorEl.style.opacity = '1' })
+      const onDown = () => cursorEl?.classList.add('bite')
+      const onUp = () => cursorEl?.classList.remove('bite')
+      const onLeave = () => { if (cursorEl) cursorEl.style.opacity = '0' }
+      const onEnter = () => { if (cursorEl) cursorEl.style.opacity = '1' }
+
+      window.addEventListener('pointermove', onMove, { passive: true })
+      window.addEventListener('pointerover', onOver, { passive: true })
+      window.addEventListener('pointerout', onOut, { passive: true })
+      window.addEventListener('pointerdown', onDown, { passive: true })
+      window.addEventListener('pointerup', onUp, { passive: true })
+      window.addEventListener('pointercancel', onUp, { passive: true })
+      window.addEventListener('pointerleave', onLeave)
+      window.addEventListener('pointerenter', onEnter)
+
+      cleanupCursor = () => {
+        window.removeEventListener('pointermove', onMove)
+        window.removeEventListener('pointerover', onOver)
+        window.removeEventListener('pointerout', onOut)
+        window.removeEventListener('pointerdown', onDown)
+        window.removeEventListener('pointerup', onUp)
+        window.removeEventListener('pointercancel', onUp)
+        window.removeEventListener('pointerleave', onLeave)
+        window.removeEventListener('pointerenter', onEnter)
+      }
     }
 
     return () => {
-      cancelAnimationFrame(rafField)
-      cancelAnimationFrame(rafCursor)
+      cleanupField?.()
+      cleanupCursor?.()
       cursorEl?.remove()
+      svgDefs?.remove()
       document.documentElement.classList.remove('js-ready')
     }
   }, [])
