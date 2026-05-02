@@ -19,6 +19,26 @@ export function PressedSpecimen({ artifact }: PressedSpecimenProps) {
 
   const ArtifactComponent = ARTIFACT_COMPONENTS[artifact.type]
 
+  if (artifact.type === 'viewport') {
+    return (
+      <div style={{ margin: 'var(--s-7) 0' }}>
+        {ArtifactComponent && <ArtifactComponent artifact={artifact} />}
+        {artifact.caption && (
+          <p style={{
+            fontFamily: 'var(--mono)',
+            fontSize: 11,
+            letterSpacing: '.04em',
+            color: 'var(--fg-3)',
+            marginTop: 'var(--s-3)',
+            textAlign: 'center',
+          }}>
+            {artifact.caption}
+          </p>
+        )}
+      </div>
+    )
+  }
+
   return (
     <Figure
       caption={artifact.caption}
