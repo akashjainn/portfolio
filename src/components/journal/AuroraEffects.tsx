@@ -8,8 +8,8 @@ export function AuroraEffects() {
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches
     const cleaners: Array<() => void> = []
 
-    if (matchMedia('(hover: hover) and (pointer: fine)').matches && !reduced) {
-      // ── Cursor dot ──────────────────────────────────────────────────────────
+    if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      // ── Cursor dot — always runs on desktop ─────────────────────────────────
       const cursorEl = document.createElement('div')
       cursorEl.className = 'cursor'
       document.body.appendChild(cursorEl)
@@ -65,68 +65,53 @@ export function AuroraEffects() {
         cursorEl.remove()
       })
 
-      // ── Magnetic tilt ───────────────────────────────────────────────────────
-      let tiltTarget: HTMLElement | null = null
-      let rafId = 0
-      let pendingX = 0
-      let pendingY = 0
+      if (!reduced) {
+        // ── Magnetic tilt ─────────────────────────────────────────────────────
+        let tiltTarget: HTMLElement | null = null
+        let rafId = 0
+        let pendingX = 0
+        let pendingY = 0
 
-      const applyTilt = () => {
-        rafId = 0
-        if (!tiltTarget) return
-        const rect  = tiltTarget.getBoundingClientRect()
-        const xNorm = ((pendingX - rect.left) / rect.width  - 0.5) * 2
-        const yNorm = ((pendingY - rect.top)  / rect.height - 0.5) * 2
-        tiltTarget.style.transform = `perspective(800px) rotateY(${(xNorm * 6).toFixed(2)}deg) rotateX(${(-yNorm * 6).toFixed(2)}deg) scale(1.02)`
-        tiltTarget.style.setProperty('--mx', `${((pendingX - rect.left) / rect.width  * 100).toFixed(1)}%`)
-        tiltTarget.style.setProperty('--my', `${((pendingY - rect.top)  / rect.height * 100).toFixed(1)}%`)
-      }
-
-      const onTiltMove = (e: MouseEvent) => {
-        const card = (e.target as Element).closest('a.entry') as HTMLElement | null
-
-        if (card !== tiltTarget) {
-          if (tiltTarget) {
-            if (rafId) { cancelAnimationFrame(rafId); rafId = 0 }
-            tiltTarget.style.transition = ''
-            tiltTarget.style.transform  = ''
-            tiltTarget.style.willChange = ''
-            tiltTarget.style.removeProperty('--mx')
-            tiltTarget.style.removeProperty('--my')
-          }
-          tiltTarget = card
-          if (card) {
-            card.style.transition = 'transform 0s, border-color .35s, background .35s'
-            card.style.willChange = 'transform'
-          }
+        const applyTilt = () => {
+          rafId = 0
+          if (!tiltTarget) return
+          const rect  = tiltTarget.getBoundingClientRect()
+          const xNorm = ((pendingX - rect.left) / rect.width  - 0.5) * 2
+          const yNorm = ((pendingY - rect.top)  / rect.height - 0.5) * 2
+          tiltTarget.style.transform = `perspective(800px) rotateY(${(xNorm * 6).toFixed(2)}deg) rotateX(${(-yNorm * 6).toFixed(2)}deg) scale(1.02)`
+          tiltTarget.style.setProperty('--mx', `${((pendingX - rect.left) / rect.width  * 100).toFixed(1)}%`)
+          tiltTarget.style.setProperty('--my', `${((pendingY - rect.top)  / rect.height * 100).toFixed(1)}%`)
         }
 
-        if (!card) return
+        const onTiltMove = (e: MouseEvent) => {
+          const card = (e.target as Element).closest('a.entry') as HTMLElement | null
 
-        pendingX = e.clientX
-        pendingY = e.clientY
-        if (!rafId) rafId = requestAnimationFrame(applyTilt)
-      }
+          if (card !== tiltTarget) {
+            if (tiltTarget) {
+              if (rafId) { cancelAnimationFrame(rafId); rafId = 0 }
+              tiltTarget.style.transition = ''
+              tiltTarget.style.transform  = ''
+              tiltTarget.style.willChange = ''
+              tiltTarget.style.removeProperty('--mx')
+              tiltTarget.style.removeProperty('--my')
+            }
+            tiltTarget = card
+            if (card) {
+              card.style.transition = 'transform 0s, border-color .35s, background .35s'
+              card.style.willChange = 'transform'
+            }
+          }
 
-      const onTiltReset = () => {
-        if (!tiltTarget) return
-        if (rafId) { cancelAnimationFrame(rafId); rafId = 0 }
-        tiltTarget.style.transition = ''
-        tiltTarget.style.transform  = ''
-        tiltTarget.style.willChange = ''
-        tiltTarget.style.removeProperty('--mx')
-        tiltTarget.style.removeProperty('--my')
-        tiltTarget = null
-      }
+          if (!card) return
 
-      window.addEventListener('mousemove',  onTiltMove,  { passive: true })
-      window.addEventListener('mouseleave', onTiltReset)
+          pendingX = e.clientX
+          pendingY = e.clientY
+          if (!rafId) rafId = requestAnimationFrame(applyTilt)
+        }
 
-      cleaners.push(() => {
-        window.removeEventListener('mousemove',  onTiltMove)
-        window.removeEventListener('mouseleave', onTiltReset)
-        if (rafId) { cancelAnimationFrame(rafId); rafId = 0 }
-        if (tiltTarget) {
+        const onTiltReset = () => {
+          if (!tiltTarget) return
+          if (rafId) { cancelAnimationFrame(rafId); rafId = 0 }
           tiltTarget.style.transition = ''
           tiltTarget.style.transform  = ''
           tiltTarget.style.willChange = ''
@@ -134,43 +119,64 @@ export function AuroraEffects() {
           tiltTarget.style.removeProperty('--my')
           tiltTarget = null
         }
-      })
 
-      // ── Aurora halo ring ────────────────────────────────────────────────────
-      const HALO_LARGE = 180  // px — for a.entry cards
-      const HALO_SMALL = 50   // px — for nav links, chips, buttons
-      let lastHaloTarget: Element | null = null
+        window.addEventListener('mousemove',  onTiltMove,  { passive: true })
+        window.addEventListener('mouseleave', onTiltReset, { passive: true })
 
-      const onHaloEnter = (e: PointerEvent) => {
-        const target = (e.target as Element).closest(interactive)
-        if (!target || target === lastHaloTarget) return
-        lastHaloTarget = target
-        const size = target.matches('a.entry') ? HALO_LARGE : HALO_SMALL
-        const halo = document.createElement('span')
-        halo.className = 'halo'
-        halo.style.left   = `${e.clientX}px`
-        halo.style.top    = `${e.clientY}px`
-        halo.style.width  = `${size}px`
-        halo.style.height = `${size}px`
-        document.body.appendChild(halo)
-        // primary cleanup: animationend
-        halo.addEventListener('animationend', () => halo.remove(), { once: true })
-        // fallback: if animationend never fires (animation:none mid-session), remove after 600ms
-        setTimeout(() => halo.isConnected && halo.remove(), 600)
+        cleaners.push(() => {
+          window.removeEventListener('mousemove',  onTiltMove)
+          window.removeEventListener('mouseleave', onTiltReset)
+          if (rafId) { cancelAnimationFrame(rafId); rafId = 0 }
+          if (tiltTarget) {
+            tiltTarget.style.transition = ''
+            tiltTarget.style.transform  = ''
+            tiltTarget.style.willChange = ''
+            tiltTarget.style.removeProperty('--mx')
+            tiltTarget.style.removeProperty('--my')
+            tiltTarget = null
+          }
+        })
+
+        // ── Aurora halo ring ──────────────────────────────────────────────────
+        const HALO_LARGE = 180  // px — for a.entry cards
+        const HALO_SMALL = 50   // px — for nav links, chips, buttons
+        let lastHaloTarget: Element | null = null
+
+        const onHaloEnter = (e: PointerEvent) => {
+          const target = (e.target as Element).closest(interactive)
+          if (!target || target === lastHaloTarget) return
+          lastHaloTarget = target
+          const size = target.matches('a.entry') ? HALO_LARGE : HALO_SMALL
+          const halo = document.createElement('span')
+          halo.className = 'halo'
+          halo.style.left   = `${e.clientX}px`
+          halo.style.top    = `${e.clientY}px`
+          halo.style.width  = `${size}px`
+          halo.style.height = `${size}px`
+          document.body.appendChild(halo)
+          // primary cleanup: animationend
+          halo.addEventListener('animationend', () => halo.remove(), { once: true })
+          // fallback: if animationend never fires (animation:none mid-session), remove after 600ms
+          setTimeout(() => halo.isConnected && halo.remove(), 600)
+        }
+
+        const onHaloLeave = (e: PointerEvent) => {
+          const leaving = (e.target as Element).closest(interactive)
+          if (leaving !== lastHaloTarget) return
+          const goingTo = e.relatedTarget instanceof Element ? e.relatedTarget : null
+          if (!goingTo || !lastHaloTarget?.contains(goingTo)) {
+            lastHaloTarget = null
+          }
+        }
+
+        document.body.addEventListener('pointerenter', onHaloEnter, { passive: true, capture: true })
+        document.body.addEventListener('pointerleave', onHaloLeave, { passive: true, capture: true })
+        cleaners.push(() => {
+          document.body.removeEventListener('pointerenter', onHaloEnter, { capture: true })
+          document.body.removeEventListener('pointerleave', onHaloLeave, { capture: true })
+          document.querySelectorAll('.halo').forEach(h => h.remove())
+        })
       }
-
-      const onHaloLeave = (e: PointerEvent) => {
-        const leaving = (e.target as Element).closest(interactive)
-        if (leaving === lastHaloTarget) lastHaloTarget = null
-      }
-
-      document.body.addEventListener('pointerenter', onHaloEnter, { passive: true, capture: true })
-      document.body.addEventListener('pointerleave', onHaloLeave, { passive: true, capture: true })
-      cleaners.push(() => {
-        document.body.removeEventListener('pointerenter', onHaloEnter, { capture: true })
-        document.body.removeEventListener('pointerleave', onHaloLeave, { capture: true })
-        document.querySelectorAll('.halo').forEach(h => h.remove())
-      })
     }
 
     return () => {

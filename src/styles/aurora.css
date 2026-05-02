@@ -432,7 +432,7 @@ a.entry:hover .arrow { transform: translateX(6px); color: var(--fg); border-colo
 .foot a { color: var(--fg-3); border: 0; }
 .foot a:hover { color: var(--fg); background: none; -webkit-text-fill-color: var(--fg); border: 0; }
 
-/* ── Bite cursor ── */
+/* ── Cursor dot ── */
 .cursor {
   position: fixed;
   left: 0; top: 0;
