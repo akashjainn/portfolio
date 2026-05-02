@@ -41,13 +41,12 @@ export default async function Home() {
         style={{ padding: 'var(--s-5)', background: 'var(--cream-2)', border: '1px solid var(--ink)', marginBottom: 'var(--s-8)' }}
       >
         <div style={{ fontFamily: 'var(--mono)', fontSize: 'var(--t-note)', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--terra)' }}>
-          Now &middot; Apr 18
+          Now &middot; May 2
         </div>
         <div>
           <p>
-            Rewriting <Link href="https://propsage-web.vercel.app/" target="_blank" rel="noopener noreferrer">PropSage</Link>&apos;s evidence overlay so the demo holds with the network cable unplugged. Reading about satellite routing on the side &mdash; partly because I&apos;ll be at SpaceX this summer, mostly because I&apos;ve found the subject fascinating for years.
+            Wrapped <Link href="/journal/stupid-together">Stupid Together</Link>, an AI anime short I directed solo in ComfyUI &mdash; LoRA-trained characters, 90s OVA style, sixteen shots. Reading about satellite routing on the side &mdash; SpaceX internship starts this summer.
           </p>
-          <p className="note" style={{ margin: 0 }}>Updates weekly. If this line goes stale, the site is broken.</p>
         </div>
       </section>
 
