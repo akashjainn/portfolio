@@ -231,10 +231,10 @@ code { font-family: var(--mono); font-size: 14px; color: var(--fg-2); }
 .hero .meta { display: flex; gap: var(--s-6); align-items: center; flex-wrap: wrap; }
 .hero h1 {
   font-family: var(--display);
-  font-size: var(--t-display);
+  font-size: clamp(40px, 5vw, 72px);
   font-weight: 200;
-  line-height: .98;
-  letter-spacing: -.035em;
+  line-height: 1.06;
+  letter-spacing: -.03em;
   margin: 0;
   max-width: 26ch;
 }
