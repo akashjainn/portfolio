@@ -1,12 +1,20 @@
 import type { Metadata, Viewport } from 'next'
-import { Source_Serif_4, JetBrains_Mono, Inter_Tight } from 'next/font/google'
+import { Inter, Inter_Tight, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
+import '../styles/aurora.css'
+import { AuroraEffects } from '@/components/journal/AuroraEffects'
 
-const sourceSerif4 = Source_Serif_4({
+const inter = Inter({
   subsets: ['latin'],
   weight: ['300', '400', '500'],
-  style: ['normal', 'italic'],
-  variable: '--font-serif',
+  variable: '--font-body',
+  display: 'swap',
+})
+
+const interTight = Inter_Tight({
+  subsets: ['latin'],
+  weight: ['200', '300', '400', '500'],
+  variable: '--font-sans',
   display: 'swap',
 })
 
@@ -17,64 +25,49 @@ const jetBrainsMono = JetBrains_Mono({
   display: 'swap',
 })
 
-const interTight = Inter_Tight({
-  subsets: ['latin'],
-  weight: ['400', '500'],
-  variable: '--font-sans',
-  display: 'swap',
-})
-
 export const metadata: Metadata = {
-  metadataBase: new URL('https://akashjain.dev'),
+  metadataBase: new URL('https://akashjain.xyz'),
   title: {
-    default: 'Akash Jain — Field Journal',
+    default: 'Akash Jain — Vol. II',
     template: '%s | Akash Jain',
   },
   description:
-    'A field journal of software work by Akash Jain — case studies, specimens, and personal study.',
-  authors: [{ name: 'Akash Jain', url: 'https://akashjain.dev' }],
+    'Computer science, Georgia Tech. Interning at SpaceX on Starlink, summer \'26. Field journal of reliable systems, written from Atlanta.',
+  authors: [{ name: 'Akash Jain', url: 'https://akashjain.xyz' }],
   creator: 'Akash Jain',
   openGraph: {
-    title: 'Akash Jain — Field Journal',
-    description: 'Case studies, specimens, and personal study.',
-    url: 'https://akashjain.dev',
+    title: 'Akash Jain — Vol. II',
+    description: 'Field journal of reliable systems, written from Atlanta.',
+    url: 'https://akashjain.xyz',
     siteName: 'Akash Jain',
     locale: 'en_US',
     type: 'website',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Akash Jain — Field Journal' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Akash Jain — Field Journal',
-    description: 'Case studies, specimens, and personal study.',
-    images: ['/og-image.png'],
+    title: 'Akash Jain — Vol. II',
+    description: 'Field journal of reliable systems, written from Atlanta.',
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
+  robots: { index: true, follow: true },
 }
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
+  themeColor: '#06070F',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
-      className={`${sourceSerif4.variable} ${jetBrainsMono.variable} ${interTight.variable}`}
+      className={`${inter.variable} ${interTight.variable} ${jetBrainsMono.variable}`}
       suppressHydrationWarning
     >
       <body>
+        <div className="aurora-field" aria-hidden="true" />
+        <div className="aurora-noise" aria-hidden="true" />
+        <AuroraEffects />
         {children}
       </body>
     </html>

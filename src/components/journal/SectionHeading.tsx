@@ -1,12 +1,15 @@
 interface SectionHeadingProps {
-  num: string
+  /** aurora MDX uses n="01" */
+  n?: string
+  num?: string
   children: React.ReactNode
 }
 
-export function SectionHeading({ num, children }: SectionHeadingProps) {
+export function SectionHeading({ n, num, children }: SectionHeadingProps) {
+  const numStr = n ?? num ?? ''
   return (
-    <h2 className="phase numbered" style={{ margin: 'var(--s-7) 0 var(--s-4)' }}>
-      <span className="num">{num}</span>
+    <h2>
+      {numStr && <span className="num">{numStr}</span>}
       {children}
     </h2>
   )

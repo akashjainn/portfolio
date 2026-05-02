@@ -11,12 +11,14 @@ interface FigureProps {
 export function Figure({ children, caption, figLabel, source, meta, aspectRatio, background }: FigureProps) {
   const metaText = source ?? meta
   return (
-    <figure className="figure" style={{ margin: 'var(--s-5) 0' }}>
-      <div style={{
-        width: '100%',
-        aspectRatio: aspectRatio ?? undefined,
-        background: background,
-      }}>
+    <figure className="figure">
+      <div
+        className="frame"
+        style={{
+          aspectRatio: aspectRatio ?? undefined,
+          background: background ?? undefined,
+        }}
+      >
         {children}
       </div>
       <figcaption className="cap">

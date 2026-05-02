@@ -59,7 +59,18 @@
       "PowerShell(try { $r = Invoke-WebRequest -Uri \"http://localhost:3001/journal/stupid-together\" -UseBasicParsing -TimeoutSec 20; $r.StatusCode } catch { $_.Exception.Message })",
       "PowerShell(try { $r = Invoke-WebRequest -Uri \"http://localhost:3001/journal\" -UseBasicParsing -TimeoutSec 20; if \\($r.Content -match \"stupid-together\"\\) { \"entry found in index\" } else { \"entry NOT in index\" } } catch { $_.Exception.Message })",
       "PowerShell(try { $r = Invoke-WebRequest -Uri \"http://localhost:3001/journal/stupid-together\" -UseBasicParsing -TimeoutSec 20; if \\($r.Content -match \"mux.com\"\\) { \"video embed found\" } else { \"video embed MISSING\" } } catch { $_.Exception.Message })",
-      "PowerShell(try { $r = Invoke-WebRequest -Uri \"http://localhost:3001/\" -UseBasicParsing -TimeoutSec 20; if \\($r.Content -match \"stupid-together\"\\) { \"entry in homepage recent entries\" } else { \"entry NOT on homepage\" } } catch { $_.Exception.Message })"
+      "PowerShell(try { $r = Invoke-WebRequest -Uri \"http://localhost:3001/\" -UseBasicParsing -TimeoutSec 20; if \\($r.Content -match \"stupid-together\"\\) { \"entry in homepage recent entries\" } else { \"entry NOT on homepage\" } } catch { $_.Exception.Message })",
+      "PowerShell(try { $r = Invoke-WebRequest -Uri \"http://localhost:3001/journal/stupid-together\" -UseBasicParsing -TimeoutSec 10; \"Status: $\\($r.StatusCode\\)\" } catch { \"Error: $\\($_.Exception.Message\\)\" })",
+      "PowerShell(try { $r = Invoke-WebRequest -Uri \"https://portfolio-l7ux3oh8k-akashjain1311-1979s-projects.vercel.app/journal/stupid-together\" -UseBasicParsing -TimeoutSec 15; \"Status: $\\($r.StatusCode\\), Length: $\\($r.Content.Length\\)\" } catch { \"Error: $\\($_.Exception.Message\\)\" })",
+      "PowerShell(try { $r = Invoke-WebRequest -Uri \"https://akashjain.xyz/journal/stupid-together\" -UseBasicParsing -TimeoutSec 15; \"Status: $\\($r.StatusCode\\)\" } catch { \"Error: $\\($_.Exception.Message\\)\" })",
+      "PowerShell(try { $r = Invoke-WebRequest -Uri \"https://akashjain.xyz/\" -UseBasicParsing -TimeoutSec 15; if \\($r.Content -match \"stupid-together\"\\) { \"stupid-together FOUND on prod homepage\" } elseif \\($r.Content -match \"Wrapped\"\\) { \"Wrapped text found\" } else { \"NOT on prod; first 300 chars: \" + $r.Content.Substring\\(0, [Math]::Min\\(300, $r.Content.Length\\)\\) } } catch { \"Error: $\\($_.Exception.Message\\)\" })",
+      "PowerShell($r = Invoke-WebRequest -Uri \"http://localhost:3001/\" -UseBasicParsing -TimeoutSec 15; $r.Content | Select-String -Pattern 'stupid-together' -Context 2,2 | ForEach-Object { $_.Line })",
+      "PowerShell(try { $r = Invoke-WebRequest -Uri \"https://akashjain.xyz/journal/starlink-redesign\" -UseBasicParsing -TimeoutSec 15; \"Status: $\\($r.StatusCode\\)\" } catch { \"Error: $\\($_.Exception.Message\\)\" })",
+      "PowerShell(try { $r = Invoke-WebRequest -Uri \"http://localhost:3001/journal/stupid-together\" -UseBasicParsing -TimeoutSec 15; if \\($r.Content -match \"Character, by training\"\\) { \"Page renders OK, title found\" } elseif \\($r.Content -match \"404\"\\) { \"404 page\" } else { \"Status $\\($r.StatusCode\\), content: \" + $r.Content.Substring\\(0, [Math]::Min\\(200,$r.Content.Length\\)\\) } } catch { \"Error: $\\($_.Exception.Message\\)\" })",
+      "PowerShell(Start-Sleep -Seconds 8; Invoke-WebRequest -Uri \"http://localhost:3002/\" -UseBasicParsing -TimeoutSec 10 | Select-Object StatusCode, @{N='BodyLen';E={$_.Content.Length}})",
+      "Bash(npx next *)",
+      "PowerShell(netstat *)",
+      "PowerShell(Start-Sleep -Seconds 5; \\(Invoke-WebRequest -Uri \"http://localhost:3003/\" -UseBasicParsing -TimeoutSec 15\\).StatusCode)"
     ]
   }
 }
