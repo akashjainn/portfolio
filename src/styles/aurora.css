@@ -354,6 +354,27 @@ a.entry::before {
   pointer-events: none;
 }
 a.entry:hover::before { opacity: .14; }
+
+a.entry::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255,255,255,.10) 0%,
+    transparent 60%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s var(--ease);
+  z-index: 1;
+}
+
+a.entry:hover::after {
+  opacity: 1;
+}
+
 a.entry:hover h3 { color: var(--fg); }
 
 .entry .when { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .14em; color: var(--fg-3); }
