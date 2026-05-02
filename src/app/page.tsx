@@ -35,9 +35,6 @@ export default async function Home() {
 
           <div className="meta">
             <span className="eyebrow">Atlanta, GA &middot; Spring 2026 &middot; Vol. II</span>
-            <span className="dots" aria-hidden="true">
-              <i /><i /><i /><i /><i />
-            </span>
           </div>
 
           <h1>
@@ -71,7 +68,6 @@ export default async function Home() {
             <p>
               Wrapped <Link href="/journal/stupid-together">Stupid Together</Link>, an AI anime short I directed solo in ComfyUI &mdash; LoRA-trained characters, 90s OVA style, sixteen shots. Reading about satellite routing on the side &mdash; SpaceX internship starts in 2 weeks.
             </p>
-            <div className="dots" aria-hidden="true"><i /><i /><i /><i /><i /></div>
           </div>
         </section>
 
