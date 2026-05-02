@@ -573,6 +573,7 @@ a.entry:hover .arrow { transform: translateX(6px); color: var(--fg); border-colo
   background: var(--aurora);
   -webkit-background-clip: text; background-clip: text;
   color: transparent; -webkit-text-fill-color: transparent;
+  padding-right: 0.15em; /* italic overhang clips last char without this */
 }
 .proj-head dl.kv {
   font-family: var(--mono);
