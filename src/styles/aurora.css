@@ -136,7 +136,7 @@ body::before {
   white-space: nowrap;
 }
 .nav-pill .home {
-  width: 28px; height: 28px;
+  width: 44px; height: 44px;
   display: inline-flex; align-items: center; justify-content: center;
   border-radius: 50%;
   color: var(--fg);
@@ -147,7 +147,7 @@ body::before {
 .nav-pill .home:hover { transform: scale(1.06); color: var(--fg); background: none; -webkit-text-fill-color: currentColor; border-bottom: 0 !important; }
 .nav-pill .home svg { width: 22px; height: 22px; display: block; }
 .nav-pill .links { display: flex; gap: var(--s-5); padding-right: var(--s-3); }
-.nav-pill a { color: var(--fg-2); text-decoration: none; border-bottom: 0; transition: color .25s; }
+.nav-pill a { color: var(--fg-2); text-decoration: none; border-bottom: 0; transition: color .25s; min-height: 44px; display: inline-flex; align-items: center; }
 .nav-pill a:hover { color: var(--fg); background: none; -webkit-text-fill-color: var(--fg); border-bottom: 0; }
 .nav-pill a[aria-current="page"] { color: var(--fg); }
 .nav-pill .sep { width: 1px; height: 16px; background: var(--line); flex-shrink: 0; }
@@ -155,6 +155,11 @@ body::before {
   .nav-pill { gap: var(--s-3); padding: 8px 12px; }
   .nav-pill .links { gap: var(--s-3); }
   .nav-pill .hide-sm { display: none; }
+}
+
+@media (max-width: 480px) {
+  .nav-pill { gap: var(--s-2); padding: 6px 10px; }
+  .nav-pill .links { gap: var(--s-2); font-size: 10px; }
 }
 
 /* ── Links ── */
