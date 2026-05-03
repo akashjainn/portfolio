@@ -851,8 +851,13 @@ a.entry:hover .arrow { transform: translateX(6px); color: var(--fg); border-colo
 }
 
 @media (max-width: 720px) {
-  .three-up, .plans { grid-template-columns: 1fr; }
+  .three-up { grid-template-columns: 1fr; }
+  .plans { grid-template-columns: repeat(2, 1fr); }
   .cov { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .plans { grid-template-columns: 1fr; }
+  .cov { grid-template-columns: 1fr; }
 }
 
 /* ── Reduced motion ── */
