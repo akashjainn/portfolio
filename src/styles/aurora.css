@@ -519,7 +519,8 @@ a.entry:hover .arrow { transform: translateX(6px); color: var(--fg); border-colo
 .chip {
   font-family: var(--mono); font-size: var(--t-note);
   text-transform: uppercase; letter-spacing: .14em;
-  padding: 6px 14px;
+  padding: 10px 16px;
+  min-height: 40px;
   border: .5px solid var(--line);
   color: var(--fg-3);
   background: var(--glass);
@@ -528,6 +529,7 @@ a.entry:hover .arrow { transform: translateX(6px); color: var(--fg); border-colo
   transition: all .2s var(--ease);
   text-decoration: none;
   border-bottom: .5px solid var(--line);
+  display: inline-flex; align-items: center;
 }
 .chip:hover { color: var(--fg); border-color: var(--fg-3); background: none; -webkit-text-fill-color: var(--fg); }
 .chip[data-active="true"] {
