@@ -96,7 +96,7 @@ a.plain:hover{ color: var(--terra); }
 }
 .site-nav .brand a{ border:0; display:inline-flex; align-items:center; color: var(--terra); }
 .site-nav .brand img{ height: 80px; width: auto; display:block; }
-@media (max-width: 560px){ .site-nav .brand img{ height: 52px; } }
+@media (max-width: 480px){ .site-nav .brand img{ height: 48px; } }
 .site-nav .brand img.logo-dark{ display: none; }
 @media (prefers-color-scheme: dark){ .site-nav .brand img.logo-light{ display: none; } .site-nav .brand img.logo-dark{ display: block; } }
 .site-nav .links{
@@ -106,9 +106,9 @@ a.plain:hover{ color: var(--terra); }
 }
 .site-nav .links a{ border-bottom: 0; color: var(--ink-2); }
 .site-nav .links a[aria-current="page"]{ color: var(--terra); }
-@media (max-width: 560px){
+@media (max-width: 480px){
   .site-nav .links{ gap: var(--s-2); flex-wrap: nowrap; }
-  .site-nav .links a{ font-size: 11px; }
+  .site-nav .links a{ font-size: 11px; min-height: 44px; display: inline-flex; align-items: center; }
 }
 
 /* --------------- typography --------------- */
