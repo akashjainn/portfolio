@@ -107,10 +107,21 @@ const keyHint: React.CSSProperties = {
 export function GBAViewport({ artifact }: GBAViewportProps) {
   const [isTouchDevice, setIsTouchDevice] = useState(false)
   const scriptRef = useRef<HTMLScriptElement | null>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [scale, setScale] = useState(1)
 
   useEffect(() => {
     const isTouch = window.matchMedia('(pointer: coarse)').matches
     setIsTouchDevice(isTouch)
+
+    const updateScale = () => {
+      if (containerRef.current) {
+        setScale(Math.min(1, containerRef.current.offsetWidth / 520))
+      }
+    }
+    updateScale()
+    const ro = new ResizeObserver(updateScale)
+    if (containerRef.current) ro.observe(containerRef.current)
 
     const w = window as unknown as Record<string, unknown>
     w.EJS_player = '#gba-player'
@@ -127,6 +138,7 @@ export function GBAViewport({ artifact }: GBAViewportProps) {
     scriptRef.current = script
 
     return () => {
+      ro.disconnect()
       if (scriptRef.current) {
         document.body.removeChild(scriptRef.current)
         scriptRef.current = null
@@ -139,12 +151,15 @@ export function GBAViewport({ artifact }: GBAViewportProps) {
 
   return (
     <div
+      ref={containerRef}
       style={{
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         gap: 16,
         width: '100%',
+        maxWidth: 520,
+        margin: '0 auto',
         boxSizing: 'border-box',
       }}
     >
@@ -158,6 +173,8 @@ export function GBAViewport({ artifact }: GBAViewportProps) {
           boxShadow: '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.6)',
           boxSizing: 'border-box',
           overflow: 'hidden',
+          transform: `scale(${scale})`,
+          transformOrigin: 'top center',
         }}
         aria-label="Game Boy Advance"
       >
