@@ -51,7 +51,7 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
-html { background: var(--bg); scroll-behavior: smooth; }
+html { background: var(--bg); scroll-behavior: smooth; overflow-x: hidden; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 
 body {
   background: transparent;
@@ -645,7 +645,8 @@ a.entry:hover .arrow { transform: translateX(6px); color: var(--fg); border-colo
   text-transform: none;
 }
 
-.proj-body .main { max-width: 68ch; }
+.proj-body .main { max-width: 68ch; min-width: 0; overflow-x: hidden; }
+.proj-body .gutter { min-width: 0; }
 .proj-body .main p {
   font-size: 18px;
   line-height: 1.75;
